@@ -1,23 +1,26 @@
-import logo from './logo.svg';
-import './App.css';
-
+import "./App.css";
+import "bootstrap/dist/css/bootstrap.min.css";
+import { Nav, Navbar, Button } from "react-bootstrap";
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="bigdiv">
+      <div className="nvbdiv">
+        <Nav className="justify-content-around navbar-dark shadow-5-strong">
+          <Navbar.Brand>Logo</Navbar.Brand>
+          <Navbar.Brand>Home</Navbar.Brand>
+          <Navbar.Brand>About us</Navbar.Brand>
+          <Navbar.Brand>someting</Navbar.Brand>
+        </Nav>
+      </div>
+      <div className="content">
+        <Button className="float-end m-3">New post</Button>
+      </div>
+      <div className="d-flex justify-content-center bgcl">
+        <h1>About us</h1>
+      </div>
+      <footer>
+        ฝากเพื่อนซื้อหน่อย วิชาWEB APPLICATION DEVELOPMENT PROJECT รหัสวิชา 01076120 สถาบันเทคโนโลยีพระจอมเกล้าเจ้าคุณทหารลาดกระบัง
+      </footer>
     </div>
   );
 }
