@@ -5,7 +5,7 @@ import {addNewPost} from "./CCscript"
 class ContentContainer extends Component {
     state = {
       postColor: "#f59317",
-    };
+    };0
     render() {
       const postColor = this.state.postColor;
       return (
@@ -21,8 +21,13 @@ class ContentContainer extends Component {
               {
                 this.setState({postColor:"#fdc959"})
               }
-              }}>New post</Button>
-          <div className="container mh-100" id="CC">
+              }
+              }
+              >
+                  New post
+              </Button>
+
+              <div className="container mh-100 " id="CC">
           </div>
         </div>
       );
