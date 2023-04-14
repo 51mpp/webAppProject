@@ -1,5 +1,5 @@
 .banner-image {
-    background-image: url('C:\KMITL\2D_2\WAB APP\ProjectFinal\CodeProject\ver00\src\img\d36d462db827833805497d9ea78a1343.jpg');
+    background-image: url('./img/d36d462db827833805497d9ea78a1343.jpg');
     background-size: cover;
 }
 
@@ -8,14 +8,14 @@ span {
 }
 
 .nav1 {
-    background-color: rgba(0,0,0,0.3)
+    background-color: rgba(0, 0, 0, 0.3)
 }
 
 .nav2 {
-    background-color: rgba(20,90,50,1)
+    background-color: rgba(20, 90, 50, 1)
 }
 
-.navl1{
+.navl1 {
     border-radius: 20px;
 }
 
@@ -24,11 +24,11 @@ span {
 }
 
 .navl1:hover {
-    background-color: rgba(255,0,0,1);
+    background-color: rgba(255, 0, 0, 1);
 
 }
 
 .navl2:hover {
-    background-color: rgba(25,0,0,0.6);
+    background-color: rgba(25, 0, 0, 0.6);
 
 }
