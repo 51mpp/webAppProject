@@ -1,0 +1,38 @@
+﻿@model (MainPose mainPose, IEnumerable<Comment> comments)
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+<!-- Page Content -->
+<div class="container">
+
+    <!-- Portfolio Item Heading -->
+    <h1 class="my-4">
+        Page Heading
+        <small>Secondary Text</small>
+    </h1>
+
+    <!-- Portfolio Item Row -->
+    <div class="row">
+
+        <div class="col-md-8">
+            <img class="img-fluid" src="@Model.mainPose.Image" alt="">
+        </div>
+
+        <div class="col-md-4">
+            <h3 class="my-3">@Model.mainPose.FirstName @Model.mainPose.LastName @Model.mainPose.Section @Model.mainPose.Phone</h3>
+            <p>@Model.mainPose.Place</p>
+        </div>
+        @foreach (var comment in Model.comments)
+        {
+            <p>@comment.CommentText</p>
+        }
+
+    </div>
+
+</div>
+
+
+
+
