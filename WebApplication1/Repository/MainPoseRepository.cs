@@ -37,6 +37,16 @@ namespace WebApplication1.Repository
         {
             return await _context.MainPoses.FirstOrDefaultAsync(i => i.Id == id);
         }
+        public async Task AddPose(MainPose mainPose)
+        {
+            await _context.MainPoses.AddAsync(mainPose);
+            await _context.SaveChangesAsync();
+        }
+        public async Task AddComment(Comment comment)
+        {
+            await _context.Comments.AddAsync(comment);
+            await _context.SaveChangesAsync();
+        }
 
         public bool Save()
         {

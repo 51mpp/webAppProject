@@ -1,12 +1,12 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
-using System.Net;
+using WebApplication1.Models;
 
-namespace WebApplication1.Models
+namespace WebApplication1.ViewModels
 {
-    public class MainPose
+    public class CreateMainPoseViewModel
     {
-        [Key]
+        
         public int Id { get; set; }
         public string? FirstName { get; set; }
         public string? LastName { get; set; }
@@ -14,11 +14,7 @@ namespace WebApplication1.Models
         public int? Phone { get; set; }
         public string? Image { get; set; }
         public string? Place { get; set; }
-        
-        [ForeignKey("AppUser")]
         public int? AppUserId { get; set; }
-        public AppUser? AppUser { get; set; }
         public ICollection<Comment> Comments { get; set; }
-   
     }
 }

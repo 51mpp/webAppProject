@@ -24,10 +24,13 @@
             <h3 class="my-3">@Model.mainPose.FirstName @Model.mainPose.LastName @Model.mainPose.Section @Model.mainPose.Phone</h3>
             <p>@Model.mainPose.Place</p>
         </div>
-        @foreach (var comment in Model.comments)
-        {
-            <p>@comment.CommentText</p>
-        }
+        <div class="col-md-4">
+            @foreach (var comment in Model.comments)
+            {
+                <p>@comment.CommentText</p>
+            }
+        </div>
+        
 
     </div>
 

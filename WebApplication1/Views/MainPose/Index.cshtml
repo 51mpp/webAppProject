@@ -10,21 +10,33 @@
         <div class="row">
             @foreach (var item in Model)
             {
-                <div class="col-md-4">
-                    <div class="card mb-4 box-shadow">
+                <div class="col-md-4 ">
+                    <div class="card mb-4 box-shadow ">
                         <img class="card-img-top" src="@item.Image" alt="Card image cap">
                         <div class="card-body">
                             <p class="card-text">@item.FirstName @item.LastName @item.Section @item.Phone</p>
                             <p class="card-text">@item.Place</p>
-                            <div class="d-flex justify-content-between align-items-center">
-                                <div class="btn-group">
-                                    <a asp-controller="MainPose" asp-action="Detail" asp-route-id="@item.Id" class="btn btn-sm btn-outline-secondary">View</a>
-                                    <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
+                            <p><h2>Comment</h2></p>
+                            <div class="row"> 
+                                <div>
+                                    @foreach (var comment in item.Comments)
+                                    {
+                                        <p>@comment.CommentText</p>
+                                    }
                                 </div>
-                        
                             </div>
                         </div>
                     </div>
+                </div>
+                <div>
+                    <form method="post" asp-action="CreateComment">
+                        <input type="hidden" name="MainPoseId" value="@item.Id" />
+                        <div class="form-group">
+                            <label for="CommentText">Comment:</label>
+                            <textarea class="form-control" name="CommentText" id="CommentText"></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </form>
                 </div>
             }
         </div>
