@@ -1,0 +1,13 @@
+img {
+    width: 100px;
+    height: 100px;
+}
+
+#postBox {
+    padding: 20px;
+}
+
+#box {
+    padding: 20px;
+    border: 1px solid black;
+}
