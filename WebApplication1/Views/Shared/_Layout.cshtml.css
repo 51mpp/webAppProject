@@ -46,3 +46,10 @@ button.accept-policy {
   white-space: nowrap;
   line-height: 60px;
 }
+.mainnav{
+  background-color: rgba(255, 0, 0, 0.3) ;
+}
+.banner-image {
+  background-image: url('./img/banner.jpg') !important;
+  background-size: cover;
+}
