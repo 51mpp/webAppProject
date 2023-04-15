@@ -1,5 +1,5 @@
 .banner-image {
-    background-image: url('C:\KMITL\2D_2\WAB APP\ProjectFinal\CodeProject\ver00\src\img\d36d462db827833805497d9ea78a1343.jpg');
+    background-image: url('./img/d36d462db827833805497d9ea78a1343.jpg');
     background-size: cover;
 }
 
@@ -9,7 +9,7 @@
 }
 
 .nav1 {
-    background-color: rgba(0,0,0,0.3)
+    background-color: rgba(0, 0, 0, 0.3)
 }
 
 .nav2 {
