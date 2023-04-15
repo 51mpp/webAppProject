@@ -1,0 +1,19 @@
+﻿img {
+    width: 100px;
+    height: 100px;
+}
+
+#postBox {
+    padding: 20px;
+}
+
+#box {
+    padding: 5px;
+    border: 1px solid black;
+}
+
+.comment {
+    text-align: center;
+    cursor: pointer;
+    background-color: yellow;
+}

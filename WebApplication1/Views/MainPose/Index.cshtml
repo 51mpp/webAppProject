@@ -3,16 +3,96 @@
 *@
 @{
 }
-@model IEnumerable<MainPose>
-<div class="album py-5 bg-light">
-    <div class="container">
+@using WebApplication1.ViewModels
+@model (IEnumerable<MainPose> mainPose,CreateMainPoseViewModel mainPoseVM)
 
+<link rel="stylesheet" href="~/css/post.css">
+
+<script src="~/js/post.js"></script>
+
+<div class="container-fluid">
+
+    <div class="row">
+        <a asp-action="CreateMainPose" class="btn btn-primary btn-lg float-end">New Post</a>
+        @foreach (var item in Model.mainPose.Reverse())
+        {
+            @* info section *@
+
+            <div id="postBox" class="col-sm-12 col-md-5 col-lg-4 ">
+                @* Poster'simage *@
+
+                <div id="box" class="card mb-4 box-shadow ">
+                    <div class="card-body">
+                        <div><img class="rounded-circle" src="@item.Image"></div>
+                        <div>
+                            <p>@item.FirstName @item.LastName</p> @* ชื่อ - สกุล*@
+                            <p>เบอร์โทรศัพท์ : @item.Phone</p> @* เบอร์โทร *@
+                            <p>ไปซื้อที่ : @item.Place</p> @* ไปซื้อที่ไหน *@
+                        </div>
+                        <hr>
+                        </hr>
+                        <div class="comment" onclick="showComment(@item.Id)">
+                            ฝากซื้อหน่อยจิ
+                        </div>
+                        <div id="postComment">
+                            <form method="post" asp-action="CreateComment">
+                                <input type="hidden" name="MainPoseId" value="@item.Id" />
+                                <div class="form-group row" id="@item.Id" style="display: none;">
+                                    <textarea class="form-control" name="CommentText" id="CommentText"></textarea>
+                                    <button type="submit" class="btn btn-primary">Submit</button>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="row">
+                            <div>
+                                @foreach (var comment in item.Comments)
+                                {
+                                    <p>@comment.CommentText</p>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+
+
+            @* comment section*@
+
+            @* <div class="row"> *@
+            @* <div> *@
+            @* @foreach (var comment in item.Comments) *@
+            @* ส่วนของ comment ที่ตึงมาจาก database *@
+            @* { *@
+            @* <p>@comment.CommentText</p> *@
+            @* } *@
+            @* </div> *@
+            @* </div> *@
+            @* Add comment section *@
+
+        }
+    </div>
+</div>
+@*<div class="album py-5" >
+    <div class="container">
+        
+        <a asp-action="CreateMainPose" class="btn btn-primary">Create Post</a>
         <div class="row">
-            @foreach (var item in Model)
+            @foreach (var item in Model.mainPose.Reverse())
             {
                 <div class="col-md-4 ">
                     <div class="card mb-4 box-shadow ">
-                        <img class="card-img-top" src="@item.Image" alt="Card image cap">
+                        @if (item.Image == null)
+                        {
+                            <div><h2>No QR Code</h2></div>
+                        }
+                        else
+                        {
+                            <img class="card-img-top" src="@item.Image" alt="Card image cap">
+                        }
+                        
                         <div class="card-body">
                             <p class="card-text">@item.FirstName @item.LastName @item.Section @item.Phone</p>
                             <p class="card-text">@item.Place</p>
@@ -42,3 +122,32 @@
         </div>
     </div>
 </div>
+*@
+@*<form method="post" asp-action="CreateMainPose" enctype="multipart/form-data">
+            <div class="form-group">
+                <label asp-for="ViewModels.mainPoseVM.FirstName">FirstName</label>
+                <input asp-for="mainPoseVM.FirstName" class="form-control" placeholder="Enter FirstName">
+                <span asp-validation-for="mainPoseVM.FirstName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="mainPoseVM.LastName">LastName</label>
+                <input asp-for="mainPoseVM.LastName" class="form-control" placeholder="Enter LastName">
+                <span asp-validation-for="mainPoseVM.LastName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="mainPoseVM.Phone">Phone</label>
+                <input asp-for="mainPoseVM.Phone" class="form-control" placeholder="Enter Phone">
+                <span asp-validation-for="mainPoseVM.Phone" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="mainPoseVM.Place">Place</label>
+                <input asp-for="mainPoseVM.Place" class="form-control" placeholder="Enter Place">
+                <span asp-validation-for="mainPoseVM.Place" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="mainPoseVM.Image">Image</label>
+                <input asp-for="mainPoseVM.Image" type="file" class="form-control" placeholder="Enter Image">
+                <span asp-validation-for="mainPoseVM.Image" class="text-danger"></span>
+            </div>
+            <button type="submit" class="btn btn-primary">Submit Pose</button>
+        </form>*@
