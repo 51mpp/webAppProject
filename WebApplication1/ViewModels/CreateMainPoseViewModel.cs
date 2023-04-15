@@ -12,9 +12,9 @@ namespace WebApplication1.ViewModels
         public string? LastName { get; set; }
         public int? Section { get; set; }
         public int? Phone { get; set; }
-        public string? Image { get; set; }
+        public IFormFile? Image { get; set; }
         public string? Place { get; set; }
-        public int? AppUserId { get; set; }
-        public ICollection<Comment> Comments { get; set; }
+        //public int? AppUserId { get; set; }
+        //public ICollection<Comment> Comments { get; set; }
     }
 }

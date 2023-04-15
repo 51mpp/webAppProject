@@ -1,20 +1,23 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using System.Net;
 using WebApplication1.Interface;
 using WebApplication1.Models;
 using WebApplication1.Repository;
+using WebApplication1.Services;
+using WebApplication1.ViewModels;
 
 namespace WebApplication1.Controllers
 {
     public class MainPoseController : Controller
     {
         private readonly IMainPoseRepository _mainPoseRepository;
+        private readonly IPhotoService _photoService;
 
 
-        public MainPoseController(IMainPoseRepository mainPoseRepository)
+        public MainPoseController(IMainPoseRepository mainPoseRepository, IPhotoService photoService)
         {
             _mainPoseRepository = mainPoseRepository;
-
-
+            _photoService = photoService;
         }
         public async Task<IActionResult> Index() // อันนี้ใช้ return view() ในหน้า club -----> controller 
         {
@@ -25,7 +28,35 @@ namespace WebApplication1.Controllers
             }
             return View(mainPoses);
         }
-        
+        public IActionResult CreateMainPose()
+        {
+            return View();
+        }
+        [HttpPost]
+        public async Task<IActionResult> CreateMainPose(CreateMainPoseViewModel mainPoseVM) 
+        {
+            if (ModelState.IsValid)
+            {
+                var result = await _photoService.AddPhotoAsync(mainPoseVM.Image);
+                var mainPose = new MainPose
+                {
+                    FirstName = mainPoseVM.FirstName,
+                    LastName = mainPoseVM.LastName,
+                    Phone = mainPoseVM.Phone,
+                    Image = result.Url.ToString(),
+                    Place = mainPoseVM.Place,
+                };
+
+                _mainPoseRepository.Add(mainPose);
+                return RedirectToAction("Index");
+
+            }
+            else
+            {
+                ModelState.AddModelError("", "Photo upload failed");
+            }
+            return View(mainPoseVM);
+        }
         [HttpPost]
         public async Task<IActionResult> CreateComment(int mainPoseId, string commentText)
         {
