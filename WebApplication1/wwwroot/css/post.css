@@ -11,3 +11,9 @@ img {
     padding: 5px;
     border: 1px solid black;
 }
+
+.comment {
+    text-align: center;
+    cursor: pointer;
+    background-color: yellow;
+}
