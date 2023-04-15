@@ -1,13 +1,18 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using WebApplication1.Data;
+using WebApplication1.Helpers;
 using WebApplication1.Interface;
 using WebApplication1.Repository;
+using WebApplication1.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 builder.Services.AddScoped<IMainPoseRepository, MainPoseRepository>();
+builder.Services.AddScoped<IPhotoService, PhotoService>();
+//เป็นการดึงไฟล์ cloudinarySetting มาใช้กับส่วนอื่นๆที่่สอดคล้องได้ ถ้าเปลี่ยนส่วนของ CloudinarySettings ไฟล์อื่นๆที่เกี่ยวข้องก็จะเปลี่ยนไปด้วย
+builder.Services.Configure<CloudinarySettings>(builder.Configuration.GetSection("CloudinarySettings"));
 //เพิ่ม database 
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
 {
