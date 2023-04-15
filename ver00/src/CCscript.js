@@ -1,7 +1,9 @@
 export const addNewPost =(color)=>
 {
     var mainC = document.getElementById("CC");
-    var newdiv=document.createElement("div");
+    var newdiv = document.createElement("div");
+    var ebtn = document.getElementById("ADDP");
+
     newdiv.innerText="Someone";
     newdiv.style.cssText = 'height: 100px;';
     newdiv.style.marginBottom = "30px"
@@ -10,6 +12,7 @@ export const addNewPost =(color)=>
     newdiv.className = "col-12 row"
     newdiv.style.padding = "5px"
     newdiv.style.borderRadius = "10px"
+
     mainC.appendChild(newdiv);
 }
 

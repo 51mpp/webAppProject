@@ -5,13 +5,13 @@ import {addNewPost} from "./CCscript"
 class ContentContainer extends Component {
     state = {
       postColor: "#f59317",
-    };0
+    };
     render() {
       const postColor = this.state.postColor;
       return (
-        <div className="content">
-          <Button className="float-end m-3" onClick={()=>
-            {
+          <div className="content">
+              <Button id="ADDP" className="float-end m-3" onClick={()=>
+              {
               addNewPost(postColor)
               if (postColor==="#fdc959")
               {
@@ -22,8 +22,7 @@ class ContentContainer extends Component {
                 this.setState({postColor:"#fdc959"})
               }
               }
-              }
-              >
+              }>
                   New post
               </Button>
 

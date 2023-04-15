@@ -7,7 +7,7 @@ import "./Navigation.css";
 function Navigation() {
     const [color, setColor] = useState(false);
     const chageColor = () => {
-        if (window.scrollY >= 350) {
+        if (window.scrollY >= 550) {
             setColor(true);
         } else {
             setColor(false);
@@ -30,10 +30,10 @@ function Navigation() {
           <Navbar.Collapse id="responsive-navbar-nav">
             <div className="mx-auto"></div>
             <Nav>
-                          <Nav.Link className={color ? "navl2" : "navl1"} href="/"><span>Logo</span></Nav.Link>
-                          <Nav.Link className={color ? "navl2" : "navl1"}  href="/"><span>Home</span></Nav.Link>
-                          <Nav.Link className={color ? "navl2" : "navl1"}  href="/"><span>About us</span></Nav.Link>
-                          <Nav.Link className={color ? "navl2" : "navl1"}  href="/"><span>Somethign</span></Nav.Link>
+                          <Nav.Link className={color ? "navl2" : "navl1"} href="/"><span>HOME</span></Nav.Link>
+                          <Nav.Link className={color ? "navl2" : "navl1"} href="/"><span>ABOUT US</span></Nav.Link>
+                          <Nav.Link className={color ? "navl2" : "navl1"}  href="/"><span>MANUAL</span></Nav.Link>
+                          <Nav.Link className={color ? "navl2" : "navl1"}  href="/"><span>USER </span></Nav.Link>
             </Nav>
           </Navbar.Collapse>
         </Container>
@@ -41,7 +41,8 @@ function Navigation() {
 
       <div className="banner-image w-100 vh-100 d-flex justify-content-center align-items-center">
         <div className="centent text-center">
-          <h1 className="text-white">WEB ZONE</h1>
+             <h1 id="WC" className="">WELCOME TO OUR PROJECT</h1>
+            <h1 className="text-white">WEB ZONE</h1>
         </div>
       </div>
       </div>

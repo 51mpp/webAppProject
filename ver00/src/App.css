@@ -1,0 +1,31 @@
+.bgcl {
+    background-color: #0b0301;
+    height: 100px;
+    justify-content: center;
+    align-items: center;
+}
+
+.bgcl > h1 {
+    color: #fdc959;
+}
+
+footer {
+    height: 100px;
+    color: #fcfcf7;
+    text-align: center;
+    background-color: #252525;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
+#CC {
+    margin-top: 40px;
+    min-height: 80px;
+}
+
+#ADDP {
+    border: 3px black solid;
+    background-color: rgba(9,68,9,1)
+    
+}
