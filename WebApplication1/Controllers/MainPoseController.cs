@@ -26,24 +26,32 @@ namespace WebApplication1.Controllers
             {
                 mainPose.Comments = (ICollection<Comment>)await _mainPoseRepository.GetCommentsByMainPoseId(mainPose.Id);
             }
-            return View(mainPoses);
+            CreateMainPoseViewModel viewModel = new CreateMainPoseViewModel();
+            return View("Index",(mainPoses, viewModel));
         }
         public IActionResult CreateMainPose()
         {
-            return View();
+
+            var createMainPoseViewModel = new CreateMainPoseViewModel { };
+            return View(createMainPoseViewModel);
         }
         [HttpPost]
         public async Task<IActionResult> CreateMainPose(CreateMainPoseViewModel mainPoseVM) 
         {
             if (ModelState.IsValid)
             {
-                var result = await _photoService.AddPhotoAsync(mainPoseVM.Image);
+                string imageUrl = null;
+                if (mainPoseVM.Image != null)
+                {
+                    var result = await _photoService.AddPhotoAsync(mainPoseVM.Image);
+                    imageUrl = result.Url.ToString();
+                }
                 var mainPose = new MainPose
                 {
                     FirstName = mainPoseVM.FirstName,
                     LastName = mainPoseVM.LastName,
                     Phone = mainPoseVM.Phone,
-                    Image = result.Url.ToString(),
+                    Image = imageUrl,
                     Place = mainPoseVM.Place,
                 };
 
@@ -61,16 +69,36 @@ namespace WebApplication1.Controllers
         public async Task<IActionResult> CreateComment(int mainPoseId, string commentText)
         {
             MainPose mainPose = await _mainPoseRepository.GetByIdAsync(mainPoseId);
-            if (mainPose == null)
+            if(ModelState.IsValid)
+            {
+                string comText = "";
+                if (commentText != null)
+                {
+                    comText = commentText;
+                }
+                Comment comment = new Comment
+                {
+                    MainPoseId = mainPoseId,
+                    CommentText = comText
+                };
+                await _mainPoseRepository.AddComment(comment);
+                return RedirectToAction("");
+            }
+            else
+            {
+                ModelState.AddModelError("", "Comment Failed");
+            }
+            /*if (mainPose == null)
             {
                 return NotFound();
-            }
-            Comment comment = new Comment
-            {
-                MainPoseId = mainPoseId,
-                CommentText = commentText
-            };
-            await _mainPoseRepository.AddComment(comment);
+            }*/
+            /* Comment comment = new Comment
+             {
+                 MainPoseId = mainPoseId,
+                 CommentText = commentText
+             };
+             await _mainPoseRepository.AddComment(comment);
+             return RedirectToAction("");*/
             return RedirectToAction("");
         }
         public async Task<IActionResult> Detail(int id)
@@ -81,6 +109,5 @@ namespace WebApplication1.Controllers
             return View("Detail", (mainPose, comments));
 
         }
-
     }
 }

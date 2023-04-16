@@ -4,73 +4,41 @@ For more information on enabling MVC for empty projects, visit https://go.micros
 @{
 }
 @model IEnumerable<MainPose>
-<link rel="stylesheet" href="~/css/post.css">
+<div class="album py-5 bg-light">
+    <div class="container">
 
-<script src="~/js/post.js"></script>
-
-<div class="container-fluid">
-
-    <div class="row">
-        <button class="btn btn-primary btn-lg float-end">New Post</button>
-        @foreach (var item in Model.Reverse())
-        {
-            @* info section *@
-
-            <div id="postBox" class="col-sm-12 col-md-5 col-lg-4 ">
-                @* Poster'simage *@
-
-                <div id="box" class="card mb-4 box-shadow ">
-                    <div class="card-body">
-                        <div><img class="rounded-circle" src="@item.Image"></div>
-                        <div>
-                            <p>@item.FirstName @item.LastName</p> @* ชื่อ - สกุล*@
-                            <p>เบอร์โทรศัพท์ : @item.Phone</p> @* เบอร์โทร *@
-                            <p>ไปซื้อที่ : @item.Place</p> @* ไปซื้อที่ไหน *@
-                        </div>
-                        <hr>
-                        </hr>
-                        <div class="comment" onclick="showComment(@item.Id)">
-                            ฝากซื้อหน่อยจิ
-                        </div>
-                        <div id="postComment">
-                            <form method="post" asp-action="CreateComment">
-                                <input type="hidden" name="MainPoseId" value="@item.Id" />
-                                <div class="form-group row" id="@item.Id" style="display: none;">
-                                    <textarea class="form-control" name="CommentText" id="CommentText"></textarea>
-                                    <button type="submit" class="btn btn-primary">Submit</button>
+        <div class="row">
+            @foreach (var item in Model)
+            {
+                <div class="col-md-4 ">
+                    <div class="card mb-4 box-shadow ">
+                        <img class="card-img-top" src="@item.Image" alt="Card image cap">
+                        <div class="card-body">
+                            <p class="card-text">@item.FirstName @item.LastName @item.Section @item.Phone</p>
+                            <p class="card-text">@item.Place</p>
+                            <p><h2>Comment</h2></p>
+                            <div class="row"> 
+                                <div>
+                                    @foreach (var comment in item.Comments)
+                                    {
+                                        <p>@comment.CommentText</p>
+                                    }
                                 </div>
-                            </form>
-                        </div>
-                        <div class="row">
-                            <div>
-                                @foreach (var comment in item.Comments)
-                                {
-                                    <p>@comment.CommentText</p>
-                                }
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-
-
-
-
-
-            @* comment section*@
-
-            @* <div class="row"> *@
-            @* <div> *@
-            @* @foreach (var comment in item.Comments) *@
-            @* ส่วนของ comment ที่ตึงมาจาก database *@
-            @* { *@
-            @* <p>@comment.CommentText</p> *@
-            @* } *@
-            @* </div> *@
-            @* </div> *@
-            @* Add comment section *@
-
-        }
+                <div>
+                    <form method="post" asp-action="CreateComment">
+                        <input type="hidden" name="MainPoseId" value="@item.Id" />
+                        <div class="form-group">
+                            <label for="CommentText">Comment:</label>
+                            <textarea class="form-control" name="CommentText" id="CommentText"></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </form>
+                </div>
+            }
+        </div>
     </div>
 </div>
-
