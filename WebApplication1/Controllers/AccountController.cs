@@ -16,6 +16,10 @@ namespace WebApplication1.Controllers
             _signInManager = signInManager;
             _userManager = userManager;
         }
+        public IActionResult Index()
+        {
+            return View();
+        }
         public IActionResult Login()
         {
             var response = new LoginVM { };

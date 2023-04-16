@@ -8,7 +8,9 @@ namespace WebApplication1.ViewModels
     {
         
         public int Id { get; set; }
+        [Required(ErrorMessage = "FirstName is requied")]
         public string? FirstName { get; set; }
+        [Required(ErrorMessage = "LastName is requied")]
         public string? LastName { get; set; }
         public int? Section { get; set; }
         public int? Phone { get; set; }
