@@ -7,5 +7,4 @@ function showComment(id) {
     } else {
         main.style.display = "block";
     }
-
 }

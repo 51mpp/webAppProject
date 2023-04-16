@@ -3,6 +3,9 @@ For more information on enabling MVC for empty projects, visit https://go.micros
 *@
 @{
 }
+@using WebApplication1.ViewModels
+@model (IEnumerable<MainPose> mainPose,CreateMainPoseViewModel mainPoseVM)
+
 @model IEnumerable<MainPose>
     
 <link rel="stylesheet" href="~/css/post.css">
@@ -12,12 +15,12 @@ For more information on enabling MVC for empty projects, visit https://go.micros
 <div id="CT" class="container-fluid">
 
     <div class="row">
-        <button class="btn btn-primary btn-lg float-end">New Post</button>
-        @foreach (var item in Model.Reverse())
+        <a asp-action="CreateMainPose" class="btn btn-primary btn-lg float-end">New Post</a>
+        @foreach (var item in Model.mainPose.Reverse())
         {
             @* info section *@
 
-            <div id="postBox" class="col-sm-12 col-md-5 col-lg-4 ">
+            <div id="postBox" class="col-sm-12 col-lg-5 col-xl-4 ">
                 @* Poster'simage *@
 
                 <div id="box" class="card mb-4 box-shadow ">
@@ -44,10 +47,10 @@ For more information on enabling MVC for empty projects, visit https://go.micros
                         </div>
                         <div class="row">
                             <div>
-                                @foreach (var comment in item.Comments)
-                                {
-                                    <p>@comment.CommentText</p>
-                                }
+                                        @foreach (var comment in item.Comments)
+                                        {
+                                        <p>@comment.CommentText</p>
+                                        }
                             </div>
                         </div>
                     </div>
@@ -58,20 +61,95 @@ For more information on enabling MVC for empty projects, visit https://go.micros
 
 
 
-            @* comment section*@
+                    @* comment section*@
 
-            @* <div class="row"> *@
-            @* <div> *@
-            @* @foreach (var comment in item.Comments) *@
-            @* ส่วนของ comment ที่ตึงมาจาก database *@
-            @* { *@
-            @* <p>@comment.CommentText</p> *@
-            @* } *@
-            @* </div> *@
-            @* </div> *@
-            @* Add comment section *@
+                    @* <div class="row"> *@
+                    @* <div> *@
+                    @* @foreach (var comment in item.Comments) *@
+                    @* ส่วนของ comment ที่ตึงมาจาก database *@
+                    @* { *@
+                    @* <p>@comment.CommentText</p> *@
+                    @* } *@
+                    @* </div> *@
+                    @* </div> *@
+                    @* Add comment section *@
 
         }
     </div>
 </div>
+            @*<div class="album py-5" >
+<div class="container">
 
+<a asp-action="CreateMainPose" class="btn btn-primary">Create Post</a>
+<div class="row">
+@foreach (var item in Model.mainPose.Reverse())
+{
+<div class="col-md-4 ">
+<div class="card mb-4 box-shadow ">
+@if (item.Image == null)
+{
+<div><h2>No QR Code</h2></div>
+}
+else
+{
+<img class="card-img-top" src="@item.Image" alt="Card image cap">
+}
+
+<div class="card-body">
+<p class="card-text">@item.FirstName @item.LastName @item.Section @item.Phone</p>
+<p class="card-text">@item.Place</p>
+<p><h2>Comment</h2></p>
+<div class="row">
+<div>
+@foreach (var comment in item.Comments)
+{
+<p>@comment.CommentText</p>
+}
+</div>
+</div>
+</div>
+</div>
+</div>
+<div>
+<form method="post" asp-action="CreateComment">
+<input type="hidden" name="MainPoseId" value="@item.Id" />
+<div class="form-group">
+<label for="CommentText">Comment:</label>
+<textarea class="form-control" name="CommentText" id="CommentText"></textarea>
+</div>
+<button type="submit" class="btn btn-primary">Submit</button>
+</form>
+</div>
+}
+</div>
+</div>
+</div>
+*@
+@*<form method="post" asp-action="CreateMainPose" enctype="multipart/form-data">
+<div class="form-group">
+<label asp-for="ViewModels.mainPoseVM.FirstName">FirstName</label>
+<input asp-for="mainPoseVM.FirstName" class="form-control" placeholder="Enter FirstName">
+<span asp-validation-for="mainPoseVM.FirstName" class="text-danger"></span>
+</div>
+<div class="form-group">
+<label asp-for="mainPoseVM.LastName">LastName</label>
+<input asp-for="mainPoseVM.LastName" class="form-control" placeholder="Enter LastName">
+<span asp-validation-for="mainPoseVM.LastName" class="text-danger"></span>
+</div>
+<div class="form-group">
+<label asp-for="mainPoseVM.Phone">Phone</label>
+<input asp-for="mainPoseVM.Phone" class="form-control" placeholder="Enter Phone">
+<span asp-validation-for="mainPoseVM.Phone" class="text-danger"></span>
+</div>
+<div class="form-group">
+<label asp-for="mainPoseVM.Place">Place</label>
+<input asp-for="mainPoseVM.Place" class="form-control" placeholder="Enter Place">
+<span asp-validation-for="mainPoseVM.Place" class="text-danger"></span>
+</div>
+<div class="form-group">
+<label asp-for="mainPoseVM.Image">Image</label>
+<input asp-for="mainPoseVM.Image" type="file" class="form-control" placeholder="Enter Image">
+<span asp-validation-for="mainPoseVM.Image" class="text-danger"></span>
+</div>
+<button type="submit" class="btn btn-primary">Submit Pose</button>
+</form>*@
