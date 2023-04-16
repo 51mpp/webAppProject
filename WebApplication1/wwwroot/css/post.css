@@ -9,12 +9,35 @@ img {
 
 #box {
     padding: 5px;
-    border: 1px solid black;
+    border: 3px solid #167019;
     border-radius: 15px;
 }
 
 .comment {
     text-align: center;
     cursor: pointer;
-    background-color: yellow;
+    background-color: #F09711;
+    color: rgb(255, 255, 255);
+    border-radius: 10px;
+}
+
+.comment:hover {
+    transform: scale(1.05, 1.1);
+    background-color: #eeb35b;
+
+}
+
+.btn {
+    background-color: rgb(16,70,19);
+    border-color: black;
+}
+
+.btn:hover {
+    background-color: rgb(76, 158, 80);
+    border-color: rgb(16,70,19);
+}
+
+#CT {
+    background-color: rgb(253,201,89);
+    border-radius: 0px 0px 50px 50px; 
 }
