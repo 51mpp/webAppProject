@@ -45,7 +45,7 @@ namespace WebApplication1.Controllers
                     var result = await _signInManager.PasswordSignInAsync(user, loginVM.Password, false, false);
                     if(result.Succeeded)
                     {
-                        return RedirectToAction("Index","Race");
+                        return RedirectToAction("Index","MainPose");
                     }
                 }
                 //password is incorrect

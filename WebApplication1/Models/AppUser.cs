@@ -1,13 +1,15 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.Diagnostics;
 using System.Net;
+using Microsoft.AspNetCore.Identity;
 
 namespace WebApplication1.Models
 {
-    public class AppUser
+    public class AppUser : IdentityUser
     {
-        [Key]
-        public int Id { get; set; }
+
+        // [Key]
+        // public int Id { get; set; }
         public string? Username { get; set; }
         public string? Password { get; set; }
         public string? FirstName { get; set; }
