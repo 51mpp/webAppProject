@@ -1,7 +1,10 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using WebApplication1.Data;
 using WebApplication1.Helpers;
 using WebApplication1.Interface;
+using WebApplication1.Models;
 using WebApplication1.Repository;
 using WebApplication1.Services;
 
@@ -18,6 +21,13 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 {
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
 });
+
+builder.Services.AddIdentity<AppUser, IdentityRole>()
+    .AddEntityFrameworkStores<ApplicationDbContext>();
+builder.Services.AddMemoryCache();
+builder.Services.AddSession();
+builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+       .AddCookie();
 var app = builder.Build();
 //ตอนรันแอพก็จะเรียงใช้ program ก็จะทำให้ Seed.SeedData ทำงาน ทำให้ data update to Database
 if (args.Length == 1 && args[0].ToLower() == "seeddata")
