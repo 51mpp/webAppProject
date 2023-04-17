@@ -47,18 +47,29 @@ button.accept-policy {
   line-height: 60px;
 }
 .mainnav{
-  background-color: rgba(255, 0, 0, 0.3) ;
+  background-color: rgba(0, 0, 0, 0.3) ;
 }
 .banner-image {
-  background-image: url('https://img.freepik.com/free-photo/chicken-wings-barbecue-sweetly-sour-sauce-picnic-summer-menu-tasty-food-top-view-flat-lay_2829-6471.jpg?w=2000') !important;
+  /*background-image: url('https://img.freepik.com/free-photo/chicken-wings-barbecue-sweetly-sour-sauce-picnic-summer-menu-tasty-food-top-view-flat-lay_2829-6471.jpg?w=2000') !important;
+  */
+  background-image: url('https://media.discordapp.net/attachments/905446050347761714/1097545282960494612/d36d462db827833805497d9ea78a1343.jpg');   
   background-size: cover;
 }
 
 .nav-item{
   border-radius: 20px;
-  color: white;
+    color: white;
 }
 .nav-item:hover{
-  background-color: rgba(0, 200, 0, 0.3);
+  background-color: rgba(255,0,0,1);
   color: white;
+}
+
+.mainnav.active{
+  background-color: rgba(9,68,9,1)
+}
+
+.nav-item.active:hover{
+  background-color: rgba(243,156,18,1);
+  color: black;
 }

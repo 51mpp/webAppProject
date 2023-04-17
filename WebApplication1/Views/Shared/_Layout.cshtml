@@ -11,7 +11,7 @@
 
 <body>
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark  border-bottom box-shadow mb-3 mainnav fixed-top " >
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark  border-bottom box-shadow mb-3 mainnav fixed-top " id="mainnav" >
             <div class="container-fluid">
                 <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">WebApplication1</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
@@ -56,4 +56,26 @@
     <script src="~/js/site.js" asp-append-version="true"></script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>
+<script>
+    const mainnav = document.querySelector('nav')
+    var navitem = document.querySelectorAll('.nav-item')
+    window.onscroll = function(){
+        if( window.scrollY>100)
+        {
+            mainnav.classList.add('active');
+            for(var i =0;i<navitem.length;i++)
+            {
+                navitem[i].classList.add('active');
+            }
+        }
+        else{
+            mainnav.classList.remove('active');
+            for(var i =0;i<navitem.length;i++)
+            {
+                navitem[i].classList.add('active');
+            }
+        }
+        
+    }
+</script>
 </html>
