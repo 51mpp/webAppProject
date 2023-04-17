@@ -9,7 +9,7 @@ namespace WebApplication1.Data
         // database ที่เราสร้างขึ้นมา
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
         {
-            
+
         }
         public DbSet<MainPose> MainPoses { get; set; }
         public DbSet<AppUser> AppUsers { get; set; }
