@@ -28,17 +28,31 @@ img {
 
 }
 
+.commented {
+    text-align: center;
+    cursor: pointer;
+    background-color: #52823b;
+    color: rgb(255, 255, 255);
+    border-radius: 10px;
+}
+
+.commented:hover {
+    transform: scale(1.05, 1.1);
+    background-color: #40aa0e;
+
+}
+
 .btn {
-    background-color: rgb(16,70,19);
+    background-color: rgb(16, 70, 19);
     border-color: black;
 }
 
 .btn:hover {
     background-color: rgb(76, 158, 80);
-    border-color: rgb(16,70,19);
+    border-color: rgb(16, 70, 19);
 }
 
 #CT {
-    background-color: rgb(253,201,89);
-    border-radius: 0px 0px 50px 50px; 
+    background-color: rgb(253, 201, 89);
+    border-radius: 0px 0px 50px 50px;
 }

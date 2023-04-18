@@ -27,7 +27,7 @@ namespace WebApplication1.Controllers
                 mainPose.Comments = (ICollection<Comment>)await _mainPoseRepository.GetCommentsByMainPoseId(mainPose.Id);
             }
             CreateMainPoseViewModel viewModel = new CreateMainPoseViewModel();
-            return View("Index",(mainPoses, viewModel));
+            return View("Index", (mainPoses, viewModel));
         }
         public IActionResult CreateMainPose()
         {
@@ -36,7 +36,7 @@ namespace WebApplication1.Controllers
             return View(createMainPoseViewModel);
         }
         [HttpPost]
-        public async Task<IActionResult> CreateMainPose(CreateMainPoseViewModel mainPoseVM) 
+        public async Task<IActionResult> CreateMainPose(CreateMainPoseViewModel mainPoseVM)
         {
             if (ModelState.IsValid)
             {
@@ -69,7 +69,7 @@ namespace WebApplication1.Controllers
         public async Task<IActionResult> CreateComment(int mainPoseId, string commentText)
         {
             MainPose mainPose = await _mainPoseRepository.GetByIdAsync(mainPoseId);
-            if(ModelState.IsValid)
+            if (ModelState.IsValid)
             {
                 string comText = "";
                 if (commentText != null)
@@ -105,7 +105,7 @@ namespace WebApplication1.Controllers
         {
             MainPose mainPose = await _mainPoseRepository.GetByIdAsync(id);
             IEnumerable<Comment> comments = await _mainPoseRepository.GetCommentsByMainPoseId(id);
-           
+
             return View("Detail", (mainPose, comments));
 
         }

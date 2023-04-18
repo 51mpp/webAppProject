@@ -7,17 +7,21 @@ For more information on enabling MVC for empty projects, visit https://go.micros
 @model (IEnumerable<MainPose> mainPose,CreateMainPoseViewModel mainPoseVM)
 
 @* @model IEnumerable<MainPose> *@
-    
+
 <link rel="stylesheet" href="~/css/post.css">
 
 <script src="~/js/post.js"></script>
+<script src="~/js/showCommented.js"></script>
 
 <div id="CT" class="container-fluid">
 
     <div class="row">
         <a asp-action="CreateMainPose" class="btn btn-primary btn-lg float-end">New Post</a>
+
         @foreach (var item in Model.mainPose.Reverse())
         {
+
+
             @* info section *@
 
             <div id="postBox" class="col-sm-12 col-lg-5 col-xl-4 ">
@@ -31,6 +35,23 @@ For more information on enabling MVC for empty projects, visit https://go.micros
                             <p>เบอร์โทรศัพท์ : @item.Phone</p> @* เบอร์โทร *@
                             <p>ไปซื้อที่ : @item.Place</p> @* ไปซื้อที่ไหน *@
                         </div>
+
+                        <div class="commented" onclick="showCommented()">
+                            ฝากแล้ว @item.Comments.Count/10 คน
+                        </div>
+                        <div id="" style="display: block;">
+                            @foreach (var comment in item.Comments)
+                            {
+                                <div class="row" style="margin-top: 10px" ;>
+                                    <div>
+                                        <p>@comment.CommentText</p>
+                                    </div>
+                                </div>
+
+                            }
+                        </div>
+
+
                         <hr>
                         </hr>
                         <div class="comment" onclick="showComment(@item.Id)">
@@ -45,14 +66,6 @@ For more information on enabling MVC for empty projects, visit https://go.micros
                                 </div>
                             </form>
                         </div>
-                        <div class="row">
-                            <div>
-                                        @foreach (var comment in item.Comments)
-                                        {
-                                        <p>@comment.CommentText</p>
-                                        }
-                            </div>
-                        </div>
                     </div>
                 </div>
             </div>
@@ -61,23 +74,23 @@ For more information on enabling MVC for empty projects, visit https://go.micros
 
 
 
-                    @* comment section*@
+            @* comment section*@
 
-                    @* <div class="row"> *@
-                    @* <div> *@
-                    @* @foreach (var comment in item.Comments) *@
-                    @* ส่วนของ comment ที่ตึงมาจาก database *@
-                    @* { *@
-                    @* <p>@comment.CommentText</p> *@
-                    @* } *@
-                    @* </div> *@
-                    @* </div> *@
-                    @* Add comment section *@
+            @* <div class="row"> *@
+            @* <div> *@
+            @* @foreach (var comment in item.Comments) *@
+            @* ส่วนของ comment ที่ตึงมาจาก database *@
+            @* { *@
+            @* <p>@comment.CommentText</p> *@
+            @* } *@
+            @* </div> *@
+            @* </div> *@
+            @* Add comment section *@
 
         }
     </div>
 </div>
-            @*<div class="album py-5" >
+@*<div class="album py-5" >
 <div class="container">
 
 <a asp-action="CreateMainPose" class="btn btn-primary">Create Post</a>
@@ -133,7 +146,7 @@ else
 </div>
 <div class="form-group">
 <label asp-for="mainPoseVM.LastName">LastName</label>
-<input asp-for="mainPoseVM.LastName" class="form-control" placeholder="Enter LastName">
+<input asp-for="mainPoseVM.LastNam((char)e" class="form-control" placeholder="Enter LastName">
 <span asp-validation-for="mainPoseVM.LastName" class="text-danger"></span>
 </div>
 <div class="form-group">
