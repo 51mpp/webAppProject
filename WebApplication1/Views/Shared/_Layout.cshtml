@@ -13,14 +13,17 @@
     window.addEventListener("load", (event) => {
       var homeCount = document.querySelectorAll('.home');
       var renderContainer = document.getElementById("renderContainer");
+      var navTop = document.getElementById("mainnav");
       if(homeCount.length!=0){
         console.log("Home");
         renderContainer.className="";
+        navTop.classList.add("fixed-top");
     }
     else
     {
         console.log("Not Home");
         renderContainer.className="container";
+        navTop.classList.remove("fixed-top");
     }
 });
 </script>
@@ -36,7 +39,7 @@
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                            <a class="nav-link px-4" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
 
                         <li class="nav-item">
