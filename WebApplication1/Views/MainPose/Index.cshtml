@@ -2,6 +2,7 @@
 For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 *@
 @{
+    ViewData["Title"] = "Post";
 }
 @using WebApplication1.ViewModels
 @model (IEnumerable<MainPose> mainPose,CreateMainPoseViewModel mainPoseVM)
@@ -39,18 +40,20 @@ For more information on enabling MVC for empty projects, visit https://go.micros
                         <div class="commented" onclick="showCommented()">
                             ฝากแล้ว @item.Comments.Count/10 คน
                         </div>
-                        <div id="" style="display: block;">
-                            @foreach (var comment in item.Comments)
-                            {
-                                <div class="row" style="margin-top: 10px" ;>
-                                    <div>
-                                        <p>@comment.CommentText</p>
+                        <div class="all_comment">
+                            <div id="" style="display: block;">
+                                @foreach (var comment in item.Comments)
+                                {
+                                    <div class="row">
+                                        <div>
+                                            <p>@comment.CommentText</p>
+
+                                        </div>
                                     </div>
-                                </div>
 
-                            }
+                                }
+                            </div>
                         </div>
-
 
                         <hr>
                         </hr>

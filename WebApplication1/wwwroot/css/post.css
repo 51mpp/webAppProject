@@ -1,4 +1,4 @@
-img {
+﻿img {
 
     width: 100px;
     height: 100px;
@@ -41,6 +41,16 @@ img {
     background-color: #40aa0e;
 
 }
+
+/* ยังนึกไม่ออกว่าเอาแบบไหนดีสำหรับช่องข้อความที่ถูกคอมเมนต์ */
+.all_comment {
+    display: flex;
+    align-items: space-around;
+    margin-top: 10px;
+    background-color: #b1e0b3;
+    width: 100%;
+}
+
 
 .btn {
     background-color: rgb(16, 70, 19);
