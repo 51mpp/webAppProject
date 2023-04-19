@@ -16,6 +16,9 @@ namespace WebApplication1.ViewModels
         public int? Phone { get; set; }
         public IFormFile? Image { get; set; }
         public string? Place { get; set; }
+        public int? MaxComment { get; set; }
+        public string? Account { get; set; }
+        /*public CommentViewModel CommentVM { get; set; }*/
         //public int? AppUserId { get; set; }
         //public ICollection<Comment> Comments { get; set; }
     }
