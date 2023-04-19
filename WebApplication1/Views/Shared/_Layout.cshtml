@@ -7,12 +7,34 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/WebApplication1.styles.css" asp-append-version="true" />
+<<<<<<< Updated upstream
 
 </head>
 <body class="">
 
     <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+=======
+</head>
+<script>
+    window.addEventListener("load", (event) => {
+      var homeCount = document.querySelectorAll('.home');
+      var renderContainer = document.getElementById("renderContainer");
+      if(homeCount.length!=0){
+        console.log("Home");
+        renderContainer.className="";
+    }
+    else
+    {
+        console.log("Not Home");
+        renderContainer.className="container";
+    }
+});
+</script>
+<body >
+    <header>
+        <nav class ="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark  mainnav fixed-top " id="mainnav" >
+>>>>>>> Stashed changes
             <div class="container-fluid">
                 <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">WebApplication1</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
@@ -26,34 +48,87 @@
                         </li>
                         
                         <li class="nav-item">
+<<<<<<< Updated upstream
                             <a class="nav-link text-dark" asp-area="" asp-controller="MainPose" asp-action="">Pose</a>
+=======
+                            <a class="nav-link px-4" asp-area="" asp-controller="MainPose" asp-action="">Pose</a>
+>>>>>>> Stashed changes
                         </li>
                         
                         <li class="nav-item">
+<<<<<<< Updated upstream
                             <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="Login">Login</a>
+=======
+                            <a class="nav-link px-4" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+>>>>>>> Stashed changes
                         </li>
                     </ul>
                 </div>
             </div>
         </nav>
+<<<<<<< Updated upstream
     </header>
     
     <div class="container">
+=======
+            <div class="bannercontainer" onload="myFunction()"></div>
+              
+    </header>
+    <div class="container" id ="renderContainer">
+>>>>>>> Stashed changes
         <main role="main" class="pb-3">
-            @RenderBody()
+        @RenderBody()
         </main>
 
     </div>
 
+<<<<<<< Updated upstream
     <footer class="border-top footer text-muted">
         <div class="container">
             &copy; 2023 - WebApplication1 - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
         </div>
     </footer>
 
+=======
+    
+>>>>>>> Stashed changes
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>
+<<<<<<< Updated upstream
+=======
+<footer>
+                  ฝากเพื่อนซื้อหน่อย <br>
+                  วิชา WEB APPLICATION DEVELOPMENT PROJECT รหัสวิชา<br>
+                  01076120 สถาบันเทคโนโลยีพระจอมเกล้าเจ้าคุณทหารลาดกระบัง<br>
+</footer>
+
+<script>
+    
+    const mainnav = document.querySelector('nav')
+    var navitem = document.querySelectorAll('.nav-item')
+    
+
+    window.onscroll = function(){
+        if( window.scrollY>50)
+        {
+            mainnav.classList.add('active');
+            for(var i =0;i<navitem.length;i++)
+            {
+                navitem[i].classList.add('active');
+            }
+        }
+        else{
+            mainnav.classList.remove('active');
+            for(var i =0;i<navitem.length;i++)
+            {
+                navitem[i].classList.remove('active');
+            }
+        }
+
+    }
+</script>
+>>>>>>> Stashed changes
 </html>
