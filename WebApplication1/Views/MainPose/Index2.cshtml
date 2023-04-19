@@ -1,0 +1,52 @@
+﻿@using WebApplication1.ViewModels
+@model (IEnumerable<MainPose>, CreateMainPoseViewModel, CommentViewModel)
+
+@foreach (var mainPose in Model.Item1)
+{
+    <div class="main-pose">
+        <h3>@mainPose.FirstName @mainPose.LastName</h3>
+        @if (!string.IsNullOrEmpty(mainPose.Image))
+        {
+            <img src="@mainPose.Image" alt="Main Pose Image">
+        }
+        <p>@mainPose.Place</p>
+        @foreach (var comment in mainPose.Comments)
+        {
+            <div class="comment">
+                <p>@comment.CommentText</p>
+                <p>By @comment.FirstName @comment.LastName</p>
+            </div>
+        }
+        <div class="add-comment">
+            <h4>Add a Comment</h4>
+            
+        </div>
+    </div>
+}
+
+<div class="create-main-pose">
+    <h3>Create Main Pose</h3>
+    <form asp-controller="MainPose" asp-action="CreateMainPose" method="post" enctype="multipart/form-data">
+        <div class="form-group">
+            <label for="first-name">First Name</label>
+            <input type="text" id="first-name" name="FirstName" class="form-control" required />
+        </div>
+        <div class="form-group">
+            <label for="last-name">Last Name</label>
+            <input type="text" id="last-name" name="LastName" class="form-control" required />
+        </div>
+        <div class="form-group">
+            <label for="phone">Phone</label>
+            <input type="text" id="phone" name="Phone" class="form-control" required />
+        </div>
+        <div class="form-group">
+            <label for="place">Place</label>
+            <input type="text" id="place" name="Place" class="form-control" required />
+        </div>
+        <div class="form-group">
+            <label for="image">Image</label>
+            <input type="file" id="image" name="Image" class="form-control" />
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+</div>

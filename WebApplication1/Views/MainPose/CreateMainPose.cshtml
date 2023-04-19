@@ -6,57 +6,32 @@ For more information on enabling MVC for empty projects, visit https://go.micros
 @using WebApplication1.ViewModels
 @model CreateMainPoseViewModel
 
-<div class="container">
-    <form method="post" asp-action="CreateMainPose" enctype="multipart/form-data">
-        <div class="container">
-            <div class="row">
-                <div class="col-6 form-group">
-                    <label asp-for="FirstName">ชื่อ :</label>
-                    <input asp-for="FirstName" class="form-control" placeholder="Ex: สมชาย">
-                    <span asp-validation-for="FirstName" class="text-danger"></span>
-                </div>
-                <div class="col-6 form-group">
-                    <label asp-for="LastName">นามสกุล :</label>
-                    <input asp-for="LastName" class="form-control" placeholder="EX: หมายหัว">
-                    <span asp-validation-for="LastName" class="text-danger"></span>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-3 form-group">
-                    <label asp-for="Phone">เบอร์โทรศัพท์ :</label>
-                    <input asp-for="Phone" type="text" class=" form-control" placeholder="Enter Phone" maxlength="10">
-                    <span asp-validation-for="Phone" class="text-danger"></span>
-                </div>
-                <div class="col-9 form-group">
-                    <label asp-for="Place">จะไปซื้อที่ :</label>
-                    <input asp-for="Place" class="form-control" placeholder="Enter Place">
-                    <span asp-validation-for="Place" class="text-danger"></span>
-                </div>
-            </div>
-            <div class="form-group">
-                <label>จำนวนที่รับฝาก :</label>
-                <select class="form-select" name="" id="">
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                    <option value="4">4</option>
-                    <option value="5">5</option>
-                    <option value="6">6</option>
-                    <option value="7">7</option>
-                    <option value="8">8</option>
-                    <option value="9">9</option>
-                    <option value="10">10</option>
-                </select>
-                @* <input asp-for="Image" type="" class="form-control" placeholder="Enter Image"> *@
-                @* <span asp-validation-for="Image" class="text-danger"></span> *@
-            </div>
-            <div class="form-group">
-                <label asp-for="Image">ช่องทางการชำระเงิน :</label>
-                <input asp-for="Image" type="file" class="form-control" placeholder="Enter Image">
-                <span asp-validation-for="Image" class="text-danger"></span>
-            </div>
-            <button type="submit" class="btn btn-primary">Submit</button>
-        </div>
-    </form>
-</div>
+<form method="post" asp-action="CreateMainPose" enctype="multipart/form-data">
+    <div class="form-group">
+        <label asp-for="FirstName">FirstName</label>
+        <input asp-for="FirstName" class="form-control" placeholder="Enter FirstName">
+        <span asp-validation-for="FirstName" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="LastName">LastName</label>
+        <input asp-for="LastName" class="form-control" placeholder="Enter LastName">
+        <span asp-validation-for="LastName" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Phone">Phone</label>
+        <input asp-for="Phone" class="form-control" placeholder="Enter Phone">
+        <span asp-validation-for="Phone" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Place">Place</label>
+        <input asp-for="Place" class="form-control" placeholder="Enter Place">
+        <span asp-validation-for="Place" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Image">Image</label>
+        <input asp-for="Image" type="file" class="form-control" placeholder="Enter Image">
+        <span asp-validation-for="Image" class="text-danger"></span>
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>
 

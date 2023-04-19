@@ -5,7 +5,7 @@ For more information on enabling MVC for empty projects, visit https://go.micros
     ViewData["Title"] = "Post";
 }
 @using WebApplication1.ViewModels
-@model (IEnumerable<MainPose> mainPose,CreateMainPoseViewModel mainPoseVM)
+@model (IEnumerable<MainPose>, CreateMainPoseViewModel, CommentViewModel)
 
 @* @model IEnumerable<MainPose> *@
 
@@ -19,7 +19,7 @@ For more information on enabling MVC for empty projects, visit https://go.micros
     <div class="row">
         <a asp-action="CreateMainPose" class="btn btn-primary btn-lg float-end">New Post</a>
 
-        @foreach (var item in Model.mainPose.Reverse())
+        @foreach (var item in Model.Item1.Reverse())
         {
 
 
@@ -33,12 +33,14 @@ For more information on enabling MVC for empty projects, visit https://go.micros
                         <div><img class="rounded-circle" src="@item.Image"></div>
                         <div>
                             <p>@item.FirstName @item.LastName</p> @* ชื่อ - สกุล*@
+                            <p>บัญชีธนาคาร : @item.Account</p>
+              
                             <p>เบอร์โทรศัพท์ : @item.Phone</p> @* เบอร์โทร *@
                             <p>ไปซื้อที่ : @item.Place</p> @* ไปซื้อที่ไหน *@
                         </div>
 
                         <div class="commented" onclick="showCommented()">
-                            ฝากแล้ว @item.Comments.Count/10 คน
+                            ฝากแล้ว @item.Comments.Count/ @item.MaxComment คน
                         </div>
                         <div class="all_comment">
                             <div id="" style="display: block;">
@@ -56,18 +58,31 @@ For more information on enabling MVC for empty projects, visit https://go.micros
                         </div>
 
                         <hr>
-                        </hr>
+                        
                         <div class="comment" onclick="showComment(@item.Id)">
                             ฝากซื้อหน่อยจิ
                         </div>
                         <div id="postComment">
-                            <form method="post" asp-action="CreateComment">
-                                <input type="hidden" name="MainPoseId" value="@item.Id" />
-                                <div class="form-group row" id="@item.Id" style="display: none;">
-                                    <textarea class="form-control" name="CommentText" id="CommentText"></textarea>
+                            <div class="form-group row" id="@item.Id" style="display: none;">
+                                <form asp-controller="MainPose" asp-action="CreateComment" method="post">
+                                    <input type="hidden" name="mainPoseId" value="@item.Id" />
+                                    
+                                    <div class="form-group">
+                                        <label for="first-name">First Name</label>
+                                        <input type="text" id="first-name" name="FirstName" class="form-control" required />
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="last-name">Last Name</label>
+                                        <input type="text" id="last-name" name="LastName" class="form-control" required />
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="comment-text">Comment Text</label>
+                                        <textarea id="comment-text" name="CommentText" class="form-control" required></textarea>
+                                    </div>
                                     <button type="submit" class="btn btn-primary">Submit</button>
-                                </div>
-                            </form>
+                                </form>
+                                
+                            </div>
                         </div>
                     </div>
                 </div>

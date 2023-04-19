@@ -14,7 +14,8 @@ namespace WebApplication1.Models
         public int? Phone { get; set; }
         public string? Image { get; set; }
         public string? Place { get; set; }
-        
+        public int? MaxComment { get; set; }
+        public string? Account { get; set; }
         [ForeignKey("AppUser")]
         public string? AppUserId { get; set; }
         public AppUser? AppUser { get; set; }
