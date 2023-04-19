@@ -73,7 +73,11 @@ button.accept-policy {
   background-color: rgba(243,156,18,1);
   color: black !important;
 }
+
 footer{
+  width: 100%;
+  padding: 5px;
+  position: absolute;
   bottom:0;
   width: 100%;
   background:#252525;

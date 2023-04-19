@@ -36,12 +36,6 @@
     border-radius: 10px;
 }
 
-.commented:hover {
-    transform: scale(1.05, 1.1);
-    background-color: #40aa0e;
-
-}
-
 /* ยังนึกไม่ออกว่าเอาแบบไหนดีสำหรับช่องข้อความที่ถูกคอมเมนต์ */
 .all_comment {
     display: flex;
