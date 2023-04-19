@@ -11,22 +11,32 @@
 </head>
 <script>
     window.addEventListener("load", (event) => {
-      var homeCount = document.querySelectorAll('.home');
       var renderContainer = document.getElementById("renderContainer");
-      if(homeCount.length!=0){
+      var  navTop = document.getElementById("mainnav");
+      
+      if(window.location.pathname=='/'){
         console.log("Home");
         renderContainer.className="";
+        navTop.classList.add("fixed-top");
+        document.getElementById("l01").style.color="white" 
+        document.getElementById("li01").style.backgroundColor ="red" 
     }
     else
     {
         console.log("Not Home");
         renderContainer.className="container";
+        navTop.classList.remove("fixed-top")
+    }
+    
+    if(window.location.pathname=='/MainPose'){
+        document.getElementById("l02").style.color="white"
+        document.getElementById("li02").style.backgroundColor ="red" 
     }
 });
 </script>
 <body >
     <header>
-        <nav class ="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark  mainnav fixed-top " id="mainnav" >
+        <nav class ="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark mainnav " id="mainnav" >
             <div class="container-fluid">
                 <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">พร้อมฝาก</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse"
@@ -35,16 +45,16 @@
                 </button>
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                        <li class="nav-item" id="li01">
+                            <a class="nav-link " asp-area="" asp-controller="Home" asp-action="Index" id="l01">Home</a>
+                        </li>
+
+                        <li class="nav-item" id="li02">
+                            <a class="nav-link" asp-area="" asp-controller="MainPose" asp-action="" id="l02">Pose</a>
                         </li>
 
                         <li class="nav-item">
-                            <a class="nav-link px-4" asp-area="" asp-controller="MainPose" asp-action="">Pose</a>
-                        </li>
-
-                        <li class="nav-item">
-                            <a class="nav-link px-4" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                            <a class="nav-link " asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
                         </li>
                     </ul>
                 </div>
@@ -55,7 +65,6 @@
               
     </header>
     <div class="container" id ="renderContainer">
->>>>>>> Stashed changes
         <main role="main" class="pb-3">
         @RenderBody()
         </main>
@@ -83,10 +92,21 @@
     window.onscroll = function(){
         if( window.scrollY>50)
         {
+            console.log("realsdl")
             mainnav.classList.add('active');
             for(var i =0;i<navitem.length;i++)
             {
                 navitem[i].classList.add('active');
+            }
+
+            if(window.location.pathname=="/")
+            {
+                document.getElementById("l01").style.color="white" 
+                document.getElementById("li01").style.backgroundColor ="#f59317"
+            }
+            else if(window.location.pathname=="/MainPose"){
+                document.getElementById("l02").style.color="white" 
+                document.getElementById("li02").style.backgroundColor ="#f59317"
             }
         }
         else{
@@ -94,6 +114,15 @@
             for(var i =0;i<navitem.length;i++)
             {
                 navitem[i].classList.remove('active');
+            }
+            if(window.location.pathname=="/")
+            {
+                document.getElementById("l01").style.color="white" 
+                document.getElementById("li01").style.backgroundColor ="red"
+            }
+            else if(window.location.pathname=="/MainPose"){
+                document.getElementById("l02").style.color="white" 
+                document.getElementById("li02").style.backgroundColor ="red"
             }
         }
 

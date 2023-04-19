@@ -46,8 +46,6 @@ button.accept-policy {
   white-space: nowrap;
   line-height: 60px;
 }
-<<<<<<< Updated upstream
-=======
 .mainnav{
   background-color: rgba(0, 0, 0, 0.3) ;
 }
@@ -73,13 +71,13 @@ button.accept-policy {
 
 .nav-item.active:hover{
   background-color: rgba(243,156,18,1);
-  color: black;
+  color: black !important;
 }
 footer{
-  padding: 5px;
   bottom:0;
+  width: 100%;
   background:#252525;
   color: #fcfcf7;
   text-align: center;
+  position:absolute;
 }
->>>>>>> Stashed changes
