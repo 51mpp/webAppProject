@@ -37,6 +37,10 @@ namespace WebApplication1.Repository
         {
             return await _context.MainPoses.FirstOrDefaultAsync(i => i.Id == id);
         }
+        public async Task<MainPose> GetByIdAsyncNoTracking(int id)
+        {
+            return await _context.MainPoses.AsNoTracking().FirstOrDefaultAsync(i => i.Id == id);
+        }
         public async Task AddPose(MainPose mainPose)
         {
             await _context.MainPoses.AddAsync(mainPose);

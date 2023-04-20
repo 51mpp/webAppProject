@@ -70,6 +70,72 @@ namespace WebApplication1.Controllers
             }
             return View(mainPoseVM);
         }
+        [HttpGet]
+        public async Task<IActionResult> EditMainPose(int id)
+        {
+            var post = await _mainPoseRepository.GetByIdAsync(id);
+            if (post == null) { return View("Error"); }
+            var mainPoseVM = new EditMainPoseViewModel
+            {
+                FirstName = post.FirstName,
+                LastName = post.LastName,
+                Phone = post.Phone,
+                URLImage = post.Image,
+                Place = post.Place,
+                Account = post.Account,
+                MaxComment = post.MaxComment
+            };
+            return View(mainPoseVM);
+        }
+        [HttpPost]
+        public async Task<IActionResult> EditMainPose(int id,EditMainPoseViewModel mainPoseVM) 
+        {
+            if (!ModelState.IsValid) 
+            {
+                ModelState.AddModelError("", "Fail to edit mainPose");
+                return View("EditMainPose", mainPoseVM); 
+            }
+            var post = await _mainPoseRepository.GetByIdAsyncNoTracking(id);
+            if (post == null)
+            {
+                return View("Error");
+            }
+            string imageUrl = null;
+            if (mainPoseVM.Image != null)
+            {
+                var result = await _photoService.AddPhotoAsync(mainPoseVM.Image);
+                imageUrl = result.Url.ToString();
+            }
+            if (!string.IsNullOrEmpty(post.Image))
+            {
+                _ = _photoService.DeletePhotoAsync(post.Image); // ไม่สนใจรีเทิน
+            }
+            var mainPose = new MainPose
+            {
+                Id = id,
+                FirstName = mainPoseVM.FirstName,
+                LastName = mainPoseVM.LastName,
+                Phone = mainPoseVM.Phone,
+                Image = imageUrl,
+                Place = mainPoseVM.Place,
+                Account = mainPoseVM.Account,
+                MaxComment = mainPoseVM.MaxComment
+            };
+            _mainPoseRepository.Update(mainPose);
+            return RedirectToAction("Index");
+        }
+        [HttpPost]
+        public async Task<IActionResult> DeleteMainPose(int mainPoseId)
+        {
+            var post = await _mainPoseRepository.GetByIdAsync(mainPoseId);
+            if (post == null) {  return View("Error"); }
+            if (!string.IsNullOrEmpty(post.Image))
+            {
+                _ = _photoService.DeletePhotoAsync(post.Image); // ไม่สนใจรีเทิน
+            }
+            _mainPoseRepository.Delete(post);
+            return RedirectToAction("");
+        }
         [HttpPost]
         public async Task<IActionResult> CreateComment(int mainPoseId,string CommentText, string FirstName,string LastName)
         {

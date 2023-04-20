@@ -1,0 +1,46 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+@using WebApplication1.ViewModels
+@model EditMainPoseViewModel
+
+<form asp-action="EditMainPose" method="post" enctype="multipart/form-data">
+    <div class="form-group">
+        <label asp-for="FirstName">FirstName</label>
+        <input asp-for="FirstName" class="form-control" placeholder="Enter FirstName">
+        <span asp-validation-for="FirstName" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="LastName">LastName</label>
+        <input asp-for="LastName" class="form-control" placeholder="Enter LastName">
+        <span asp-validation-for="LastName" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Phone">Phone</label>
+        <input asp-for="Phone" class="form-control" placeholder="Enter Phone">
+        <span asp-validation-for="Phone" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Account">Payment-Account</label>
+        <input asp-for="Account" class="form-control" placeholder="Enter Payment-Account">
+        <span asp-validation-for="Account" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="MaxComment">Max Comment</label>
+        <input asp-for="MaxComment" class="form-control" placeholder="Enter Max Comment">
+        <span asp-validation-for="MaxComment" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Place">Place</label>
+        <input asp-for="Place" class="form-control" placeholder="Enter Place">
+        <span asp-validation-for="Place" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Image">QR Code</label>
+        <input asp-for="Image" type="file" class="form-control" placeholder="QR Code">
+        <span asp-validation-for="Image" class="text-danger"></span>
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>
