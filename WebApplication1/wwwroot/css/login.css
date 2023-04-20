@@ -1,0 +1,108 @@
+body {
+    font-family: 'Poppins', Arial, sans-serif;
+    margin: 0;
+    height: 100vh;
+    display: flex;
+
+    /* background-image: url("https://i.pinimg.com/564x/85/18/66/85186629f91c763799f78bcc927888ac.jpg"); */
+    /* Center and scale the image nicely */
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.container {
+    display: flex;
+    width: 100%;
+    height: 100%;
+}
+
+.image-container {
+    flex: 7;
+}
+
+.image-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.signin-container {
+    flex: 3;
+    /* background-color: #f0f2f5; */
+    padding: 60px;
+    border-radius: 5px;
+    /* box-shadow: 0 0 10px rgba(0, 0, 0, 0.15); */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+h1 {
+    font-size: 50px;
+    text-align: center;
+    margin-bottom: 30px;
+    color: #333;
+}
+
+.input-group {
+    position: relative;
+    margin-bottom: 20px;
+}
+
+.input-icon {
+    position: absolute;
+    left: 10px;
+    top: 10px;
+    color: #aaa;
+}
+
+input {
+    display: block;
+    width: 90%;
+    padding: 10px;
+    padding-left: 40px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    color: #777;
+    background-color: #fff;
+}
+
+input::placeholder {
+    color: #aaa;
+}
+
+button {
+    background-color: #007bff;
+    color: white;
+    font-size: 16px;
+    padding: 10px;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    width: 100%;
+    margin-top: 10px;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+.signup-link {
+    margin-top: 20px;
+    text-align: center;
+}
+
+.signup-link p {
+    color: #333;
+}
+
+.signup-link a {
+    color: #007bff;
+    text-decoration: none;
+}
+
+.signup-link a:hover {
+    text-decoration: underline;
+}
