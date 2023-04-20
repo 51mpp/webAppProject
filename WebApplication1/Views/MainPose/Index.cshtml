@@ -40,13 +40,13 @@ For more information on enabling MVC for empty projects, visit https://go.micros
                         <div>
                             <p>@item.FirstName @item.LastName</p> @* ชื่อ - สกุล*@
                             <p>บัญชีธนาคาร : @item.Account</p>
-              
+
                             <p>เบอร์โทรศัพท์ : @item.Phone</p> @* เบอร์โทร *@
                             <p>ไปซื้อที่ : @item.Place</p> @* ไปซื้อที่ไหน *@
                         </div>
 
                         <div class="commented" onclick="showCommented()">
-                            ฝากแล้ว @item.Comments.Count/ @item.MaxComment คน
+                            ฝากแล้ว @item.Comments.Count / @item.MaxComment คน
                         </div>
                         <div class="all_comment">
                             <div id="" style="display: block;">
@@ -64,7 +64,7 @@ For more information on enabling MVC for empty projects, visit https://go.micros
                         </div>
 
                         <hr>
-                        
+
                         <div class="comment" onclick="showComment(@item.Id)">
                             ฝากซื้อหน่อยจิ
                         </div>
@@ -72,7 +72,7 @@ For more information on enabling MVC for empty projects, visit https://go.micros
                             <div class="form-group row" id="@item.Id" style="display: none;">
                                 <form asp-controller="MainPose" asp-action="CreateComment" method="post">
                                     <input type="hidden" name="mainPoseId" value="@item.Id" />
-                                    
+
                                     <div class="form-group">
                                         <label for="first-name">First Name</label>
                                         <input type="text" id="first-name" name="FirstName" class="form-control" required />
@@ -83,11 +83,12 @@ For more information on enabling MVC for empty projects, visit https://go.micros
                                     </div>
                                     <div class="form-group">
                                         <label for="comment-text">Comment Text</label>
-                                        <textarea id="comment-text" name="CommentText" class="form-control" required></textarea>
+                                        <textarea id="comment-text" name="CommentText" class="form-control"
+                                            required></textarea>
                                     </div>
                                     <button type="submit" class="btn btn-primary">Submit</button>
                                 </form>
-                                
+
                             </div>
                         </div>
                     </div>

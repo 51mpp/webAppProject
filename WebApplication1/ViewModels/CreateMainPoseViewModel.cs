@@ -6,7 +6,7 @@ namespace WebApplication1.ViewModels
 {
     public class CreateMainPoseViewModel
     {
-        
+
         public int Id { get; set; }
         [Required(ErrorMessage = "FirstName is requied")]
         public string? FirstName { get; set; }

@@ -11,34 +11,37 @@
 </head>
 <script>
     window.addEventListener("load", (event) => {
-      var renderContainer = document.getElementById("renderContainer");
-      var  navTop = document.getElementById("mainnav");
-      
-      if(window.location.pathname=='/'){
-        console.log("Home");
-        renderContainer.className="";
-        navTop.classList.add("fixed-top");
-        document.getElementById("l01").style.color="white" 
-        document.getElementById("li01").style.backgroundColor ="red" 
-    }
-    else
-    {
-        console.log("Not Home");
-        renderContainer.className="container";
-        navTop.classList.remove("fixed-top")
-    }
-    
-    if(window.location.pathname=='/MainPose'){
-        document.getElementById("l02").style.color="white"
-        document.getElementById("li02").style.backgroundColor ="red" 
-    }
-});
+        var renderContainer = document.getElementById("renderContainer");
+        var navTop = document.getElementById("mainnav");
+
+        if (window.location.pathname == '/') {
+            console.log("Home");
+            renderContainer.className = "";
+            navTop.classList.add("fixed-top");
+            document.getElementById("l01").style.color = "white"
+            document.getElementById("li01").style.backgroundColor = "red"
+        }
+        else {
+            console.log("Not Home");
+            renderContainer.className = "container";
+            navTop.classList.remove("fixed-top")
+        }
+
+        if (window.location.pathname == '/MainPose') {
+            document.getElementById("l02").style.color = "white"
+            document.getElementById("li02").style.backgroundColor = "red"
+        }
+    });
 </script>
-<body >
+
+<body>
     <header>
-        <nav class ="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark mainnav " id="mainnav" >
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark mainnav " id="mainnav">
             <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">พร้อมฝาก</a>
+                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index"><img class="logo"
+                        style="width: auto;height: 50px;"
+                        src="https://media.discordapp.net/attachments/1088293941192962138/1098666583150309396/prompFaglogo2.png?width=1000&height=500"
+                        alt=""></a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse"
                     aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -46,32 +49,37 @@
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item" id="li01">
-                            <a class="nav-link " asp-area="" asp-controller="Home" asp-action="Index" id="l01">Home</a>
+                            <a class="nav-link " asp-area="" asp-controller="Home" asp-action="Index"
+                                id="l01">หน้าหลัก</a>
                         </li>
 
                         <li class="nav-item" id="li02">
-                            <a class="nav-link" asp-area="" asp-controller="MainPose" asp-action="" id="l02">Pose</a>
+                            <a class="nav-link" asp-area="" asp-controller="MainPose" asp-action="" id="l02">รับฝาก</a>
+                        </li>
+
+                        <li class="nav-item" id="li02">
+                            <a class="nav-link" asp-area="" asp-controller="" asp-action="" id="">ฝากซื้อ</a>
                         </li>
 
                         <li class="nav-item">
-                            <a class="nav-link " asp-area="" asp-controller="Account" asp-action="Login">Login</a>
+                            <a class="nav-link " asp-area="" asp-controller="Account" asp-action="Login">ลงชื่อเข้าใช้</a>
                         </li>
                     </ul>
                 </div>
             </div>
         </nav>
 
-            <div class="bannercontainer" onload="myFunction()"></div>
-              
+        <div class="bannercontainer" onload="myFunction()"></div>
+
     </header>
-    <div class="container" id ="renderContainer">
+    <div class="container" id="renderContainer">
         <main role="main" class="pb-3">
-        @RenderBody()
+            @RenderBody()
         </main>
 
     </div>
 
-    
+
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
@@ -79,53 +87,49 @@
 </body>
 <footer>
     ฝากเพื่อนซื้อหน่อย <br>
-    วิชา WEB APPLICATION DEVELOPMENT PROJECT รหัสวิชา<br>
-    01076120 สถาบันเทคโนโลยีพระจอมเกล้าเจ้าคุณทหารลาดกระบัง<br>
+    วิชา WEB APPLICATION DEVELOPMENT PROJECT รหัสวิชา 01076120 <br>
+    สถาบันเทคโนโลยีพระจอมเกล้าเจ้าคุณทหารลาดกระบัง<br>
 </footer>
 
 <script>
-    
+
     const mainnav = document.querySelector('nav')
     var navitem = document.querySelectorAll('.nav-item')
-    
 
     window.onscroll = function(){
-        if( window.scrollY>50)
+        if( window.scrollY>80)
         {
             console.log("realsdl")
             mainnav.classList.add('active');
-            for(var i =0;i<navitem.length;i++)
-            {
+            for (var i = 0; i < navitem.length; i++) {
                 navitem[i].classList.add('active');
             }
 
-            if(window.location.pathname=="/")
-            {
-                document.getElementById("l01").style.color="white" 
-                document.getElementById("li01").style.backgroundColor ="#f59317"
+            if (window.location.pathname == "/") {
+                document.getElementById("l01").style.color = "white"
+                document.getElementById("li01").style.backgroundColor = "#f59317"
             }
-            else if(window.location.pathname=="/MainPose"){
-                document.getElementById("l02").style.color="white" 
-                document.getElementById("li02").style.backgroundColor ="#f59317"
+            else if (window.location.pathname == "/MainPose") {
+                document.getElementById("l02").style.color = "white"
+                document.getElementById("li02").style.backgroundColor = "#f59317"
             }
         }
-        else{
+        else {
             mainnav.classList.remove('active');
-            for(var i =0;i<navitem.length;i++)
-            {
+            for (var i = 0; i < navitem.length; i++) {
                 navitem[i].classList.remove('active');
             }
-            if(window.location.pathname=="/")
-            {
-                document.getElementById("l01").style.color="white" 
-                document.getElementById("li01").style.backgroundColor ="red"
+            if (window.location.pathname == "/") {
+                document.getElementById("l01").style.color = "white"
+                document.getElementById("li01").style.backgroundColor = "red"
             }
-            else if(window.location.pathname=="/MainPose"){
-                document.getElementById("l02").style.color="white" 
-                document.getElementById("li02").style.backgroundColor ="red"
+            else if (window.location.pathname == "/MainPose") {
+                document.getElementById("l02").style.color = "white"
+                document.getElementById("li02").style.backgroundColor = "red"
             }
         }
 
     }
 </script>
+
 </html>

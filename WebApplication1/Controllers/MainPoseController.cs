@@ -31,7 +31,7 @@ namespace WebApplication1.Controllers
             CommentViewModel commentVM = new CommentViewModel();
             return View("Index", (mainPoses, createMainPoseVM, commentVM));
         }
-        
+
         public IActionResult CreateMainPose()
         {
 
@@ -137,7 +137,7 @@ namespace WebApplication1.Controllers
             return RedirectToAction("");
         }
         [HttpPost]
-        public async Task<IActionResult> CreateComment(int mainPoseId,string CommentText, string FirstName,string LastName)
+        public async Task<IActionResult> CreateComment(int mainPoseId, string CommentText, string FirstName, string LastName)
         {
             MainPose mainPose = await _mainPoseRepository.GetByIdAsync(mainPoseId);
             if (ModelState.IsValid)

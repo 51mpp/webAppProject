@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using WebApplication1.Data;
 using WebApplication1.Models;
+using WebApplication1.ViewModels;
 
 namespace WebApplication1.Controllers
 {
@@ -34,7 +35,7 @@ namespace WebApplication1.Controllers
                 return View();
             }
 
-            var user = await _userManager.FindByEmailAsync(loginVM.Email);
+            var user = await _userManager.FindByEmailAsync(loginVM.EmailAddress);
             if(user != null)
             {
                 //user found check password
