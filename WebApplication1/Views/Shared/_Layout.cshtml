@@ -39,6 +39,7 @@
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark mainnav " id="mainnav">
             <div class="container-fluid">
                 <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index"><img class="logo"
+                        style="width: auto;height: 50px;"
                         src="https://media.discordapp.net/attachments/1088293941192962138/1098666583150309396/prompFaglogo2.png?width=1000&height=500"
                         alt=""></a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse"
@@ -48,15 +49,21 @@
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item" id="li01">
-                            <a class="nav-link " asp-area="" asp-controller="Home" asp-action="Index" id="l01">Home</a>
+                            <a class="nav-link " asp-area="" asp-controller="Home" asp-action="Index"
+                                id="l01">หน้าหลัก</a>
                         </li>
 
                         <li class="nav-item" id="li02">
-                            <a class="nav-link" asp-area="" asp-controller="MainPose" asp-action="" id="l02">Pose</a>
+                            <a class="nav-link" asp-area="" asp-controller="MainPose" asp-action="" id="l02">รับฝาก</a>
+                        </li>
+
+                        <li class="nav-item" id="li02">
+                            <a class="nav-link" asp-area="" asp-controller="" asp-action="" id="">ฝากซื้อ</a>
                         </li>
 
                         <li class="nav-item">
-                            <a class="nav-link " asp-area="" asp-controller="Account" asp-action="Login">Login</a>
+                            <a class="nav-link " asp-area="" asp-controller="Account"
+                                asp-action="Login">ลงชื่อเข้าใช้</a>
                         </li>
                     </ul>
                 </div>
