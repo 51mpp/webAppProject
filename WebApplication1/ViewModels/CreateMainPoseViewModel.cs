@@ -6,7 +6,7 @@ namespace WebApplication1.ViewModels
 {
     public class CreateMainPoseViewModel
     {
-        
+
         public int Id { get; set; }
         [Required(ErrorMessage = "FirstName is requied")]
         public string? FirstName { get; set; }
@@ -16,6 +16,9 @@ namespace WebApplication1.ViewModels
         public int? Phone { get; set; }
         public IFormFile? Image { get; set; }
         public string? Place { get; set; }
+        public int? MaxComment { get; set; }
+        public string? Account { get; set; }
+        /*public CommentViewModel CommentVM { get; set; }*/
         //public int? AppUserId { get; set; }
         //public ICollection<Comment> Comments { get; set; }
     }

@@ -18,7 +18,7 @@ namespace WebApplication1.Models
         public int? Section { get; set; }
         public int? Phone { get; set; }
         public string? Icon { get; set; }
-
+        public string? Account { get; set; }
         [ForeignKey("MainPose")]
         public int? MainPoseId { get; set; }
         public ICollection<MainPose> MainPoses { get; set; }

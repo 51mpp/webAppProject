@@ -19,6 +19,7 @@ namespace WebApplication1.Controllers
             _mainPoseRepository = mainPoseRepository;
             _photoService = photoService;
         }
+        [HttpGet]
         public async Task<IActionResult> Index() // อันนี้ใช้ return view() ในหน้า club -----> controller 
         {
             IEnumerable<MainPose> mainPoses = await _mainPoseRepository.GetAll();
@@ -26,9 +27,11 @@ namespace WebApplication1.Controllers
             {
                 mainPose.Comments = (ICollection<Comment>)await _mainPoseRepository.GetCommentsByMainPoseId(mainPose.Id);
             }
-            CreateMainPoseViewModel viewModel = new CreateMainPoseViewModel();
-            return View("Index", (mainPoses, viewModel));
+            CreateMainPoseViewModel createMainPoseVM = new CreateMainPoseViewModel();
+            CommentViewModel commentVM = new CommentViewModel();
+            return View("Index", (mainPoses, createMainPoseVM, commentVM));
         }
+
         public IActionResult CreateMainPose()
         {
 
@@ -53,6 +56,8 @@ namespace WebApplication1.Controllers
                     Phone = mainPoseVM.Phone,
                     Image = imageUrl,
                     Place = mainPoseVM.Place,
+                    Account = mainPoseVM.Account,
+                    MaxComment = mainPoseVM.MaxComment
                 };
 
                 _mainPoseRepository.Add(mainPose);
@@ -66,20 +71,27 @@ namespace WebApplication1.Controllers
             return View(mainPoseVM);
         }
         [HttpPost]
-        public async Task<IActionResult> CreateComment(int mainPoseId, string commentText)
+        public async Task<IActionResult> CreateComment(int mainPoseId, string CommentText, string FirstName, string LastName)
         {
             MainPose mainPose = await _mainPoseRepository.GetByIdAsync(mainPoseId);
             if (ModelState.IsValid)
             {
                 string comText = "";
-                if (commentText != null)
+                string firstName = "";
+                string lastName = "";
+                if (CommentText != null)
                 {
-                    comText = commentText;
+                    comText = CommentText;
+                    firstName = FirstName;
+                    lastName = LastName;
+
                 }
                 Comment comment = new Comment
                 {
                     MainPoseId = mainPoseId,
-                    CommentText = comText
+                    CommentText = comText,
+                    FirstName = firstName,
+                    LastName = lastName
                 };
                 await _mainPoseRepository.AddComment(comment);
                 return RedirectToAction("");
@@ -99,7 +111,8 @@ namespace WebApplication1.Controllers
              };
              await _mainPoseRepository.AddComment(comment);
              return RedirectToAction("");*/
-            return RedirectToAction("");
+            /*return RedirectToAction("");*/
+            return RedirectToAction(nameof(Index));
         }
         public async Task<IActionResult> Detail(int id)
         {
