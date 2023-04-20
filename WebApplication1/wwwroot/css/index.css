@@ -17,7 +17,8 @@ a {
   border-color: #1861ac;
 }
 
-.nav-pills .nav-link.active, .nav-pills .show > .nav-link {
+.nav-pills .nav-link.active,
+.nav-pills .show>.nav-link {
   color: #fff;
   background-color: #1b6ec2;
   border-color: #1861ac;
@@ -26,6 +27,7 @@ a {
 .border-top {
   border-top: 1px solid #e5e5e5;
 }
+
 .border-bottom {
   border-bottom: 1px solid #e5e5e5;
 }
@@ -46,30 +48,38 @@ button.accept-policy {
   white-space: nowrap;
   line-height: 60px;
 }
-.mainnav{
-  background-color: rgba(0, 0, 0, 0.3) ;
+
+.mainnav {
+  background-color: rgba(0, 0, 0, 0.3);
 }
+
 .banner-image {
   /*background-image: url('https://img.freepik.com/free-photo/chicken-wings-barbecue-sweetly-sour-sauce-picnic-summer-menu-tasty-food-top-view-flat-lay_2829-6471.jpg?w=2000') !important;
   */
-  background-image: url('https://media.discordapp.net/attachments/905446050347761714/1097545282960494612/d36d462db827833805497d9ea78a1343.jpg');   
+  background-image: url('https://media.discordapp.net/attachments/905446050347761714/1097545282960494612/d36d462db827833805497d9ea78a1343.jpg');
   background-size: cover;
 }
 
-.nav-item{
-  border-radius: 20px;
-    color: white;
+.logo {
+  width: auto;
+  height: 50px;
 }
-.nav-item:hover{
-  background-color: rgba(255,0,0,1);
+
+.nav-item {
+  border-radius: 20px;
   color: white;
 }
 
-.mainnav.active{
-  background-color: rgba(9,68,9,1)
+.nav-item:hover {
+  background-color: rgba(255, 0, 0, 1);
+  color: white;
 }
 
-.nav-item.active:hover{
-  background-color: rgba(243,156,18,1);
+.mainnav.active {
+  background-color: rgba(9, 68, 9, 1)
+}
+
+.nav-item.active:hover {
+  background-color: rgba(243, 156, 18, 1);
   color: black;
 }

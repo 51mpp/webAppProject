@@ -46,8 +46,8 @@ namespace WebApplication1.Data
                     {
                         new AppUser()
                         {
-                        
-                           
+
+
                             FirstName = "Thanakorn",
                             LastName = "Rattanapornchai",
                             Section = 18,
