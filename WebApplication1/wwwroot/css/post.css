@@ -37,12 +37,8 @@
 }
 
 /* ยังนึกไม่ออกว่าเอาแบบไหนดีสำหรับช่องข้อความที่ถูกคอมเมนต์ */
-.all_comment {
-    display: flex;
-    align-items: space-around;
-    margin-top: 10px;
-    background-color: #b1e0b3;
-    width: 100%;
+.order_box {
+    margin-top: 5px;
 }
 
 
