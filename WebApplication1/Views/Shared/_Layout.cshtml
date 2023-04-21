@@ -62,7 +62,8 @@
                         </li>
 
                         <li class="nav-item">
-                            <a class="nav-link " asp-area="" asp-controller="Account" asp-action="Login">ลงชื่อเข้าใช้</a>
+                            <a class="nav-link " asp-area="" asp-controller="Account"
+                                asp-action="Login">ลงชื่อเข้าใช้</a>
                         </li>
                     </ul>
                 </div>
@@ -86,9 +87,11 @@
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 <footer>
-    ฝากเพื่อนซื้อหน่อย <br>
-    วิชา WEB APPLICATION DEVELOPMENT PROJECT รหัสวิชา 01076120 <br>
-    สถาบันเทคโนโลยีพระจอมเกล้าเจ้าคุณทหารลาดกระบัง<br>
+    <p>
+        เว็บไซต์พร้อมฝาก <br>
+        วิชา WEB APPLICATION DEVELOPMENT PROJECT รหัสวิชา 01076120 <br>
+        สถาบันเทคโนโลยีพระจอมเกล้าเจ้าคุณทหารลาดกระบัง<br>
+    </p>
 </footer>
 
 <script>
@@ -96,9 +99,8 @@
     const mainnav = document.querySelector('nav')
     var navitem = document.querySelectorAll('.nav-item')
 
-    window.onscroll = function(){
-        if( window.scrollY>80)
-        {
+    window.onscroll = function () {
+        if (window.scrollY > 80) {
             console.log("realsdl")
             mainnav.classList.add('active');
             for (var i = 0; i < navitem.length; i++) {

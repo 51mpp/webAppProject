@@ -19,23 +19,32 @@ For more information on enabling MVC for empty projects, visit https://go.micros
 
     <div class="row">
         <a asp-action="CreateMainPose" class="btn btn-primary btn-lg float-end">New Post</a>
-        
+
         @foreach (var item in Model.Item1.Reverse())
         {
 
 
             @* info section *@
-            
+
             <div id="postBox" class="col-sm-12 col-lg-5 col-xl-4 ">
-                
+
                 @* Poster'simage *@
 
-                <div id="box" class="card mb-4 box-shadow ">
-                    <a asp-controller="MainPose" asp-action="EditMainPose" asp-route-id="@item.Id" class="btn btn-primary">Edit Post</a>
-                    <form asp-controller="MainPose" asp-action="DeleteMainPose" method="post">
-                        <input type="hidden" name="mainPoseId" value="@item.Id" />
-                        <button type="submit" class="btn btn-primary">Delete</button>
-                    </form>
+                <div id="box" class="card mb-4 box-shadow position-relative">
+                    <div class="editPost row flex-row-reverse position-absolute top-0 end-0">
+                        <div class="col-7">
+                            <form asp-controller="MainPose" asp-action="DeleteMainPose" method="post">
+                                <input type="hidden" name="mainPoseId" value="@item.Id" />
+                                <button type="submit" class="remove"><img
+                                        src="https://cdn-icons-png.flaticon.com/512/189/189690.png" alt=""></button>
+                            </form>
+                        </div>
+                        <div class="col-4">
+                            <a asp-controller="MainPose" asp-action="EditMainPose" asp-route-id="@item.Id" class="edit"><img
+                                    src="https://cdn-icons-png.flaticon.com/512/3597/3597075.png" alt="">
+                            </a>
+                        </div>
+                    </div>
                     <div class="card-body">
                         <a>
                             @{
@@ -98,7 +107,7 @@ For more information on enabling MVC for empty projects, visit https://go.micros
                         <hr>
 
                         <div class="comment" onclick="showComment(@item.Id)">
-                            ฝากซื้อหน่อยจิ
+                            ฝากซื้อหน่อย
                         </div>
                         <div id="postComment">
                             <div class="form-group row" id="@item.Id" style="display: none;">

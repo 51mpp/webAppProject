@@ -56,6 +56,44 @@
     border-color: rgb(16, 70, 19);
 }
 
+
+.editPost {
+    margin-top: 10px;
+}
+
+.edit {
+    border: none;
+    cursor: pointer;
+    appearance: none;
+    background-color: inherit;
+}
+
+.edit img {
+    width: 30px;
+    height: auto;
+
+}
+
+.edit img:hover {
+    filter: brightness(120%);
+}
+
+.remove {
+    border: none;
+    cursor: pointer;
+    appearance: none;
+    background-color: inherit;
+}
+
+.remove img {
+    width: 30px;
+    height: auto;
+}
+
+.remove img:hover {
+    filter: brightness(200%);
+}
+
 #CT {
     background-color: rgb(253, 201, 89);
     border-radius: 0px 0px 50px 50px;
