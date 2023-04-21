@@ -1,4 +1,4 @@
-function showComment(id) {
+function showComment(id, current, max) {
     console.log("click");
     var main = document.getElementById(id);
     console.log(main.style.display);
@@ -7,6 +7,11 @@ function showComment(id) {
     } else {
         main.style.display = "block";
     }
+    if (current == max) {
+        main.style.textAlign = "center";
+        main.innerHTML = "เต็มแล้วจ้า";
+    }
+
 }
 
 function showQR(id) {
@@ -14,9 +19,14 @@ function showQR(id) {
     var image = document.getElementById(id);
     if (image.style.display === "none") {
         image.style.display = "block";
+        image.style.marginLeft = "auto";
+        image.style.marginRight = "auto";
+
     } else {
         image.style.display = "none";
     }
+
 }
+
 
 

@@ -16,6 +16,7 @@ For more information on enabling MVC for empty projects, visit https://go.micros
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai:wght@500&display=swap" rel="stylesheet">
 
+
 <script src="~/js/post.js"></script>
 
 
@@ -130,10 +131,20 @@ For more information on enabling MVC for empty projects, visit https://go.micros
                             <img id="@item.Phone" src="@item.Image" alt="" style="display: none;">
                         </div>
                         
-
-                        <div class="commented">
+                        
+                        <div class="commented" id="@item.Account">
                             ฝากแล้ว @item.Comments.Count / @item.MaxComment คน
                         </div>
+                        <script>
+                            console.log(2)
+                            if (@item.Comments.Count == @item.MaxComment) {
+                                document.getElementById("@item.Account").style.backgroundColor = "red";   
+                            }
+                            else if (@item.Comments.Count  >= @item.MaxComment/2){
+                                document.getElementById("@item.Account").style.backgroundColor = "yellow";
+                                document.getElementById("@item.Account").style.color = "black";
+                            } 
+                        </script>
 
 
             @foreach (var comment in item.Comments)
@@ -157,7 +168,7 @@ For more information on enabling MVC for empty projects, visit https://go.micros
 
                         <hr>
 
-                        <div class="comment" onclick="showComment(@item.Id)">
+                        <div class="comment" onclick="showComment(@item.Id,@item.Comments.Count,@item.MaxComment)" >
                             ฝากซื้อหน่อย
                         </div>
                         <div id="postComment">
