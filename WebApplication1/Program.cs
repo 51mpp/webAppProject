@@ -32,7 +32,8 @@ var app = builder.Build();
 //ตอนรันแอพก็จะเรียงใช้ program ก็จะทำให้ Seed.SeedData ทำงาน ทำให้ data update to Database
 if (args.Length == 1 && args[0].ToLower() == "seeddata")
 {
-    Seed.SeedData(app);
+    await Seed.SeedUsersAndRolesAsync(app);
+    
     //Seed.SeedData(app);
 }
 // Configure the HTTP request pipeline.
@@ -47,7 +48,7 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
-
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllerRoute(

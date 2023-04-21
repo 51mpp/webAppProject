@@ -46,37 +46,41 @@ For more information on enabling MVC for empty projects, visit https://go.micros
                         </div>
                     </div>
                     <div class="card-body">
-                        <a>
+                        <small class="position-absolute top-0 start-1" style="margin-top: 5px;color: grey">
                             @{
-                                var x = DateTime.Now-item.CreatedTime;
+                                var x = DateTime.Now - item.CreatedTime;
                                 string y = "";
                                 if (x.Minutes <= 0 && x.Hours <= 0 && x.Days <= 0)
                                 {
                                     y = "ซักครู่";
                                 }
-                                else if (x.Hours <= 0 && x.Days <= 0 )
+                                else if (x.Hours <= 0 && x.Days <= 0)
                                 {
-                                    y = string.Format("{0} นาที", x.Minutes);
+                                    y = string.Format("โพสต์เมื่อ {0} นาทีที่แล้ว", x.Minutes);
                                 }
                                 else if (x.Hours > 0 && x.Days <= 0)
                                 {
-                                    y = string.Format("{0} ชม.", x.Hours);
-                                }else if(x.Days > 0 && x.Days <= 7)
+                                    y = string.Format("โพสต์เมื่อ {0} ชั่วโมงที่แล้ว", x.Hours);
+                                }
+                                else if (x.Days > 0 && x.Days <= 7)
                                 {
-                                    y = string.Format("{0} วัน ", x.Days);
+                                    y = string.Format("โพสต์เมื่อ {0} วันที่แล้ว ", x.Days);
                                 }
                                 else if (x.Days <= 365)
                                 {
-                                    y = item.CreatedTime.ToString("dd MMMM เวลา HH:mm น.", new CultureInfo("th-TH"));
+                                    y = item.CreatedTime.ToString("โพสต์เมื่อ dd MMMM เวลา HH:mm น.", new CultureInfo("th-TH"));
                                 }
                                 else
                                 {
-                                    y = item.CreatedTime.ToString("dd MMMM yyyy เวลา HH:mm น.", new CultureInfo("th-TH"));
+                                    y = item.CreatedTime.ToString("โพสต์เมื่อ dd MMMM yyyy เวลา HH:mm น.", new
+                                    CultureInfo("th-TH"));
                                 }
 
                             }
                             @y
-                        </a>
+                            &#128337;
+                        </small>
+
                         <div><img class="rounded-circle" src="@item.Image"></div>
                         <div>
                             <p>@item.FirstName @item.LastName</p> @* ชื่อ - สกุล*@
@@ -89,20 +93,27 @@ For more information on enabling MVC for empty projects, visit https://go.micros
                         <div class="commented" onclick="showCommented()">
                             ฝากแล้ว @item.Comments.Count / @item.MaxComment คน
                         </div>
-                        <div class="all_comment">
-                            <div id="" style="display: block;">
-                                @foreach (var comment in item.Comments)
-                                {
-                                    <div class="row">
-                                        <div>
-                                            <p>@comment.CommentText</p>
 
+
+                        @foreach (var comment in item.Comments)
+                        {
+                            <div class="row">
+                                <div class="order_box">
+                                    <div class="card p-3 shadow-sm">
+                                        <div class="d-flex justify-content-between align-items-center">
+                                            <div class="user d-flex flex-row align-items-center">
+                                                <span><small class="font-weight-bold"
+                                                        style="color: rgb(76, 158, 80);">@comment.FirstName</small>
+                                                    <small class="font-weight-bold">@comment.CommentText</small></span>
+                                            </div>
                                         </div>
                                     </div>
-
-                                }
+                                </div>
                             </div>
-                        </div>
+
+                        }
+
+
 
                         <hr>
 
@@ -152,79 +163,3 @@ For more information on enabling MVC for empty projects, visit https://go.micros
         }
     </div>
 </div>
-@*<div class="album py-5" >
-<div class="container">
-
-<a asp-action="CreateMainPose" class="btn btn-primary">Create Post</a>
-<div class="row">
-@foreach (var item in Model.mainPose.Reverse())
-{
-<div class="col-md-4 ">
-<div class="card mb-4 box-shadow ">
-@if (item.Image == null)
-{
-<div><h2>No QR Code</h2></div>
-}
-else
-{
-<img class="card-img-top" src="@item.Image" alt="Card image cap">
-}
-
-<div class="card-body">
-<p class="card-text">@item.FirstName @item.LastName @item.Section @item.Phone</p>
-<p class="card-text">@item.Place</p>
-<p><h2>Comment</h2></p>
-<div class="row">
-<div>
-@foreach (var comment in item.Comments)
-{
-<p>@comment.CommentText</p>
-}
-</div>
-</div>
-</div>
-</div>
-</div>
-<div>
-<form method="post" asp-action="CreateComment">
-<input type="hidden" name="MainPoseId" value="@item.Id" />
-<div class="form-group">
-<label for="CommentText">Comment:</label>
-<textarea class="form-control" name="CommentText" id="CommentText"></textarea>
-</div>
-<button type="submit" class="btn btn-primary">Submit</button>
-</form>
-</div>
-}
-</div>
-</div>
-</div>
-*@
-@*<form method="post" asp-action="CreateMainPose" enctype="multipart/form-data">
-<div class="form-group">
-<label asp-for="ViewModels.mainPoseVM.FirstName">FirstName</label>
-<input asp-for="mainPoseVM.FirstName" class="form-control" placeholder="Enter FirstName">
-<span asp-validation-for="mainPoseVM.FirstName" class="text-danger"></span>
-</div>
-<div class="form-group">
-<label asp-for="mainPoseVM.LastName">LastName</label>
-<input asp-for="mainPoseVM.LastNam((char)e" class="form-control" placeholder="Enter LastName">
-<span asp-validation-for="mainPoseVM.LastName" class="text-danger"></span>
-</div>
-<div class="form-group">
-<label asp-for="mainPoseVM.Phone">Phone</label>
-<input asp-for="mainPoseVM.Phone" class="form-control" placeholder="Enter Phone">
-<span asp-validation-for="mainPoseVM.Phone" class="text-danger"></span>
-</div>
-<div class="form-group">
-<label asp-for="mainPoseVM.Place">Place</label>
-<input asp-for="mainPoseVM.Place" class="form-control" placeholder="Enter Place">
-<span asp-validation-for="mainPoseVM.Place" class="text-danger"></span>
-</div>
-<div class="form-group">
-<label asp-for="mainPoseVM.Image">Image</label>
-<input asp-for="mainPoseVM.Image" type="file" class="form-control" placeholder="Enter Image">
-<span asp-validation-for="mainPoseVM.Image" class="text-danger"></span>
-</div>
-<button type="submit" class="btn btn-primary">Submit Pose</button>
-</form>*@
