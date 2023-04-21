@@ -1,5 +1,6 @@
-﻿img {
-
+﻿.profile {
+    border-radius: 10px;
+    filter: drop-shadow(3px 4px 2px gray);
     width: 100px;
     height: 100px;
 }
@@ -12,6 +13,43 @@
     padding: 5px;
     border: 3px solid #167019;
     border-radius: 15px;
+}
+
+p {
+    font-family: 'IBM Plex Sans Thai', sans-serif;
+    font-size: 16px;
+}
+
+span {
+    font-family: 'IBM Plex Sans Thai', sans-serif;
+    font-size: 16px;
+}
+
+
+
+small {
+    font-family: 'IBM Plex Sans Thai', sans-serif;
+}
+
+.scan {
+    text-align: center;
+    margin-bottom: 5px;
+}
+
+.scan span {
+    cursor: pointer;
+    text-decoration: underline;
+    color: black;
+}
+
+.scan span:hover {
+    color: rgb(92, 89, 89);
+}
+
+.QRcode img {
+    width: 300px;
+    height: auto;
+    margin-bottom: 10px;
 }
 
 .comment {
@@ -30,7 +68,7 @@
 
 .commented {
     text-align: center;
-    cursor: pointer;
+
     background-color: #52823b;
     color: rgb(255, 255, 255);
     border-radius: 10px;
