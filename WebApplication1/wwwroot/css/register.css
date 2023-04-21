@@ -1,0 +1,77 @@
+body {
+    font-family: 'Poppins', Arial, sans-serif;
+    /* background-image: url("https://assets3.thrillist.com/v1/image/2790642/1200x630/flatten;crop_down;webp=auto;jpeg_quality=70"); */
+    background-repeat: no-repeat;
+    background-size: cover;
+    margin: 0;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.container {
+    width: 100%;
+    max-width: 400px;
+}
+
+.signup-container {
+    background-color: #fff;
+    background-image: linear-gradient(135deg, #ffffff 0%, #f3f3f3 100%);
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2), 0 6px 6px rgba(0, 0, 0, 0.23);
+    display: flex;
+    flex-direction: column;
+}
+
+h1 {
+    text-align: center;
+    margin-bottom: 30px;
+    color: #333;
+}
+
+.input-group {
+    position: relative;
+    margin-bottom: 20px;
+}
+
+.input-icon {
+    position: absolute;
+    left: 10px;
+    top: 10px;
+    color: #aaa;
+}
+
+input {
+    display: block;
+    width: 85%;
+    padding: 10px;
+    padding-left: 40px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    color: #777;
+    background-color: #fff;
+}
+
+input::placeholder {
+    color: #aaa;
+}
+
+button {
+    background-color: #007bff;
+    color: white;
+    font-size: 16px;
+    padding: 10px;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    width: 100%;
+    margin-top: 10px;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+

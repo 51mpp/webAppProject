@@ -46,7 +46,7 @@ namespace WebApplication1.Controllers
                     var result = await _signInManager.PasswordSignInAsync(user, loginVM.Password, false, false);
                     if(result.Succeeded)
                     {
-                        return RedirectToAction("Index","MainPose");
+                        return RedirectToAction("Index","Home");
                     }
                 }
                 //password is incorrect
@@ -57,6 +57,7 @@ namespace WebApplication1.Controllers
             TempData["Error"] = "Wrong credentials. Please, try again";
             return View(loginVM);
         }
+        
         public IActionResult Register()
         {
             var response = new RegisterVM { };
@@ -66,8 +67,11 @@ namespace WebApplication1.Controllers
         [HttpPost]
         public async Task<IActionResult> Register(RegisterVM registerVM)
         {
-            if(!ModelState.IsValid) return View(registerVM);
-
+            if(!ModelState.IsValid)
+            {
+                return View();
+            }
+            
             var user = await _userManager.FindByEmailAsync(registerVM.EmailAddress);
             if(user != null)
             {
@@ -80,17 +84,20 @@ namespace WebApplication1.Controllers
                 Email = registerVM.EmailAddress,
                 UserName = registerVM.EmailAddress
             };
+
             var newUserResponse = await _userManager.CreateAsync(newUser, registerVM.Password);
 
             if(newUserResponse.Succeeded)
                 await _userManager.AddToRoleAsync(newUser, UserRoles.User);
                 
-            return View("Home");
+            return View("Index","Home");
         }
+
         [HttpPost]
         public async Task<IActionResult> Logout()
         {
-
+            await _signInManager.SignOutAsync();
+            return RedirectToAction("Index","Home");
         }
     }
 }
