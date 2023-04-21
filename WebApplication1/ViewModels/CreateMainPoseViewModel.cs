@@ -19,6 +19,8 @@ namespace WebApplication1.ViewModels
         public string? Place { get; set; }
         public int? MaxComment { get; set; }
         public string? Account { get; set; }
+        public DateTime CreatedTime { get; set; }
+        public DateTime? LastModified { get; set; }
         /*public CommentViewModel CommentVM { get; set; }*/
         //public int? AppUserId { get; set; }
         //public ICollection<Comment> Comments { get; set; }

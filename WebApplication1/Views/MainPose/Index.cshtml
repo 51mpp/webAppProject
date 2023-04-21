@@ -4,6 +4,7 @@ For more information on enabling MVC for empty projects, visit https://go.micros
 @{
     ViewData["Title"] = "Post";
 }
+@using System.Globalization;
 @using WebApplication1.ViewModels
 @model (IEnumerable<MainPose>, CreateMainPoseViewModel, CommentViewModel)
 
@@ -36,6 +37,37 @@ For more information on enabling MVC for empty projects, visit https://go.micros
                         <button type="submit" class="btn btn-primary">Delete</button>
                     </form>
                     <div class="card-body">
+                        <a>
+                            @{
+                                var x = DateTime.Now-item.CreatedTime;
+                                string y = "";
+                                if (x.Minutes <= 0 && x.Hours <= 0 && x.Days <= 0)
+                                {
+                                    y = "ซักครู่";
+                                }
+                                else if (x.Hours <= 0 && x.Days <= 0 )
+                                {
+                                    y = string.Format("{0} นาที", x.Minutes);
+                                }
+                                else if (x.Hours > 0 && x.Days <= 0)
+                                {
+                                    y = string.Format("{0} ชม.", x.Hours);
+                                }else if(x.Days > 0 && x.Days <= 7)
+                                {
+                                    y = string.Format("{0} วัน ", x.Days);
+                                }
+                                else if (x.Days <= 365)
+                                {
+                                    y = item.CreatedTime.ToString("dd MMMM เวลา HH:mm น.", new CultureInfo("th-TH"));
+                                }
+                                else
+                                {
+                                    y = item.CreatedTime.ToString("dd MMMM yyyy เวลา HH:mm น.", new CultureInfo("th-TH"));
+                                }
+
+                            }
+                            @y
+                        </a>
                         <div><img class="rounded-circle" src="@item.Image"></div>
                         <div>
                             <p>@item.FirstName @item.LastName</p> @* ชื่อ - สกุล*@

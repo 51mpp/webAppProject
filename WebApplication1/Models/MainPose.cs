@@ -16,6 +16,8 @@ namespace WebApplication1.Models
         public string? Place { get; set; }
         public int? MaxComment { get; set; }
         public string? Account { get; set; }
+        public DateTime CreatedTime { get; set; }
+        public DateTime? LastModified { get; set; }
         [ForeignKey("AppUser")]
         public string? AppUserId { get; set; }
         public AppUser? AppUser { get; set; }

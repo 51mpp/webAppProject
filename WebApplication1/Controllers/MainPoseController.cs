@@ -57,7 +57,8 @@ namespace WebApplication1.Controllers
                     Image = imageUrl,
                     Place = mainPoseVM.Place,
                     Account = mainPoseVM.Account,
-                    MaxComment = mainPoseVM.MaxComment
+                    MaxComment = mainPoseVM.MaxComment,
+                    CreatedTime = DateTime.Now,
                 };
 
                 _mainPoseRepository.Add(mainPose);
@@ -83,7 +84,9 @@ namespace WebApplication1.Controllers
                 URLImage = post.Image,
                 Place = post.Place,
                 Account = post.Account,
-                MaxComment = post.MaxComment
+                MaxComment = post.MaxComment,
+                CreatedTime = post.CreatedTime
+
             };
             return View(mainPoseVM);
         }
@@ -119,7 +122,10 @@ namespace WebApplication1.Controllers
                 Image = imageUrl,
                 Place = mainPoseVM.Place,
                 Account = mainPoseVM.Account,
-                MaxComment = mainPoseVM.MaxComment
+                MaxComment = mainPoseVM.MaxComment,
+                CreatedTime = mainPoseVM.CreatedTime,
+                LastModified = DateTime.Now,
+                
             };
             _mainPoseRepository.Update(mainPose);
             return RedirectToAction("Index");

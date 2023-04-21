@@ -7,6 +7,7 @@
 @model EditMainPoseViewModel
 
 <form asp-action="EditMainPose" method="post" enctype="multipart/form-data">
+    
     <div class="form-group">
         <label asp-for="FirstName">FirstName</label>
         <input asp-for="FirstName" class="form-control" placeholder="Enter FirstName">
@@ -42,5 +43,9 @@
         <input asp-for="Image" type="file" class="form-control" placeholder="QR Code">
         <span asp-validation-for="Image" class="text-danger"></span>
     </div>
+    <div class="form-group">
+        <input asp-for="CreatedTime" type="hidden">
+    </div>
+    
     <button type="submit" class="btn btn-primary">Submit</button>
 </form>
