@@ -23,20 +23,20 @@
         <h1>Sign In</h1>
         <form asp-action="Login">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="input-group">
-                <i class="fas fa-user input-icon"></i>
-                <input asp-for="EmailAddress" type="text" id="username" name="username" placeholder="Username">
+            <div class="form-group">
+                <label asp-for="EmailAddress" class="control-label"></label>
+                <input asp-for="EmailAddress" class="form-control">
                 <span asp-validation-for="EmailAddress" class="text-danger"></span>
             </div>
-            <div class="input-group">
-                <i class="fas fa-lock input-icon"></i>
-                <input asp-for="Password" type="password" id="password" name="password" placeholder="Password">
+            <div class="form-group">
+                <label asp-for="Password" class="control-label"></label>
+                <input asp-for="Password" class="form-control" />
                 <span asp-validation-for="Password" class="text-danger"></span>
             </div>
             <button type="submit">Sign In</button>
         </form>
         <div class="signup-link">
-            <p>Don't have an account? <a href="signup.html">Create an account</a></p>
+            <p>Don't have an account? <a asp-controller="Account"asp-action="Register">Create an account</a> </p>
         </div>
     </div>
     
