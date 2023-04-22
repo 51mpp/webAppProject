@@ -89,7 +89,7 @@ namespace WebApplication1.Controllers
 
             if(newUserResponse.Succeeded)
                 await _userManager.AddToRoleAsync(newUser, UserRoles.User);
-                
+                //บัครหัสไม่ถูกฟอร์ม
             return View("Login");
         }
 
