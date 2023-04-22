@@ -13,12 +13,17 @@ namespace WebApplication1.ViewModels
         [Required(ErrorMessage = "LastName is requied")]
         public string? LastName { get; set; }
         public int? Section { get; set; }
-        public int? Phone { get; set; }
+
+        [Phone]
+        [Required(ErrorMessage = "Mobile Number is required.")]
+        [RegularExpression("^([0-9]{10})$", ErrorMessage = "Invalid Mobile Number.")]
+        public string? Phone { get; set; }
         public IFormFile? Image { get; set; }
-        
         public string? Place { get; set; }
         public int? MaxComment { get; set; }
         public string? Account { get; set; }
+        /*[Required(ErrorMessage = "MaxTimePose is requied")]*/
+        public int? MaxTimePose { get; set; }
         public DateTime CreatedTime { get; set; }
         public DateTime? LastModified { get; set; }
         /*public CommentViewModel CommentVM { get; set; }*/
