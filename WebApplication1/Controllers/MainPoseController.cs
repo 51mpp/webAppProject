@@ -61,6 +61,7 @@ namespace WebApplication1.Controllers
                     Place = mainPoseVM.Place,
                     Account = mainPoseVM.Account,
                     MaxComment = mainPoseVM.MaxComment,
+                    MaxTimePose = mainPoseVM.MaxTimePose,
                     CreatedTime = DateTime.Now,
                 };
 
@@ -94,12 +95,12 @@ namespace WebApplication1.Controllers
             return View(mainPoseVM);
         }
         [HttpPost]
-        public async Task<IActionResult> EditMainPose(int id,EditMainPoseViewModel mainPoseVM) 
+        public async Task<IActionResult> EditMainPose(int id, EditMainPoseViewModel mainPoseVM)
         {
-            if (!ModelState.IsValid) 
+            if (!ModelState.IsValid)
             {
                 ModelState.AddModelError("", "Fail to edit mainPose");
-                return View("EditMainPose", mainPoseVM); 
+                return View("EditMainPose", mainPoseVM);
             }
             var post = await _mainPoseRepository.GetByIdAsyncNoTracking(id);
             if (post == null)
@@ -128,7 +129,7 @@ namespace WebApplication1.Controllers
                 MaxComment = mainPoseVM.MaxComment,
                 CreatedTime = mainPoseVM.CreatedTime,
                 LastModified = DateTime.Now,
-                
+
             };
             _mainPoseRepository.Update(mainPose);
             return RedirectToAction("Index");
@@ -137,7 +138,7 @@ namespace WebApplication1.Controllers
         public async Task<IActionResult> DeleteMainPose(int mainPoseId)
         {
             var post = await _mainPoseRepository.GetByIdAsync(mainPoseId);
-            if (post == null) {  return View("Error"); }
+            if (post == null) { return View("Error"); }
             if (!string.IsNullOrEmpty(post.Image))
             {
                 _ = _photoService.DeletePhotoAsync(post.Image); // ไม่สนใจรีเทิน
@@ -271,6 +272,6 @@ namespace WebApplication1.Controllers
             }
             return Json(new { success = false, errors = ModelState });
         }
-        
+
     }
 }
