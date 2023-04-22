@@ -11,7 +11,8 @@ For more information on enabling MVC for empty projects, visit https://go.micros
 @* @model IEnumerable<MainPose> *@
 
 <link rel="stylesheet" href="~/css/post.css">
-
+<script
+    src="https://cdnjs.cloudflare.com/ajax/libs/jquery-ajax-unobtrusive/3.2.6/jquery.unobtrusive-ajax.min.js"></script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai:wght@500&display=swap" rel="stylesheet">
@@ -27,8 +28,6 @@ For more information on enabling MVC for empty projects, visit https://go.micros
 
         @foreach (var item in Model.Item1.Reverse())
         {
-
-
             @* info section *@
 
             <div id="postBox" class="col-sm-12 col-lg-5 col-xl-4 ">
@@ -89,7 +88,7 @@ For more information on enabling MVC for empty projects, visit https://go.micros
                         <div style="margin-top: 10px;">
                             <div class="row align-items-center">
                                 <div class="col-sm-12 col-md-4">
-                                    <img class="profile" src="@item.Image">
+                                    <img class="profile" src="@item.Image" style="margin-bottom: 10px;">
                                 </div>
 
                                 <div class="col-sm-12 col-md-8">
@@ -112,67 +111,109 @@ For more information on enabling MVC for empty projects, visit https://go.micros
 
                             </div>
                             <div class="row align-items-end">
-                                <div class="col-12" style="padding: 10px;">
-                                    <span>ไปซื้อที่ : @item.Place</span> @* ไปซื้อที่ไหน *@
+                                <div class="col-12" style="margin-top:5px;">
+                                    <span>ไปซื้อที่ : @item.Place</span>
+                                </div>
+                                <div class="col-12">
+                                    <span>จะไปซื้อในอีก : @item.MaxTimePose
+                                        (@item.CreatedTime.Hour:@item.CreatedTime.Minute) </span> @*
+                                ไปซื้อที่ไหน *@
                                 </div>
 
-
                             </div>
-
-
-
                         </div>
                         <div class="row align-items-center">
                             <div class="scan col-12">
-                                <span onclick="showQR(@item.Phone)">แสกนจ่าย</span>
+                                <span onclick="showQR(@item.Id@item.Id,2)">แสกนจ่าย</span>
                             </div>
                         </div>
-                        <div class="QRcode">
-                            <img id="@item.Phone" src="@item.Image" alt="" style="display: none;">
+                        <div class="QRcode w-60 h-100">
+                            <img id="@item.Id@item.Id" src="@item.Image" alt="" style="display: none;">
                         </div>
-                        
-                        
-                        <div class="commented" id="@item.Account">
-                            ฝากแล้ว @item.Comments.Count / @item.MaxComment คน
+
+                        @*
+                    <div class="commented" id="@item.Id">
+                    ฝากแล้ว @item.Comments.Count / @item.MaxComment คน
+                    </div>
+                    <script>
+                    console.log(2)
+                    if (@item.Comments.Count >= @item.MaxComment) {
+                    document.getElementById("@item.Id").style.backgroundColor = "red";
+                    }
+                    else if (@item.Comments.Count >= @item.MaxComment/2){
+                    document.getElementById("@item.Id").style.backgroundColor = "yellow";
+                    document.getElementById("@item.Id").style.color = "black";
+                    }
+                    </script>*@
+                        <div id="test1">
+                            <span id="count-@item.Id-comments" ฝากแล้ว คน></span>
+
                         </div>
+                        <div id="post-@item.Id-comments">
+
+
+                        </div>
+
                         <script>
-                            console.log(2)
-                            if (@item.Comments.Count == @item.MaxComment) {
-                                document.getElementById("@item.Account").style.backgroundColor = "red";   
+                            function loadComments(mainPoseId) {
+                                $.ajax({
+                                    url: '@Url.Action("GetComments", "MainPose")',
+                                    data: { mainPoseId: mainPoseId },
+                                    type: 'GET',
+                                    success: function (result) {
+                                        console.log('success.');
+                                        $('#post-' + mainPoseId + '-comments').html(result);
+                                    },
+                                    error: function () {
+                                        console.log('Error occurred while retrieving new comments.');
+                                    }
+                                });
+                                $.ajax({
+                                    url: '@Url.Action("CountComments", "MainPose")',
+                                    data: { mainPoseId: mainPoseId },
+                                    type: 'GET',
+                                    success: function (result) {
+                                        console.log('success.');
+                                        $('#count-' + mainPoseId + '-comments').html(result);
+                                    },
+                                    error: function () {
+                                        console.log('Error occurred while retrieving new comments.');
+                                    }
+                                });
+
                             }
-                            else if (@item.Comments.Count  >= @item.MaxComment/2){
-                                document.getElementById("@item.Account").style.backgroundColor = "yellow";
-                                document.getElementById("@item.Account").style.color = "black";
-                            } 
+                            function showComment(id, current, max, state) {
+                                console.log("click");
+                                var main = document.getElementById(id);
+                                console.log(main);
+                                console.log(main.style.display);
+                                if (state === 1) {
+                                    if (main.style.display === "block") {
+                                        main.style.display = "none";
+                                    } else {
+                                        main.style.display = "block";
+                                    }
+                                    if (current >= max) {
+                                        main.style.textAlign = "center";
+                                        main.innerHTML = "เต็มแล้วจ้า";
+                                    }
+                                }
+                            }
+                            // Call loadComments every 5 seconds
+                            setInterval(function () {
+                                loadComments(@item.Id);
+
+                            }, 1000);
                         </script>
-
-
-            @foreach (var comment in item.Comments)
-            {
-                            <div class="row">
-                                <div class="order_box">
-                                    <div class="card p-3 shadow-sm">
-                                        <div class="d-flex justify-content-between align-items-center">
-                                            <div class="user d-flex flex-row align-items-center">
-                                                <span><small style="color: rgb(76, 158, 80);">@comment.FirstName</small>
-                                                    <small class="font-weight-bold">@comment.CommentText</small></span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-            }
-
-
 
                         <hr>
 
-                        <div class="comment" onclick="showComment(@item.Id,@item.Comments.Count,@item.MaxComment)" >
+                        <div class="comment"
+                            onclick="showComment(@item.Id@item.Id@item.Id,@item.Comments.Count,@item.MaxComment,1)">
                             ฝากซื้อหน่อย
                         </div>
                         <div id="postComment">
-                            <div class="form-group row" id="@item.Id" style="display: none;">
+                            <div class="form-group row" id="@item.Id@item.Id@item.Id" style="display: none;">
                                 <form asp-controller="MainPose" asp-action="CreateComment" method="post">
                                     <input type="hidden" name="mainPoseId" value="@item.Id" />
 
@@ -211,6 +252,30 @@ For more information on enabling MVC for empty projects, visit https://go.micros
             @* </div> *@
             @* Add comment section *@
 
+            @*script>
+        function loadComments(mainPoseId) {
+        var id = mainPoseId;
+        $.ajax({
+        url: '@Url.Action("GetComments", "MainPose")',
+        data: { mainPoseId: id },
+        type: 'GET',
+        success: function (result) {
+        console.log('success.');
+        $('#@item.Id@item.Id@item.Id@item.Id@item.Id@item.Id').html(result);
+
+        },
+        error: function () {
+        console.log('Error occurred while retrieving new comments.');
+        }
+        });
+        }
+
+        // Call loadComments every 5 seconds
+        setInterval(function () {
+        loadComments(@item.Id);
+        }, 1000);
+        </script>*@
         }
     </div>
+
 </div>

@@ -25,7 +25,7 @@ namespace WebApplication1.Data
                             FirstName = "Thanakorn",
                             LastName = "Rattanapornchai",
                             Section = 18,
-                            Phone = 0643259023,
+                            Phone = "0643259023",
                             Image = "https://www.eatthis.com/wp-content/uploads/sites/4/2020/05/running.jpg?quality=82&strip=1&resize=640%2C360",
                             Place = "โรงพระเทพ"
                          },
@@ -34,7 +34,7 @@ namespace WebApplication1.Data
                             FirstName = "auty",
                             LastName = "auth",
                             Section = 18,
-                            Phone = 0643259024,
+                            Phone = "0643259023",
                             Image = "https://www.eatthis.com/wp-content/uploads/sites/4/2020/05/running.jpg?quality=82&strip=1&resize=640%2C360",
                             Place = "โรงพระเทพ2"
                         }

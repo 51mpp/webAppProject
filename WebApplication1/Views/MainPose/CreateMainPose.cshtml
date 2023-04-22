@@ -7,7 +7,7 @@ For more information on enabling MVC for empty projects, visit https://go.micros
 @model CreateMainPoseViewModel
 
 <link rel="stylesheet" href="~/css/createMainPost.css">
-<div class="container">
+<div class="container h-100 w-70 d-flex align-items-center justify-content-center">
     <form method="post" asp-action="CreateMainPose" enctype="multipart/form-data">
         <div class="row">
             <div class="col-md-6 col-sm-12 form-group">
@@ -28,33 +28,39 @@ For more information on enabling MVC for empty projects, visit https://go.micros
             </div>
         </div>
         <div class="row">
-            <div class="col-xl-3 col-md-4 form-group">
+            <div class="col-xl-6 col-md-4 form-group">
                 <label asp-for="Phone">เบอร์โทรศัพท์</label>
                 <input asp-for="Phone" type="text" class="form-control" placeholder="*กรอกเบอร์โทรศัพท์" maxlength="10">
                 <span asp-validation-for="Phone" class="text-danger"></span>
             </div>
-            <div class="col-xl-2  col-md-3 form-group">
-                <label asp-for="MaxComment">จำนวนรับฝาก (เริ่มต้นที่ 1 คน)</label>
-                <input asp-for="MaxComment" class="form-control" value="1" min="1">
-
+            <div class="col-xl-6  col-md-3 form-group">
+                <label asp-for="Account">หมายเลขบัญชี</label>
+                <input asp-for="Account" type="text" class="form-control" placeholder="กรอกหมายเลขบัญชี">
             </div>
-            <div class="col-xl-6 col-md-8 form-group">
+        </div>
+
+        <div class="row">
+            <div class="col-xl-12 col-md-12 form-group">
                 <label asp-for="Place">ไปซื่อที่</label>
                 <input asp-for="Place" class="form-control" placeholder="จะไปซื้อที่ไหน Ex: โรงพระเทพ ร้านอาหารตามสั่ง">
                 <span asp-validation-for="Place" class="text-danger"></span>
             </div>
-
-        </div>
-
-        <div class="row">
-            <div class=" col-xl-3 col-md-6 col-sm-12 form-group">
-                <label asp-for="Account">หมายเลขบัญชี</label>
-                <input asp-for="Account" type="text" class="form-control" placeholder="กรอกหมายเลขบัญชี">
+            <div class=" col-xl-4 col-md-4 col-sm-12 form-group">
+                <label asp-for="MaxTimePose">จะไปซื้อในอีก</label>
+                <input asp-for="MaxTimePose" class="form-control" value="0" min="1">
+            </div>
+            <div class=" col-xl-4 col-md-4 col-sm-12 form-group">
+                <label asp-for="MaxComment">จำนวนรับฝาก (เริ่มต้นที่ 1 คน)</label>
+                <input asp-for="MaxComment" class="form-control" value="1" min="1">
+            </div>
+            <div class=" col-xl-4 col-md-4 col-sm-12 form-group">
                 <label asp-for="Image">QR code</label>
                 <input asp-for="Image" type="file" class="form-control" placeholder="เลือกไฟล์">
                 <span asp-validation-for="Image" class="text-danger"></span>
             </div>
         </div>
-        <button type="submit" class="btn btn-primary">Submit</button>
+        <a class="btn btn-secondary" href="/MainPose">ยกเลิก</a>
+        <button type="submit" class="btn btn-primary">ยืนยัน</button>
+
     </form>
 </div>

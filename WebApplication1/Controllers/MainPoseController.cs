@@ -1,5 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using System.ComponentModel.DataAnnotations;
+using System.Globalization;
 using System.Net;
+using System.Xml.Linq;
 using WebApplication1.Interface;
 using WebApplication1.Models;
 using WebApplication1.Repository;
@@ -142,6 +145,12 @@ namespace WebApplication1.Controllers
             _mainPoseRepository.Delete(post);
             return RedirectToAction("");
         }
+        [HttpGet]
+        public async Task<IActionResult> GetComments(int mainPoseId)
+        {
+            IEnumerable<Comment> comments = await _mainPoseRepository.GetCommentsByMainPoseId(mainPoseId);
+            return PartialView("_CommentPartialView", comments);
+        }
         [HttpPost]
         public async Task<IActionResult> CreateComment(int mainPoseId, string CommentText, string FirstName, string LastName)
         {
@@ -186,6 +195,49 @@ namespace WebApplication1.Controllers
             /*return RedirectToAction("");*/
             return RedirectToAction(nameof(Index));
         }
+        [HttpGet]
+        public async Task<IActionResult> CountComments(int mainPoseId)
+        {
+            MainPose mainPoses = await _mainPoseRepository.GetByIdAsync(mainPoseId);
+            IEnumerable<Comment> comments = await _mainPoseRepository.GetCommentsByMainPoseId(mainPoseId);
+            int count = comments.Count();
+            int max = (int)mainPoses.MaxComment;
+            /*ฝากแล้ว @item.Comments.Count / @item.MaxComment คน*/
+            string html = $"<span id='count-{mainPoseId}-comments'>ฝากแล้ว {count}  / {max} คน</span>";
+            return Content(html);
+        }
+        [HttpGet]
+        public IActionResult GetDate(DateTime CreatedTime)
+        {
+            var x = DateTime.Now - CreatedTime;
+            string y = "";
+            if (x.Minutes <= 0 && x.Hours <= 0 && x.Days <= 0)
+            {
+                y = "โพสต์เมื่อซักครู่";
+            }
+            else if (x.Hours <= 0 && x.Days <= 0)
+            {
+                y = string.Format("โพสต์เมื่อ {0} นาทีที่แล้ว", x.Minutes);
+            }
+            else if (x.Hours > 0 && x.Days <= 0)
+            {
+                y = string.Format("โพสต์เมื่อ {0} ชั่วโมงที่แล้ว", x.Hours);
+            }
+            else if (x.Days > 0 && x.Days <= 7)
+            {
+                y = string.Format("โพสต์เมื่อ {0} วันที่แล้ว ", x.Days);
+            }
+            else if (x.Days <= 365)
+            {
+                y = CreatedTime.ToString("โพสต์เมื่อ dd MMMM เวลา HH:mm น.", new CultureInfo("th-TH"));
+            }
+            else
+            {
+                y = CreatedTime.ToString("โพสต์เมื่อ dd MMMM yyyy เวลา HH:mm น.", new
+                CultureInfo("th-TH"));
+            }
+            return Json(new { formattedDate = y });
+        }
         public async Task<IActionResult> Detail(int id)
         {
             MainPose mainPose = await _mainPoseRepository.GetByIdAsync(id);
@@ -194,5 +246,31 @@ namespace WebApplication1.Controllers
             return View("Detail", (mainPose, comments));
 
         }
+        [HttpPost]
+        public async Task<IActionResult> CreateCommentByAjax(int mainPoseId, string CommentText, string FirstName, string LastName)
+        {
+            if (ModelState.IsValid)
+            {
+                string comText = CommentText;
+                string firstName = FirstName;
+                string lastName = LastName;
+                Comment comment = new Comment
+                {
+                    MainPoseId = mainPoseId,
+                    CommentText = comText,
+                    FirstName = firstName,
+                    LastName = lastName
+                };
+                await _mainPoseRepository.AddComment(comment);
+                return Json(new { success = true, comment = comment });
+            }
+            else
+            {
+                ModelState.AddModelError("", "Comment Failed");
+
+            }
+            return Json(new { success = false, errors = ModelState });
+        }
+        
     }
 }
