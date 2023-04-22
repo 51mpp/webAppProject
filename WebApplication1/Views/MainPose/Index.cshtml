@@ -115,7 +115,8 @@ For more information on enabling MVC for empty projects, visit https://go.micros
                                     <span>ไปซื้อที่ : @item.Place</span>
                                 </div>
                                 <div class="col-12">
-                                    <span>จะไปซื้อในอีก : @item.CreatedTime.Hour:@item.CreatedTime.Minute </span> @*
+                                    <span>จะไปซื้อในอีก : @item.MaxTimePose
+                                        (@item.CreatedTime.Hour:@item.CreatedTime.Minute) </span> @*
                                 ไปซื้อที่ไหน *@
                                 </div>
 
