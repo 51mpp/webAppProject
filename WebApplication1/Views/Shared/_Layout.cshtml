@@ -26,6 +26,8 @@
         }
 
         if (window.location.pathname == '/MainPose') {
+            console.log("mainPost")
+            document.getElementById("mainnav").style.backgroundColor = "rgb(16, 70, 19)";
             document.getElementById("l02").style.color = "white"
             document.getElementById("li02").style.backgroundColor = "red"
         }
@@ -61,7 +63,8 @@
                         </li>
 
                         <li class="nav-item">
-                            <a class="nav-link " asp-area="" asp-controller="Account"asp-action="Login">ลงชื่อเข้าใช้</a>
+                            <a class="nav-link " asp-area="" asp-controller="Account"
+                                asp-action="Login">ลงชื่อเข้าใช้</a>
                         </li>
 
                     </ul>
