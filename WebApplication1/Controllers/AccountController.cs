@@ -88,9 +88,12 @@ namespace WebApplication1.Controllers
             var newUserResponse = await _userManager.CreateAsync(newUser, registerVM.Password);
 
             if(newUserResponse.Succeeded)
+            {
                 await _userManager.AddToRoleAsync(newUser, UserRoles.User);
-                //บัครหัสไม่ถูกฟอร์ม
-            return View("Login");
+                return View("Login");
+            }
+            TempData["Error"] = "Format password should have: Use a combination of upper and lowercase letters, numbers, and symbols. Password at least 6-12 characters long.";
+            return View("Register");
         }
 
         [HttpPost]
