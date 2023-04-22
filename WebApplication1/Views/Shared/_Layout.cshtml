@@ -17,14 +17,12 @@
         if (window.location.pathname == '/') {
             console.log("Home");
             renderContainer.className = "";
-            navTop.classList.add("fixed-top");
             document.getElementById("l01").style.color = "white"
             document.getElementById("li01").style.backgroundColor = "red"
         }
         else {
             console.log("Not Home");
             renderContainer.className = "container";
-            navTop.classList.remove("fixed-top")
         }
 
         if (window.location.pathname == '/MainPose') {
@@ -36,7 +34,7 @@
 
 <body>
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark mainnav " id="mainnav">
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark mainnav fixed-top" id="mainnav">
             <div class="container-fluid">
                 <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index"><img class="logo"
                         style="width: auto;height: 50px;"
@@ -47,7 +45,8 @@
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
+                    <div class="me-auto"></div>
+                    <ul class="navbar-nav">
                         <li class="nav-item" id="li01">
                             <a class="nav-link " asp-area="" asp-controller="Home" asp-action="Index"
                                 id="l01">หน้าหลัก</a>
@@ -73,8 +72,8 @@
         <div class="bannercontainer" onload="myFunction()"></div>
 
     </header>
-    <div class="container" id="renderContainer">
-        <main role="main" class="pb-3">
+    <div class="container " id="renderContainer">
+        <main role="main " class="pb-3">
             @RenderBody()
         </main>
 
