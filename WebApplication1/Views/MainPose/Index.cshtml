@@ -11,7 +11,8 @@ For more information on enabling MVC for empty projects, visit https://go.micros
 @* @model IEnumerable<MainPose> *@
 
 <link rel="stylesheet" href="~/css/post.css">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-ajax-unobtrusive/3.2.6/jquery.unobtrusive-ajax.min.js"></script>
+<script
+    src="https://cdnjs.cloudflare.com/ajax/libs/jquery-ajax-unobtrusive/3.2.6/jquery.unobtrusive-ajax.min.js"></script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai:wght@500&display=swap" rel="stylesheet">
@@ -111,8 +112,13 @@ For more information on enabling MVC for empty projects, visit https://go.micros
                             </div>
                             <div class="row align-items-end">
                                 <div class="col-12" style="margin-top:5px;">
-                                    <span>ไปซื้อที่ : @item.Place</span> @* ไปซื้อที่ไหน *@
+                                    <span>ไปซื้อที่ : @item.Place</span>
                                 </div>
+                                <div class="col-12">
+                                    <span>จะไปซื้อในอีก : @item.CreatedTime.Hour:@item.CreatedTime.Minute </span> @*
+                                ไปซื้อที่ไหน *@
+                                </div>
+
                             </div>
                         </div>
                         <div class="row align-items-center">
@@ -120,33 +126,33 @@ For more information on enabling MVC for empty projects, visit https://go.micros
                                 <span onclick="showQR(@item.Id@item.Id,2)">แสกนจ่าย</span>
                             </div>
                         </div>
-                        <div class="QRcode">
+                        <div class="QRcode w-60 h-100">
                             <img id="@item.Id@item.Id" src="@item.Image" alt="" style="display: none;">
                         </div>
-                        
+
                         @*
-                        <div class="commented" id="@item.Id">
-                            ฝากแล้ว @item.Comments.Count / @item.MaxComment คน
-                        </div>
-                        <script>
-                            console.log(2)
-                            if (@item.Comments.Count >= @item.MaxComment) {
-                                document.getElementById("@item.Id").style.backgroundColor = "red";   
-                            }
-                            else if (@item.Comments.Count  >= @item.MaxComment/2){
-                                document.getElementById("@item.Id").style.backgroundColor = "yellow";
-                                document.getElementById("@item.Id").style.color = "black";
-                            } 
-                        </script>*@
+                    <div class="commented" id="@item.Id">
+                    ฝากแล้ว @item.Comments.Count / @item.MaxComment คน
+                    </div>
+                    <script>
+                    console.log(2)
+                    if (@item.Comments.Count >= @item.MaxComment) {
+                    document.getElementById("@item.Id").style.backgroundColor = "red";
+                    }
+                    else if (@item.Comments.Count >= @item.MaxComment/2){
+                    document.getElementById("@item.Id").style.backgroundColor = "yellow";
+                    document.getElementById("@item.Id").style.color = "black";
+                    }
+                    </script>*@
                         <div id="test1">
-                            <span id="count-@item.Id-comments"ฝากแล้ว  คน></span>
-                            
+                            <span id="count-@item.Id-comments" ฝากแล้ว คน></span>
+
                         </div>
                         <div id="post-@item.Id-comments">
-                            
-                            
+
+
                         </div>
-                        
+
                         <script>
                             function loadComments(mainPoseId) {
                                 $.ajax({
@@ -167,7 +173,7 @@ For more information on enabling MVC for empty projects, visit https://go.micros
                                     type: 'GET',
                                     success: function (result) {
                                         console.log('success.');
-                                        $('#count-' + mainPoseId + '-comments').html(result);  
+                                        $('#count-' + mainPoseId + '-comments').html(result);
                                     },
                                     error: function () {
                                         console.log('Error occurred while retrieving new comments.');
@@ -197,11 +203,12 @@ For more information on enabling MVC for empty projects, visit https://go.micros
                                 loadComments(@item.Id);
 
                             }, 1000);
-                            </script>
-                       
+                        </script>
+
                         <hr>
 
-                        <div class="comment" onclick="showComment(@item.Id@item.Id@item.Id,@item.Comments.Count,@item.MaxComment,1)" >
+                        <div class="comment"
+                            onclick="showComment(@item.Id@item.Id@item.Id,@item.Comments.Count,@item.MaxComment,1)">
                             ฝากซื้อหน่อย
                         </div>
                         <div id="postComment">
@@ -245,28 +252,28 @@ For more information on enabling MVC for empty projects, visit https://go.micros
             @* Add comment section *@
 
             @*script>
-                function loadComments(mainPoseId) {
-                    var id = mainPoseId;
-                    $.ajax({
-                        url: '@Url.Action("GetComments", "MainPose")',
-                        data: { mainPoseId: id },
-                        type: 'GET',
-                        success: function (result) {
-                            console.log('success.');
-                            $('#@item.Id@item.Id@item.Id@item.Id@item.Id@item.Id').html(result);
-                            
-                        },
-                        error: function () {
-                            console.log('Error occurred while retrieving new comments.');
-                        }
-                    });
-                }
-                
-                // Call loadComments every 5 seconds
-                setInterval(function () {
-                    loadComments(@item.Id);
-                }, 1000);
-            </script>*@
+        function loadComments(mainPoseId) {
+        var id = mainPoseId;
+        $.ajax({
+        url: '@Url.Action("GetComments", "MainPose")',
+        data: { mainPoseId: id },
+        type: 'GET',
+        success: function (result) {
+        console.log('success.');
+        $('#@item.Id@item.Id@item.Id@item.Id@item.Id@item.Id').html(result);
+
+        },
+        error: function () {
+        console.log('Error occurred while retrieving new comments.');
+        }
+        });
+        }
+
+        // Call loadComments every 5 seconds
+        setInterval(function () {
+        loadComments(@item.Id);
+        }, 1000);
+        </script>*@
         }
     </div>
 
