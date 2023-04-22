@@ -89,7 +89,7 @@ For more information on enabling MVC for empty projects, visit https://go.micros
                         <div style="margin-top: 10px;">
                             <div class="row align-items-center">
                                 <div class="col-sm-12 col-md-4">
-                                    <img class="profile" src="@item.Image">
+                                    <img class="profile" src="@item.Image" style="margin-bottom: 10px;">
                                 </div>
 
                                 <div class="col-sm-12 col-md-8">
@@ -112,7 +112,7 @@ For more information on enabling MVC for empty projects, visit https://go.micros
 
                             </div>
                             <div class="row align-items-end">
-                                <div class="col-12" style="padding: 10px;">
+                                <div class="col-12" style="margin-top:5px;">
                                     <span>ไปซื้อที่ : @item.Place</span> @* ไปซื้อที่ไหน *@
                                 </div>
 
@@ -124,25 +124,25 @@ For more information on enabling MVC for empty projects, visit https://go.micros
                         </div>
                         <div class="row align-items-center">
                             <div class="scan col-12">
-                                <span onclick="showQR(@item.Phone)">แสกนจ่าย</span>
+                                <span onclick="showQR(@item.Id@item.Id,2)">แสกนจ่าย</span>
                             </div>
                         </div>
                         <div class="QRcode">
-                            <img id="@item.Phone" src="@item.Image" alt="" style="display: none;">
+                            <img id="@item.Id@item.Id" src="@item.Image" alt="" style="display: none;">
                         </div>
                         
                         
-                        <div class="commented" id="@item.Account">
+                        <div class="commented" id="@item.Id">
                             ฝากแล้ว @item.Comments.Count / @item.MaxComment คน
                         </div>
                         <script>
                             console.log(2)
                             if (@item.Comments.Count == @item.MaxComment) {
-                                document.getElementById("@item.Account").style.backgroundColor = "red";   
+                                document.getElementById("@item.Id").style.backgroundColor = "red";   
                             }
                             else if (@item.Comments.Count  >= @item.MaxComment/2){
-                                document.getElementById("@item.Account").style.backgroundColor = "yellow";
-                                document.getElementById("@item.Account").style.color = "black";
+                                document.getElementById("@item.Id").style.backgroundColor = "yellow";
+                                document.getElementById("@item.Id").style.color = "black";
                             } 
                         </script>
 
@@ -168,11 +168,11 @@ For more information on enabling MVC for empty projects, visit https://go.micros
 
                         <hr>
 
-                        <div class="comment" onclick="showComment(@item.Id,@item.Comments.Count,@item.MaxComment)" >
+                        <div class="comment" onclick="showComment(@item.Id@item.Id@item.Id,@item.Comments.Count,@item.MaxComment,1)" >
                             ฝากซื้อหน่อย
                         </div>
                         <div id="postComment">
-                            <div class="form-group row" id="@item.Id" style="display: none;">
+                            <div class="form-group row" id="@item.Id@item.Id@item.Id" style="display: none;">
                                 <form asp-controller="MainPose" asp-action="CreateComment" method="post">
                                     <input type="hidden" name="mainPoseId" value="@item.Id" />
 
