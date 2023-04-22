@@ -9,7 +9,7 @@ function showComment(id, current, max, state) {
         } else {
             main.style.display = "block";
         }
-        if (current == max) {
+        if (current >= max) {
             main.style.textAlign = "center";
             main.innerHTML = "เต็มแล้วจ้า";
         }
