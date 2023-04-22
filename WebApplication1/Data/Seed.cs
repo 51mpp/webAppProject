@@ -27,7 +27,8 @@ namespace WebApplication1.Data
                             Section = 18,
                             Phone = "0643259023",
                             Image = "https://www.eatthis.com/wp-content/uploads/sites/4/2020/05/running.jpg?quality=82&strip=1&resize=640%2C360",
-                            Place = "โรงพระเทพ"
+                            Place = "โรงพระเทพ",
+                            MaxComment = 0
                          },
                         new MainPose()
                         {
@@ -36,9 +37,10 @@ namespace WebApplication1.Data
                             Section = 18,
                             Phone = "0643259023",
                             Image = "https://www.eatthis.com/wp-content/uploads/sites/4/2020/05/running.jpg?quality=82&strip=1&resize=640%2C360",
-                            Place = "โรงพระเทพ2"
+                            Place = "โรงพระเทพ2",
+                            MaxComment = 0
                         }
-                    });
+                    }); ;
                     context.SaveChanges();
                 }
                 if (!context.AppUsers.Any())
