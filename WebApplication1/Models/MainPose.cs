@@ -11,11 +11,13 @@ namespace WebApplication1.Models
         public string? FirstName { get; set; }
         public string? LastName { get; set; }
         public int? Section { get; set; }
-        public int? Phone { get; set; }
+        [DataType(DataType.PhoneNumber)]
+        public string? Phone { get; set; }
         public string? Image { get; set; }
         public string? Place { get; set; }
         public int? MaxComment { get; set; }
         public string? Account { get; set; }
+        public int? MaxTimePose { get; set; }
         public DateTime CreatedTime { get; set; }
         public DateTime? LastModified { get; set; }
         [ForeignKey("AppUser")]

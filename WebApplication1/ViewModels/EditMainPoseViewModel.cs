@@ -10,11 +10,14 @@ namespace WebApplication1.ViewModels
         [Required(ErrorMessage = "LastName is requied")]
         public string? LastName { get; set; }
         public int? Section { get; set; }
-        public int? Phone { get; set; }
+        [Required(ErrorMessage = "Phone is requied")]
+        public string? Phone { get; set; }
         public IFormFile? Image { get; set; }
         public string? URLImage { get; set; }
         public string? Place { get; set; }
         public int? MaxComment { get; set; }
+        /*[Required(ErrorMessage = "MaxTimePose is requied")]*/
+        public int? MaxTimePose { get; set; }
         public string? Account { get; set; }
         public DateTime? LastModified { get; set; }
         public DateTime CreatedTime { get; set; }
