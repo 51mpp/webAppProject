@@ -64,6 +64,9 @@ button.accept-policy {
 .nav-item {
   border-radius: 20px;
   color: white;
+  align-items: center;
+  justify-content: center;
+  display: flex;
 }
 
 .nav-item:hover {
@@ -97,4 +100,10 @@ footer p {
 }
 .container{
   margin-top:100px;
+}
+
+#LogoutBTN{
+  color: rgb(255, 24, 24);
+  background-color: rgba(255, 255, 255, 0.7);
+  border-radius: 20px;
 }

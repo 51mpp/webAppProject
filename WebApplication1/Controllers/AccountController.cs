@@ -69,7 +69,7 @@ namespace WebApplication1.Controllers
         {
             if(!ModelState.IsValid)
             {
-                return View();
+                return View(registerVM);
             }
             
             var user = await _userManager.FindByEmailAsync(registerVM.EmailAddress);
@@ -90,7 +90,7 @@ namespace WebApplication1.Controllers
             if(newUserResponse.Succeeded)
                 await _userManager.AddToRoleAsync(newUser, UserRoles.User);
                 
-            return View("Index","Home");
+            return View("Login");
         }
 
         [HttpPost]
