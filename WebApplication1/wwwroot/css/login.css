@@ -1,24 +1,14 @@
-body {
-    font-family: 'Poppins', Arial, sans-serif;
-    margin: 0;
-    height: 100vh;
-    display: flex;
 
-    /* background-image: url("https://i.pinimg.com/564x/85/18/66/85186629f91c763799f78bcc927888ac.jpg"); */
-    /* Center and scale the image nicely */
-    background-position: center;
-    background-repeat: no-repeat;
+.contain{
+    width: 100%;
+    min-height: 100vh;
+    background-image: url('https://i.insider.com/5bff19e748eb124b3e421886?width=900');
     background-size: cover;
 }
 
-.container {
-    display: flex;
-    width: 100%;
-    height: 100%;
-}
-
 .image-container {
-    flex: 7;
+    width: 100%;
+    height: 100vh;
 }
 
 .image-container img {
@@ -28,14 +18,11 @@ body {
 }
 
 .signin-container {
-    flex: 3;
-    /* background-color: #f0f2f5; */
     padding: 60px;
-    border-radius: 5px;
-    /* box-shadow: 0 0 10px rgba(0, 0, 0, 0.15); */
     display: flex;
     flex-direction: column;
     justify-content: center;
+
 }
 
 h1 {
