@@ -26,11 +26,11 @@
             renderContainer.className = "container";
 
         }
-        else if (window.location.pathname == '/Account/Login' || window.location.pathname == '/Account/Register') {
+        else if (window.location.pathname == '/Account/Login' || window.location.pathname =='/Account/Register') {
             console.log("Login")
             document.getElementById("li03").style.color = "white"
             document.getElementById("li03").style.backgroundColor = "red"
-            document.getElementById("footer").style.display = "none"
+            document.getElementById("footer").style.display="none"
             renderContainer.className = "";
 
         }
@@ -78,8 +78,7 @@
                         else
                         {
                             <li class="nav-item" id="li03">
-                                <a class="nav-link " asp-area="" asp-controller="Account" asp-action="Login"
-                                    id="l03">ลงชื่อเข้าใช้</a>
+                                <a class="nav-link " asp-area="" asp-controller="Account"asp-action="Login" id="l03">ลงชื่อเข้าใช้</a>
                             </li>
                         }
 
@@ -134,7 +133,7 @@
                 document.getElementById("l02").style.color = "white"
                 document.getElementById("li02").style.backgroundColor = "#f59317"
             }
-            else if (window.location.pathname == "/Account/Login" || window.location.pathname == '/Account/Register') {
+            else if (window.location.pathname == "/Account/Login" || window.location.pathname =='/Account/Register') {
                 document.getElementById("l03").style.color = "white"
                 document.getElementById("li03").style.backgroundColor = "#f59317"
             }
@@ -152,7 +151,7 @@
                 document.getElementById("l02").style.color = "white"
                 document.getElementById("li02").style.backgroundColor = "red"
             }
-            else if (window.location.pathname == "/Account/Login" || window.location.pathname == '/Account/Register') {
+            else if (window.location.pathname == "/Account/Login" || window.location.pathname =='/Account/Register') {
                 document.getElementById("l03").style.color = "white"
                 document.getElementById("li03").style.backgroundColor = "red"
             }
