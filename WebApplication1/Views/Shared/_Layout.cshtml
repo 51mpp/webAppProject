@@ -13,22 +13,26 @@
     window.addEventListener("load", (event) => {
         var renderContainer = document.getElementById("renderContainer");
         var navTop = document.getElementById("mainnav");
-
         if (window.location.pathname == '/') {
             console.log("Home");
             renderContainer.className = "";
             document.getElementById("l01").style.color = "white"
             document.getElementById("li01").style.backgroundColor = "red"
         }
-        else {
-            console.log("Not Home");
-            renderContainer.className = "container";
-        }
-
-        if (window.location.pathname == '/MainPose') {
+        else if (window.location.pathname == '/MainPose') {
             console.log("mainPost")
             document.getElementById("l02").style.color = "white"
             document.getElementById("li02").style.backgroundColor = "red"
+            renderContainer.className = "container";
+
+        }
+        else if (window.location.pathname == '/Account/Login' || window.location.pathname =='/Account/Register') {
+            console.log("Login")
+            document.getElementById("li03").style.color = "white"
+            document.getElementById("li03").style.backgroundColor = "red"
+            document.getElementById("footer").style.display="none"
+            renderContainer.className = "";
+
         }
     });
 </script>
@@ -73,8 +77,8 @@
                         }
                         else
                         {
-                            <li class="nav-item">
-                                <a class="nav-link " asp-area="" asp-controller="Account"asp-action="Login">ลงชื่อเข้าใช้</a>
+                            <li class="nav-item" id="li03">
+                                <a class="nav-link " asp-area="" asp-controller="Account"asp-action="Login" id="l03">ลงชื่อเข้าใช้</a>
                             </li>
                         }
                         
@@ -99,7 +103,7 @@
     <script src="~/js/site.js" asp-append-version="true"></script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>
-<footer>
+<footer id='footer'>
     <p>
         เว็บไซต์พร้อมฝาก <br>
         วิชา WEB APPLICATION DEVELOPMENT PROJECT รหัสวิชา 01076120 <br>
@@ -113,6 +117,7 @@
     var navitem = document.querySelectorAll('.nav-item')
 
     window.onscroll = function () {
+        console.log(window.location.pathname)
         if (window.scrollY > 80) {
 
             mainnav.classList.add('active');
@@ -128,6 +133,10 @@
                 document.getElementById("l02").style.color = "white"
                 document.getElementById("li02").style.backgroundColor = "#f59317"
             }
+            else if (window.location.pathname == "/Account/Login" || window.location.pathname =='/Account/Register') {
+                document.getElementById("l03").style.color = "white"
+                document.getElementById("li03").style.backgroundColor = "#f59317"
+            }
         }
         else {
             mainnav.classList.remove('active');
@@ -141,6 +150,10 @@
             else if (window.location.pathname == "/MainPose") {
                 document.getElementById("l02").style.color = "white"
                 document.getElementById("li02").style.backgroundColor = "red"
+            }
+            else if (window.location.pathname == "/Account/Login" || window.location.pathname =='/Account/Register') {
+                document.getElementById("l03").style.color = "white"
+                document.getElementById("li03").style.backgroundColor = "red"
             }
         }
 
