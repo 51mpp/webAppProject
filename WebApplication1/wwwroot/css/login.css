@@ -1,7 +1,7 @@
 
 .contain{
     width: 100%;
-    min-height: 100vh;
+    min-height: 100;
     background-image: url('https://i.insider.com/5bff19e748eb124b3e421886?width=900');
     background-size: cover;
 }
