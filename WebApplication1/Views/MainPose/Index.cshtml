@@ -24,7 +24,7 @@ For more information on enabling MVC for empty projects, visit https://go.micros
 <div id="CT" class="container-fluid ">
 
     <div class="row">
-        <a asp-action="CreateMainPose" class="btn btn-primary btn-lg float-end">New Post</a>
+        <a asp-action="CreateMainPose" class="btn btn-primary btn-lg float-end">รับฝาก</a>
 
         @foreach (var item in Model.Item1.Reverse())
         {
@@ -117,8 +117,7 @@ For more information on enabling MVC for empty projects, visit https://go.micros
                                     <span>
                                         @{
                                             var a = DateTime.Now - item.CreatedTime;
-                                            string b = "จะไปซื้อในอีก : ";
-                                            b += item.MaxTimePose + " นาที ";
+                                            string b = "ช่วงเวลารับฝาก : ";
                                             b += item.CreatedTime.ToString("(HH:mm - ", new CultureInfo("th-TH"));
                                             b += item.CreatedTime.AddMinutes(item.MaxTimePose.Value).ToString("HH:mm)", new
                                             CultureInfo("th-TH"));

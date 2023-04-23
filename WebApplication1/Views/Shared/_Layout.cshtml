@@ -57,16 +57,16 @@
                             <a class="nav-link" asp-area="" asp-controller="MainPose" asp-action="" id="l02">รับฝาก</a>
                         </li>
 
-                        <li class="nav-item" id="li02">
-                            <a class="nav-link" asp-area="" asp-controller="" asp-action="" id="">ฝากซื้อ</a>
+                        <li class="nav-item" id="li03">
+                            <a class="nav-link" asp-area="" asp-controller="Deposit" asp-action="" id="103">ฝากซื้อ</a>
                         </li>
                         @if (User.Identity.IsAuthenticated)
                         {
                             <li class="nav-item">
-                                <a class="nav-link " asp-area="" asp-controller="Dashboard"asp-action="Index">ผู้ใช้งาน</a>
+                                <a class="nav-link " asp-area="" asp-controller="Dashboard" asp-action="Index">ผู้ใช้งาน</a>
                             </li>
                             <li class="nav-item">
-                                <form class="nav-link " asp-area="" asp-controller="Account"asp-action="Logout">
+                                <form class="nav-link " asp-area="" asp-controller="Account" asp-action="Logout">
                                     <button id="LogoutBTN" class="btn">ออกจากระบบ</button>
                                 </form>
                             </li>
@@ -74,10 +74,11 @@
                         else
                         {
                             <li class="nav-item">
-                                <a class="nav-link " asp-area="" asp-controller="Account"asp-action="Login">ลงชื่อเข้าใช้</a>
+                                <a class="nav-link " asp-area="" asp-controller="Account"
+                                asp-action="Login">ลงชื่อเข้าใช้</a>
                             </li>
                         }
-                        
+
                     </ul>
                 </div>
             </div>
