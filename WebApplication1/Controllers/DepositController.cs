@@ -17,6 +17,17 @@ namespace WebApplication1.Controllers
         {
             return View();
         }
+        [HttpPost]
+        public IActionResult Post()
+        {
+            return View();
+        }
+        [HttpGet]
+        public IActionResult Post(int id)
+        {
+            return View();
+        }
+
 
     }
 }

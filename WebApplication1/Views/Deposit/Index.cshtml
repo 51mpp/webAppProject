@@ -1,7 +1,68 @@
 @{
     ViewData["Title"] = "ฝากหน่อย";
 }
+<link rel="stylesheet" href="~/css/Deposit.css">
+<div class="container-fluid">
+    <div class="row">
+        <a asp-action="Post" class="btn btn-primary btn-lg float-end">ฝากซื้อ</a>
+        <div id="postBox" class="col-sm-12 col-lg-5 col-xl-4 ">
+            <div id="box" class="card mb-4 box-shadow position-relative">
+                <div class="editPost row flex-row-reverse position-absolute top-0 end-0">
+                    <div class="col-7">
+                        <form method="post">
+                            <input type="hidden" name="mainPoseId" value="" />
+                            <button type="submit" class="remove"><img
+                                    src="https://cdn-icons-png.flaticon.com/512/189/189690.png" alt=""></button>
+                        </form>
+                    </div>
+                    <div class="col-4">
+                        <a class="edit"><img src="https://cdn-icons-png.flaticon.com/512/3597/3597075.png" alt="">
+                        </a>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <small class="position-absolute top-0 start-1" style="margin-top: 0px;color: grey">
+                        โพสต์เมื่อสักครู่&#128337;
+                    </small>
+                    <div class="row align-items-center">
+                        <div class="col-sm-12 col-md-4">
+                            <img class="profile" src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png"
+                                style="margin-bottom: 10px;">
+                        </div>
 
-<body>
-    <h1>Test</h1>
-</body>
+                        <div class="col-sm-12 col-md-8">
+                            <div class="row align-items-center">
+                                <div class="col-12">
+                                    <span>ไททัศน์ กันทา</span> @* ชื่อ - สกุล*@
+                                </div>
+                            </div>
+                            <div class="row align-items-center">
+                                <div class="col-12">
+                                    <span>โทร : 0896419465</span> @* เบอร์โทร *@
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row align-items-end">
+                            <div class="col-12" style="margin-top:5px;">
+                                <span>ไปซื้อที่ไหน : โรงพระเทพ ร้านอาหารตามสั่ง </span>
+                            </div>
+                            <div class="col-12" style="margin-top:5px;">
+                                <span>ไปซื้ออะไร : กะเพราไก่พิเศษ + ไข่ดาว 2</span>
+                            </div>
+                            <div class="col-12" style="margin-top:5px;">
+                                <span>เอามาส่งที่ไหน : ตึก EEC ชั้น 5 ห้อง co-work</span>
+                            </div>
+                            <div class="col-12" style="margin-top:5px;">
+                                <span>เอามาส่งเมื่อไร : 11.30-12.00</span>
+                            </div>
+                        </div>
+                        <div class="accept" onclick="">
+                            เดี๋ยวไปซื้อให้
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
