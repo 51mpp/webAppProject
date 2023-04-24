@@ -1,0 +1,227 @@
+@using Microsoft.AspNetCore.Identity
+@inject SignInManager<AppUser> SignInManager
+@using System.Globalization;
+
+@* @model WebApplication1.ViewModels.DashboardViewModel *@
+
+<h1 class="display-5 fw-normal">User Dashboard</h1>
+
+<div class="album py-2 justify-content-center">  @*bg-light *@
+    <a asp-controller="MainPose" asp-action="CreateMainPose" class="btn btn-primary btn-lg float-end">New Post</a>
+    <div class="container bg-light">
+        <h2 class="display-6 fw-normal">Your Post</h2>
+        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+
+            @foreach (var item in Model.Item1.Reverse())
+            {
+                @* info section *@
+
+                <div id="postBox" class="col-sm-12 col-lg-5 col-xl-4 ">
+
+                    @* Poster'simage *@
+
+                    <div id="box" class="card mb-4 box-shadow position-relative">
+
+                            <div class="editPost row flex-row-reverse position-absolute top-0 end-0">
+                                <div class="col-7">
+                                    <form asp-controller="MainPose" asp-action="DeleteMainPose" method="post">
+                                        <input type="hidden" name="mainPoseId" value="@item.Id" />
+                                        <button type="submit" class="remove"><img
+                                                src="https://cdn-icons-png.flaticon.com/512/189/189690.png" alt=""></button>
+                                    </form>
+                                </div>
+                                <div class="col-4">
+                                    <a asp-controller="MainPose" asp-action="EditMainPose" asp-route-id="@item.Id" class="edit"><img
+                                            src="https://cdn-icons-png.flaticon.com/512/3597/3597075.png" alt="">
+                                    </a>
+                                </div>
+                            </div>
+                        
+                        <div class="card-body">
+                            <small class="position-absolute top-0 start-1" style="margin-top: 5px;color: grey">
+                                @{
+                                    var x = DateTime.Now - item.CreatedTime;
+                                    string y = "";
+                                    if (x.Minutes <= 0 && x.Hours <= 0 && x.Days <= 0)
+                                    {
+                                        y = "โพสต์เมื่อซักครู่";
+                                    }
+                                    else if (x.Hours <= 0 && x.Days <= 0)
+                                    {
+                                        y = string.Format("โพสต์เมื่อ {0} นาทีที่แล้ว", x.Minutes);
+                                    }
+                                    else if (x.Hours > 0 && x.Days <= 0)
+                                    {
+                                        y = string.Format("โพสต์เมื่อ {0} ชั่วโมงที่แล้ว", x.Hours);
+                                    }
+                                    else if (x.Days > 0 && x.Days <= 7)
+                                    {
+                                        y = string.Format("โพสต์เมื่อ {0} วันที่แล้ว ", x.Days);
+                                    }
+                                    else if (x.Days <= 365)
+                                    {
+                                        y = item.CreatedTime.ToString("โพสต์เมื่อ dd MMMM เวลา HH:mm น.", new CultureInfo("th-TH"));
+                                    }
+                                    else
+                                    {
+                                        y = item.CreatedTime.ToString("โพสต์เมื่อ dd MMMM yyyy เวลา HH:mm น.", new
+                                        CultureInfo("th-TH"));
+                                    }
+                                }
+                                @y
+                                &#128337;
+                            </small>
+
+                            <div style="margin-top: 10px;">
+                                <div class="row align-items-center">
+                                    <div class="col-sm-12 col-md-4">
+                                        <img class="profile" src="@item.Image" style="margin-bottom: 10px;">
+                                    </div>
+
+                                    <div class="col-sm-12 col-md-8">
+                                        <div class="row align-items-center">
+                                            <div class="col-12">
+                                                <span>@item.FirstName @item.LastName</span> @* ชื่อ - สกุล*@
+                                            </div>
+                                        </div>
+                                        <div class="row align-items-center">
+                                            <div class="col-12">
+                                                <span>โทร : @item.Phone</span> @* เบอร์โทร *@
+                                            </div>
+                                        </div>
+                                        <div class="row align-items-center">
+                                            <div class="col-12">
+                                                <span>บัญชีธนาคาร : @item.Account</span>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div class="row align-items-end">
+                                    <div class="col-12" style="margin-top:5px;">
+                                        <span>ไปซื้อที่ : @item.Place</span>
+                                    </div>
+                                    <div class="col-12">
+                                        <span>
+                                            @{
+                                                var a = DateTime.Now - item.CreatedTime;
+                                                string b = "จะไปซื้อในอีก : ";
+                                                b += item.MaxTimePose + " นาที ";
+                                                b += item.CreatedTime.ToString("(HH:mm - ", new CultureInfo("th-TH"));
+                                                b += item.CreatedTime.AddMinutes(item.MaxTimePose.Value).ToString("HH:mm)", new
+                                                CultureInfo("th-TH"));
+                                            }@b
+                                        </span>
+                                        @* ไปซื้อที่ไหน *@
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div class="row align-items-center">
+                                <div class="scan col-12">
+                                    <span onclick="showQR(@item.Id@item.Id,2)">แสกนจ่าย</span>
+                                </div>
+                            </div>
+                            <div class="QRcode w-60 h-100">
+                                <img id="@item.Id@item.Id" src="@item.Image" alt="" style="display: none;">
+                            </div>
+
+                            <div id="test1">
+                                <span id="count-@item.Id-comments" ฝากแล้ว คน></span>
+
+                            </div>
+                            <div id="post-@item.Id-comments">
+
+
+                            </div>
+
+                            <script>
+                                function loadComments(mainPoseId) {
+                                    $.ajax({
+                                        url: '@Url.Action("GetComments", "MainPose")',
+                                        data: { mainPoseId: mainPoseId },
+                                        type: 'GET',
+                                        success: function (result) {
+                                            console.log('success.');
+                                            $('#post-' + mainPoseId + '-comments').html(result);
+                                        },
+                                        error: function () {
+                                            console.log('Error occurred while retrieving new comments.');
+                                        }
+                                    });
+                                    $.ajax({
+                                        url: '@Url.Action("CountComments", "MainPose")',
+                                        data: { mainPoseId: mainPoseId },
+                                        type: 'GET',
+                                        success: function (result) {
+                                            console.log('success.');
+                                            $('#count-' + mainPoseId + '-comments').html(result);
+                                        },
+                                        error: function () {
+                                            console.log('Error occurred while retrieving new comments.');
+                                        }
+                                    });
+
+                                }
+                                function showComment(id, current, max, state) {
+                                    console.log("click");
+                                    var main = document.getElementById(id);
+                                    console.log(main);
+                                    console.log(main.style.display);
+                                    if (state === 1) {
+                                        if (main.style.display === "block") {
+                                            main.style.display = "none";
+                                        } else {
+                                            main.style.display = "block";
+                                        }
+                                        if (current >= max) {
+                                            main.style.textAlign = "center";
+                                            main.innerHTML = "เต็มแล้วจ้า";
+                                        }
+                                    }
+                                }
+                                // Call loadComments every 5 seconds
+                                setInterval(function () {
+                                    loadComments(@item.Id);
+
+                                }, 1000);
+                            </script>
+
+                            <hr>
+
+                            <div class="comment"
+                                onclick="showComment(@item.Id@item.Id@item.Id,@item.Comments.Count,@item.MaxComment,1)">
+                                ฝากซื้อหน่อย
+                            </div>
+                            <div id="postComment">
+                                <div class="form-group row" id="@item.Id@item.Id@item.Id" style="display: none;">
+                                    <form asp-controller="MainPose" asp-action="CreateComment" method="post">
+                                        <input type="hidden" name="mainPoseId" value="@item.Id" />
+
+                                        <div class="form-group">
+                                            <label for="first-name">First Name</label>
+                                            <input type="text" id="first-name" name="FirstName" class="form-control" required />
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="last-name">Last Name</label>
+                                            <input type="text" id="last-name" name="LastName" class="form-control" required />
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="comment-text">Comment Text</label>
+                                            <textarea id="comment-text" name="CommentText" class="form-control"
+                                                required></textarea>
+                                        </div>
+                                        <button type="submit" class="btn btn-primary">Submit</button>
+                                    </form>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            }
+
+        </div>
+    </div>
+</div>

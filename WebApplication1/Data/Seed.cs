@@ -92,7 +92,7 @@ namespace WebApplication1.Data
                 }
                 //Users
                 var userManager = serviceScope.ServiceProvider.GetRequiredService<UserManager<AppUser>>();
-                string adminUserEmail = "thanakornrattanapornchai@gmail.com";
+                string adminUserEmail = "admin@gmail.com";
 
                 var adminUser = await userManager.FindByEmailAsync(adminUserEmail);
                 if (adminUser == null)
@@ -104,7 +104,7 @@ namespace WebApplication1.Data
                         EmailConfirmed = true,
 
                     };
-                    await userManager.CreateAsync(newAdminUser, "Coding@1234?");
+                    await userManager.CreateAsync(newAdminUser, "Admin@123456");
                     await userManager.AddToRoleAsync(newAdminUser, UserRoles.Admin);
                 }
 

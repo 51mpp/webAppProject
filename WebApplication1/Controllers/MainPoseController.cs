@@ -35,6 +35,7 @@ namespace WebApplication1.Controllers
             return View("Index", (mainPoses, createMainPoseVM, commentVM));
         }
 
+        
         public IActionResult CreateMainPose()
         {
 

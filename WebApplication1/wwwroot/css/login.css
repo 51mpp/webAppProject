@@ -2,7 +2,7 @@
 .contain{
     width: 100%;
     min-height: 100vh;
-    background-image: url('https://i.insider.com/5bff19e748eb124b3e421886?width=900');
+    /* background-image: url('https://i.insider.com/5bff19e748eb124b3e421886?width=900'); */
     background-size: cover;
 }
 
@@ -22,7 +22,7 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
-
+    /* box-shadow: 0 0 10px rgba(0, 0, 0, 0.15); */
 }
 
 h1 {
