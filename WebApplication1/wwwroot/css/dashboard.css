@@ -1,10 +1,76 @@
 body{
     margin: 0;
 }
-.bg{
+/*.bg{
     background-image: url('https://media.discordapp.net/attachments/905446050347761714/1097545282960494612/d36d462db827833805497d9ea78a1343.jpg');
     background-size: cover;
     width: 80%;
     min-height: 100vh;
     background-position: center;
+    z-index: 1 ;
+    filter: blur(5px);
+}*/
+#iconpfp{
+    background-image: url('https://pbs.twimg.com/profile_images/1324357023602036736/UpKepdqi_400x400.jpg');
+    background-size: cover;
+    margin-top: 80px;
+    min-height: 100px;
+    width: 100px;
+    border: solid yellowgreen 5px;
+
+}
+
+.bg::before {
+    content: "";
+    position: fixed;
+    left: 0;
+    right: 0;
+    z-index: -1;
+  
+    display: block;
+    background-image: url('https://i.imgur.com/lL6tQfy.png');
+    background-size:cover;
+    width: 100%;
+    height: 100%;
+  
+    -webkit-filter: blur(5px);
+    -moz-filter: blur(5px);
+    -o-filter: blur(5px);
+    -ms-filter: blur(5px);
+    filter: blur(5px);
+}
+
+.row div{
+
+    margin-top: 10px;
+    margin-bottom: 10px;
+    padding: 10px;
+}
+.row div div{
+    background-color: white;
+    width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+    border: solid black 5px;
+}
+
+.form-group #history{
+    background-color: red;
+    min-height: 500px;
+    margin:10%;
+    border: solid black 5px;
+    margin-top: 3%;
+}
+form div h2{
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    font-style: italic;
+    color: black;
+    font-size: large;
+    background-color: white;
+    width: 20%;
+    padding: 10px;
+    border: solid black 5px;
+
 }
