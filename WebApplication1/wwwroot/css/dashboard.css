@@ -1,0 +1,10 @@
+body{
+    margin: 0;
+}
+.bg{
+    background-image: url('https://media.discordapp.net/attachments/905446050347761714/1097545282960494612/d36d462db827833805497d9ea78a1343.jpg');
+    background-size: cover;
+    width: 80%;
+    min-height: 100vh;
+    background-position: center;
+}
