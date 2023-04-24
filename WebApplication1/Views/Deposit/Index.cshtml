@@ -104,9 +104,45 @@
                                     </span>
                                 </div>
                             </div>
-                            <div class="accept" onclick="">
+                            <div class="accept" onclick="showComment(@item.Id@item.Id)">
                                 เดี๋ยวไปซื้อให้
                             </div>
+                            <div id="postComment">
+                                <div id="@item.Id@item.Id" class="form-group row" style="display: none;">
+                                    <form>
+                                        @* <input type="hidden" name="mainPoseId" value="" /> *@
+                                        <div class="form-group">
+                                            <label for="first-name">ชื่อ</label>
+                                            <input type="text" id="first-name" name="FirstName" class="form-control" required />
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="last-name">นามสกุล</label>
+                                            <input type="text" id="last-name" name="LastName" class="form-control" required />
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="comment-text">รายละเอียด</label>
+                                            <textarea id="comment-text" name="CommentText" class="form-control"
+                                                required></textarea>
+                                        </div>
+                                        <div>
+                                            <label for="payment">ช่องทางการชำระเงิน</label>
+                                            <input type="file" class="form-control" name="" id="">
+                                        </div>
+                                        
+                                        <button type="submit" class="btn btn-primary">Submit</button>
+                                    </form>
+                                </div>
+                            </div>
+                            <script>
+                                function showComment(id){
+                                    console.log("click");
+                                    if(document.getElementById(id).style.display === "none"){
+                                        document.getElementById(id).style.display = "block";
+                                    }else{
+                                        document.getElementById(id).style.display = "none";
+                                    }
+                                }
+                            </script>
                         </div>
 
                     </div>
