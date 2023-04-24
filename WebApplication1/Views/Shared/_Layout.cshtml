@@ -42,6 +42,13 @@
             document.getElementById("footer").style.display = "none"
 
         }
+        else if (window.location.pathname == '/Account/Dashboard') {
+            console.log("Login")
+            document.getElementById("li05").style.color = "white"
+            document.getElementById("li05").style.backgroundColor = "red"
+            document.getElementById("footer").style.display = "none"
+            renderContainer.className = "";
+        }
     });
 </script>
 
@@ -73,8 +80,9 @@
                         </li>
                         @if (User.Identity.IsAuthenticated)
                         {
-                            <li class="nav-item">
-                                <a class="nav-link " asp-area="" asp-controller="Dashboard" asp-action="Index">ผู้ใช้งาน</a>
+                            <li class="nav-item" id='li05'>
+                                <a class="nav-link " asp-area="" asp-controller="Account"
+                                asp-action="Dashboard" id='l05'>ผู้ใช้งาน</a>
                             </li>
                             <li class="nav-item">
                                 <form class="nav-link " asp-area="" asp-controller="Account" asp-action="Logout">
