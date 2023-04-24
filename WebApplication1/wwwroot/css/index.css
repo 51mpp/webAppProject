@@ -80,10 +80,13 @@ button.accept-policy {
   color: black;
 }
 
+#WC {
+  font-family: 'Mitr', sans-serif;
+}
 
 @media (max-width:720px) {
-  #WC{
+  #WC {
     color: white;
   }
-  
+
 }
