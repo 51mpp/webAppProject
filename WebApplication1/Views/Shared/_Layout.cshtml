@@ -27,11 +27,11 @@
             renderContainer.className = "container";
 
         }
-        else if (window.location.pathname == '/Account/Login' || window.location.pathname =='/Account/Register') {
+        else if (window.location.pathname == '/Account/Login' || window.location.pathname == '/Account/Register') {
             console.log("Login")
             document.getElementById("li04").style.color = "white"
             document.getElementById("li04").style.backgroundColor = "red"
-            document.getElementById("footer").style.display="none"
+            document.getElementById("footer").style.display = "none"
             renderContainer.className = "";
 
         }
@@ -39,7 +39,7 @@
             console.log("Login")
             document.getElementById("li03").style.color = "white"
             document.getElementById("li03").style.backgroundColor = "red"
-            document.getElementById("footer").style.display="none"
+            document.getElementById("footer").style.display = "none"
 
         }
     });
@@ -74,7 +74,8 @@
                         @if (User.Identity.IsAuthenticated)
                         {
                             <li class="nav-item">
-                                <a class="nav-link " asp-area="" asp-controller="Dashboard" asp-action="Index">ผู้ใช้งาน</a>
+                                <a class="nav-link " asp-area="" asp-controller="Account"
+                                asp-action="Dashboard">ผู้ใช้งาน</a>
                             </li>
                             <li class="nav-item">
                                 <form class="nav-link " asp-area="" asp-controller="Account" asp-action="Logout">
@@ -85,7 +86,8 @@
                         else
                         {
                             <li class="nav-item" id="li04">
-                                <a class="nav-link " asp-area="" asp-controller="Account"asp-action="Login" id="l04">ลงชื่อเข้าใช้</a>
+                                <a class="nav-link " asp-area="" asp-controller="Account" asp-action="Login"
+                                    id="l04">ลงชื่อเข้าใช้</a>
                             </li>
                         }
 
@@ -139,11 +141,11 @@
                 document.getElementById("l02").style.color = "white"
                 document.getElementById("li02").style.backgroundColor = "#f59317"
             }
-            else if ( window.location.pathname =='/Deposit') {
+            else if (window.location.pathname == '/Deposit') {
                 document.getElementById("l03").style.color = "white"
                 document.getElementById("li03").style.backgroundColor = "#f59317"
             }
-            else if (window.location.pathname == "/Account/Login" || window.location.pathname =='/Account/Register') {
+            else if (window.location.pathname == "/Account/Login" || window.location.pathname == '/Account/Register') {
                 document.getElementById("l04").style.color = "white"
                 document.getElementById("li04").style.backgroundColor = "#f59317"
             }
@@ -165,11 +167,11 @@
                 document.getElementById("l03").style.color = "white"
                 document.getElementById("li03").style.backgroundColor = "#f59317"
             }
-            else if (window.location.pathname == "/Account/Login" || window.location.pathname =='/Account/Register') {
+            else if (window.location.pathname == "/Account/Login" || window.location.pathname == '/Account/Register') {
                 document.getElementById("l04").style.color = "white"
                 document.getElementById("li04").style.backgroundColor = "red"
             }
-            
+
         }
 
     }
