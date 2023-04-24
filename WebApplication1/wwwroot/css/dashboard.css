@@ -46,12 +46,20 @@ body{
     margin-bottom: 10px;
     padding: 10px;
 }
-.row div div{
+.row div .lable{
+    background-color: salmon;
+    width: 20%;
+    margin-left: 10%;
+    min-height: 50px;
+}
+
+.row div .data{
     background-color: white;
     width: 80%;
     margin-left: auto;
     margin-right: auto;
     border: solid black 5px;
+    min-height: 50px;
 }
 
 .form-group #history{
