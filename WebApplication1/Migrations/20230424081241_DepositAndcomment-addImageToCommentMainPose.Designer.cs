@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using WebApplication1.Data;
 
@@ -11,9 +12,11 @@ using WebApplication1.Data;
 namespace WebApplication1.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230424081241_DepositAndcomment-addImageToCommentMainPose")]
+    partial class DepositAndcommentaddImageToCommentMainPose
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -170,9 +173,6 @@ namespace WebApplication1.Migrations
                         .IsConcurrencyToken()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("DepositId")
-                        .HasColumnType("int");
-
                     b.Property<string>("Email")
                         .HasMaxLength(256)
                         .HasColumnType("nvarchar(256)");
@@ -260,9 +260,6 @@ namespace WebApplication1.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Icon")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("Image")
                         .HasColumnType("nvarchar(max)");
 
@@ -294,14 +291,10 @@ namespace WebApplication1.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int?>("DepositId")
-                        .IsRequired()
                         .HasColumnType("int");
 
                     b.Property<string>("FirstName")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Icon")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Image")
@@ -311,9 +304,15 @@ namespace WebApplication1.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int?>("MainPoseId")
+                        .IsRequired()
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
 
                     b.HasIndex("DepositId");
+
+                    b.HasIndex("MainPoseId");
 
                     b.ToTable("CommentDeposits");
                 });
@@ -335,12 +334,6 @@ namespace WebApplication1.Migrations
                     b.Property<string>("FirstName")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Food")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Icon")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<DateTime?>("LastModified")
                         .HasColumnType("datetime2");
 
@@ -354,9 +347,6 @@ namespace WebApplication1.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Place")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("PlaceDeliver")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
@@ -384,9 +374,6 @@ namespace WebApplication1.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("FirstName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Icon")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Image")
@@ -484,19 +471,23 @@ namespace WebApplication1.Migrations
 
             modelBuilder.Entity("WebApplication1.Models.CommentDeposit", b =>
                 {
-                    b.HasOne("WebApplication1.Models.Deposit", "Deposit")
+                    b.HasOne("WebApplication1.Models.Deposit", null)
                         .WithMany("CommentDeposits")
-                        .HasForeignKey("DepositId")
+                        .HasForeignKey("DepositId");
+
+                    b.HasOne("WebApplication1.Models.MainPose", "MainPose")
+                        .WithMany()
+                        .HasForeignKey("MainPoseId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Deposit");
+                    b.Navigation("MainPose");
                 });
 
             modelBuilder.Entity("WebApplication1.Models.Deposit", b =>
                 {
                     b.HasOne("WebApplication1.Models.AppUser", "AppUser")
-                        .WithMany("Deposits")
+                        .WithMany()
                         .HasForeignKey("AppUserId");
 
                     b.Navigation("AppUser");
@@ -513,8 +504,6 @@ namespace WebApplication1.Migrations
 
             modelBuilder.Entity("WebApplication1.Models.AppUser", b =>
                 {
-                    b.Navigation("Deposits");
-
                     b.Navigation("MainPoses");
                 });
 

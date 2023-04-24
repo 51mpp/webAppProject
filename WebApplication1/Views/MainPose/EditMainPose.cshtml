@@ -1,51 +1,65 @@
 ﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 *@
 @{
 }
 @using WebApplication1.ViewModels
 @model EditMainPoseViewModel
 
-<form asp-action="EditMainPose" method="post" enctype="multipart/form-data">
-    
-    <div class="form-group">
-        <label asp-for="FirstName">FirstName</label>
-        <input asp-for="FirstName" class="form-control" placeholder="Enter FirstName">
-        <span asp-validation-for="FirstName" class="text-danger"></span>
-    </div>
-    <div class="form-group">
-        <label asp-for="LastName">LastName</label>
-        <input asp-for="LastName" class="form-control" placeholder="Enter LastName">
-        <span asp-validation-for="LastName" class="text-danger"></span>
-    </div>
-    <div class="form-group">
-        <label asp-for="Phone">Phone</label>
-        <input asp-for="Phone" class="form-control" placeholder="Enter Phone">
-        <span asp-validation-for="Phone" class="text-danger"></span>
-    </div>
-    <div class="form-group">
-        <label asp-for="Account">Payment-Account</label>
-        <input asp-for="Account" class="form-control" placeholder="Enter Payment-Account">
-        <span asp-validation-for="Account" class="text-danger"></span>
-    </div>
-    <div class="form-group">
-        <label asp-for="MaxComment">Max Comment</label>
-        <input asp-for="MaxComment" class="form-control" placeholder="Enter Max Comment">
-        <span asp-validation-for="MaxComment" class="text-danger"></span>
-    </div>
-    <div class="form-group">
-        <label asp-for="Place">Place</label>
-        <input asp-for="Place" class="form-control" placeholder="Enter Place">
-        <span asp-validation-for="Place" class="text-danger"></span>
-    </div>
-    <div class="form-group">
-        <label asp-for="Image">QR Code</label>
-        <input asp-for="Image" type="file" class="form-control" placeholder="QR Code">
-        <span asp-validation-for="Image" class="text-danger"></span>
-    </div>
-    <div class="form-group">
-        <input asp-for="CreatedTime" type="hidden">
-    </div>
-    
-    <button type="submit" class="btn btn-primary">Submit</button>
-</form>
+<link rel="stylesheet" href="~/css/createMainPost.css">
+<div class="box container h-200 d-flex align-items-center justify-content-center">
+    <form asp-action="EditMainPose" method="post" enctype="multipart/form-data">
+        <div class="row">
+            <div class="col-md-6 col-sm-12 form-group">
+                <label asp-for="FirstName">ชื่อ</label>
+                <div class="col-12">
+                    <input asp-for="FirstName" class="form-control" placeholder="*กรอกชื่อ">
+                    <span asp-validation-for="FirstName" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="col-md-6 col-sm-12 form-group">
+                <label asp-for="LastName">นามสกุล</label>
+                <div class="col-12">
+                    <input asp-for="LastName" class="form-control" placeholder="*กรอกนามสกุล">
+                    <span asp-validation-for="LastName" class="text-danger"></span>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xl-6 col-md-4 form-group">
+                <label asp-for="Phone">เบอร์โทรศัพท์</label>
+                <input asp-for="Phone" type="text" class="form-control" placeholder="*กรอกเบอร์โทรศัพท์" maxlength="10">
+                <span asp-validation-for="Phone" class="text-danger"></span>
+            </div>
+            <div class="col-xl-6  col-md-4 form-group">
+                <label asp-for="Account">หมายเลขบัญชี</label>
+                <input asp-for="Account" type="text" class="form-control" placeholder="กรอกหมายเลขบัญชี">
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-xl-12 col-md-12 form-group">
+                <label asp-for="Place">ไปซื่อที่</label>
+                <input asp-for="Place" class="form-control"
+                    placeholder="*จะไปซื้อที่ไหน Ex: โรงพระเทพ ร้านอาหารตามสั่ง">
+                <span asp-validation-for="Place" class="text-danger"></span>
+            </div>
+            <div class=" col-xl-4 col-md-4 col-sm-12 form-group">
+                <label asp-for="MaxTimePose">จะไปซื้อในอีก (นาที)</label>
+                <input asp-for="MaxTimePose" class="form-control" min="0"/>
+            </div>
+            <div class=" col-xl-4 col-md-4 col-sm-12 form-group">
+                <label asp-for="MaxComment">จำนวนรับฝาก (เริ่มต้นที่ 1 คน)</label>
+                <input asp-for="MaxComment" class="form-control " min="1">
+            </div>
+            <div class=" col-xl-4 col-md-4 col-sm-12 form-group">
+                <label asp-for="Image">QR code</label>
+                <input asp-for="Image" type="file" class="form-control" placeholder="เลือกไฟล์">
+                <span asp-validation-for="Image" class="text-danger"></span>
+            </div>
+        </div>
+        <input asp-for="CreatedTime" class="form-control" type="hidden"/>
+        <a class="btn btn-secondary" href="/MainPose">ยกเลิก</a>
+        <button type="submit" class="btn btn-primary">ยืนยัน</button>
+    </form>
+</div>

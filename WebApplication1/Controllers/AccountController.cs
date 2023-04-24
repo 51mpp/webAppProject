@@ -6,7 +6,7 @@ using WebApplication1.ViewModels;
 
 namespace WebApplication1.Controllers
 {
-    public class  AccountController : Controller
+    public class AccountController : Controller
     {
         private readonly UserManager<AppUser> _userManager;
         private readonly SignInManager<AppUser> _signInManager;
@@ -26,27 +26,37 @@ namespace WebApplication1.Controllers
             var response = new LoginVM { };
             return View(response);
         }
+        [HttpPost]
+        public IActionResult Dashboard()
+        {
+            return View();
+        }
+        [HttpGet]
+        public IActionResult Dashboard(int id)
+        {
+            return View();
+        }
 
         [HttpPost]
         public async Task<IActionResult> Login(LoginVM loginVM)
         {
-            if(!ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
                 return View();
             }
 
             var user = await _userManager.FindByEmailAsync(loginVM.EmailAddress);
-            if(user != null)
+            if (user != null)
             {
                 //user found check password
                 var passwordCheck = await _userManager.CheckPasswordAsync(user, loginVM.Password);
-                if(passwordCheck)
+                if (passwordCheck)
                 {
                     //password is correct, sign in
                     var result = await _signInManager.PasswordSignInAsync(user, loginVM.Password, false, false);
-                    if(result.Succeeded)
+                    if (result.Succeeded)
                     {
-                        return RedirectToAction("Index","Home");
+                        return RedirectToAction("Index", "Home");
                     }
                 }
                 //password is incorrect
@@ -57,7 +67,7 @@ namespace WebApplication1.Controllers
             TempData["Error"] = "Wrong credentials. Please, try again";
             return View(loginVM);
         }
-        
+
         public IActionResult Register()
         {
             var response = new RegisterVM { };
@@ -67,13 +77,13 @@ namespace WebApplication1.Controllers
         [HttpPost]
         public async Task<IActionResult> Register(RegisterVM registerVM)
         {
-            if(!ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
                 return View(registerVM);
             }
-            
+
             var user = await _userManager.FindByEmailAsync(registerVM.EmailAddress);
-            if(user != null)
+            if (user != null)
             {
                 TempData["Error"] = "This email address is already in use";
                 return View(registerVM);
@@ -87,7 +97,7 @@ namespace WebApplication1.Controllers
 
             var newUserResponse = await _userManager.CreateAsync(newUser, registerVM.Password);
 
-            if(newUserResponse.Succeeded)
+            if (newUserResponse.Succeeded)
             {
                 await _userManager.AddToRoleAsync(newUser, UserRoles.User);
                 return View("Login");
@@ -100,8 +110,9 @@ namespace WebApplication1.Controllers
         public async Task<IActionResult> Logout()
         {
             await _signInManager.SignOutAsync();
-            return RedirectToAction("Index","Home");
+            return RedirectToAction("Index", "Home");
         }
+
     }
 }
 

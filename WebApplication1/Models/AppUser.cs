@@ -22,5 +22,8 @@ namespace WebApplication1.Models
         [ForeignKey("MainPose")]
         public int? MainPoseId { get; set; }
         public ICollection<MainPose> MainPoses { get; set; }
+        [ForeignKey("Deposit")]
+        public int? DepositId { get; set; }
+        public ICollection<Deposit> Deposits { get; set; }
     }
 }

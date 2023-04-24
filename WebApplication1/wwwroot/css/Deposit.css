@@ -1,0 +1,67 @@
+#postBox {
+    padding: 20px;
+}
+
+#box {
+    padding: 5px;
+    border: 3px solid #167019;
+    border-radius: 15px;
+}
+
+.profile {
+    border-radius: 100px;
+    filter: drop-shadow(3px 4px 2px gray);
+    width: 100px;
+    height: 100px;
+}
+
+.accept {
+    text-align: center;
+    cursor: pointer;
+    background-color: #F09711;
+    color: rgb(255, 255, 255);
+    border-radius: 10px;
+}
+
+.accept:hover {
+    transform: scale(1.05, 1.1);
+    background-color: #eeb35b;
+
+}
+
+.editPost {
+    margin-top: 10px;
+}
+
+.edit {
+    border: none;
+    cursor: pointer;
+    appearance: none;
+    background-color: inherit;
+}
+
+.edit img {
+    width: 30px;
+    height: auto;
+
+}
+
+.edit img:hover {
+    filter: brightness(120%);
+}
+
+.remove {
+    border: none;
+    cursor: pointer;
+    appearance: none;
+    background-color: inherit;
+}
+
+.remove img {
+    width: 30px;
+    height: auto;
+}
+
+.remove img:hover {
+    filter: brightness(200%);
+}

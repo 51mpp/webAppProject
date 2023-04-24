@@ -6,12 +6,14 @@ For more information on enabling MVC for empty projects, visit https://go.micros
 }
 @using System.Globalization;
 @using WebApplication1.ViewModels
-@model (IEnumerable<MainPose>, CreateMainPoseViewModel, CommentViewModel)
+@model (IEnumerable<MainPose>, CreateMainPoseViewModel, CreateCommentViewModel)
 
 @* @model IEnumerable<MainPose> *@
 
 <link rel="stylesheet" href="~/css/post.css">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-ajax-unobtrusive/3.2.6/jquery.unobtrusive-ajax.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+@*<script
+    src="https://cdnjs.cloudflare.com/ajax/libs/jquery-ajax-unobtrusive/3.2.6/jquery.unobtrusive-ajax.min.js"></script>*@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai:wght@500&display=swap" rel="stylesheet">
@@ -23,7 +25,7 @@ For more information on enabling MVC for empty projects, visit https://go.micros
 <div id="CT" class="container-fluid ">
 
     <div class="row">
-        <a asp-action="CreateMainPose" class="btn btn-primary btn-lg float-end">New Post</a>
+        <a asp-action="CreateMainPose" class="btn btn-primary btn-lg float-end">รับฝาก</a>
 
         @foreach (var item in Model.Item1.Reverse())
         {
@@ -120,8 +122,7 @@ For more information on enabling MVC for empty projects, visit https://go.micros
                                     <span>
                                         @{
                                             var a = DateTime.Now - item.CreatedTime;
-                                            string b = "จะไปซื้อในอีก : ";
-                                            b += item.MaxTimePose + " นาที ";
+                                            string b = "ช่วงเวลารับฝาก : ";
                                             b += item.CreatedTime.ToString("(HH:mm - ", new CultureInfo("th-TH"));
                                             b += item.CreatedTime.AddMinutes(item.MaxTimePose.Value).ToString("HH:mm)", new
                                             CultureInfo("th-TH"));
@@ -156,77 +157,39 @@ For more information on enabling MVC for empty projects, visit https://go.micros
                     }
                     </script>*@
                         <div id="test1">
-                            <span id="count-@item.Id-comments" ฝากแล้ว คน></span>
+                            <span id="count-@item.Id-comments" ฝากแล้ว คน>
+                                ฝากแล้ว @item.Comments.Count / @item.MaxComment คน
+                            </span>
 
                         </div>
                         <div id="post-@item.Id-comments">
-
-
+                            @foreach (var comment in @item.Comments)
+                            {
+                                <div class="row">
+                                    <div class="order_box">
+                                        <div class="card p-3 shadow-sm">
+                                            <div class="d-flex justify-content-between align-items-center">
+                                                <div class="user d-flex flex-row align-items-center">
+                                                    <span>
+                                                        <small style="color: rgb(76, 158, 80);">@comment.FirstName</small>
+                                                        <small class="font-weight-bold">@comment.CommentText</small>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            }
                         </div>
-
-                        <script>
-                            function loadComments(mainPoseId) {
-                                $.ajax({
-                                    url: '@Url.Action("GetComments", "MainPose")',
-                                    data: { mainPoseId: mainPoseId },
-                                    type: 'GET',
-                                    success: function (result) {
-                                        console.log('success.');
-                                        $('#post-' + mainPoseId + '-comments').html(result);
-                                    },
-                                    error: function () {
-                                        console.log('Error occurred while retrieving new comments.');
-                                    }
-                                });
-                                $.ajax({
-                                    url: '@Url.Action("CountComments", "MainPose")',
-                                    data: { mainPoseId: mainPoseId },
-                                    type: 'GET',
-                                    success: function (result) {
-                                        console.log('success.');
-                                        $('#count-' + mainPoseId + '-comments').html(result);
-                                    },
-                                    error: function () {
-                                        console.log('Error occurred while retrieving new comments.');
-                                    }
-                                });
-
-                            }
-                            function showComment(id, current, max, state) {
-                                console.log("click");
-                                var main = document.getElementById(id);
-                                console.log(main);
-                                console.log(main.style.display);
-                                if (state === 1) {
-                                    if (main.style.display === "block") {
-                                        main.style.display = "none";
-                                    } else {
-                                        main.style.display = "block";
-                                    }
-                                    if (current >= max) {
-                                        main.style.textAlign = "center";
-                                        main.innerHTML = "เต็มแล้วจ้า";
-                                    }
-                                }
-                            }
-                            // Call loadComments every 5 seconds
-                            setInterval(function () {
-                                loadComments(@item.Id);
-
-                            }, 1000);
-                        </script>
-
                         <hr>
-
-                        <div class="comment"
-                            onclick="showComment(@item.Id@item.Id@item.Id,@item.Comments.Count,@item.MaxComment,1)">
+                        <div class="comment" onclick="showComment(@item.Id@item.Id@item.Id,@item.Comments.Count,@item.MaxComment,1  )">
                             ฝากซื้อหน่อย
                         </div>
+                        
                         <div id="postComment">
                             <div class="form-group row" id="@item.Id@item.Id@item.Id" style="display: none;">
                                 <form asp-controller="MainPose" asp-action="CreateComment" method="post">
                                     <input type="hidden" name="mainPoseId" value="@item.Id" />
-
                                     <div class="form-group">
                                         <label for="first-name">First Name</label>
                                         <input type="text" id="first-name" name="FirstName" class="form-control" required />
@@ -242,13 +205,30 @@ For more information on enabling MVC for empty projects, visit https://go.micros
                                     </div>
                                     <button type="submit" class="btn btn-primary">Submit</button>
                                 </form>
-
                             </div>
+                            @*<div class="form-group row" id="@item.Id@item.Id@item.Id" style="display: none;">
+                                <form id="comment-form-@item.Id" asp-controller="MainPose" asp-action="CreateCommentByAjax" data-pose-id="@item.Id">
+                                    <input type="hidden" name="mainPoseId" value="@item.Id" />
+                                    <div class="form-group">
+                                        <label for="first-name">First Name</label>
+                                        <input type="text" id="first-name" name="FirstName" class="form-control" required />
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="last-name">Last Name</label>
+                                        <input type="text" id="last-name" name="LastName" class="form-control" required />
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="comment-text">Comment Text</label>
+                                        <textarea id="comment-text" name="CommentText" class="form-control"
+                                                  required></textarea>
+                                    </div>
+                                    <button type="button" id="submit-comment-@item.Id" class="btn btn-primary">Submit</button>
+                                </form>
+                            </div>*@
                         </div>
                     </div>
                 </div>
             </div>
-
             @* comment section*@
 
             @* <div class="row"> *@
@@ -261,30 +241,70 @@ For more information on enabling MVC for empty projects, visit https://go.micros
             @* </div> *@
             @* </div> *@
             @* Add comment section *@
+            <script>
+                function loadComments(mainPoseId) {
+                    $.ajax({
+                        url: '@Url.Action("GetComments", "MainPose")',
+                        data: { mainPoseId: mainPoseId },
+                        type: 'GET',
+                        success: function (result) {
+                            console.log('success.');
+                            $('#post-' + mainPoseId + '-comments').html(result);
+                        },
+                        error: function () {
+                            console.log('Error occurred while retrieving new comments.');
+                        }
+                    });
+                    $.ajax({
+                        url: '@Url.Action("CountComments", "MainPose")',
+                        data: { mainPoseId: mainPoseId },
+                        type: 'GET',
+                        success: function (result) {
+                            console.log('success.');
+                            $('#count-' + mainPoseId + '-comments').html(result);
+                        },
+                        error: function () {
+                            console.log('Error occurred while retrieving new comments.');
+                        }
+                    });
 
-            @*script>
-        function loadComments(mainPoseId) {
-        var id = mainPoseId;
-        $.ajax({
-        url: '@Url.Action("GetComments", "MainPose")',
-        data: { mainPoseId: id },
-        type: 'GET',
-        success: function (result) {
-        console.log('success.');
-        $('#@item.Id@item.Id@item.Id@item.Id@item.Id@item.Id').html(result);
 
-        },
-        error: function () {
-        console.log('Error occurred while retrieving new comments.');
-        }
-        });
-        }
+                }@*
+                $(function () {
+                    $('#submit-comment-@item.Id').click(function () {
+                        var form = $('#comment-form-@item.Id');
+                        var poseId = form.data('pose-id');
+                        $.ajax({
+                            url: form.attr('action'),
+                            type: form.attr('method'),
+                            data: form.serialize(),
+                            success: function (result) {
+                                if (result.success) {
+                                    // Comment added successfully, update the UI
+                                    var comment = result.comment;
+                                    var html = '<div class="card"><div class="card-body"><h5 class="card-title">' + comment.firstName + ' ' + comment.lastName + '</h5><p class="card-text">' + comment.commentText + '</p></div></div>';
+                                    $('#comment-section-' + poseId).append(html);
+                                    form[0].reset();
+                                } else {
+                                    // Comment failed, show error messages
+                                    $.each(result.errors, function (key, value) {
+                                        $('#' + key + '-error').html(value.join('<br>'));
+                                    });
+                                }
+                            },
+                            error: function () {
+                                // Handle error
+                            }
+                        });
+                    });
+                });*@
+                // Call loadComments every 1 seconds
+                setInterval(function () {
+                    loadComments(@item.Id);
+                    showComment();
 
-        // Call loadComments every 5 seconds
-        setInterval(function () {
-        loadComments(@item.Id);
-        }, 1000);
-        </script>*@
+                }, 1000);
+            </script>
         }
     </div>
 
