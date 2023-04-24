@@ -33,3 +33,4 @@ function showQR(id, state) {
 
 
 
+

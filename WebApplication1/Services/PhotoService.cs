@@ -47,6 +47,35 @@ namespace WebApplication1.Services
 
             return uploadResult;
         }
+        public async Task<ImageUploadResult> AddPhotoCommentAsync(IFormFile file)
+        {
+            /*var uploadResult = new ImageUploadResult();
+            if (file.Length > 0)
+            {
+                using var stream = file.OpenReadStream();
+                var uploadParams = new ImageUploadParams
+                {
+                    File = new FileDescription(file.FileName, stream),
+                    Transformation = new Transformation().Height(500).Width(500).Crop("fill").Gravity("face")
+                };
+                uploadResult = await _clondinary.UploadAsync(uploadParams);
+            }
+            
+            return uploadResult;*/
+            var uploadResult = new ImageUploadResult();
+            if (file?.Length > 0)
+            {
+                using var stream = file.OpenReadStream();
+                var uploadParams = new ImageUploadParams
+                {
+                    File = new FileDescription(file.FileName, stream),
+                    Transformation = new Transformation().Height(150).Width(150).Crop("fill").Gravity("face")
+                };
+                uploadResult = await _clondinary.UploadAsync(uploadParams);
+            }
+
+            return uploadResult;
+        }
 
         public async Task<DeletionResult> DeletePhotoAsync(string publicId)
         {

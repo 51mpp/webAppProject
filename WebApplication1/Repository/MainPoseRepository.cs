@@ -24,7 +24,11 @@ namespace WebApplication1.Repository
             _context.Remove(mainPose);
             return Save();
         }
-
+        public bool DeleteCommentEach(Comment comment)
+        {
+            _context.Remove(comment);
+            return Save();
+        }
         public async Task<IEnumerable<MainPose>> GetAll()
         {
             return await _context.MainPoses.ToListAsync();
@@ -32,6 +36,10 @@ namespace WebApplication1.Repository
         public async Task<IEnumerable<Comment>> GetCommentsByMainPoseId(int mainPoseId)
         {
             return await _context.Comments.Where(c => c.MainPoseId == mainPoseId).ToListAsync();
+        }
+        public async Task<Comment> GetCommentEachByIdAsync(int id)
+        {
+            return await _context.Comments.FirstOrDefaultAsync(i => i.Id == id);
         }
         public async Task<MainPose> GetByIdAsync(int id)
         {

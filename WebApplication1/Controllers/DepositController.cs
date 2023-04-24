@@ -92,8 +92,8 @@ namespace WebApplication1.Controllers
         {
             if (!ModelState.IsValid)
             {
-                ModelState.AddModelError("", "Fail to edit mainPose");
-                return View("EditMainPose", depositVM);
+                ModelState.AddModelError("", "Fail to edit EditDepositPose");
+                return View("EditDeposit", depositVM);
             }
             var post = await _depositRepository.GetByIdAsyncNoTracking(id);
             if (post == null)
@@ -107,6 +107,8 @@ namespace WebApplication1.Controllers
                 LastName = depositVM.LastName,
                 Phone = depositVM.Phone,
                 Place = depositVM.Place,
+                Food = depositVM.Food,
+                PlaceDeliver = depositVM.PlaceDeliver,
                 CreatedTime = depositVM.CreatedTime,
                 MaxTimePose = depositVM.MaxTimePose,
                 LastModified = DateTime.Now,
