@@ -11,9 +11,9 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai:wght@500&display=swap" rel="stylesheet">
 
-<div class="container-fluid">
+<div class="container-fluid" id="CT">
     <div class="row">
-        <a asp-action="CreateDeposit" class="btn btn-primary btn-lg float-end">ฝากซื้อ</a>
+        <a asp-action="CreateDeposit" class="btn btn-primary btn-lg float-end" id="depositing">ฝากซื้อ</a>
         @foreach (var item in Model.Item1.Reverse())
         {
             <div id="postBox" class="col-sm-12 col-lg-5 col-xl-4 ">
@@ -96,7 +96,12 @@
                                     <span>เอามาส่งที่ไหน : @item.PlaceDeliver</span>
                                 </div>
                                 <div class="col-12" style="margin-top:5px;">
-                                    <span>เอามาส่งเมื่อไร : @item.MaxTimePose</span>
+                                    <span>รับฝากได้ตั้งแต่ : @{
+                                            string b = item.CreatedTime.ToString("HH:mm น.", new CultureInfo("th-TH"));
+                                            b += " - " + item.CreatedTime.AddMinutes(item.MaxTimePose.Value).ToString("HH:mm น.", new
+                                            CultureInfo("th-TH"));
+                                        }@b
+                                    </span>
                                 </div>
                             </div>
                             <div class="accept" onclick="">
@@ -108,6 +113,6 @@
                 </div>
             </div>
         }
-        
+
     </div>
 </div>

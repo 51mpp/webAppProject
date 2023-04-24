@@ -6,6 +6,7 @@ a.navbar-brand {
   text-align: center;
   word-break: break-all;
 }
+
 a {
   color: #0077cc;
 }
@@ -88,14 +89,16 @@ footer {
   position: absolute;
   bottom: 0;
   width: 100%;
-  background: #252525;
+  background: #25252554;
   color: #fcfcf7;
   text-align: center;
-  position: absolute;
+
 }
 
 footer p {
-  padding: 5px;
+
+  font-family: 'Maitree', serif;
+  font-size: 10px
 }
 
 .container {

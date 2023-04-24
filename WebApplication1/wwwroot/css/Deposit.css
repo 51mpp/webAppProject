@@ -21,6 +21,7 @@
     background-color: #F09711;
     color: rgb(255, 255, 255);
     border-radius: 10px;
+    margin-top: 10px;
 }
 
 .accept:hover {
