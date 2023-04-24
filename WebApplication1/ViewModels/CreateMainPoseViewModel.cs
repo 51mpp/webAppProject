@@ -20,9 +20,10 @@ namespace WebApplication1.ViewModels
         public string? Phone { get; set; }
         public IFormFile? Image { get; set; }
         public string? Place { get; set; }
+        [Required(ErrorMessage = "MaxComment is requied")]
         public int? MaxComment { get; set; }
         public string? Account { get; set; }
-        /*[Required(ErrorMessage = "MaxTimePose is requied")]*/
+        [Required(ErrorMessage = "MaxTimePose is requied")]
         public int? MaxTimePose { get; set; }
         public DateTime CreatedTime { get; set; }
         public DateTime? LastModified { get; set; }

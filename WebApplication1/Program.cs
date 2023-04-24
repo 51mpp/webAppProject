@@ -13,6 +13,7 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 builder.Services.AddScoped<IMainPoseRepository, MainPoseRepository>();
+builder.Services.AddScoped<IDepositRepository, DepositRepository>();
 builder.Services.AddScoped<IPhotoService, PhotoService>();
 //เป็นการดึงไฟล์ cloudinarySetting มาใช้กับส่วนอื่นๆที่่สอดคล้องได้ ถ้าเปลี่ยนส่วนของ CloudinarySettings ไฟล์อื่นๆที่เกี่ยวข้องก็จะเปลี่ยนไปด้วย
 builder.Services.Configure<CloudinarySettings>(builder.Configuration.GetSection("CloudinarySettings"));

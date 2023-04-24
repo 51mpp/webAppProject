@@ -31,7 +31,7 @@ namespace WebApplication1.Controllers
                 mainPose.Comments = (ICollection<Comment>)await _mainPoseRepository.GetCommentsByMainPoseId(mainPose.Id);
             }
             CreateMainPoseViewModel createMainPoseVM = new CreateMainPoseViewModel();
-            CommentViewModel commentVM = new CommentViewModel();
+            CreateCommentViewModel commentVM = new CreateCommentViewModel();
             return View("Index", (mainPoses, createMainPoseVM, commentVM));
         }
 
@@ -89,6 +89,7 @@ namespace WebApplication1.Controllers
                 Place = post.Place,
                 Account = post.Account,
                 MaxComment = post.MaxComment,
+                MaxTimePose = post.MaxTimePose,
                 CreatedTime = post.CreatedTime
 
             };
@@ -128,6 +129,7 @@ namespace WebApplication1.Controllers
                 Account = mainPoseVM.Account,
                 MaxComment = mainPoseVM.MaxComment,
                 CreatedTime = mainPoseVM.CreatedTime,
+                MaxTimePose = mainPoseVM.MaxTimePose,
                 LastModified = DateTime.Now,
 
             };

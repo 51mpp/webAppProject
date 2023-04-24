@@ -14,5 +14,7 @@ namespace WebApplication1.Data
         public DbSet<MainPose> MainPoses { get; set; }
         public DbSet<AppUser> AppUsers { get; set; }
         public DbSet<Comment> Comments { get; set; }
+        public DbSet<Deposit> Deposits { get; set; }
+        public DbSet<CommentDeposit> CommentDeposits { get; set; }
     }
 }
