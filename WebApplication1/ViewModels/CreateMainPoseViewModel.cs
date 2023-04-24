@@ -12,13 +12,12 @@ namespace WebApplication1.ViewModels
         public string? FirstName { get; set; }
         [Required(ErrorMessage = "LastName is requied")]
         public string? LastName { get; set; }
-        public int? Section { get; set; }
-
         [Phone]
         [Required(ErrorMessage = "Mobile Number is required.")]
         [RegularExpression("^([0-9]{10})$", ErrorMessage = "Invalid Mobile Number.")]
         public string? Phone { get; set; }
         public IFormFile? Image { get; set; }
+        [Required(ErrorMessage = "Place is required.")]
         public string? Place { get; set; }
         [Required(ErrorMessage = "MaxComment is requied")]
         public int? MaxComment { get; set; }
