@@ -11,6 +11,7 @@
 </head>
 <script>
     window.addEventListener("load", (event) => {
+        console.log(window.location.pathname)
         var renderContainer = document.getElementById("renderContainer");
         var navTop = document.getElementById("mainnav");
         if (window.location.pathname == '/') {
@@ -28,10 +29,17 @@
         }
         else if (window.location.pathname == '/Account/Login' || window.location.pathname =='/Account/Register') {
             console.log("Login")
+            document.getElementById("li04").style.color = "white"
+            document.getElementById("li04").style.backgroundColor = "red"
+            document.getElementById("footer").style.display="none"
+            renderContainer.className = "";
+
+        }
+        else if (window.location.pathname == '/Deposit') {
+            console.log("Login")
             document.getElementById("li03").style.color = "white"
             document.getElementById("li03").style.backgroundColor = "red"
             document.getElementById("footer").style.display="none"
-            renderContainer.className = "";
 
         }
     });
@@ -56,32 +64,31 @@
                             <a class="nav-link " asp-area="" asp-controller="Home" asp-action="Index"
                                 id="l01">หน้าหลัก</a>
                         </li>
-
                         <li class="nav-item" id="li02">
                             <a class="nav-link" asp-area="" asp-controller="MainPose" asp-action="" id="l02">รับฝาก</a>
                         </li>
 
-                        <li class="nav-item" id="li02">
-                            <a class="nav-link" asp-area="" asp-controller="" asp-action="" id="">ฝากซื้อ</a>
+                        <li class="nav-item" id="li03">
+                            <a class="nav-link" asp-area="" asp-controller="Deposit" asp-action="" id="103">ฝากซื้อ</a>
                         </li>
                         @if (User.Identity.IsAuthenticated)
                         {
                             <li class="nav-item">
-                                <a class="nav-link " asp-area="" asp-controller="Dashboard"asp-action="Index">ผู้ใช้งาน</a>
+                                <a class="nav-link " asp-area="" asp-controller="Dashboard" asp-action="Index">ผู้ใช้งาน</a>
                             </li>
                             <li class="nav-item">
-                                <form class="nav-link " asp-area="" asp-controller="Account"asp-action="Logout">
+                                <form class="nav-link " asp-area="" asp-controller="Account" asp-action="Logout">
                                     <button id="LogoutBTN" class="btn">ออกจากระบบ</button>
                                 </form>
                             </li>
                         }
                         else
                         {
-                            <li class="nav-item" id="li03">
-                                <a class="nav-link " asp-area="" asp-controller="Account"asp-action="Login" id="l03">ลงชื่อเข้าใช้</a>
+                            <li class="nav-item" id="li04">
+                                <a class="nav-link " asp-area="" asp-controller="Account"asp-action="Login" id="l04">ลงชื่อเข้าใช้</a>
                             </li>
                         }
-                        
+
                     </ul>
                 </div>
             </div>
@@ -91,7 +98,7 @@
 
     </header>
     <div class="container " id="renderContainer">
-        <main role="main " class="pb-3">
+        <main role="main " class="">
             @RenderBody()
         </main>
 
@@ -117,7 +124,6 @@
     var navitem = document.querySelectorAll('.nav-item')
 
     window.onscroll = function () {
-        console.log(window.location.pathname)
         if (window.scrollY > 80) {
 
             mainnav.classList.add('active');
@@ -133,9 +139,13 @@
                 document.getElementById("l02").style.color = "white"
                 document.getElementById("li02").style.backgroundColor = "#f59317"
             }
-            else if (window.location.pathname == "/Account/Login" || window.location.pathname =='/Account/Register') {
+            else if ( window.location.pathname =='/Deposit') {
                 document.getElementById("l03").style.color = "white"
                 document.getElementById("li03").style.backgroundColor = "#f59317"
+            }
+            else if (window.location.pathname == "/Account/Login" || window.location.pathname =='/Account/Register') {
+                document.getElementById("l04").style.color = "white"
+                document.getElementById("li04").style.backgroundColor = "#f59317"
             }
         }
         else {
@@ -151,10 +161,15 @@
                 document.getElementById("l02").style.color = "white"
                 document.getElementById("li02").style.backgroundColor = "red"
             }
-            else if (window.location.pathname == "/Account/Login" || window.location.pathname =='/Account/Register') {
+            else if (window.location.pathname == "/Deposit") {
                 document.getElementById("l03").style.color = "white"
-                document.getElementById("li03").style.backgroundColor = "red"
+                document.getElementById("li03").style.backgroundColor = "#f59317"
             }
+            else if (window.location.pathname == "/Account/Login" || window.location.pathname =='/Account/Register') {
+                document.getElementById("l04").style.color = "white"
+                document.getElementById("li04").style.backgroundColor = "red"
+            }
+            
         }
 
     }
