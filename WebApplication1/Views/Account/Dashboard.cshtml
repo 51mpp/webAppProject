@@ -1,3 +1,7 @@
+@*เพิ่มmodal ให้ด้วยนะ*@
+
+
+
 <link rel="stylesheet" href="~/css/dashboard.css">
 
 
@@ -9,19 +13,20 @@
         </div>
         <div class="row">
             <div class="col-12 col-md-6 "> 
-                <div class="lable">FirstName</div> <div class="data"></div> </div>
-            <div class="col-12 col-md-6 "> <div  class="lable">LastName</div> <div class="data"></div> </div>
+                <div class="lable">FirstName</div> <input type="text" class="data" placeholder="Ricado"> </div>
+            <div class="col-12 col-md-6 "> <div  class="lable">LastName</div> <input type="text" class="data" placeholder="milos"> </div>
         </div>
         <div class="row">
-            <div class="col-12 col-md-6 "> <div  class="lable">NickName</div>  <div class="data"></div></div>
-            <div class="col-12 col-md-6 "> <div  class="lable">Phone Number</div> <div class="data"></div></div>
+            <div class="col-12 col-md-6 "> <div  class="lable">NickName</div> <input type="text" class="data" placeholder="pT0"> </div>
+            <div class="col-12 col-md-6 "> <div  class="lable">Phone Number</div> <input type="text" class="data" placeholder="091xxxxxx"></div>
         </div>
         <div class="row">
-            <div class="col-12 "> <div  class="lable">Bank Account Number</div> <div class="data"></div></div>
+            <div class="col-12 "> <div  class="lable">Bank Account Number</div> <input type="text" class="data" placeholder="1511515151515"></div>
+            <button type="submit" id="change">Save Change</button>
         </div>
-        <div class="form-group">
+        @*<div class="form-group">
             <h2>History</h2>
             <div id="history"></div>
-        </div>
+        </div> *@
     </form>
 </div>
