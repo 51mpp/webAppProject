@@ -8,6 +8,9 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/WebApplication1.styles.css" asp-append-version="true" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Maitree:wght@300&display=swap" rel="stylesheet">
 </head>
 <script>
     window.addEventListener("load", (event) => {
@@ -81,8 +84,8 @@
                         @if (User.Identity.IsAuthenticated)
                         {
                             <li class="nav-item" id='li05'>
-                                <a class="nav-link " asp-area="" asp-controller="Account"
-                                asp-action="Dashboard" id='l05'>ผู้ใช้งาน</a>
+                                <a class="nav-link " asp-area="" asp-controller="Account" asp-action="Dashboard"
+                                    id='l05'>ผู้ใช้งาน</a>
                             </li>
                             <li class="nav-item">
                                 <form class="nav-link " asp-area="" asp-controller="Account" asp-action="Logout">

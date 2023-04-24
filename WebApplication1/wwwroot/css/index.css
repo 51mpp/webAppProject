@@ -41,12 +41,17 @@ button.accept-policy {
   line-height: inherit;
 }
 
-.footer {
+#footer {
   position: absolute;
-  bottom: 0;
+  /* bottom: 0;
   width: 100%;
   white-space: nowrap;
-  line-height: 60px;
+  line-height: 60px; */
+}
+
+#footer p {
+  font-family: 'Maitree', serif;
+  font-size: 10px;
 }
 
 .mainnav {
