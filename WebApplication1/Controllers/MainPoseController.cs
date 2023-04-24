@@ -208,6 +208,14 @@ namespace WebApplication1.Controllers
             return Content(html);
         }
         [HttpGet]
+        public async Task<IActionResult> CountComments2(int mainPoseId)
+        {
+            MainPose mainPoses = await _mainPoseRepository.GetByIdAsync(mainPoseId);
+            IEnumerable<Comment> comments = await _mainPoseRepository.GetCommentsByMainPoseId(mainPoseId);
+            int count = comments.Count();
+            return Json(new {countComment = count });
+        }
+        [HttpGet]
         public IActionResult GetDate(DateTime CreatedTime)
         {
             var x = DateTime.Now - CreatedTime;
