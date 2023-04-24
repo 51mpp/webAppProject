@@ -79,3 +79,11 @@ button.accept-policy {
   background-color: rgba(243, 156, 18, 1);
   color: black;
 }
+
+
+@media (max-width:720px) {
+  #WC{
+    color: white;
+  }
+  
+}
