@@ -16,12 +16,14 @@ namespace WebApplication1.Controllers
     {
         private readonly IDepositRepository _depositRepository;
         private readonly IPhotoService _photoService;
+        private readonly IHttpContextAccessor _httpContextAccessor;
 
 
-        public DepositController(IDepositRepository depositRepository, IPhotoService photoService)
+        public DepositController(IDepositRepository depositRepository, IPhotoService photoService, IHttpContextAccessor httpContextAccessor)
         {
             _depositRepository = depositRepository;
             _photoService = photoService;
+            _httpContextAccessor = httpContextAccessor;
         }
         [HttpGet]
         public async Task<IActionResult> Index() // อันนี้ใช้ return view() ในหน้า club -----> controller 
@@ -38,8 +40,8 @@ namespace WebApplication1.Controllers
         [HttpGet]
         public IActionResult CreateDeposit()
         {
-
-            var createDepositViewModel = new CreateDepositViewModel { };
+            var curUserId = _httpContextAccessor.HttpContext.User.GetUserId();
+            var createDepositViewModel = new CreateDepositViewModel { AppUserId = curUserId  };
             return View(createDepositViewModel);
         }
         [HttpPost]
@@ -56,6 +58,7 @@ namespace WebApplication1.Controllers
                     Food = depositVM.Food,
                     PlaceDeliver = depositVM.PlaceDeliver,
                     MaxTimePose = depositVM.MaxTimePose,
+                    AppUserId = depositVM.AppUserId,
                     CreatedTime = DateTime.Now
                 };
 

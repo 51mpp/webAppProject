@@ -26,8 +26,7 @@ div button {
 .contain{
     width: 100%;
     min-height: 100vh;
-    background-image: url('https://i.insider.com/5bff19e748eb124b3e421886?width=900'); 
-    background-image: url('https://i.insider.com/5bff19e748eb124b3e421886?width=900');
+    /* background-image: url('https://i.insider.com/5bff19e748eb124b3e421886?width=900'); */
     background-size: cover;
 }
 
