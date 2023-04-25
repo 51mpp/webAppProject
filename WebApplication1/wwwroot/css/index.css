@@ -1,5 +1,28 @@
 ﻿/* Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
 for details on configuring this project to bundle and minify static web assets. */
+main {
+  width: 100%;
+  margin: 0 0 0 0;
+  scroll-snap-type: y mandatory;
+  overflow: y;
+}
+
+#section1 {
+  scroll-snap-align: start;
+}
+
+#section2 {
+  scroll-snap-align: start;
+}
+
+#section3 {
+  scroll-snap-align: start;
+}
+
+#section4 {
+  scroll-snap-align: start;
+}
+
 #welcome {
 
   padding: 30px;
@@ -66,7 +89,9 @@ button.accept-policy {
 .banner-image {
   /*background-image: url('https://img.freepik.com/free-photo/chicken-wings-barbecue-sweetly-sour-sauce-picnic-summer-menu-tasty-food-top-view-flat-lay_2829-6471.jpg?w=2000') !important;
   */
+
   background-image: url('https://media.discordapp.net/attachments/905446050347761714/1097545282960494612/d36d462db827833805497d9ea78a1343.jpg');
+
   background-size: cover;
 }
 
@@ -122,23 +147,26 @@ button.accept-policy {
 }
 
 :root {
-  --main-color:#ff702a;
-  --text-color:#fff;
-  --bg-color:#1e1c2a;
-  --big-font:4rem;
-  --h2-font:2.25rem;
-  --p-font:0.9rem;
+  --main-color: #ff702a;
+  --text-color: #fff;
+  --bg-color: #1e1c2a;
+  --big-font: 4rem;
+  --h2-font: 2.25rem;
+  --p-font: 0.9rem;
 }
+
 *::selection {
   background: var(--main-color);
   color: #fff;
 }
+
 body {
   color: var(--text-color);
   background: var(--bg-color);
 }
+
 header {
-  position:fixed;
+  position: fixed;
   top: 0;
   right: 0;
   width: 100%;
@@ -149,32 +177,40 @@ header {
   padding: 30px 170px;
   background: var(--bg-color);
 }
+
 .logo {
   color: var(--main-color);
   font-weight: 600;
   font-size: 2.4rem;
 }
+
 .navbar {
   display: flex;
 }
+
 .navbar a {
   color: var(--text-color);
-  font-size: 1.1rem;
+  font-size: 16px;
   padding: 10px 20px;
   font-weight: 500;
 }
+
 .navbar a:hover {
   color: var(--main-color);
   transition: .4s;
 }
+
 #menu-icon {
   font-size: 2rem;
   cursor: pointer;
   display: none;
 }
+
 section {
+
   padding: 70px 17%;
 }
+
 .home {
   padding-top: 170px;
   width: 100%;
@@ -184,19 +220,23 @@ section {
   grid-gap: 1.5rem;
   align-items: center;
 }
+
 .home-img img {
   max-width: 100%;
   width: 600px;
   height: auto;
 }
+
 .home-text h1 {
   font-size: var(--big-font);
   color: var(--main-color);
 }
+
 .home-text h2 {
   font-size: var(--h2-font);
   margin: 1rem 0 2rem;
 }
+
 .btn {
   display: inline-block;
   padding: 10px 20px;
@@ -204,63 +244,76 @@ section {
   color: #fff;
   border-radius: 0.5rem;
 }
+
 .btn:hover {
   transform: scale(1.2) translateX(10px);
   transition: .4s;
 }
+
 .about {
   display: grid;
   grid-template-columns: repeat(2, 2fr);
   grid-gap: 1.5rem;
   align-items: center;
 }
+
 .about-img img {
   max-width: 100%;
   width: 480px;
   height: auto;
 }
+
 .about-text span {
   color: var(--main-color);
   font-weight: 600;
 }
+
 .about-text h2 {
-  font-size:var(--h2-font) ;
+  font-size: var(--h2-font);
   margin-top: 1rem;
 }
+
 .about-text p {
   font-size: var(--p-font);
   margin: 0.8rem 0 1.8rem;
   line-height: 1.7;
 }
+
 .heading {
   text-align: center;
 }
+
 .heading h3 {
   color: var(--main-color);
   font-weight: 600;
 }
+
 .team-members {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
   margin-top: 40px;
 }
+
 .team-member {
   width: 180px;
   text-align: center;
   margin-bottom: 30px;
 }
+
 .team-member img {
   width: 100%;
   height: auto;
   border-radius: 50%;
   margin-bottom: 15px;
 }
+
 .team-member h3 {
   font-weight: 600;
   color: #333;
   margin-bottom: 5px;
 }
+
 .team-member p {
   font-weight: 400;
   color: #666;
@@ -269,68 +322,80 @@ section {
 
 @media (max-width: 1560px) {
   header {
-      padding: 15px 40px;
+    padding: 0px 40px;
   }
+
   :root {
-      --big-font:3.5rem;
-      --h2-font:2rem;
+    --big-font: 3.5rem;
+    --h2-font: 2rem;
   }
 }
 
 @media (max-width: 1140px) {
   section {
-      padding: 50px 8%;
+
+    padding: 50px 8%;
   }
+
   #menu-icon {
-      display: initial;
-      color: var(--text-color);
+    display: initial;
+    color: var(--text-color);
   }
+
   .navbar {
-      position: absolute;
-      top: -400px;
-      left: 0;
-      right: 0;
-      display: flex;
-      flex-direction: column;
-      text-align: center;
-      background: #2b2640;
-      transition: .3s;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    background: #2b2640;
+    transition: .3s;
   }
+
   .navbar.active {
-      top: 70px;
+    top: 70px;
   }
+
   .navbar a {
-      padding: 1.5rem;
-      display: block;
+    padding: 1.5rem;
+    display: block;
   }
+
   .col {
-      width: 50%;
-      margin-bottom: 10px;
+    width: 50%;
+    margin-bottom: 10px;
   }
 }
 
 @media (max-width: 720px) {
   header {
-      pad: 10px 16px;
+    pad: 10px 16px;
   }
+
   .home {
-      grid-template-columns: 1fr;
-      text-align: center;
+    grid-template-columns: 1fr;
+    text-align: center;
   }
+
   .about {
-      grid-template-columns: 1fr;
-      text-align: center;
+    grid-template-columns: 1fr;
+    text-align: center;
   }
+
   .about-img {
-      order: 2;
+    order: 2;
   }
+
   section {
-      padding: 100px 7%;
+
+    padding: 100px 7%;
   }
 }
 
 @media (max-width: 575px) {
   .col {
-      width: 100%;
+    width: 100%;
   }
 }

@@ -6,20 +6,21 @@
 <link href="https://fonts.googleapis.com/css2?family=Mitr&display=swap" rel="stylesheet">
 
 <link rel="stylesheet" href="~/css/index.css" asp-append-version="true" />
-<div class="text-center row">
-<div class="banner-image w-100 vh-100 d-flex justify-content-center align-items-center col-12">
+<main>
+    @* <section class="sec1 border"> *@
+    <section id="section1" class="banner-image w-100 vh-100 d-flex justify-content-center align-items-center">
         <div class="centent text-center" id="welcome">
-             <h1 id="WC" class="">ยินดีต้อนรับเข้าสู่เว็บไซต์</h1>
+            <h1 id="WC" class="">ยินดีต้อนรับเข้าสู่เว็บไซต์</h1>
             <h1 class="text-white">พร้อมฝาก</h1>
         </div>
-</div>
-<section class="home" id="home">
+    </section>
+    @* </section> *@
+    <section class="home vh-100" id="section1">
         <div class="home-text">
             <h1>บริการ รับ/ฝาก ซื้ออาหาร</h1>
             <h2>หิวเมื่อไหร่ก็แวะมา <br> มีคนรอ รับ/ฝาก อยู่ตลอด</h2>
             <a href="#" class="btn">ลงชื่อเข้าใช้</a>
         </div>
-
         <div class="home-img">
             <img src="https://www.recipetineats.com/wp-content/uploads/2020/05/Pepperoni-Pizza_5-SQjpg.jpg" alt="pizza">
 
@@ -27,7 +28,7 @@
     </section>
 
     <!-------about start------->
-    <section class="about" id="about">
+    <section class="about vh-100" id="section3">
         <div class="about-img">
             <img src="https://media.tenor.com/v99j-aduTkgAAAAd/mr-incredible.gif" alt="member">
         </div>
@@ -35,13 +36,19 @@
         <div class="about-text">
             <span>About Us</span>
             <h2>เว็บไซต์สำหรับ รับ/ฝาก ซื้ออาหาร <br> จากโรงอาหารพระเทพ</h2>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque porttitor aliquet urna, sed molestie massa varius eget. Praesent faucibus et elit sed consectetur. Sed nulla odio, fermentum sed elit blandit, luctus tincidunt mi. Duis porttitor odio ut mattis eleifend. In luctus risus vitae sem viverra interdum. Proin consequat elit sed turpis feugiat, ac eleifend quam aliquam. Vivamus aliquam massa lacus, at rhoncus dui tempus a. Integer tincidunt ipsum lectus, nec convallis justo hendrerit sed. Vestibulum pretium nulla justo, ac blandit sapien commodo id. Proin consectetur lorem eget purus aliquam, sed sollicitudin sapien pharetra.</p>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque porttitor aliquet urna, sed molestie
+                massa varius eget. Praesent faucibus et elit sed consectetur. Sed nulla odio, fermentum sed elit
+                blandit, luctus tincidunt mi. Duis porttitor odio ut mattis eleifend. In luctus risus vitae sem viverra
+                interdum. Proin consequat elit sed turpis feugiat, ac eleifend quam aliquam. Vivamus aliquam massa
+                lacus, at rhoncus dui tempus a. Integer tincidunt ipsum lectus, nec convallis justo hendrerit sed.
+                Vestibulum pretium nulla justo, ac blandit sapien commodo id. Proin consectetur lorem eget purus
+                aliquam, sed sollicitudin sapien pharetra.</p>
             <a href="#" class="btn">สมัครเข้าใช้งาน</a>
         </div>
     </section>
 
     <!-------member start------->
-    <section class="member" id="member">
+    <section class="member vh-100" id="section4">
         <div class="heading">
             <h3>Member</h3>
         </div>
@@ -79,4 +86,4 @@
             </div>
         </div>
     </section>
-</div>
+</main>
