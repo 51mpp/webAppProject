@@ -13,7 +13,7 @@ For more information on enabling MVC for empty projects, visit https://go.micros
 <link rel="stylesheet" href="~/css/post.css">
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 @*<script
-    src="https://cdnjs.cloudflare.com/ajax/libs/jquery-ajax-unobtrusive/3.2.6/jquery.unobtrusive-ajax.min.js"></script>*@
+src="https://cdnjs.cloudflare.com/ajax/libs/jquery-ajax-unobtrusive/3.2.6/jquery.unobtrusive-ajax.min.js"></script>*@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai:wght@500&display=swap" rel="stylesheet">
@@ -53,7 +53,7 @@ For more information on enabling MVC for empty projects, visit https://go.micros
                             </div>
                         </div>
                     }
-                    
+
                     <div class="card-body">
                         <small class="position-absolute top-0 start-1" style="margin-top: 5px;color: grey">
                             @{
@@ -176,7 +176,7 @@ For more information on enabling MVC for empty projects, visit https://go.micros
                                                     </span>
                                                     <small onclick="showQR(Image-@comment.Id-comment,2)">แสกนจ่าย</small>A
                                                     <div class="QRcode w-20 h-35">
-                                                        <img id="Image-@comment.Id-comment" src="@comment.Image" alt="" >
+                                                        <img id="Image-@comment.Id-comment" src="@comment.Image" alt="">
                                                     </div>
                                                 </div>
                                             </div>
@@ -192,53 +192,57 @@ For more information on enabling MVC for empty projects, visit https://go.micros
                             }
                         </div>
                         <hr>
-                        <div class="comment" onclick="showComment(@item.Id@item.Id@item.Id,@item.Comments.Count,@item.MaxComment,1  )">
+                        <div class="comment"
+                            onclick="showComment(@item.Id@item.Id@item.Id,@item.Comments.Count,@item.MaxComment,1  )">
                             ฝากซื้อหน่อย
                         </div>
-                        
+
                         <div id="postComment">
                             <div class="form-group row" id="@item.Id@item.Id@item.Id" style="display: none;">
-                                <form asp-controller="MainPose" asp-action="CreateComment" method="post"  enctype="multipart/form-data">
+                                <form asp-controller="MainPose" asp-action="CreateComment" method="post"
+                                    enctype="multipart/form-data">
                                     <input type="hidden" name="mainPoseId" value="@item.Id" />
                                     <div class="form-group">
-                                        <label for="first-name">First Name</label>
+                                        <label for="first-name">ชื่อ</label>
                                         <input type="text" id="first-name" name="FirstName" class="form-control" required />
                                     </div>
                                     <div class="form-group">
-                                        <label for="last-name">Last Name</label>
+                                        <label for="last-name">นามสกุล</label>
                                         <input type="text" id="last-name" name="LastName" class="form-control" required />
                                     </div>
                                     <div class="form-group">
-                                        <label for="comment-text">Comment Text</label>
+                                        <label for="comment-text">รายละเอียด</label>
                                         <textarea id="comment-text" name="CommentText" class="form-control"
                                             required></textarea>
                                     </div>
                                     <div class="form-group">
-                                        <label for="Image2">QR code</label>
-                                        <input id="Image2" name="image2" type="file" class="form-control" placeholder="เลือกไฟล์">
+                                        <label for="Image2">หลักฐานการชำระเงิน</label>
+                                        <input id="Image2" name="image2" type="file" class="form-control"
+                                            placeholder="เลือกไฟล์">
                                     </div>
                                     <button type="submit" class="btn btn-primary">Submit</button>
                                 </form>
                             </div>
                             @*<div class="form-group row" id="@item.Id@item.Id@item.Id" style="display: none;">
-                                <form id="comment-form-@item.Id" asp-controller="MainPose" asp-action="CreateCommentByAjax" data-pose-id="@item.Id">
-                                    <input type="hidden" name="mainPoseId" value="@item.Id" />
-                                    <div class="form-group">
-                                        <label for="first-name">First Name</label>
-                                        <input type="text" id="first-name" name="FirstName" class="form-control" required />
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="last-name">Last Name</label>
-                                        <input type="text" id="last-name" name="LastName" class="form-control" required />
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="comment-text">Comment Text</label>
-                                        <textarea id="comment-text" name="CommentText" class="form-control"
-                                                  required></textarea>
-                                    </div>
-                                    <button type="button" id="submit-comment-@item.Id" class="btn btn-primary">Submit</button>
-                                </form>
-                            </div>*@
+                        <form id="comment-form-@item.Id" asp-controller="MainPose" asp-action="CreateCommentByAjax"
+                        data-pose-id="@item.Id">
+                        <input type="hidden" name="mainPoseId" value="@item.Id" />
+                        <div class="form-group">
+                        <label for="first-name">First Name</label>
+                        <input type="text" id="first-name" name="FirstName" class="form-control" required />
+                        </div>
+                        <div class="form-group">
+                        <label for="last-name">Last Name</label>
+                        <input type="text" id="last-name" name="LastName" class="form-control" required />
+                        </div>
+                        <div class="form-group">
+                        <label for="comment-text">Comment Text</label>
+                        <textarea id="comment-text" name="CommentText" class="form-control"
+                        required></textarea>
+                        </div>
+                        <button type="button" id="submit-comment-@item.Id" class="btn btn-primary">Submit</button>
+                        </form>
+                        </div>*@
                         </div>
                     </div>
                 </div>
@@ -283,39 +287,39 @@ For more information on enabling MVC for empty projects, visit https://go.micros
                     });
 
 
-                }@*
+                } @*
                 $(function () {
-                    $('#submit-comment-@item.Id').click(function () {
-                        var form = $('#comment-form-@item.Id');
-                        var poseId = form.data('pose-id');
-                        $.ajax({
-                            url: form.attr('action'),
-                            type: form.attr('method'),
-                            data: form.serialize(),
-                            success: function (result) {
-                                if (result.success) {
-                                    // Comment added successfully, update the UI
-                                    var comment = result.comment;
-                                    var html = '<div class="card"><div class="card-body"><h5 class="card-title">' + comment.firstName + ' ' + comment.lastName + '</h5><p class="card-text">' + comment.commentText + '</p></div></div>';
-                                    $('#comment-section-' + poseId).append(html);
-                                    form[0].reset();
-                                } else {
-                                    // Comment failed, show error messages
-                                    $.each(result.errors, function (key, value) {
-                                        $('#' + key + '-error').html(value.join('<br>'));
-                                    });
-                                }
-                            },
-                            error: function () {
-                                // Handle error
-                            }
-                        });
-                    });
+                $('#submit-comment-@item.Id').click(function () {
+                var form = $('#comment-form-@item.Id');
+                var poseId = form.data('pose-id');
+                $.ajax({
+                url: form.attr('action'),
+                type: form.attr('method'),
+                data: form.serialize(),
+                success: function (result) {
+                if (result.success) {
+                // Comment added successfully, update the UI
+                var comment = result.comment;
+                var html = '<div class="card"><div class="card-body"><h5 class="card-title">' + comment.firstName + ' ' + comment.lastName + '</h5><p class="card-text">' + comment.commentText + '</p></div></div>';
+                $('#comment-section-' + poseId).append(html);
+                form[0].reset();
+                } else {
+                // Comment failed, show error messages
+                $.each(result.errors, function (key, value) {
+                $('#' + key + '-error').html(value.join('<br>'));
+                });
+                }
+                },
+                error: function () {
+                // Handle error
+                }
+                });
+                });
                 });*@
-                // Call loadComments every 1 seconds
-                setInterval(function () {
-                    loadComments(@item.Id);`
-                }, 1000);
+                    // Call loadComments every 1 seconds
+                    setInterval(function () {
+                        loadComments(@item.Id);`
+                    }, 1000);
             </script>
         }
     </div>
