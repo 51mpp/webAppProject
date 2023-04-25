@@ -9,38 +9,34 @@
 <link rel="stylesheet" href="~/css/login.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"> 
 
-<div id="container" class="container">
+<div class="contain">
     <div class="row">
-        <div class="image-container col-12 col-md-8">
-            
+    <div class="empty col-12 col-md-8"></div>
+    <div class="signin-container shadow  rounded col-12 col-md-4">
+    @if(TempData["Error"] != null)
+    {
+        <div class="col-md-12 alert alert-danger">
+            <span><b>Sorry!</b> - @TempData["Error"]</span>
         </div>
- 
-        <div class="signin-container col-12 col-md-4 px-5 ">
-            @if(TempData["Error"] != null)
-            {
-                <div class="col-md-12 alert alert-danger">
-                    <span><b>Sorry!</b> - @TempData["Error"]</span>
-                </div>
-            }
-            <h1>Sign In</h1>
-            <form asp-action="Login">
-                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                <div class="form-group">
-                    <label asp-for="EmailAddress" class="control-label"></label>
-                    <input asp-for="EmailAddress" class="form-control">
-                    <span asp-validation-for="EmailAddress" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="Password" class="control-label"></label>
-                    <input asp-for="Password" class="form-control" />
-                    <span asp-validation-for="Password" class="text-danger"></span>
-                </div>
-                <button type="submit">Sign In</button>
-            </form>
-            <div class="signup-link">
-                <p>ยังไม่มีบัญชีผู้ใช้งาน? <a asp-controller="Account"asp-action="Register">สมัครเลย</a></p>
+    }
+        <h1>Sign In</h1>
+        <form asp-action="Login">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="EmailAddress" class="control-label"></label>
+                <input asp-for="EmailAddress" class="form-control">
+                <span asp-validation-for="EmailAddress" class="text-danger"></span>
             </div>
-        
+            <div class="form-group">
+                <label asp-for="Password" class="control-label"></label>
+                <input asp-for="Password" class="form-control" />
+                <span asp-validation-for="Password" class="text-danger"></span>
+            </div>
+            <button type="submit">Sign In</button>
+        </form>
+        <div class="signup-link">
+            <p>ยังไม่มีบัญชีผู้ใช้งาน? <a asp-controller="Account"asp-action="Register">สมัครเลย</a> </p>
         </div>
+    </div>
     </div>
 </div>
