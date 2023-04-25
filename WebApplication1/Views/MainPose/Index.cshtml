@@ -162,6 +162,7 @@ src="https://cdnjs.cloudflare.com/ajax/libs/jquery-ajax-unobtrusive/3.2.6/jquery
                             </span>
 
                         </div>
+
                         <div id="post-@item.Id-comments">
                             @foreach (var comment in @item.Comments)
                             {
@@ -170,13 +171,17 @@ src="https://cdnjs.cloudflare.com/ajax/libs/jquery-ajax-unobtrusive/3.2.6/jquery
                                         <div class="card p-3 shadow-sm">
                                             <div class="d-flex justify-content-between align-items-center">
                                                 <div class="user d-flex flex-row align-items-center">
-                                                    <span>
-                                                        <small style="color: rgb(76, 158, 80);">@comment.FirstName</small>
-                                                        <small class="font-weight-bold">@comment.CommentText</small>
-                                                    </span>
-                                                    <small onclick="showQR(Image-@comment.Id-comment,2)">แสกนจ่าย</small>A
-                                                    <div class="QRcode w-20 h-35">
-                                                        <img id="Image-@comment.Id-comment" src="@comment.Image" alt="">
+                                                    <div class="row">
+                                                        <div class="col-3">
+                                                            <small style="color: rgb(76, 158, 80);">@comment.FirstName</small>
+                                                        </div>
+                                                        <div class="col-9">
+                                                            <small class="font-weight-bold">@comment.CommentText</small>
+                                                        </div>
+                                                        <div></div>
+                                                        <div class="slip">
+                                                            <img id="Image-@comment.Id-comment" src="@comment.Image" alt="">
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -191,6 +196,7 @@ src="https://cdnjs.cloudflare.com/ajax/libs/jquery-ajax-unobtrusive/3.2.6/jquery
                                 </div>
                             }
                         </div>
+                        
                         <hr>
                         <div class="comment"
                             onclick="showComment(@item.Id@item.Id@item.Id,@item.Comments.Count,@item.MaxComment,1  )">
@@ -319,7 +325,7 @@ src="https://cdnjs.cloudflare.com/ajax/libs/jquery-ajax-unobtrusive/3.2.6/jquery
                     // Call loadComments every 1 seconds
                     setInterval(function () {
                         loadComments(@item.Id);`
-                    }, 1000);
+                                                                                    }, 1000);
             </script>
         }
     </div>
