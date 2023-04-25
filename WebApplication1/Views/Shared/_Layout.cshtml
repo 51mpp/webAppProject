@@ -74,17 +74,18 @@
                             <a class="nav-link " asp-area="" asp-controller="Home" asp-action="Index"
                                 id="l01">หน้าหลัก</a>
                         </li>
-                        <li class="nav-item" id="li02">
-                            <a class="nav-link" asp-area="" asp-controller="MainPose" asp-action="" id="l02">รับฝาก</a>
-                        </li>
-
-                        <li class="nav-item" id="li03">
-                            <a class="nav-link" asp-area="" asp-controller="Deposit" asp-action="" id="103">ฝากซื้อ</a>
-                        </li>
                         @if (User.Identity.IsAuthenticated)
                         {
+                            <li class="nav-item" id="li02">
+                                <a class="nav-link" asp-area="" asp-controller="MainPose" asp-action="" id="l02">รับฝาก</a>
+                            </li>
+
+                            <li class="nav-item" id="li03">
+                                <a class="nav-link" asp-area="" asp-controller="Deposit" asp-action="" id="103">ฝากซื้อ</a>
+                            </li>
+                        
                             <li class="nav-item" id='li05'>
-                                <a class="nav-link " asp-area="" asp-controller="Account" asp-action="Dashboard"
+                                <a class="nav-link " asp-area="" asp-controller="Dashboard" asp-action="Index"
                                     id='l05'>ผู้ใช้งาน</a>
                             </li>
                             <li class="nav-item">

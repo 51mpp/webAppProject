@@ -2,17 +2,24 @@
 @inject SignInManager<AppUser> SignInManager
 @using System.Globalization;
 
-@* @model WebApplication1.ViewModels.DashboardViewModel *@
+@model WebApplication1.ViewModels.DashboardVM
+
+<link rel="stylesheet" href="~/css/post.css">
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai:wght@500&display=swap" rel="stylesheet">
+
+<script src="~/js/post.js"></script>
 
 <h1 class="display-5 fw-normal">User Dashboard</h1>
-
 <div class="album py-2 justify-content-center">  @*bg-light *@
     <a asp-controller="MainPose" asp-action="CreateMainPose" class="btn btn-primary btn-lg float-end">New Post</a>
     <div class="container bg-light">
         <h2 class="display-6 fw-normal">Your Post</h2>
         <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
 
-            @foreach (var item in Model.Item1.Reverse())
+            @foreach (var item in Model.MainPoses) @*.Reverse()*@
             {
                 @* info section *@
 
@@ -186,36 +193,9 @@
 
                                 }, 1000);
                             </script>
-
+                            
                             <hr>
 
-                            <div class="comment"
-                                onclick="showComment(@item.Id@item.Id@item.Id,@item.Comments.Count,@item.MaxComment,1)">
-                                ฝากซื้อหน่อย
-                            </div>
-                            <div id="postComment">
-                                <div class="form-group row" id="@item.Id@item.Id@item.Id" style="display: none;">
-                                    <form asp-controller="MainPose" asp-action="CreateComment" method="post">
-                                        <input type="hidden" name="mainPoseId" value="@item.Id" />
-
-                                        <div class="form-group">
-                                            <label for="first-name">First Name</label>
-                                            <input type="text" id="first-name" name="FirstName" class="form-control" required />
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="last-name">Last Name</label>
-                                            <input type="text" id="last-name" name="LastName" class="form-control" required />
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="comment-text">Comment Text</label>
-                                            <textarea id="comment-text" name="CommentText" class="form-control"
-                                                required></textarea>
-                                        </div>
-                                        <button type="submit" class="btn btn-primary">Submit</button>
-                                    </form>
-
-                                </div>
-                            </div>
                         </div>
                     </div>
                 </div>

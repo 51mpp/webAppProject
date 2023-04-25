@@ -17,8 +17,8 @@ namespace WebApplication1.Repository
         }
         public async Task<List<MainPose>> GetAllUserMainPose()
         {
-            var curUser = _httpContextAccessor.HttpContext?.User;
-            var userMainPoses = _context.MainPoses.Where(r => r.AppUser.Id == curUser.ToString());
+            var curUser = _httpContextAccessor.HttpContext?.User.GetUserId();
+            var userMainPoses = _context.MainPoses.Where(r => r.AppUser.Id == curUser);
             return userMainPoses.ToList();
         }
 
