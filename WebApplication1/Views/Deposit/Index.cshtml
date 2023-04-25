@@ -18,21 +18,24 @@
         {
             <div id="postBox" class="col-sm-12 col-lg-5 col-xl-4 ">
                 <div id="box" class="card mb-4 box-shadow position-relative">
-                    <div class="editPost row flex-row-reverse position-absolute top-0 end-0">
-                        <div class="col-7">
-                            <form asp-controller="Deposit" asp-action="DeleteDeposit" method="post">
-                                <input type="hidden" name="depositId" value="@item.Id" />
-                                <button type="submit" class="remove">
-                                    <img src="https://cdn-icons-png.flaticon.com/512/189/189690.png" alt="">
-                                </button>
-                            </form>
+                    @if (User.Identity.IsAuthenticated && User.IsInRole("admin")) 
+                    {
+                        <div class="editPost row flex-row-reverse position-absolute top-0 end-0">
+                            <div class="col-7">
+                                <form asp-controller="Deposit" asp-action="DeleteDeposit" method="post">
+                                    <input type="hidden" name="depositId" value="@item.Id" />
+                                    <button type="submit" class="remove">
+                                        <img src="https://cdn-icons-png.flaticon.com/512/189/189690.png" alt="">
+                                    </button>
+                                </form>
+                            </div>
+                            <div class="col-4">
+                                <a a asp-controller="Deposit" asp-action="EditDeposit" asp-route-id="@item.Id" class="edit">
+                                    <img src="https://cdn-icons-png.flaticon.com/512/3597/3597075.png" alt="">
+                                </a>
+                            </div>
                         </div>
-                        <div class="col-4">
-                            <a asp-controller="Deposit" asp-action="EditDeposit" asp-route-id="@item.Id" class="edit">
-                                <img src="https://cdn-icons-png.flaticon.com/512/3597/3597075.png" alt="">
-                            </a>
-                        </div>
-                    </div>
+                    }
                     <div class="card-body">
                         <small class="position-absolute top-0 start-1" style="margin-top: 0px;color: grey">
                             @{
