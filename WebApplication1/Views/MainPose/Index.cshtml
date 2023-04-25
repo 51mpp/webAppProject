@@ -179,7 +179,7 @@ src="https://cdnjs.cloudflare.com/ajax/libs/jquery-ajax-unobtrusive/3.2.6/jquery
                                                             <small class="font-weight-bold">@comment.CommentText</small>
                                                         </div>
                                                         <div></div>
-                                                        <div class="slip">
+                                                        <div class="slip col-8">
                                                             <img id="Image-@comment.Id-comment" src="@comment.Image" alt="">
                                                         </div>
                                                     </div>
@@ -196,7 +196,7 @@ src="https://cdnjs.cloudflare.com/ajax/libs/jquery-ajax-unobtrusive/3.2.6/jquery
                                 </div>
                             }
                         </div>
-                        
+
                         <hr>
                         <div class="comment"
                             onclick="showComment(@item.Id@item.Id@item.Id,@item.Comments.Count,@item.MaxComment,1  )">
@@ -325,7 +325,7 @@ src="https://cdnjs.cloudflare.com/ajax/libs/jquery-ajax-unobtrusive/3.2.6/jquery
                     // Call loadComments every 1 seconds
                     setInterval(function () {
                         loadComments(@item.Id);`
-                                                                                    }, 1000);
+                                                                                            }, 1000);
             </script>
         }
     </div>
