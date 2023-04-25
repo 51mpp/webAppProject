@@ -11,6 +11,7 @@
 
 <div class="box container h-200 d-flex align-items-center justify-content-center">
     <form method="post" asp-action="CreateDeposit">
+        <input type="hidden" id="AppUserId" name="AppUserId" asp-for="AppUserId"/>
         <div class="row">
             <div class="col-md-6 col-sm-12 form-group">
                 <label asp-for="FirstName">ชื่อ</label>

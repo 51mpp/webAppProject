@@ -22,5 +22,12 @@ namespace WebApplication1.Repository
             return userMainPoses.ToList();
         }
 
+        public async Task<List<Deposit>> GetAllUserDeposit()
+        {
+            var curUser = _httpContextAccessor.HttpContext?.User.GetUserId();
+            var userDeposits = _context.Deposits.Where(r => r.AppUser.Id == curUser);
+            return userDeposits.ToList();
+        }
+
     }
 }
