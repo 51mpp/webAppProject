@@ -1,4 +1,12 @@
 
+
+body{
+    height: 100vh;
+}
+.empty{
+    background-color: rgba(red, green, blue, 0);
+    height: 100%;
+}
 div button {
     background-color: #007bff;
     color: white;
@@ -11,6 +19,9 @@ div button {
     margin-top: 10px;
 }
 
+.contain .row{
+    height: 100% ;
+}
 
 .contain{
     width: 100%;
@@ -31,13 +42,16 @@ div button {
     object-fit: cover;
 }
 
-.signin-container {
+.contain .row .signin-container{
+    height: 100vh;
     padding: 60px;
     display: flex;
     flex-direction: column;
     justify-content: center;
     /* box-shadow: 0 0 10px rgba(0, 0, 0, 0.15); */
+    background-color: rgba(red, green, blue, 0) !important;
 }
+
 
 h1 {
     font-size: 50px;

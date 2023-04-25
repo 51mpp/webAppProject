@@ -19,9 +19,11 @@ namespace WebApplication1.Controllers
         public async Task<IActionResult> Index()
         {
             var userMainPoses = await _dashboardRepository.GetAllUserMainPose();
+            var userDeposits = await _dashboardRepository.GetAllUserDeposit();
             var dashboardVM = new DashboardVM()
             {
-                MainPoses = userMainPoses
+                MainPoses = userMainPoses,
+                Deposites = userDeposits
             };
             return View(dashboardVM);
         }
