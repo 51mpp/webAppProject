@@ -174,10 +174,20 @@ For more information on enabling MVC for empty projects, visit https://go.micros
                                                         <small style="color: rgb(76, 158, 80);">@comment.FirstName</small>
                                                         <small class="font-weight-bold">@comment.CommentText</small>
                                                     </span>
+                                                    <small onclick="showQR(Image-@comment.Id-comment,2)">แสกนจ่าย</small>A
+                                                    <div class="QRcode w-20 h-35">
+                                                        <img id="Image-@comment.Id-comment" src="@comment.Image" alt="" >
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
+                                    <form asp-controller="MainPose" asp-action="DeleteComment" method="post">
+                                        <input type="hidden" name="commentId" value="@comment.Id" />
+                                        <button type="submit" class="remove">
+                                            <img src="https://cdn-icons-png.flaticon.com/512/189/189690.png" alt="">
+                                        </button>
+                                    </form>
                                 </div>
                             }
                         </div>
@@ -188,7 +198,7 @@ For more information on enabling MVC for empty projects, visit https://go.micros
                         
                         <div id="postComment">
                             <div class="form-group row" id="@item.Id@item.Id@item.Id" style="display: none;">
-                                <form asp-controller="MainPose" asp-action="CreateComment" method="post">
+                                <form asp-controller="MainPose" asp-action="CreateComment" method="post"  enctype="multipart/form-data">
                                     <input type="hidden" name="mainPoseId" value="@item.Id" />
                                     <div class="form-group">
                                         <label for="first-name">First Name</label>
@@ -202,6 +212,10 @@ For more information on enabling MVC for empty projects, visit https://go.micros
                                         <label for="comment-text">Comment Text</label>
                                         <textarea id="comment-text" name="CommentText" class="form-control"
                                             required></textarea>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="Image2">QR code</label>
+                                        <input id="Image2" name="image2" type="file" class="form-control" placeholder="เลือกไฟล์">
                                     </div>
                                     <button type="submit" class="btn btn-primary">Submit</button>
                                 </form>
@@ -300,9 +314,7 @@ For more information on enabling MVC for empty projects, visit https://go.micros
                 });*@
                 // Call loadComments every 1 seconds
                 setInterval(function () {
-                    loadComments(@item.Id);
-                    showComment();
-
+                    loadComments(@item.Id);`
                 }, 1000);
             </script>
         }

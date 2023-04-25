@@ -11,9 +11,9 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai:wght@500&display=swap" rel="stylesheet">
 
-<div class="container-fluid">
+<div class="container-fluid" id="CT">
     <div class="row">
-        <a asp-action="CreateDeposit" class="btn btn-primary btn-lg float-end">ฝากซื้อ</a>
+        <a asp-action="CreateDeposit" class="btn btn-primary btn-lg float-end" id="depositing">ฝากซื้อ</a>
         @foreach (var item in Model.Item1.Reverse())
         {
             <div id="postBox" class="col-sm-12 col-lg-5 col-xl-4 ">
@@ -99,18 +99,90 @@
                                     <span>เอามาส่งที่ไหน : @item.PlaceDeliver</span>
                                 </div>
                                 <div class="col-12" style="margin-top:5px;">
-                                    <span>เอามาส่งเมื่อไร : @item.MaxTimePose</span>
+                                    <span>รับฝากได้ตั้งแต่ : @{
+                                            string b = item.CreatedTime.ToString("HH:mm น.", new CultureInfo("th-TH"));
+                                            b += " - " + item.CreatedTime.AddMinutes(item.MaxTimePose.Value).ToString("HH:mm น.", new
+                                            CultureInfo("th-TH"));
+                                        }@b
+                                    </span>
                                 </div>
                             </div>
-                            <div class="accept" onclick="">
+                            <div id="post-@item.Id-comments">
+                                @if (item.CommentDeposits.Any())
+                                {
+                                    <div class="row">
+                                    <div class="order_box">
+                                        <div class="card p-3 shadow-sm">
+                                            <div class="d-flex justify-content-between align-items-center">
+                                                <div class="user d-flex flex-row align-items-center">
+                                                    <span>
+                                                        <small style="color: rgb(76, 158, 80);">@item.CommentDeposits.First().FirstName</small>
+                                                        <small class="font-weight-bold">@item.CommentDeposits.First().CommentText</small>
+                                                    </span>
+                                                    <small onclick="showQR(Image-@item.CommentDeposits.First().Id-comment,2)">แสกนจ่าย</small>A
+                                                    <div class="QRcode w-20 h-35">
+                                                        <img id="Image-@item.CommentDeposits.First().Id-comment" src="@item.CommentDeposits.First().Image" alt="">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <form asp-controller="Deposit" asp-action="DeleteComment" method="post">
+                                        <input type="hidden" name="depositId" value="@item.CommentDeposits.First().Id" />
+                                        <button type="submit" class="remove">
+                                            <img src="https://cdn-icons-png.flaticon.com/512/189/189690.png" alt="">
+                                        </button>
+                                    </form>
+                                </div>
+                                }
+                                
+                            </div>
+                            <hr>
+                            <div class="accept" onclick="showComment(@item.Id@item.Id)">
                                 เดี๋ยวไปซื้อให้
                             </div>
+                            <div id="postComment">
+                                <div id="@item.Id@item.Id" class="form-group row" style="display: none;">
+                                    <form asp-controller="Deposit" asp-action="CreateComment" method="post" enctype="multipart/form-data">
+                                        <input type="hidden" name="depositId" value="@item.Id" />
+                                        <div class="form-group">
+                                            <label for="first-name">ชื่อ</label>
+                                            <input type="text" id="first-name" name="FirstName" class="form-control" required />
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="last-name">นามสกุล</label>
+                                            <input type="text" id="last-name" name="LastName" class="form-control" required />
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="comment-text">รายละเอียด</label>
+                                            <textarea id="comment-text" name="CommentText" class="form-control"
+                                                required></textarea>
+                                        </div>
+                                        <div>
+                                            <label for="payment">ช่องทางการชำระเงิน</label>
+                                            <input type="file" class="form-control" name="image" id="payment" placeholder="เลือกไฟล์">
+                                        </div>
+                                        
+                                        <button type="submit" class="btn btn-primary">Submit</button>
+                                    </form>
+                                </div>
+                            </div>
+                            <script>
+                                function showComment(id){
+                                    console.log("click");
+                                    if(document.getElementById(id).style.display === "none"){
+                                        document.getElementById(id).style.display = "block";
+                                    }else{
+                                        document.getElementById(id).style.display = "none";
+                                    }
+                                }
+                            </script>
                         </div>
 
                     </div>
                 </div>
             </div>
         }
-        
+
     </div>
 </div>

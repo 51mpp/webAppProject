@@ -1,10 +1,25 @@
+#CT {
+    /* background-color: #F2B350; */
+    background-color: rgb(253, 201, 89);
+    border-radius: 0px 0px 50px 50px;
+
+}
+
+#depositing {
+    background-color: #511D1B;
+}
+
+#depositing:hover {
+    background-color: #86373E;
+}
+
 #postBox {
     padding: 20px;
 }
 
 #box {
     padding: 5px;
-    border: 3px solid #167019;
+    border: 3px solid #AA9894;
     border-radius: 15px;
 }
 
@@ -18,14 +33,15 @@
 .accept {
     text-align: center;
     cursor: pointer;
-    background-color: #F09711;
+    background-color: #511D1B;
     color: rgb(255, 255, 255);
     border-radius: 10px;
+    margin-top: 10px;
 }
 
 .accept:hover {
     transform: scale(1.05, 1.1);
-    background-color: #eeb35b;
+    background-color: #86373E;
 
 }
 

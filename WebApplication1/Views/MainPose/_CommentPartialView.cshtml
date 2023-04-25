@@ -14,11 +14,23 @@
                         <span>
                             <small style="color: rgb(76, 158, 80);">@comment.FirstName</small>
                             <small class="font-weight-bold">@comment.CommentText</small>
+
+
                         </span>
+                        <small onclick="showQR(Image-@comment.Id-comment,2)">แสกนจ่าย</small>A
+                        <div class="QRcode w-10 h-15">
+                            <img id="Image-@comment.Id-comment" src="@comment.Image" alt="">
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
+        <form asp-controller="MainPose" asp-action="DeleteComment" method="post">
+            <input type="hidden" name="commentId" value="@comment.Id" />
+            <button type="submit" class="remove">
+                <img src="https://cdn-icons-png.flaticon.com/512/189/189690.png" alt="">
+            </button>
+        </form>
     </div>
 
 }

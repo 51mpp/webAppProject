@@ -1,5 +1,10 @@
 ﻿/* Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
 for details on configuring this project to bundle and minify static web assets. */
+#welcome {
+
+  padding: 30px;
+  font-family: 'Mitr', sans-serif;
+}
 
 a.navbar-brand {
   white-space: normal;
@@ -43,10 +48,10 @@ button.accept-policy {
 
 #footer {
   position: absolute;
-  /* bottom: 0;
+  bottom: 0;
   width: 100%;
   white-space: nowrap;
-  line-height: 60px; */
+
 }
 
 #footer p {
@@ -86,12 +91,21 @@ button.accept-policy {
 }
 
 #WC {
-  font-family: 'Mitr', sans-serif;
+  color: rgb(255, 162, 0);
+  /* filter: drop-shadow(8px 5px 4px black); */
+
 }
 
 @media (max-width:720px) {
   #WC {
-    color: white;
+    color: rgb(255, 162, 0);
+  }
+
+  .banner-image {
+    /*background-image: url('https://img.freepik.com/free-photo/chicken-wings-barbecue-sweetly-sour-sauce-picnic-summer-menu-tasty-food-top-view-flat-lay_2829-6471.jpg?w=2000') !important;
+    */
+    background-image: url('https://media.discordapp.net/attachments/905446050347761714/1097545282960494612/d36d462db827833805497d9ea78a1343.jpg');
+    background-size: cover;
   }
 
 }

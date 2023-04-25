@@ -118,6 +118,10 @@ namespace WebApplication1.Controllers
                 var result = await _photoService.AddPhotoAsync(mainPoseVM.Image);
                 imageUrl = result.Url.ToString();
             }
+            else
+            {
+                imageUrl = mainPoseVM.URLImage;
+            }
             if (!string.IsNullOrEmpty(post.Image))
             {
                 _ = _photoService.DeletePhotoAsync(post.Image); // ไม่สนใจรีเทิน
@@ -159,11 +163,18 @@ namespace WebApplication1.Controllers
             return PartialView("_CommentPartialView", comments);
         }
         [HttpPost]
-        public async Task<IActionResult> CreateComment(int mainPoseId, string CommentText, string FirstName, string LastName)
+        public async Task<IActionResult> CreateComment(int mainPoseId, string CommentText, string FirstName, string LastName,IFormFile? image2)
         {
             MainPose mainPose = await _mainPoseRepository.GetByIdAsync(mainPoseId);
+            
             if (ModelState.IsValid)
             {
+                string imageUrl = "";
+                if (image2 != null)
+                {
+                    var result = await _photoService.AddPhotoCommentAsync(image2);
+                    imageUrl = result.Url.ToString();
+                }
                 string comText = "";
                 string firstName = "";
                 string lastName = "";
@@ -179,7 +190,8 @@ namespace WebApplication1.Controllers
                     MainPoseId = mainPoseId,
                     CommentText = comText,
                     FirstName = firstName,
-                    LastName = lastName
+                    LastName = lastName,
+                    Image = imageUrl
                 };
                 await _mainPoseRepository.AddComment(comment);
                 return RedirectToAction("");
@@ -188,19 +200,19 @@ namespace WebApplication1.Controllers
             {
                 ModelState.AddModelError("", "Comment Failed");
             }
-            /*if (mainPose == null)
-            {
-                return NotFound();
-            }*/
-            /* Comment comment = new Comment
-             {
-                 MainPoseId = mainPoseId,
-                 CommentText = commentText
-             };
-             await _mainPoseRepository.AddComment(comment);
-             return RedirectToAction("");*/
-            /*return RedirectToAction("");*/
             return RedirectToAction(nameof(Index));
+        }
+        [HttpPost]
+        public async Task<IActionResult> DeleteComment(int commentId)
+        {
+            var post = await _mainPoseRepository.GetCommentEachByIdAsync(commentId);
+            if (post == null) { return View("Error"); }
+            if (!string.IsNullOrEmpty(post.Image))
+            {
+                _ = _photoService.DeletePhotoAsync(post.Image); // ไม่สนใจรีเทิน
+            }
+            _mainPoseRepository.DeleteCommentEach(post);
+            return RedirectToAction("");
         }
         [HttpGet]
         public async Task<IActionResult> CountComments(int mainPoseId)

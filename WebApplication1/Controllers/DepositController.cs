@@ -8,6 +8,7 @@ using WebApplication1.Models;
 using WebApplication1.Repository;
 using WebApplication1.Services;
 using WebApplication1.ViewModels;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace WebApplication1.Controllers
 {
@@ -92,8 +93,8 @@ namespace WebApplication1.Controllers
         {
             if (!ModelState.IsValid)
             {
-                ModelState.AddModelError("", "Fail to edit mainPose");
-                return View("EditMainPose", depositVM);
+                ModelState.AddModelError("", "Fail to edit EditDepositPose");
+                return View("EditDeposit", depositVM);
             }
             var post = await _depositRepository.GetByIdAsyncNoTracking(id);
             if (post == null)
@@ -107,6 +108,8 @@ namespace WebApplication1.Controllers
                 LastName = depositVM.LastName,
                 Phone = depositVM.Phone,
                 Place = depositVM.Place,
+                Food = depositVM.Food,
+                PlaceDeliver = depositVM.PlaceDeliver,
                 CreatedTime = depositVM.CreatedTime,
                 MaxTimePose = depositVM.MaxTimePose,
                 LastModified = DateTime.Now,
@@ -131,7 +134,7 @@ namespace WebApplication1.Controllers
             return PartialView("_CommentDepositPartialView", commentDeposits);
         }
         [HttpPost]
-        public async Task<IActionResult> CreateComment(int depositId, string CommentText, string FirstName, string LastName)
+        public async Task<IActionResult> CreateComment(int depositId, string CommentText, string FirstName, string LastName, IFormFile? image)
         {
             Deposit deposits = await _depositRepository.GetByIdAsync(depositId);
             if (ModelState.IsValid)
@@ -139,6 +142,12 @@ namespace WebApplication1.Controllers
                 string comText = "";
                 string firstName = "";
                 string lastName = "";
+                string imageUrl = "";
+                if (image != null)
+                {
+                    var result = await _photoService.AddPhotoCommentAsync(image);
+                    imageUrl = result.Url.ToString();
+                }
                 if (CommentText != null)
                 {
                     comText = CommentText;
@@ -150,7 +159,8 @@ namespace WebApplication1.Controllers
                     DepositId = depositId,
                     CommentText = comText,
                     FirstName = firstName,
-                    LastName = lastName
+                    LastName = lastName,
+                    Image = imageUrl
                 };
                 await _depositRepository.AddComment(comment);
                 return RedirectToAction("");
@@ -162,7 +172,19 @@ namespace WebApplication1.Controllers
             return RedirectToAction(nameof(Index));
         }
         [HttpPost]
-        public async Task<IActionResult> CreateCommentByAjax(int depositId, string CommentText, string FirstName, string LastName)
+        public async Task<IActionResult> DeleteComment(int depositId)
+        {
+            var post = await _depositRepository.GetCommentEachByIdAsync(depositId);
+            if (post == null) { return View("Error"); }
+            if (!string.IsNullOrEmpty(post.Image))
+            {
+                _ = _photoService.DeletePhotoAsync(post.Image); // ไม่สนใจรีเทิน
+            }
+            _depositRepository.DeleteCommentEach(post);
+            return RedirectToAction("");
+        }
+        [HttpPost]
+        public async Task<IActionResult> CreateCommentByAjax(int? depositId, string CommentText, string FirstName, string LastName)
         {
             if (ModelState.IsValid)
             {

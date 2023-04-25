@@ -24,7 +24,11 @@ namespace WebApplication1.Repository
             _context.Remove(deposit);
             return Save();
         }
-
+        public bool DeleteCommentEach(CommentDeposit commentDeposit)
+        {
+            _context.Remove(commentDeposit);
+            return Save();
+        }
         public async Task<IEnumerable<Deposit>> GetAll()
         {
             return await _context.Deposits.ToListAsync();
@@ -32,6 +36,10 @@ namespace WebApplication1.Repository
         public async Task<IEnumerable<CommentDeposit>> GetCommentsByDepositId(int depositId)
         {
             return await _context.CommentDeposits.Where(c => c.DepositId == depositId).ToListAsync();
+        }
+        public async Task<CommentDeposit> GetCommentEachByIdAsync(int id)
+        {
+            return await _context.CommentDeposits.FirstOrDefaultAsync(i => i.Id == id);
         }
         public async Task<Deposit> GetByIdAsync(int id)
         {
