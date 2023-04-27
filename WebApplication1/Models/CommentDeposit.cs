@@ -15,5 +15,7 @@ namespace WebApplication1.Models
         [ForeignKey("Deposit")]
         public int? DepositId { get; set; }
         public Deposit Deposit { get; set; }
+
+        public string? Email { get; set; }
     }
 }

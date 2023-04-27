@@ -28,6 +28,7 @@ namespace WebApplication1.ViewModels
         public DateTime? LastModified { get; set; }
         /*public CommentViewModel CommentVM { get; set; }*/
         public string AppUserId { get; set; }
+        public string Email { get; set; }
         //public ICollection<Comment> Comments { get; set; }
     }
 }

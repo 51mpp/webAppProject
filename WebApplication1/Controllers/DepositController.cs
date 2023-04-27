@@ -145,7 +145,7 @@ namespace WebApplication1.Controllers
                 string comText = "";
                 string firstName = "";
                 string lastName = "";
-                string imageUrl = "";
+                string imageUrl = null;
                 if (image != null)
                 {
                     var result = await _photoService.AddPhotoCommentAsync(image);
@@ -210,6 +210,12 @@ namespace WebApplication1.Controllers
 
             }
             return Json(new { success = false, errors = ModelState });
+        }
+        [HttpGet]
+        public async Task<IActionResult> GetCommentDeposit(int depositId)
+        {
+            IEnumerable<CommentDeposit> comments = await _depositRepository.GetCommentsByDepositId(depositId);
+            return PartialView("_CommentDepositPartialView", comments);
         }
 
     }

@@ -18,17 +18,14 @@ src="https://cdnjs.cloudflare.com/ajax/libs/jquery-ajax-unobtrusive/3.2.6/jquery
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai:wght@500&display=swap" rel="stylesheet">
 
-
-<script src="~/js/post.js"></script>
-
-
 <div id="CT" class="container-fluid">
 
-    <div class="row">
+    <div class="row" id="testP">
         <a asp-action="CreateMainPose" class="btn btn-primary btn-lg float-end">รับฝาก</a>
 
         @foreach (var item in Model.Item1.Reverse())
         {
+
             @* info section *@
 
             <div id="postBox" class="col-sm-12 col-lg-5 col-xl-4 ">
@@ -36,8 +33,9 @@ src="https://cdnjs.cloudflare.com/ajax/libs/jquery-ajax-unobtrusive/3.2.6/jquery
                 @* Poster'simage *@
 
                 <div id="box" class="card mb-4 box-shadow position-relative">
-                    @if (User.Identity.IsAuthenticated && User.IsInRole("admin"))
-                    {
+
+                    @if (User.Identity.IsAuthenticated && (User.IsInRole("admin") || User.Identity.Name == item.Email))
+                        {
                         <div class="editPost row flex-row-reverse position-absolute top-0 end-0">
                             <div class="col-7">
                                 <form asp-controller="MainPose" asp-action="DeleteMainPose" method="post">
@@ -141,21 +139,6 @@ src="https://cdnjs.cloudflare.com/ajax/libs/jquery-ajax-unobtrusive/3.2.6/jquery
                         <div class="QRcode w-60 h-100">
                             <img id="@item.Id@item.Id" src="@item.Image" alt="" style="display: none;">
                         </div>
-
-                        @*
-                    <div class="commented" id="@item.Id">
-                    ฝากแล้ว @item.Comments.Count / @item.MaxComment คน
-                    </div>
-                    <script>
-                    console.log(2)
-                    if (@item.Comments.Count >= @item.MaxComment) {
-                    document.getElementById("@item.Id").style.backgroundColor = "red";
-                    }
-                    else if (@item.Comments.Count >= @item.MaxComment/2){
-                    document.getElementById("@item.Id").style.backgroundColor = "yellow";
-                    document.getElementById("@item.Id").style.color = "black";
-                    }
-                    </script>*@
                         <div id="test1">
                             <span id="count-@item.Id-comments" ฝากแล้ว คน>
                                 ฝากแล้ว @item.Comments.Count / @item.MaxComment คน
@@ -196,7 +179,6 @@ src="https://cdnjs.cloudflare.com/ajax/libs/jquery-ajax-unobtrusive/3.2.6/jquery
                                 </div>
                             }
                         </div>
-
                         <hr>
                         <div class="comment"
                             onclick="showComment(@item.Id@item.Id@item.Id,@item.Comments.Count,@item.MaxComment,1  )">
@@ -229,26 +211,7 @@ src="https://cdnjs.cloudflare.com/ajax/libs/jquery-ajax-unobtrusive/3.2.6/jquery
                                     <button type="submit" class="btn btn-primary">Submit</button>
                                 </form>
                             </div>
-                            @*<div class="form-group row" id="@item.Id@item.Id@item.Id" style="display: none;">
-                        <form id="comment-form-@item.Id" asp-controller="MainPose" asp-action="CreateCommentByAjax"
-                        data-pose-id="@item.Id">
-                        <input type="hidden" name="mainPoseId" value="@item.Id" />
-                        <div class="form-group">
-                        <label for="first-name">First Name</label>
-                        <input type="text" id="first-name" name="FirstName" class="form-control" required />
-                        </div>
-                        <div class="form-group">
-                        <label for="last-name">Last Name</label>
-                        <input type="text" id="last-name" name="LastName" class="form-control" required />
-                        </div>
-                        <div class="form-group">
-                        <label for="comment-text">Comment Text</label>
-                        <textarea id="comment-text" name="CommentText" class="form-control"
-                        required></textarea>
-                        </div>
-                        <button type="button" id="submit-comment-@item.Id" class="btn btn-primary">Submit</button>
-                        </form>
-                        </div>*@
+
                         </div>
                     </div>
                 </div>
@@ -265,6 +228,7 @@ src="https://cdnjs.cloudflare.com/ajax/libs/jquery-ajax-unobtrusive/3.2.6/jquery
             @* </div> *@
             @* </div> *@
             @* Add comment section *@
+
             <script>
                 function loadComments(mainPoseId) {
                     $.ajax({
@@ -273,6 +237,7 @@ src="https://cdnjs.cloudflare.com/ajax/libs/jquery-ajax-unobtrusive/3.2.6/jquery
                         type: 'GET',
                         success: function (result) {
                             console.log('success.');
+                            /*$('#post-' + mainPoseId + '-comments').html(result);*/
                             $('#post-' + mainPoseId + '-comments').html(result);
                         },
                         error: function () {
@@ -291,43 +256,14 @@ src="https://cdnjs.cloudflare.com/ajax/libs/jquery-ajax-unobtrusive/3.2.6/jquery
                             console.log('Error occurred while retrieving new comments.');
                         }
                     });
-
-
-                } @*
-                $(function () {
-                $('#submit-comment-@item.Id').click(function () {
-                var form = $('#comment-form-@item.Id');
-                var poseId = form.data('pose-id');
-                $.ajax({
-                url: form.attr('action'),
-                type: form.attr('method'),
-                data: form.serialize(),
-                success: function (result) {
-                if (result.success) {
-                // Comment added successfully, update the UI
-                var comment = result.comment;
-                var html = '<div class="card"><div class="card-body"><h5 class="card-title">' + comment.firstName + ' ' + comment.lastName + '</h5><p class="card-text">' + comment.commentText + '</p></div></div>';
-                $('#comment-section-' + poseId).append(html);
-                form[0].reset();
-                } else {
-                // Comment failed, show error messages
-                $.each(result.errors, function (key, value) {
-                $('#' + key + '-error').html(value.join('<br>'));
-                });
                 }
-                },
-                error: function () {
-                // Handle error
-                }
-                });
-                });
-                });*@
-                    // Call loadComments every 1 seconds
-                    setInterval(function () {
-                        loadComments(@item.Id);`
-                                                                                                                }, 1000);
+                // Call loadComments every 1 seconds
+                setInterval(function () {
+                    loadComments(@item.Id);
+                }, 1000);
             </script>
         }
-    </div>
 
+    </div>
 </div>
+<script src="~/js/post.js"></script>
