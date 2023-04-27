@@ -14,7 +14,7 @@
 
 <h1 class="display-5 fw-normal">User Dashboard</h1>
 <div class="album py-2 justify-content-center">  @*bg-light *@
-    <a asp-controller="MainPose" asp-action="CreateMainPose" class="btn btn-primary btn-lg float-end">New Post</a>
+    <a asp-controller="MainPose" asp-action="CreateMainPose" class="btn btn-primary btn-lg float-end">สร้างการรับฝาก</a>
     <div class="container bg-light">
         <h2 class="display-6 fw-normal">Your Post</h2>
         <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
@@ -193,26 +193,26 @@
 
                                 }, 1000);
                             </script>
-                            
                             <hr>
 
                         </div>
                     </div>
                 </div>
-
             }
 
         </div>
     </div>
-
     <hr>
-    <div class="container-fluid" id="CT">
-    <div class="row">
-        <a asp-controller="Deposit" asp-action="CreateDeposit" class="btn btn-primary btn-lg float-end">ฝากซื้อ</a>
 
-        @foreach (var item in Model.Deposites)
-        {
+</div>
 
+<div class="album py-2 justify-content-center">  @*bg-light *@
+        <div class="container bg-light">
+            <h2 class="display-6 fw-normal">Your Post</h2>
+            <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+
+            @foreach (var item in Model.Deposites)
+            {
             <div id="postBox" class="col-sm-12 col-lg-5 col-xl-4 ">
                 <div id="box" class="card mb-4 box-shadow position-relative">
                     @if (User.Identity.IsAuthenticated && User.IsInRole("admin")) 
@@ -338,7 +338,7 @@
                             }
                             
                         </div>
-
+                            <hr>
                             <script>
                                 function showComment(id){
                                     console.log("click");
@@ -355,8 +355,6 @@
                 </div>
             </div>
         }
-
-    </div>
-
-
+            </div>
+        </div>
 </div>
