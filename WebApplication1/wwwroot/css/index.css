@@ -1,33 +1,12 @@
 ﻿/* Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
 for details on configuring this project to bundle and minify static web assets. */
-main {
-  width: 100%;
-  margin: 0 0 0 0;
-  scroll-snap-type: y mandatory;
-  overflow: y;
-}
 
-#section1 {
-  scroll-snap-align: start;
-}
-
-#section2 {
-  scroll-snap-align: start;
-}
-
-#section3 {
-  scroll-snap-align: start;
-}
-
-#section4 {
-  scroll-snap-align: start;
-}
-
-#welcome {
-
-  padding: 30px;
+#welcome h1 {
+  /* font-size: 32px; */
   font-family: 'Mitr', sans-serif;
+
 }
+
 
 a.navbar-brand {
   white-space: normal;
@@ -89,10 +68,9 @@ button.accept-policy {
 .banner-image {
   /*background-image: url('https://img.freepik.com/free-photo/chicken-wings-barbecue-sweetly-sour-sauce-picnic-summer-menu-tasty-food-top-view-flat-lay_2829-6471.jpg?w=2000') !important;
   */
-
   background-image: url('https://media.discordapp.net/attachments/905446050347761714/1097545282960494612/d36d462db827833805497d9ea78a1343.jpg');
-
   background-size: cover;
+
 }
 
 
@@ -116,15 +94,19 @@ button.accept-policy {
 }
 
 #WC {
-  color: rgb(255, 162, 0);
+  color: white;
+  filter: drop-shadow(2px 4px 0px rgba(0, 0, 0, 0.7));
   /* filter: drop-shadow(8px 5px 4px black); */
 
 }
 
+.second-text {
+  color: rgba(243, 156, 18, 1);
+  filter: drop-shadow(2px 3px 0px rgba(0, 0, 0, 0.7));
+}
+
 @media (max-width:720px) {
-  #WC {
-    color: rgb(255, 162, 0);
-  }
+
 
   .banner-image {
     /*background-image: url('https://img.freepik.com/free-photo/chicken-wings-barbecue-sweetly-sour-sauce-picnic-summer-menu-tasty-food-top-view-flat-lay_2829-6471.jpg?w=2000') !important;
@@ -147,7 +129,8 @@ button.accept-policy {
 }
 
 :root {
-  --main-color: #ff702a;
+  --font: 'Mitr', sans-serif;
+  --main-color: rgba(243, 156, 18, 1);
   --text-color: #fff;
   --bg-color: #1e1c2a;
   --big-font: 4rem;
@@ -212,29 +195,28 @@ section {
 }
 
 .home {
-  padding-top: 170px;
-  width: 100%;
-  min-height: 90vh;
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  grid-gap: 1.5rem;
-  align-items: center;
+  padding-top: 100px;
+  padding-bottom: 100px;
 }
 
 .home-img img {
   max-width: 100%;
-  width: 600px;
+  width: 100%;
   height: auto;
 }
+
+
 
 .home-text h1 {
   font-size: var(--big-font);
   color: var(--main-color);
+  font-family: var(--font);
 }
 
 .home-text h2 {
   font-size: var(--h2-font);
   margin: 1rem 0 2rem;
+  font-family: var(--font);
 }
 
 .btn {
@@ -243,6 +225,7 @@ section {
   background: var(--main-color);
   color: #fff;
   border-radius: 0.5rem;
+  font-family: var(--font);
 }
 
 .btn:hover {
@@ -251,10 +234,8 @@ section {
 }
 
 .about {
-  display: grid;
-  grid-template-columns: repeat(2, 2fr);
-  grid-gap: 1.5rem;
-  align-items: center;
+  font-family: var(--font);
+  padding-bottom: 100px;
 }
 
 .about-img img {
@@ -266,43 +247,44 @@ section {
 .about-text span {
   color: var(--main-color);
   font-weight: 600;
+  font-family: var(--font);
 }
 
 .about-text h2 {
   font-size: var(--h2-font);
   margin-top: 1rem;
+  font-family: var(--font);
 }
 
 .about-text p {
   font-size: var(--p-font);
   margin: 0.8rem 0 1.8rem;
   line-height: 1.7;
+  font-family: var(--font);
 }
 
 .heading {
   text-align: center;
+
 }
 
 .heading h3 {
   color: var(--main-color);
   font-weight: 600;
+  font-family: var(--font);
 }
 
-.team-members {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  margin-top: 40px;
+.member {
+  padding-top: 30px;
 }
 
 .team-member {
-  width: 180px;
   text-align: center;
   margin-bottom: 30px;
 }
 
 .team-member img {
-  width: 100%;
+  width: 50%;
   height: auto;
   border-radius: 50%;
   margin-bottom: 15px;
@@ -312,12 +294,15 @@ section {
   font-weight: 600;
   color: #333;
   margin-bottom: 5px;
+  font-size: 20px;
+  font-family: var(--font);
 }
 
 .team-member p {
   font-weight: 400;
   color: #666;
   font-size: 16px;
+  font-family: var(--font);
 }
 
 @media (max-width: 1560px) {
@@ -332,10 +317,7 @@ section {
 }
 
 @media (max-width: 1140px) {
-  section {
 
-    padding: 50px 8%;
-  }
 
   #menu-icon {
     display: initial;
@@ -355,7 +337,7 @@ section {
   }
 
   .navbar.active {
-    top: 70px;
+    top: 0px;
   }
 
   .navbar a {
@@ -370,32 +352,34 @@ section {
 }
 
 @media (max-width: 720px) {
-  header {
-    pad: 10px 16px;
-  }
-
   .home {
-    grid-template-columns: 1fr;
-    text-align: center;
+    padding-top: 0px;
   }
 
   .about {
-    grid-template-columns: 1fr;
-    text-align: center;
+    padding-top: 0px;
   }
 
-  .about-img {
-    order: 2;
+  .member {
+    padding-top: 0;
   }
 
-  section {
 
-    padding: 100px 7%;
-  }
 }
 
 @media (max-width: 575px) {
-  .col {
-    width: 100%;
+  .home {
+    padding-top: 70px;
   }
+
+  .about {
+    padding-top: 30px;
+  }
+
+  .member {
+    padding-top: 0;
+  }
+
+
+
 }

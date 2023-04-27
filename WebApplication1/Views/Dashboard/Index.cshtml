@@ -12,10 +12,13 @@
 
 <script src="~/js/post.js"></script>
 
-<h1 class="display-5 fw-normal">User Dashboard</h1>
+
 <div class="album py-2 justify-content-center">  @*bg-light *@
-    <a asp-controller="MainPose" asp-action="CreateMainPose" class="btn btn-primary btn-lg float-end">New Post</a>
-    <div class="container bg-light">
+    
+    <div class="container bg-light" style="margin-top: 100px ;">
+        <a asp-controller="MainPose" asp-action="CreateMainPose" class="btn btn-primary btn-lg float-end">New Post</a>
+        <a asp-controller="MainPose" asp-action="CreateMainPose" class="btn btn-primary btn-lg float-end">New Post</a>
+        <h1 class="display-5 fw-normal">User Dashboard</h1>
         <h2 class="display-6 fw-normal">Your Post</h2>
         <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
 
