@@ -6,84 +6,95 @@
 <link href="https://fonts.googleapis.com/css2?family=Mitr&display=swap" rel="stylesheet">
 
 <link rel="stylesheet" href="~/css/index.css" asp-append-version="true" />
-<main>
-    @* <section class="sec1 border"> *@
-    <section id="section1" class="banner-image w-100 vh-100 d-flex justify-content-center align-items-center">
+@* <section class="sec1 border"> *@
+
+<div>
+    <section class="banner-image d-flex justify-content-center align-items-center vh-100">
         <div class="centent text-center" id="welcome">
             <h1 id="WC" class="">ยินดีต้อนรับเข้าสู่เว็บไซต์</h1>
-            <h1 class="text-white">พร้อมฝาก</h1>
+            <h1 class="second-text">พร้อมฝาก</h1>
         </div>
     </section>
-    @* </section> *@
-    <section class="home vh-100" id="section1">
-        <div class="home-text">
-            <h1>บริการ รับ/ฝาก ซื้ออาหาร</h1>
-            <h2>หิวเมื่อไหร่ก็แวะมา <br> มีคนรอ รับ/ฝาก อยู่ตลอด</h2>
-            <a href="#" class="btn">ลงชื่อเข้าใช้</a>
-        </div>
-        <div class="home-img">
-            <img src="https://www.recipetineats.com/wp-content/uploads/2020/05/Pepperoni-Pizza_5-SQjpg.jpg" alt="pizza">
 
+
+    @* </section> *@
+    <section class="home" id="section2">
+        <div class="row justify-content-between align-item-center p-3 boder">
+            <div class="home-text col-xl-6 col-sm-12 p-2">
+                <h1>บริการ รับ/ฝาก ซื้ออาหาร</h1>
+                <h2>หิวเมื่อไหร่ก็แวะมา <br> มีคนรอ รับ/ฝาก อยู่ตลอด</h2>
+                <a href="./Account/Login" class="btn">ลงชื่อเข้าใช้</a>
+            </div>
+            <div class="home-img col-xl-6 col-sm-12 p-2">
+                <img src="https://scontent.fbkk3-6.fna.fbcdn.net/v/t1.6435-9/163261349_1883601285126635_930153694810579536_n.jpg?_nc_cat=106&ccb=1-7&_nc_sid=730e14&_nc_eui2=AeEj-4S9rQ4yOrUXDv5FArRsjBY1ULBhSdaMFjVQsGFJ1tmXLQmtzWDZwJ9tzceSKbhSCAeuPopfLnQ0673E1T1c&_nc_ohc=wJsJwuTCB8kAX_fQFl4&_nc_ht=scontent.fbkk3-6.fna&oh=00_AfCu82WmjL9CsL72u_VMQGe_LLYiz1fKy3t7zfqLxqkCFg&oe=6471FE1E"
+                    alt="pizza">
+
+            </div>
         </div>
     </section>
 
     <!-------about start------->
-    <section class="about vh-100" id="section3">
-        <div class="about-img">
-            <img src="https://media.tenor.com/v99j-aduTkgAAAAd/mr-incredible.gif" alt="member">
-        </div>
+    <section class="about" id="section3">
+        <div class="row justify-content-between align-item-center p-3">
+            <div class="about-img col-xl-5 p-3">
+                <img src="https://media.tenor.com/v99j-aduTkgAAAAd/mr-incredible.gif" alt="member">
+            </div>
 
-        <div class="about-text">
-            <span>About Us</span>
-            <h2>เว็บไซต์สำหรับ รับ/ฝาก ซื้ออาหาร <br> จากโรงอาหารพระเทพ</h2>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque porttitor aliquet urna, sed molestie
-                massa varius eget. Praesent faucibus et elit sed consectetur. Sed nulla odio, fermentum sed elit
-                blandit, luctus tincidunt mi. Duis porttitor odio ut mattis eleifend. In luctus risus vitae sem viverra
-                interdum. Proin consequat elit sed turpis feugiat, ac eleifend quam aliquam. Vivamus aliquam massa
-                lacus, at rhoncus dui tempus a. Integer tincidunt ipsum lectus, nec convallis justo hendrerit sed.
-                Vestibulum pretium nulla justo, ac blandit sapien commodo id. Proin consectetur lorem eget purus
-                aliquam, sed sollicitudin sapien pharetra.</p>
-            <a href="#" class="btn">สมัครเข้าใช้งาน</a>
+            <div class="about-text col-xl-6 offset-xl-1 p-3">
+                <span>เกี่ยวกับเว็บไซต์ของพวกเรา</span>
+                <h2>เว็บไซต์สำหรับ รับ/ฝาก ซื้ออาหาร</h2>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque porttitor aliquet urna, sed molestie
+                    massa varius eget. Praesent faucibus et elit sed consectetur. Sed nulla odio, fermentum sed elit
+                    blandit, luctus tincidunt mi. Duis porttitor odio ut mattis eleifend. In luctus risus vitae sem
+                    viverra
+                    interdum. Proin consequat elit sed turpis feugiat, ac eleifend quam aliquam. Vivamus aliquam massa
+                    lacus, at rhoncus dui tempus a. Integer tincidunt ipsum lectus, nec convallis justo hendrerit sed.
+                    Vestibulum pretium nulla justo, ac blandit sapien commodo id. Proin consectetur lorem eget purus
+                    aliquam, sed sollicitudin sapien pharetra.</p>
+                <a href="./Account/Register" class="btn">สมัครเข้าใช้งาน</a>
+            </div>
         </div>
     </section>
 
     <!-------member start------->
-    <section class="member vh-100" id="section4">
-        <div class="heading">
-            <h3>Member</h3>
-        </div>
-
-        <div class="team-members">
-            <!-- Team member 1 -->
-            <div class="team-member">
-                <img src="https://media.tenor.com/v99j-aduTkgAAAAd/mr-incredible.gif" alt="Member 1">
-                <h3>John Doe</h3>
-                <p>6666666</p>
+    <section class="member" id="section4">
+        <div class="row align-items-center justify-content-center">
+            <div class="heading col-xl-12">
+                <h3>ทีมผู้พัฒนา</h3>
+                <br>
             </div>
-            <!-- Team member 2 -->
-            <div class="team-member">
-                <img src="https://media.tenor.com/v99j-aduTkgAAAAd/mr-incredible.gif" alt="Member 2">
-                <h3>Jane Smith</h3>
-                <p>666666</p>
-            </div>
-            <!-- Team member 3 -->
-            <div class="team-member">
-                <img src="https://media.tenor.com/v99j-aduTkgAAAAd/mr-incredible.gif" alt="Member 3">
-                <h3>Michael Johnson</h3>
-                <p>6666666</p>
-            </div>
-            <!-- Team member 4 -->
-            <div class="team-member">
-                <img src="https://media.tenor.com/v99j-aduTkgAAAAd/mr-incredible.gif" alt="Member 4">
-                <h3>Sarah Williams</h3>
-                <p>6666666</p>
-            </div>
-            <!-- Team member 5 -->
-            <div class="team-member">
-                <img src="https://media.tenor.com/v99j-aduTkgAAAAd/mr-incredible.gif" alt="Member 5">
-                <h3>Tom Brown</h3>
-                <p>6666666</p>
+            <div class="team-members row align-items-center justify-content-center">
+                <!-- Team member 1 -->
+                <div class="team-member col-xl-3">
+                    <img src="https://media.tenor.com/v99j-aduTkgAAAAd/mr-incredible.gif" alt="Member 1">
+                    <h3>ณัฐพล เนื้อเย็น</h3>
+                    <p>64010247</p>
+                </div>
+                <!-- Team member 2 -->
+                <div class="team-member col-xl-3 col">
+                    <img src="https://media.tenor.com/v99j-aduTkgAAAAd/mr-incredible.gif" alt="Member 2">
+                    <h3>ไททัศน์ กันทา</h3>
+                    <p>64010298</p>
+                </div>
+                <!-- Team member 3 -->
+                <div class="team-member col-xl-3">
+                    <img src="https://media.tenor.com/v99j-aduTkgAAAAd/mr-incredible.gif" alt="Member 3">
+                    <h3>ธนกาญจน์ กันไพเราะ</h3>
+                    <p>64010309</p>
+                </div>
+                <!-- Team member 4 -->
+                <div class="team-member col-xl-3">
+                    <img src="https://media.tenor.com/v99j-aduTkgAAAAd/mr-incredible.gif" alt="Member 4">
+                    <h3>ธนากร รัตนพรชัย</h3>
+                    <p>64010342</p>
+                </div>
+                <!-- Team member 5 -->
+                <div class="team-member col-xl-3">
+                    <img src="https://media.tenor.com/v99j-aduTkgAAAAd/mr-incredible.gif" alt="Member 5">
+                    <h3>นีรชา เลาะหมัดจิตร</h3>
+                    <p>64010444</p>
+                </div>
             </div>
         </div>
     </section>
-</main>
+</div>
