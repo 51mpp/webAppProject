@@ -4,7 +4,7 @@
 
 @model WebApplication1.ViewModels.DashboardVM
 
-<link rel="stylesheet" href="~/css/post.css">
+<link rel="stylesheet" href="~/css/DashboardM.css">
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -12,10 +12,14 @@
 
 <script src="~/js/post.js"></script>
 
-<h1 class="display-5 fw-normal">User Dashboard</h1>
+
+
 <div class="album py-2 justify-content-center">  @*bg-light *@
-    <a asp-controller="MainPose" asp-action="CreateMainPose" class="btn btn-primary btn-lg float-end">สร้างการรับฝาก</a>
-    <div class="container bg-light">
+    <div id="fCon" class="container bg-light">
+        <h1 class="display-5 fw-normal">User Dashboard</h1>
+        <a type="button" class="btn btn-primary" asp-area="" asp-controller="MainPose" asp-action="CreateMainPose">สร้างการรับฝาก</a>
+        <a type="button" class="btn btn-primary" asp-area="" asp-controller="Deposit" asp-action="CreateDeposit">สร้างการฝากซื้อ</a>
+        <a type="button" class="btn btn-primary" asp-area="" asp-controller="" asp-action="">สร้างการฝากซื้อ</a>
         <h2 class="display-6 fw-normal">Your Post</h2>
         <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
 
@@ -305,7 +309,7 @@
                                 </div>
                             </div>
                             <div id="post-@item.Id-comments">
-                            @foreach (var comment in @item.CommentDeposits)
+                            @* @foreach (var comment in @item.CommentDeposits)
                             {
                                 <div class="row">
                                     <div class="order_box">
@@ -335,7 +339,7 @@
                                         </button>
                                     </form>
                                 </div>
-                            }
+                            } *@
                         </div>
                             <hr>
                             <script>

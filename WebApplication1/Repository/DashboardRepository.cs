@@ -29,5 +29,10 @@ namespace WebApplication1.Repository
             return userDeposits.ToList();
         }
 
+        public async Task<AppUser> GetUserById(string id)
+        {
+            return await _context.User.FindAsync(id);
+        }
+
     }
 }
