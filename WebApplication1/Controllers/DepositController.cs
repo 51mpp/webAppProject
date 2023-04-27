@@ -145,7 +145,7 @@ namespace WebApplication1.Controllers
                 string comText = "";
                 string firstName = "";
                 string lastName = "";
-                string imageUrl = "";
+                string imageUrl = null;
                 if (image != null)
                 {
                     var result = await _photoService.AddPhotoCommentAsync(image);

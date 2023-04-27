@@ -328,14 +328,15 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <form asp-controller="MainPose" asp-action="DeleteComment" method="post">
-                                        <input type="hidden" name="commentId" value="@comment.Id" />
+                                    <form asp-controller="Deposit" asp-action="DeleteDeposit" method="post">
+                                        <input type="hidden" name="depositId" value="@comment.Id" />
                                         <button type="submit" class="remove">
                                             <img src="https://cdn-icons-png.flaticon.com/512/189/189690.png" alt="">
                                         </button>
                                     </form>
                                 </div>
                             }
+                            
                         </div>
 
                             <script>
