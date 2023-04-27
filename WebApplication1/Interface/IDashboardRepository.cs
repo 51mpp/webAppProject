@@ -6,6 +6,6 @@ namespace WebApplication1.Interface
     {
         Task<List<MainPose>> GetAllUserMainPose();
         Task<List<Deposit>> GetAllUserDeposit();
-        Task<AppUser> GetUserById(string id);
+        // Task<AppUser> GetUserById(string id);
     }
 }

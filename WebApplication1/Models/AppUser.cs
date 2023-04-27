@@ -17,9 +17,10 @@ namespace WebApplication1.Models
         public string? LastName { get; set; }
         public int? Section { get; set; }
         public int? Phone { get; set; }
-        public string? ProfileImageUrl { get; set; }
-        public string? City { get; set; }
-        public String? State { get; set; }
+        
+        // public string? ProfileImageUrl { get; set; }
+        // public string? City { get; set; }
+        // public String? State{ get; set; }
         public string? Icon { get; set; }
         public string? Account { get; set; }
         [ForeignKey("MainPose")]

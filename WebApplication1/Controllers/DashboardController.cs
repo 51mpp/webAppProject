@@ -31,21 +31,21 @@ namespace WebApplication1.Controllers
             };
             return View(dashboardVM);
         }
-        public async Task<IActionResult> EditUserProfile()
-        {
-            var curUserId = _httpContextAccessor.HttpContext.User.GetUserId();
-            var user = await _dashboardRepository.GetUserById(curUserId);
-            if(user == null) return View("Error");
-            var editUserVM = new EditUserDashboardVM()
-            {
-                Id = curUserId,
-                Section =user.Section,
-                Phone = user.Phone,
-                ProfileImageUrl = user.ProfileImageUrl,
-                City = user.City,
-                State = user.State
-            };
-            return View(editUserVM);
-        }
+        // public async Task<IActionResult> EditUserProfile()
+        // {
+        //     var curUserId = _httpContextAccessor.HttpContext.User.GetUserId();
+        //     var user = await _dashboardRepository.GetUserById(curUserId);
+        //     if(user == null) return View("Error");
+        //     var editUserVM = new EditUserDashboardVM()
+        //     {
+        //         Id = curUserId,
+        //         Section =user.Section,
+        //         Phone = user.Phone,
+        //         ProfileImageUrl = user.ProfileImageUrl,
+        //         City = user.City,
+        //         State = user.State
+        //     };
+        //     return View(editUserVM);
+        // }
     }
 }
