@@ -15,5 +15,7 @@ namespace WebApplication1.Models
         [ForeignKey("MainPose")]
         public int? MainPoseId { get; set; }
         public MainPose MainPose { get; set; }
+
+        public string? Email { get; set; }
     }
 }

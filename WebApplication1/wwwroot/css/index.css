@@ -157,7 +157,6 @@ header {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 30px 170px;
   background: var(--bg-color);
 }
 
@@ -306,9 +305,7 @@ section {
 }
 
 @media (max-width: 1560px) {
-  header {
-    padding: 0px 40px;
-  }
+  header {}
 
   :root {
     --big-font: 3.5rem;

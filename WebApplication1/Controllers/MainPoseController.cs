@@ -2,6 +2,7 @@
 using System.ComponentModel.DataAnnotations;
 using System.Globalization;
 using System.Net;
+using System.Security.Claims;
 using System.Xml.Linq;
 using WebApplication1.Interface;
 using WebApplication1.Models;
@@ -36,8 +37,6 @@ namespace WebApplication1.Controllers
             CreateCommentViewModel commentVM = new CreateCommentViewModel();
             return View("Index", (mainPoses, createMainPoseVM, commentVM));
         }
-
-        
         public IActionResult CreateMainPose()
         {
             var curUserId = _httpContextAccessor.HttpContext.User.GetUserId();
@@ -67,6 +66,7 @@ namespace WebApplication1.Controllers
                     MaxComment = mainPoseVM.MaxComment,
                     MaxTimePose = mainPoseVM.MaxTimePose,
                     CreatedTime = DateTime.Now,
+                    Email = mainPoseVM.Email
                 };
 
                 _mainPoseRepository.Add(mainPose);
@@ -78,6 +78,16 @@ namespace WebApplication1.Controllers
                 ModelState.AddModelError("", "Photo upload failed");
             }
             return View(mainPoseVM);
+        }
+        [HttpGet]
+        public async Task<IActionResult> GetMainPose()
+        {
+            IEnumerable<MainPose> mainPoses = await _mainPoseRepository.GetAll();
+            foreach (MainPose mainPose in mainPoses)
+            {
+                mainPose.Comments = (ICollection<Comment>)await _mainPoseRepository.GetCommentsByMainPoseId(mainPose.Id);
+            }
+            return PartialView("_MainPosePartialView", (mainPoses));
         }
         [HttpGet]
         public async Task<IActionResult> EditMainPose(int id)

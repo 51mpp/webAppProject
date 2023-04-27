@@ -11,50 +11,9 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Maitree:wght@300&display=swap" rel="stylesheet">
+    <script src="~/js/startSetup.js"></script>
 </head>
-<script>
-    window.addEventListener("load", (event) => {
-        console.log(window.location.pathname)
-        var renderContainer = document.getElementById("renderContainer");
-        var navTop = document.getElementById("mainnav");
-        if (window.location.pathname == '/') {
-            console.log("Home");
-            renderContainer.className = "";
-            document.getElementById("l01").style.color = "white"
-            document.getElementById("li01").style.backgroundColor = "red"
-        }
-        else if (window.location.pathname == '/MainPose') {
-            console.log("mainPost")
-            document.getElementById("l02").style.color = "white"
-            document.getElementById("li02").style.backgroundColor = "red"
-            document.getElementById("footer").style.display = "none"
-            renderContainer.className = "container";
 
-        }
-        else if (window.location.pathname == '/Account/Login' || window.location.pathname == '/Account/Register') {
-            console.log("Login")
-            document.getElementById("li04").style.color = "white"
-            document.getElementById("li04").style.backgroundColor = "red"
-            document.getElementById("footer").style.display = "none"
-            renderContainer.className = "";
-
-        }
-        else if (window.location.pathname == '/Deposit') {
-            console.log("Login")
-            document.getElementById("li03").style.color = "white"
-            document.getElementById("li03").style.backgroundColor = "red"
-            document.getElementById("footer").style.display = "none"
-
-        }
-        else if (window.location.pathname == '/Dashboard') {
-            console.log("Login")
-            document.getElementById("li05").style.color = "white"
-            document.getElementById("li05").style.backgroundColor = "red"
-            document.getElementById("footer").style.display = "none"
-            renderContainer.className = "";
-        }
-    });
-</script>
 
 <body>
     <header>
@@ -118,7 +77,7 @@
 
     </div>
 
-
+    <script src="~/js/scrollScript.js"></script>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
@@ -134,59 +93,7 @@
 
 <script>
 
-    const mainnav = document.querySelector('nav')
-    var navitem = document.querySelectorAll('.nav-item')
-
-    window.onscroll = function () {
-        if (window.scrollY > 80) {
-
-            mainnav.classList.add('active');
-            for (var i = 0; i < navitem.length; i++) {
-                navitem[i].classList.add('active');
-            }
-
-            if (window.location.pathname == "/") {
-                document.getElementById("l01").style.color = "white"
-                document.getElementById("li01").style.backgroundColor = "#f59317"
-            }
-            else if (window.location.pathname == "/MainPose") {
-                document.getElementById("l02").style.color = "white"
-                document.getElementById("li02").style.backgroundColor = "#f59317"
-            }
-            else if (window.location.pathname == '/Deposit') {
-                document.getElementById("l03").style.color = "white"
-                document.getElementById("li03").style.backgroundColor = "#f59317"
-            }
-            else if (window.location.pathname == "/Account/Login" || window.location.pathname == '/Account/Register') {
-                document.getElementById("l04").style.color = "white"
-                document.getElementById("li04").style.backgroundColor = "#f59317"
-            }
-        }
-        else {
-            mainnav.classList.remove('active');
-            for (var i = 0; i < navitem.length; i++) {
-                navitem[i].classList.remove('active');
-            }
-            if (window.location.pathname == "/") {
-                document.getElementById("l01").style.color = "white"
-                document.getElementById("li01").style.backgroundColor = "red"
-            }
-            else if (window.location.pathname == "/MainPose") {
-                document.getElementById("l02").style.color = "white"
-                document.getElementById("li02").style.backgroundColor = "red"
-            }
-            else if (window.location.pathname == "/Deposit") {
-                document.getElementById("l03").style.color = "white"
-                document.getElementById("li03").style.backgroundColor = "#f59317"
-            }
-            else if (window.location.pathname == "/Account/Login" || window.location.pathname == '/Account/Register') {
-                document.getElementById("l04").style.color = "white"
-                document.getElementById("li04").style.backgroundColor = "red"
-            }
-
-        }
-
-    }
+    
 </script>
 
 </html>
