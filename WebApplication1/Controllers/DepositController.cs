@@ -211,6 +211,12 @@ namespace WebApplication1.Controllers
             }
             return Json(new { success = false, errors = ModelState });
         }
+        [HttpGet]
+        public async Task<IActionResult> GetCommentDeposit(int depositId)
+        {
+            IEnumerable<CommentDeposit> comments = await _depositRepository.GetCommentsByDepositId(depositId);
+            return PartialView("_CommentDepositPartialView", comments);
+        }
 
     }
 }

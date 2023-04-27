@@ -304,8 +304,8 @@
                                     </span>
                                 </div>
                             </div>
-                            <div id="post-@item.Id-comments">
-                            @foreach (var comment in @item.CommentDeposits)
+                            <div id="post-@item.Id-commentDeposit">
+                           @*@foreach (var comment in @item.CommentDeposits)
                             {
                                 <div class="row">
                                     <div class="order_box">
@@ -335,11 +335,46 @@
                                         </button>
                                     </form>
                                 </div>
-                            }
-                            
+                            }*@                     
                         </div>
                             <hr>
                             <script>
+                                function loadCommentDeposits(depositId) {
+                                    $.ajax({
+                                        url: '@Url.Action("GetCommentDeposit", "Deposit")',
+                                        data: { depositId: depositId },
+                                        type: 'GET',
+                                        success: function (result) {
+                                            console.log('success.');
+                                                $('#post-' + depositId + '-commentDeposit').html(result);
+                                        },
+                                        error: function () {
+                                            console.log('Error occurred while retrieving new comments.');
+                                        }
+                                    });
+                                }
+                                function showComment(id, current, max, state) {
+                                    console.log("click");
+                                    var main = document.getElementById(id);
+                                    console.log(main);
+                                    console.log(main.style.display);
+                                    if (state === 1) {
+                                        if (main.style.display === "block") {
+                                            main.style.display = "none";
+                                        } else {
+                                            main.style.display = "block";
+                                        }
+                                        if (current >= max) {
+                                            main.style.textAlign = "center";
+                                            main.innerHTML = "เต็มแล้วจ้า";
+                                        }
+                                    }
+                                }
+                                    
+                                @*setInterval(function () {
+                                    loadComments(@item.Id);
+
+                                }, 1000);*@
                                 function showComment(id){
                                     console.log("click");
                                     if(document.getElementById(id).style.display === "none"){
