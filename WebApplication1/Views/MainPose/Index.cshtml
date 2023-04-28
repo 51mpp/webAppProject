@@ -5,6 +5,7 @@ For more information on enabling MVC for empty projects, visit https://go.micros
     ViewData["Title"] = "Post";
 }
 @using System.Globalization;
+@using System.Security.Claims;
 @using WebApplication1.ViewModels
 @model (IEnumerable<MainPose>, CreateMainPoseViewModel, CreateCommentViewModel)
 
@@ -34,8 +35,8 @@ src="https://cdnjs.cloudflare.com/ajax/libs/jquery-ajax-unobtrusive/3.2.6/jquery
 
                 <div id="box" class="card mb-4 box-shadow position-relative">
 
-                    @if (User.Identity.IsAuthenticated && (User.IsInRole("admin") || User.Identity.Name == item.Email))
-                    {
+                    @if (User.Identity.IsAuthenticated && (User.IsInRole("admin") || User.Identity.Name == item.Email ))
+                        {
                         <div class="editPost row flex-row-reverse position-absolute top-0 end-0">
                             <div class="col-7">
                                 <form asp-controller="MainPose" asp-action="DeleteMainPose" method="post">
@@ -147,7 +148,7 @@ src="https://cdnjs.cloudflare.com/ajax/libs/jquery-ajax-unobtrusive/3.2.6/jquery
                         </div>
 
                         <div id="post-@item.Id-comments">
-                            @foreach (var comment in @item.Comments)
+                            @foreach (var comment in @item.Comments.Take((int)@item.MaxComment))
                             {
                                 <div class="row">
                                     <div class="order_box">
@@ -174,7 +175,16 @@ src="https://cdnjs.cloudflare.com/ajax/libs/jquery-ajax-unobtrusive/3.2.6/jquery
                                             </div>
                                         </div>
                                     </div>
-
+                                    @if (User.Identity.IsAuthenticated && (User.IsInRole("admin") || User.Identity.Name == comment.Email))
+                                    {
+                                        <form asp-controller="MainPose" asp-action="DeleteComment" method="post">
+                                            <input type="hidden" name="commentId" value="@comment.Id" />
+                                            <button type="submit" class="remove">
+                                                <img src="https://cdn-icons-png.flaticon.com/512/189/189690.png" alt="">
+                                            </button>
+                                        </form>
+                                    }
+                                    
                                 </div>
 
                             }
@@ -190,6 +200,7 @@ src="https://cdnjs.cloudflare.com/ajax/libs/jquery-ajax-unobtrusive/3.2.6/jquery
                                 <form asp-controller="MainPose" asp-action="CreateComment" method="post"
                                     enctype="multipart/form-data">
                                     <input type="hidden" name="mainPoseId" value="@item.Id" />
+                                    <input type="hidden" name="email" value="@User.Identity.Name" />
                                     <div class="form-group">
                                         <label for="first-name">ชื่อ</label>
                                         <input type="text" id="first-name" name="FirstName" class="form-control" required />

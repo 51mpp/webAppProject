@@ -3,10 +3,12 @@ namespace WebApplication1
     public class EditUserDashboardVM
     {
         public string Id { get; set; }
+        public string? FirstName { get; set; }
+        public string? LastName { get; set; }
         public int? Section { get; set; }
-        public int? Phone { get; set; }
-        public string? ProfileImageUrl { get; set; }
-        public string? City { get; set; }
+        public string? Phone { get; set; }
+        public string? Icon { get; set; }
+        public string? NickName { get; set; }
         public string? State { get; set; }
         public IFormFile Image { get; set; }
     }
