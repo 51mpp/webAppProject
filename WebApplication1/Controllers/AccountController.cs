@@ -97,6 +97,7 @@ namespace WebApplication1.Controllers
                 Phone = registerVM.Phone,
                 Email = registerVM.EmailAddress,
                 UserName = registerVM.EmailAddress,
+                // NickName = registerVM.NickName,
                 Icon = registerVM.Icon
             };
 
