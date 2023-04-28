@@ -317,7 +317,7 @@ namespace WebApplication1.Controllers
             return Json(new { success = false, errors = ModelState });
         }
         [HttpPost]
-        public async Task<IActionResult> ConfirmComment(int commentId, string CommentText, string FirstName, string LastName, string email,bool confirm,int mainPoseId)
+        public async Task<IActionResult> ConfirmComment(int commentId, string CommentText, string FirstName, string LastName, string? Image, string email,bool confirm,int mainPoseId)
         {
             if (!ModelState.IsValid)
             {
@@ -327,6 +327,7 @@ namespace WebApplication1.Controllers
             string firstName = FirstName;
             string lastName = LastName;
             string emailText = email;
+            string image = Image;
             var comment = new Comment
             {
                 Id = commentId,
@@ -334,8 +335,9 @@ namespace WebApplication1.Controllers
                 LastName = lastName,
                 CommentText = comText,
                 Email = emailText,
-                Like = confirm,
-                MainPoseId = mainPoseId
+                Like = !confirm,
+                MainPoseId = mainPoseId,
+                Image = image
             };
             _mainPoseRepository.UpdateComment(comment);
             return Ok("Comment submitted successfully");

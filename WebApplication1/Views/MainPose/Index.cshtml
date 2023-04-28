@@ -52,7 +52,6 @@ src="https://cdnjs.cloudflare.com/ajax/libs/jquery-ajax-unobtrusive/3.2.6/jquery
                             </div>
                         </div>
                     }
-
                     <div class="card-body">
                         <small class="position-absolute top-0 start-1" style="margin-top: 5px;color: grey">
                             @{
@@ -111,7 +110,6 @@ src="https://cdnjs.cloudflare.com/ajax/libs/jquery-ajax-unobtrusive/3.2.6/jquery
                                         </div>
                                     </div>
                                 </div>
-
                             </div>
                             <div class="row align-items-end">
                                 <div class="col-12" style="margin-top:5px;">
@@ -144,9 +142,7 @@ src="https://cdnjs.cloudflare.com/ajax/libs/jquery-ajax-unobtrusive/3.2.6/jquery
                             <span id="count-@item.Id-comments" ฝากแล้ว คน>
                                 ฝากแล้ว @item.Comments.Count / @item.MaxComment คน
                             </span>
-
                         </div>
-
                         <div id="post-@item.Id-comments">
                             @foreach (var comment in @item.Comments.Take((int)@item.MaxComment))
                             {
@@ -173,26 +169,7 @@ src="https://cdnjs.cloudflare.com/ajax/libs/jquery-ajax-unobtrusive/3.2.6/jquery
                                     </div>
                                     @if (comment.Like == true)
                                     {
-                                        <img src="https://cdn.discordapp.com/attachments/880751147449733150/1101569968333656125/pngwing.com.png" alt="">
-                                    }
-                                    @if (comment.Like == true && (User.Identity.IsAuthenticated && (User.IsInRole("admin") || User.Identity.Name == comment.Email)))
-                                    {
-                                        <form asp-controller="MainPose" asp-action="CreateComment" method="post"
-                                            enctype="multipart/form-data">
-                                            <input type="hidden" name="mainPoseId" value="@item.Id" />
-                                            <input type="hidden" name="email" value="@User.Identity.Name" />
-                                            <input type="hidden" name="confirm" value="true" />
-                                            <input type="hidden" id="first-name" name="FirstName" value="@comment.FirstName" />
-                                            <input type="hidden" id="last-name" name="LastName" value=@comment.LastName/>
-                                            <input type="hidden" id="comment-text" name="CommentText" value=@comment.CommentText/>
-                                            <input type="hidden" name="commentId" value="@comment.Id" />
-                                            <div class="form-group">
-                                                <label for="Image2">หลักฐานการชำระเงิน</label>
-                                                <input id="Image2" name="image2" type="file" class="form-control"
-                                                    placeholder="เลือกไฟล์">
-                                            </div>
-                                            <button type="submit" class="btn btn-primary">Submit</button>
-                                        </form>
+                                        <img class="w-25 h-25" src="https://cdn.discordapp.com/attachments/880751147449733150/1101569968333656125/pngwing.com.png" alt="">
                                     }
                                     @if (User.Identity.IsAuthenticated && (User.IsInRole("admin") || User.Identity.Name == item.Email))
                                     {
@@ -253,32 +230,18 @@ src="https://cdnjs.cloudflare.com/ajax/libs/jquery-ajax-unobtrusive/3.2.6/jquery
                                     </div>
                                     <input id="Image2" name="image2" type="hidden" class="form-control"
                                            placeholder="เลือกไฟล์">
-                                    @*<div class="form-group">
+                                    <div class="form-group">
                                         <label for="Image2">หลักฐานการชำระเงิน</label>
                                         <input id="Image2" name="image2" type="file" class="form-control"
                                             placeholder="เลือกไฟล์">
-                                    </div>*@
+                                    </div>
                                     <button type="submit" class="btn btn-primary">Submit</button>
                                 </form>
-
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-            @* comment section*@
-
-            @* <div class="row"> *@
-            @* <div> *@
-            @* @foreach (var comment in item.Comments) *@
-            @* ส่วนของ comment ที่ตึงมาจาก database *@
-            @* { *@
-            @* <p>@comment.CommentText</p> *@
-            @* } *@
-            @* </div> *@
-            @* </div> *@
-            @* Add comment section *@
-
             <script>
                 
                 function loadComments(mainPoseId) {
