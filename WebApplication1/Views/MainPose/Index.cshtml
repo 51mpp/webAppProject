@@ -35,8 +35,8 @@ src="https://cdnjs.cloudflare.com/ajax/libs/jquery-ajax-unobtrusive/3.2.6/jquery
 
                 <div id="box" class="card mb-4 box-shadow position-relative">
 
-                    @if (User.Identity.IsAuthenticated && (User.IsInRole("admin") || User.Identity.Name == item.Email ))
-                        {
+                    @if (User.Identity.IsAuthenticated && (User.IsInRole("admin") || User.Identity.Name == item.Email))
+                    {
                         <div class="editPost row flex-row-reverse position-absolute top-0 end-0">
                             <div class="col-7">
                                 <form asp-controller="MainPose" asp-action="DeleteMainPose" method="post">
@@ -153,13 +153,17 @@ src="https://cdnjs.cloudflare.com/ajax/libs/jquery-ajax-unobtrusive/3.2.6/jquery
                                 <div class="row">
                                     <div class="order_box">
                                         <div class="card p-3 shadow-sm">
-                                            <form asp-controller="MainPose" asp-action="DeleteComment" method="post"
-                                                class="position-absolute top-0 end-0 p-1">
-                                                <input type="hidden" name="commentId" value="@comment.Id" />
-                                                <button type="submit" class="remove">
-                                                    <img src="https://cdn-icons-png.flaticon.com/512/189/189690.png" alt="">
-                                                </button>
-                                            </form>
+                                            @if (User.Identity.IsAuthenticated && (User.IsInRole("admin") || User.Identity.Name
+                                           == comment.Email))
+                                            {
+                                                <form asp-controller="MainPose" asp-action="DeleteComment" method="post"
+                                                    class="position-absolute top-0 end-0 p-1">
+                                                    <input type="hidden" name="commentId" value="@comment.Id" />
+                                                    <button type="submit" class="remove">
+                                                        <img src="https://cdn-icons-png.flaticon.com/512/189/189690.png" alt="">
+                                                    </button>
+                                                </form>
+                                            }
                                             <div class="row">
                                                 <div class="col-3">
                                                     <small style="color: rgb(76, 158, 80);">@comment.FirstName</small>
@@ -175,16 +179,9 @@ src="https://cdnjs.cloudflare.com/ajax/libs/jquery-ajax-unobtrusive/3.2.6/jquery
                                             </div>
                                         </div>
                                     </div>
-                                    @if (User.Identity.IsAuthenticated && (User.IsInRole("admin") || User.Identity.Name == comment.Email))
-                                    {
-                                        <form asp-controller="MainPose" asp-action="DeleteComment" method="post">
-                                            <input type="hidden" name="commentId" value="@comment.Id" />
-                                            <button type="submit" class="remove">
-                                                <img src="https://cdn-icons-png.flaticon.com/512/189/189690.png" alt="">
-                                            </button>
-                                        </form>
-                                    }
-                                    
+
+
+
                                 </div>
 
                             }
@@ -194,7 +191,6 @@ src="https://cdnjs.cloudflare.com/ajax/libs/jquery-ajax-unobtrusive/3.2.6/jquery
                             onclick="showComment(@item.Id@item.Id@item.Id,@item.Comments.Count,@item.MaxComment,1  )">
                             ฝากซื้อหน่อย
                         </div>
-
                         <div id="postComment">
                             <div class="form-group row" id="@item.Id@item.Id@item.Id" style="display: none;">
                                 <form asp-controller="MainPose" asp-action="CreateComment" method="post"
