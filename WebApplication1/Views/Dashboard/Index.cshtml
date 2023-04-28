@@ -13,8 +13,14 @@
 
 
 <div id="fCon" class="container">
-    <img src="@Model.Item2.ProfileImageUrl">
-    <h3>@Model.Item2.Section</h3>
+    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+        <img src="@Model.Item2.ProfileImageUrl">
+        <div>
+            <h3>First Name & Last Name: </h3>
+            <p>Section: @Model.Item2.Section</p>
+            <p>Phone: @Model.Item2.Phone</p>
+        </div>
+    </div>
 </div>
 <div class="album py-2 justify-content-center">  @*bg-light *@
     <div class="container bg-light">
