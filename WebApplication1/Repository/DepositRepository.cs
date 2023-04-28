@@ -71,5 +71,10 @@ namespace WebApplication1.Repository
             _context.Update(deposit);
             return Save();
         }
+        public bool UpdateComment(CommentDeposit commentDeposit)
+        {
+            _context.Update(commentDeposit);
+            return Save();
+        }
     }
 }

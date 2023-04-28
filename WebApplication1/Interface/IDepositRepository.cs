@@ -15,6 +15,7 @@ namespace WebApplication1.Interface
         bool Delete(Deposit deposit);
         bool DeleteCommentEach(CommentDeposit commentDeposit);
         bool Update(Deposit deposit);
+        bool UpdateComment(CommentDeposit commentDeposit);
         bool Save();
     }
 }

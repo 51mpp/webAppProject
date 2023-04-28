@@ -35,8 +35,8 @@ src="https://cdnjs.cloudflare.com/ajax/libs/jquery-ajax-unobtrusive/3.2.6/jquery
 
                 <div id="box" class="card mb-4 box-shadow position-relative">
 
-                    @if (User.Identity.IsAuthenticated && (User.IsInRole("admin") || User.Identity.Name == item.Email ))
-                        {
+                    @if (User.Identity.IsAuthenticated && (User.IsInRole("admin") || User.Identity.Name == item.Email))
+                    {
                         <div class="editPost row flex-row-reverse position-absolute top-0 end-0">
                             <div class="col-7">
                                 <form asp-controller="MainPose" asp-action="DeleteMainPose" method="post">
@@ -52,7 +52,6 @@ src="https://cdnjs.cloudflare.com/ajax/libs/jquery-ajax-unobtrusive/3.2.6/jquery
                             </div>
                         </div>
                     }
-
                     <div class="card-body">
                         <small class="position-absolute top-0 start-1" style="margin-top: 5px;color: grey">
                             @{
@@ -93,7 +92,6 @@ src="https://cdnjs.cloudflare.com/ajax/libs/jquery-ajax-unobtrusive/3.2.6/jquery
                                 <div class="col-sm-12 col-md-4">
                                     <img class="profile" src="@item.Image" style="margin-bottom: 10px;">
                                 </div>
-
                                 <div class="col-sm-12 col-md-8">
                                     <div class="row align-items-center">
                                         <div class="col-12">
@@ -111,7 +109,6 @@ src="https://cdnjs.cloudflare.com/ajax/libs/jquery-ajax-unobtrusive/3.2.6/jquery
                                         </div>
                                     </div>
                                 </div>
-
                             </div>
                             <div class="row align-items-end">
                                 <div class="col-12" style="margin-top:5px;">
@@ -144,37 +141,39 @@ src="https://cdnjs.cloudflare.com/ajax/libs/jquery-ajax-unobtrusive/3.2.6/jquery
                             <span id="count-@item.Id-comments" ฝากแล้ว คน>
                                 ฝากแล้ว @item.Comments.Count / @item.MaxComment คน
                             </span>
-
                         </div>
-
                         <div id="post-@item.Id-comments">
                             @foreach (var comment in @item.Comments.Take((int)@item.MaxComment))
                             {
                                 <div class="row">
                                     <div class="order_box">
                                         <div class="card p-3 shadow-sm">
-                                            <form asp-controller="MainPose" asp-action="DeleteComment" method="post"
-                                                class="position-absolute top-0 end-0 p-1">
-                                                <input type="hidden" name="commentId" value="@comment.Id" />
-                                                <button type="submit" class="remove">
-                                                    <img src="https://cdn-icons-png.flaticon.com/512/189/189690.png" alt="">
-                                                </button>
-                                            </form>
-                                            <div class="row">
-                                                <div class="col-3">
-                                                    <small style="color: rgb(76, 158, 80);">@comment.FirstName</small>
-                                                </div>
-                                                <div class="col-9">
-                                                    <small class="font-weight-bold">@comment.CommentText</small>
-                                                </div>
-                                            </div>
-                                            <div class="row">
-                                                <div id="Image-@comment.Id-comment" class="col-12" style="display: none;">
-                                                    <img class="slip" src="@comment.Image" alt="">
+                                            <div class="d-flex justify-content-between align-items-center">
+                                                <div class="user d-flex flex-row align-items-center">
+                                                    <div class="row">
+                                                        <div class="col-3">
+                                                            <small style="color: rgb(76, 158, 80);">@comment.FirstName</small>
+                                                        </div>
+                                                        <div class="col-9">
+                                                            <small class="font-weight-bold">@comment.CommentText</small>
+                                                        </div>
+                                                        <div></div>
+                                                        <div class="slip col-8">
+                                                            <img id="Image-@comment.Id-comment" src="@comment.Image" alt="">
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
+                                    @if (comment.Like == true)
+                                    {
+                                        <img class="w-25 h-25" src="https://cdn.discordapp.com/attachments/880751147449733150/1101569968333656125/pngwing.com.png" alt="">
+                                    }
+                                    @if (User.Identity.IsAuthenticated && (User.IsInRole("admin") || User.Identity.Name == item.Email))
+                                    {
+                                        <button id="confirm-@comment.Id-comments" onclick="confirmComment('@comment.Id','@comment.CommentText','@comment.FirstName','@comment.LastName','@comment.Image','@comment.Email',true,@Model.Item3)">Confirm Comment</button>
+                                    }
                                     @if (User.Identity.IsAuthenticated && (User.IsInRole("admin") || User.Identity.Name == comment.Email))
                                     {
                                         <form asp-controller="MainPose" asp-action="DeleteComment" method="post">
@@ -184,9 +183,23 @@ src="https://cdnjs.cloudflare.com/ajax/libs/jquery-ajax-unobtrusive/3.2.6/jquery
                                             </button>
                                         </form>
                                     }
-                                    
                                 </div>
-
+                                <script>
+                                    function confirmComment(commentId, CommentText, FirstName, LastName, image, email, confirm, mainPoseId) {
+                                        $.ajax({
+                                            url: '@Url.Action("ConfirmComment", "MainPose")',
+                                            data: { commentId: commentId, CommentText: CommentText, FirstName: FirstName, LastName: LastName, image: image, email: email, confirm: confirm, mainPoseId: mainPoseId },
+                                            type: 'POST',
+                                            success: function (result) {
+                                                console.log(result);
+                                                // Do something with the result, if needed
+                                            },
+                                            error: function () {
+                                                console.log('Error occurred while confirming comment.');
+                                            }
+                                        });
+                                    }
+                                </script>
                             }
                         </div>
                         <hr>
@@ -194,13 +207,13 @@ src="https://cdnjs.cloudflare.com/ajax/libs/jquery-ajax-unobtrusive/3.2.6/jquery
                             onclick="showComment(@item.Id@item.Id@item.Id,@item.Comments.Count,@item.MaxComment,1  )">
                             ฝากซื้อหน่อย
                         </div>
-
                         <div id="postComment">
                             <div class="form-group row" id="@item.Id@item.Id@item.Id" style="display: none;">
                                 <form asp-controller="MainPose" asp-action="CreateComment" method="post"
                                     enctype="multipart/form-data">
                                     <input type="hidden" name="mainPoseId" value="@item.Id" />
                                     <input type="hidden" name="email" value="@User.Identity.Name" />
+                                    <input type="hidden" name="confirm" value="false" />
                                     <div class="form-group">
                                         <label for="first-name">ชื่อ</label>
                                         <input type="text" id="first-name" name="FirstName" class="form-control" required />
@@ -214,6 +227,8 @@ src="https://cdnjs.cloudflare.com/ajax/libs/jquery-ajax-unobtrusive/3.2.6/jquery
                                         <textarea id="comment-text" name="CommentText" class="form-control"
                                             required></textarea>
                                     </div>
+                                    <input id="Image2" name="image2" type="hidden" class="form-control"
+                                           placeholder="เลือกไฟล์">
                                     <div class="form-group">
                                         <label for="Image2">หลักฐานการชำระเงิน</label>
                                         <input id="Image2" name="image2" type="file" class="form-control"
@@ -222,25 +237,12 @@ src="https://cdnjs.cloudflare.com/ajax/libs/jquery-ajax-unobtrusive/3.2.6/jquery
                                     <button type="submit" class="btn btn-primary">Submit</button>
                                 </form>
                             </div>
-
                         </div>
                     </div>
                 </div>
             </div>
-            @* comment section*@
-
-            @* <div class="row"> *@
-            @* <div> *@
-            @* @foreach (var comment in item.Comments) *@
-            @* ส่วนของ comment ที่ตึงมาจาก database *@
-            @* { *@
-            @* <p>@comment.CommentText</p> *@
-            @* } *@
-            @* </div> *@
-            @* </div> *@
-            @* Add comment section *@
-
             <script>
+                
                 function loadComments(mainPoseId) {
                     $.ajax({
                         url: '@Url.Action("GetComments", "MainPose")',
@@ -272,6 +274,7 @@ src="https://cdnjs.cloudflare.com/ajax/libs/jquery-ajax-unobtrusive/3.2.6/jquery
                 setInterval(function () {
                     loadComments(@item.Id);
                 }, 1000);
+                
             </script>
         }
 

@@ -15,6 +15,7 @@ namespace WebApplication1.Interface
         bool Delete(MainPose mainPose);
         bool DeleteCommentEach(Comment comment);
         bool Update(MainPose mainPose);
+        bool UpdateComment(Comment comment);
         bool Save();
     }
 }

@@ -71,6 +71,11 @@ namespace WebApplication1.Repository
             _context.Update(mainPose);
             return Save();
         }
+        public bool UpdateComment(Comment comment)
+        {
+            _context.Update(comment);
+            return Save();
+        }
 
 
     }

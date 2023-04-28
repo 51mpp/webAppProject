@@ -177,10 +177,10 @@ namespace WebApplication1.Controllers
             MainPose mainPose = await _mainPoseRepository.GetByIdAsync(mainPoseId);
             int maxComment = (int)mainPose.MaxComment;
             IEnumerable<Comment> comments = await _mainPoseRepository.GetCommentsByMainPoseId(mainPoseId);
-            return PartialView("_CommentPartialView", (comments,maxComment));
+            return PartialView("_CommentPartialView", (comments,maxComment,mainPoseId,mainPose));
         }
         [HttpPost]
-        public async Task<IActionResult> CreateComment(int mainPoseId, string CommentText, string FirstName, string LastName,IFormFile? image2,string email)
+        public async Task<IActionResult> CreateComment(int mainPoseId, string CommentText, string FirstName, string LastName,IFormFile? image2,string email,bool confirm)
         {
             MainPose mainPose = await _mainPoseRepository.GetByIdAsync(mainPoseId);
             
@@ -208,7 +208,8 @@ namespace WebApplication1.Controllers
                     FirstName = firstName,
                     LastName = lastName,
                     Image = imageUrl,
-                    Email = email
+                    Email = email,
+                    Like = confirm
                 };
                 await _mainPoseRepository.AddComment(comment);
                 return RedirectToAction("");
@@ -314,6 +315,58 @@ namespace WebApplication1.Controllers
 
             }
             return Json(new { success = false, errors = ModelState });
+        }
+        [HttpPost]
+        public async Task<IActionResult> ConfirmComment(int commentId, string CommentText, string FirstName, string LastName, string? Image, string email,bool confirm,int mainPoseId)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest("Invalid model state");
+            }
+            string comText = CommentText;
+            string firstName = FirstName;
+            string lastName = LastName;
+            string emailText = email;
+            string image = Image;
+            var comment = new Comment
+            {
+                Id = commentId,
+                FirstName = firstName,
+                LastName = lastName,
+                CommentText = comText,
+                Email = emailText,
+                Like = !confirm,
+                MainPoseId = mainPoseId,
+                Image = image
+            };
+            _mainPoseRepository.UpdateComment(comment);
+            return Ok("Comment submitted successfully");
+        }
+        [HttpPost]
+        public async Task<IActionResult> UpdateComment(int commentId, string CommentText, string FirstName, string LastName, string? image, string email, bool confirm, int mainPoseId)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest("Invalid model state");
+            }
+            string comText = CommentText;
+            string firstName = FirstName;
+            string lastName = LastName;
+            string img = image;
+            string emailText = email;
+            var comment = new Comment
+            {
+                Id = commentId,
+                FirstName = firstName,
+                LastName = lastName,
+                CommentText = comText,
+                Image = img,
+                Email = emailText,
+                Like = confirm,
+                MainPoseId = mainPoseId
+            };
+            _mainPoseRepository.UpdateComment(comment);
+            return RedirectToAction("");
         }
 
     }
