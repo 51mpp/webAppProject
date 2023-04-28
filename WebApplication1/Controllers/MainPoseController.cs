@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
 using System.ComponentModel.DataAnnotations;
 using System.Globalization;
 using System.Net;
@@ -17,6 +18,7 @@ namespace WebApplication1.Controllers
         private readonly IMainPoseRepository _mainPoseRepository;
         private readonly IPhotoService _photoService;
         private readonly IHttpContextAccessor _httpContextAccessor;
+        private readonly IUserRepository _userRepository;
 
 
         public MainPoseController(IMainPoseRepository mainPoseRepository, IPhotoService photoService, IHttpContextAccessor httpContextAccessor)
@@ -28,6 +30,7 @@ namespace WebApplication1.Controllers
         [HttpGet]
         public async Task<IActionResult> Index() // อันนี้ใช้ return view() ในหน้า club -----> controller 
         {
+
             IEnumerable<MainPose> mainPoses = await _mainPoseRepository.GetAll();
             foreach (MainPose mainPose in mainPoses)
             {
@@ -37,6 +40,7 @@ namespace WebApplication1.Controllers
             CreateCommentViewModel commentVM = new CreateCommentViewModel();
             return View("Index", (mainPoses, createMainPoseVM, commentVM));
         }
+        [HttpGet]
         public IActionResult CreateMainPose()
         {
             var curUserId = _httpContextAccessor.HttpContext.User.GetUserId();
@@ -104,7 +108,8 @@ namespace WebApplication1.Controllers
                 Account = post.Account,
                 MaxComment = post.MaxComment,
                 MaxTimePose = post.MaxTimePose,
-                CreatedTime = post.CreatedTime
+                CreatedTime = post.CreatedTime,
+                Email = post.Email
 
             };
             return View(mainPoseVM);
@@ -149,7 +154,7 @@ namespace WebApplication1.Controllers
                 CreatedTime = mainPoseVM.CreatedTime,
                 MaxTimePose = mainPoseVM.MaxTimePose,
                 LastModified = DateTime.Now,
-
+                Email = mainPoseVM.Email
             };
             _mainPoseRepository.Update(mainPose);
             return RedirectToAction("Index");
@@ -169,11 +174,13 @@ namespace WebApplication1.Controllers
         [HttpGet]
         public async Task<IActionResult> GetComments(int mainPoseId)
         {
+            MainPose mainPose = await _mainPoseRepository.GetByIdAsync(mainPoseId);
+            int maxComment = (int)mainPose.MaxComment;
             IEnumerable<Comment> comments = await _mainPoseRepository.GetCommentsByMainPoseId(mainPoseId);
-            return PartialView("_CommentPartialView", comments);
+            return PartialView("_CommentPartialView", (comments,maxComment));
         }
         [HttpPost]
-        public async Task<IActionResult> CreateComment(int mainPoseId, string CommentText, string FirstName, string LastName,IFormFile? image2)
+        public async Task<IActionResult> CreateComment(int mainPoseId, string CommentText, string FirstName, string LastName,IFormFile? image2,string email)
         {
             MainPose mainPose = await _mainPoseRepository.GetByIdAsync(mainPoseId);
             
@@ -193,7 +200,6 @@ namespace WebApplication1.Controllers
                     comText = CommentText;
                     firstName = FirstName;
                     lastName = LastName;
-
                 }
                 Comment comment = new Comment
                 {
@@ -201,7 +207,8 @@ namespace WebApplication1.Controllers
                     CommentText = comText,
                     FirstName = firstName,
                     LastName = lastName,
-                    Image = imageUrl
+                    Image = imageUrl,
+                    Email = email
                 };
                 await _mainPoseRepository.AddComment(comment);
                 return RedirectToAction("");

@@ -59,7 +59,9 @@ namespace WebApplication1.Controllers
                     PlaceDeliver = depositVM.PlaceDeliver,
                     MaxTimePose = depositVM.MaxTimePose,
                     AppUserId = depositVM.AppUserId,
-                    CreatedTime = DateTime.Now
+                    CreatedTime = DateTime.Now,
+                    Email = depositVM.Email
+                    
                 };
 
                 _depositRepository.Add(deposit);
@@ -86,7 +88,8 @@ namespace WebApplication1.Controllers
                 Food = post.Food,
                 PlaceDeliver = post.PlaceDeliver,
                 MaxTimePose = post.MaxTimePose,
-                CreatedTime = post.CreatedTime
+                CreatedTime = post.CreatedTime,
+                Email = post.Email
 
             };
             return View(depositVM);
@@ -116,6 +119,7 @@ namespace WebApplication1.Controllers
                 CreatedTime = depositVM.CreatedTime,
                 MaxTimePose = depositVM.MaxTimePose,
                 LastModified = DateTime.Now,
+                Email = depositVM.Email
 
             };
             _depositRepository.Update(deposit);
@@ -137,7 +141,7 @@ namespace WebApplication1.Controllers
             return PartialView("_CommentDepositPartialView", commentDeposits);
         }
         [HttpPost]
-        public async Task<IActionResult> CreateComment(int depositId, string CommentText, string FirstName, string LastName, IFormFile? image)
+        public async Task<IActionResult> CreateComment(int depositId, string CommentText, string FirstName, string LastName, IFormFile? image,string email)
         {
             Deposit deposits = await _depositRepository.GetByIdAsync(depositId);
             if (ModelState.IsValid)
@@ -163,7 +167,8 @@ namespace WebApplication1.Controllers
                     CommentText = comText,
                     FirstName = firstName,
                     LastName = lastName,
-                    Image = imageUrl
+                    Image = imageUrl,
+                    Email = email
                 };
                 await _depositRepository.AddComment(comment);
                 return RedirectToAction("");

@@ -11,6 +11,7 @@
         <div class="row">
             <div class="col-md-6 col-sm-12 form-group">
                 <input asp-for="CreatedTime" type="hidden" class="form-control" />
+                <input type="hidden" id="Email" name="Email" asp-for="Email" value="@User.Identity.Name" />
                 <label asp-for="FirstName">ชื่อ</label>
                 <div class="col-12">
                     <input asp-for="FirstName" class="form-control" placeholder="*กรอกชื่อ">
