@@ -1,6 +1,8 @@
+using CloudinaryDotNet.Actions;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using WebApplication1.Data;
+using WebApplication1.Interface;
 using WebApplication1.Models;
 using WebApplication1.ViewModels;
 
@@ -11,11 +13,13 @@ namespace WebApplication1.Controllers
         private readonly UserManager<AppUser> _userManager;
         private readonly SignInManager<AppUser> _signInManager;
         private readonly ApplicationDbContext _context;
-        public AccountController(UserManager<AppUser> userManager, SignInManager<AppUser> signInManager, ApplicationDbContext context)
+        private readonly IPhotoService _photoService;
+        public AccountController(UserManager<AppUser> userManager, SignInManager<AppUser> signInManager, ApplicationDbContext context, IPhotoService photoService)
         {
             _context = context;
             _signInManager = signInManager;
             _userManager = userManager;
+            _photoService = photoService;
         }
         public IActionResult Index()
         {
@@ -89,6 +93,12 @@ namespace WebApplication1.Controllers
                 return View(registerVM);
             }
 
+            string imageUrl = null;
+            if (registerVM.Image != null)
+            {
+                var result = await _photoService.AddPhotoAsync(registerVM.Image);
+                imageUrl = result.Url.ToString();
+            }
             var newUser = new AppUser()
             {
                 FirstName = registerVM.FirstName,
@@ -97,8 +107,8 @@ namespace WebApplication1.Controllers
                 Phone = registerVM.Phone,
                 Email = registerVM.EmailAddress,
                 UserName = registerVM.EmailAddress,
-                // NickName = registerVM.NickName,
-                Icon = registerVM.Icon
+                NickName = registerVM.NickName,
+                Icon = imageUrl
             };
 
             var newUserResponse = await _userManager.CreateAsync(newUser, registerVM.Password);
