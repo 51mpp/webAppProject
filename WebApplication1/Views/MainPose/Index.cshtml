@@ -172,7 +172,7 @@ src="https://cdnjs.cloudflare.com/ajax/libs/jquery-ajax-unobtrusive/3.2.6/jquery
                                     }
                                     @if (User.Identity.IsAuthenticated && (User.IsInRole("admin") || User.Identity.Name == item.Email))
                                     {
-                                        <button id="confirm-@comment.Id-comments" onclick="confirmComment('@comment.Id','@comment.CommentText','@comment.FirstName','@comment.LastName','@comment.Image','@comment.Email',true,@Model.Item3)">Confirm Comment</button>
+                                        <button id="confirm-@comment.Id-comments" onclick="confirmComment('@comment.Id','@comment.CommentText','@comment.FirstName','@comment.LastName','@comment.Image','@comment.Email','@comment.Like',@Model.Item3)">Confirm Comment</button>
                                     }
                                     @if (User.Identity.IsAuthenticated && (User.IsInRole("admin") || User.Identity.Name == comment.Email))
                                     {

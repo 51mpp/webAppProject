@@ -137,11 +137,12 @@ namespace WebApplication1.Controllers
         [HttpGet]
         public async Task<IActionResult> GetComments(int depositId)
         {
-            IEnumerable<CommentDeposit> commentDeposits = await _depositRepository.GetCommentsByDepositId(depositId);
-            return PartialView("_CommentDepositPartialView", commentDeposits);
+            Deposit deposit = await _depositRepository.GetByIdAsync(depositId);
+            IEnumerable <CommentDeposit> commentDeposits = await _depositRepository.GetCommentsByDepositId(depositId);
+            return PartialView("_CommentDepositPartialView", (commentDeposits,deposit));
         }
         [HttpPost]
-        public async Task<IActionResult> CreateComment(int depositId, string CommentText, string FirstName, string LastName, IFormFile? image,string email)
+        public async Task<IActionResult> CreateComment(int depositId, string CommentText, string FirstName, string LastName, IFormFile? image,string email, bool confirm)
         {
             Deposit deposits = await _depositRepository.GetByIdAsync(depositId);
             if (ModelState.IsValid)
@@ -168,7 +169,8 @@ namespace WebApplication1.Controllers
                     FirstName = firstName,
                     LastName = lastName,
                     Image = imageUrl,
-                    Email = email
+                    Email = email,
+                    Like = confirm
                 };
                 await _depositRepository.AddComment(comment);
                 return RedirectToAction("");
@@ -219,8 +221,36 @@ namespace WebApplication1.Controllers
         [HttpGet]
         public async Task<IActionResult> GetCommentDeposit(int depositId)
         {
+            Deposit deposit = await _depositRepository.GetByIdAsync(depositId);
             IEnumerable<CommentDeposit> comments = await _depositRepository.GetCommentsByDepositId(depositId);
-            return PartialView("_CommentDepositPartialView", comments);
+            return PartialView("_CommentDepositPartialView", (comments,deposit));
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> ConfirmComment(int commentDepositId,int depositId, string CommentText, string FirstName, string LastName, string? image, string email, bool confirm)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest("Invalid model state");
+            }
+            string comText = CommentText;
+            string firstName = FirstName;
+            string lastName = LastName;
+            string emailText = email;
+            string img = image;
+            var commentDeposit = new CommentDeposit
+            {
+                Id = commentDepositId,
+                FirstName = firstName,
+                LastName = lastName,
+                CommentText = comText,
+                Email = emailText,
+                Like = !confirm,
+                DepositId = depositId,
+                Image = img
+            };
+            _depositRepository.UpdateComment(commentDeposit);
+            return Ok("Comment submitted successfully");
         }
 
     }
