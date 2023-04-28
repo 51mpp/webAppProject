@@ -21,5 +21,9 @@ namespace WebApplication1.ViewModels
         public string? LastName { get; set; }
         [Required(ErrorMessage = "Phone is required")]
         public string? Phone { get; set; }
+
+        public int? Section { get; set; }
+        public string? Icon { get; set; }
+        public IFormFile Image { get; set; }
     }
 }

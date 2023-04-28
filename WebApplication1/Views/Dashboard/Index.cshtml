@@ -14,11 +14,12 @@
 
 <div id="fCon" class="container">
     <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
-        <img src="@Model.Item2.ProfileImageUrl">
+        <img src="@Model.Item2.Icon">
         <div>
-            <h3>First Name & Last Name: </h3>
-            <p>Section: @Model.Item2.Section</p>
+            <h3>First Name & Last Name: <br> @Model.Item2.FirstName  @Model.Item2.LastName</h3>
+            <p>Nick Name: @Model.Item2.NickName</p>
             <p>Phone: @Model.Item2.Phone</p>
+            <p>Section: @Model.Item2.Section</p>
         </div>
     </div>
 </div>

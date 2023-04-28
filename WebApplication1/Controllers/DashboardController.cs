@@ -26,10 +26,12 @@ namespace WebApplication1.Controllers
         private void MapUserEdit(AppUser user, EditUserDashboardVM editVM, ImageUploadResult photoResult)
         {
             user.Id = editVM.Id;
+            user.FirstName = editVM.FirstName;
+            user.LastName = editVM.LastName;
             user.Section = editVM.Section;
             user.Phone = editVM.Phone;
-            user.ProfileImageUrl = photoResult.Url.ToString();
-            user.City = editVM.City;
+            user.Icon = photoResult.Url.ToString();
+            user.NickName = editVM.NickName;
             user.State = editVM.State;
         }
         public async Task<IActionResult> Index()
@@ -53,10 +55,12 @@ namespace WebApplication1.Controllers
             var editUserVM = new EditUserDashboardVM()
             {
                 Id = curUserId,
-                Section =user.Section,
+                FirstName = user.FirstName,
+                LastName = user.LastName,
+                Section = user.Section,
                 Phone = user.Phone,
-                ProfileImageUrl = user.ProfileImageUrl,
-                City = user.City,
+                Icon = user.Icon,
+                NickName = user.NickName,
                 State = user.State
             };
             return View(editUserVM);
@@ -73,7 +77,7 @@ namespace WebApplication1.Controllers
 
             AppUser user = await _dashboardRepository.GetByIdNoTracking(editVM.Id);
 
-            if(user.ProfileImageUrl == "" || user.ProfileImageUrl == null)
+            if(user.Icon == "" || user.Icon == null)
             {
 
                 var photoResult = await _photoService.AddPhotoAsync(editVM.Image);
@@ -87,7 +91,7 @@ namespace WebApplication1.Controllers
             {
                 try
                 {
-                    await _photoService.DeletePhotoAsync(user.ProfileImageUrl);
+                    await _photoService.DeletePhotoAsync(user.Icon);
                 }
                 catch(Exception ex)
                 {

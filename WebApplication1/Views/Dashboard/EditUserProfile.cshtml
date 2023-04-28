@@ -2,9 +2,23 @@
 @model EditUserDashboardVM
 
 <h2>User profile</h2>
-@* ถ้าอยากใส่อะไรเพิ่มก็แค่ไปเพิ่มที่ EdituserdashboardVm กับ Dashboardcontroller *@
 <form method="post" asp-action="EditUserProfile" enctype="multipart/form-data">
     <input type="hidden" id="Id" name="Id" asp-for="Id">
+    <div class="form-group">
+        <label asp-for="FirstName" class="control-label"></label>
+        <input asp-for="FirstName" class="form-control" />
+        <span asp-validation-for="FirstName" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="LastName" class="control-label"></label>
+        <input asp-for="LastName" class="form-control" />
+        <span asp-validation-for="LastName" class="text-danger"></span>
+    </div>
+        <div class="form-group">
+        <label asp-for="NickName">NickName</label>
+        <input asp-for="NickName" class="form-control" placeholder="NickName">
+        <span asp-validation-for="NickName" class="text-danger"></span>
+    </div>
     <div class="form-group">
         <label asp-for="Section">Section</label>
         <input asp-for="Section" class="form-control" placeholder="Section">
@@ -16,19 +30,10 @@
         <span asp-validation-for="Phone" class="text-danger"></span>
     </div>
     <div class="form-group">
-        <label asp-for="City">City</label>
-        <input asp-for="City" class="form-control" placeholder="City">
-        <span asp-validation-for="City" class="text-danger"></span>
-    </div>
-    <div class="form-group">
-        <label asp-for="State">State</label>
-        <input asp-for="State" class="form-control" placeholder="State">
-        <span asp-validation-for="State" class="text-danger"></span>
-    </div>
-    <div class="form-group">
         <label asp-for="Image"> Image</label>
         <input asp-for="Image" class="form-control" placeholder="Image">
         <span asp-validation-for="Image" class="text-danger"></span>
     </div>
     <button type="submit" class="btn btn-primary">submit</button>
+    <a class="btn btn-secondary" href="/Dashboard/Index">ยกเลิก</a>
 </form>
