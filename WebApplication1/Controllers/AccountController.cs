@@ -91,6 +91,9 @@ namespace WebApplication1.Controllers
 
             var newUser = new AppUser()
             {
+                FirstName = registerVM.FirstName,
+                LastName = registerVM.LastName,
+                Phone = registerVM.Phone,
                 Email = registerVM.EmailAddress,
                 UserName = registerVM.EmailAddress
             };

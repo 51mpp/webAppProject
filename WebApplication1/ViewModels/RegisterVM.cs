@@ -15,5 +15,11 @@ namespace WebApplication1.ViewModels
         [DataType(DataType.Password)]
         [Compare("Password", ErrorMessage = "Password do not match")]
         public string ConfirmPassword { get; set; }
+        [Required(ErrorMessage = "FirstName is requied")]
+        public string? FirstName { get; set; }
+        [Required(ErrorMessage = "LastName is requied")]
+        public string? LastName { get; set; }
+        [Required(ErrorMessage = "Phone is required")]
+        public string? Phone { get; set; }
     }
 }

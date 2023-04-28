@@ -20,7 +20,7 @@ namespace WebApplication1.Models
 
         public string? ProfileImageUrl { get; set; }
         public string? City { get; set; }
-        public String? State{ get; set; }
+        public string? State{ get; set; }
         public string? Icon { get; set; }
         public string? Account { get; set; }
         [ForeignKey("MainPose")]
