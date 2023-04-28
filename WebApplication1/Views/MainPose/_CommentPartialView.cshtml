@@ -3,7 +3,8 @@ For more information on enabling MVC for empty projects, visit https://go.micros
 *@
 @{
 }
-@model (IEnumerable<Comment>,int)
+@model (IEnumerable<Comment>,int,int,MainPose)
+
 @foreach (var comment in Model.Item1.Take(Model.Item2))
 {    
     <div class="row">
@@ -27,6 +28,34 @@ For more information on enabling MVC for empty projects, visit https://go.micros
                 </div>
             </div>
         </div>
+        @if (comment.Like == true)
+        {
+            <img src="https://cdn.discordapp.com/attachments/880751147449733150/1101569968333656125/pngwing.com.png" alt="">
+        }
+        @if (comment.Like == true && (User.Identity.IsAuthenticated && (User.IsInRole("admin") || User.Identity.Name == comment.Email)))
+        {
+            <form asp-controller="MainPose" asp-action="CreateComment" method="post"
+                enctype="multipart/form-data">
+                <input type="hidden" name="mainPoseId" value="@Model.Item4" />
+                <input type="hidden" name="email" value="@User.Identity.Name" />
+                <input type="hidden" name="confirm" value="true" />
+                <input type="hidden" id="first-name" name="FirstName" value="@comment.FirstName" />
+                <input type="hidden" id="last-name" name="LastName" value=@comment.LastName/>
+                <input type="hidden" id="comment-text" name="CommentText" value=@comment.CommentText/>
+                <input type="hidden" name="commentId" value="@comment.Id" />
+                <div class="form-group">
+                    <label for="Image2">หลักฐานการชำระเงิน</label>
+                    <input id="Image2" name="image2" type="file" class="form-control"
+                        placeholder="เลือกไฟล์">
+                </div>
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+        }
+        @if (User.Identity.IsAuthenticated && (User.IsInRole("admin") || User.Identity.Name == Model.Item4.Email))
+        {
+            <button id="confirm-@comment.Id-comments" onclick="confirmComment('@comment.Id','@comment.CommentText','@comment.FirstName','@comment.LastName','@comment.Email',true,@Model.Item3)">Confirm Comment</button>
+        }
+        
         @if (User.Identity.IsAuthenticated && (User.IsInRole("admin") || User.Identity.Name == comment.Email))
         {
             <form asp-controller="MainPose" asp-action="DeleteComment" method="post">
@@ -36,6 +65,21 @@ For more information on enabling MVC for empty projects, visit https://go.micros
                 </button>
             </form>
         }
-        
     </div>
+    <script>
+        function confirmComment(commentId, CommentText, FirstName, LastName, email, confirm, mainPoseId) {
+            $.ajax({
+                url: '@Url.Action("ConfirmComment", "MainPose")',
+                data: { commentId: commentId, CommentText: CommentText, FirstName: FirstName, LastName: LastName, email: email, confirm: confirm, mainPoseId: mainPoseId },
+                type: 'POST',
+                success: function (result) {
+                    console.log(result);
+                    // Do something with the result, if needed
+                },
+                error: function () {
+                    console.log('Error occurred while confirming comment.');
+                }
+            });
+        }
+    </script>
 }
