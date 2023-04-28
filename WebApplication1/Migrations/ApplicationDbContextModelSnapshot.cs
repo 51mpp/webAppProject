@@ -293,7 +293,7 @@ namespace WebApplication1.Migrations
 
                     b.HasIndex("MainPoseId");
 
-                    b.ToTable("Comments");
+                    b.ToTable("Comments", (string)null);
                 });
 
             modelBuilder.Entity("WebApplication1.Models.CommentDeposit", b =>
@@ -336,7 +336,7 @@ namespace WebApplication1.Migrations
 
                     b.HasIndex("DepositId");
 
-                    b.ToTable("CommentDeposits");
+                    b.ToTable("CommentDeposits", (string)null);
                 });
 
             modelBuilder.Entity("WebApplication1.Models.Deposit", b =>
@@ -387,7 +387,7 @@ namespace WebApplication1.Migrations
 
                     b.HasIndex("AppUserId");
 
-                    b.ToTable("Deposits");
+                    b.ToTable("Deposits", (string)null);
                 });
 
             modelBuilder.Entity("WebApplication1.Models.MainPose", b =>
@@ -444,7 +444,7 @@ namespace WebApplication1.Migrations
 
                     b.HasIndex("AppUserId");
 
-                    b.ToTable("MainPoses");
+                    b.ToTable("MainPoses", (string)null);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
