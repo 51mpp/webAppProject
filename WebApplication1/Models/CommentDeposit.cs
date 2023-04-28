@@ -17,5 +17,6 @@ namespace WebApplication1.Models
         public Deposit Deposit { get; set; }
 
         public string? Email { get; set; }
+        public bool? Like { get; set; }
     }
 }
