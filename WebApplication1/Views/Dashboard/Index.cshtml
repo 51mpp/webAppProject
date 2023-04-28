@@ -218,8 +218,8 @@
             {
             <div id="postBox" class="col-sm-12 col-lg-5 col-xl-4 ">
                 <div id="box" class="card mb-4 box-shadow position-relative">
-                    @if (User.Identity.IsAuthenticated && User.IsInRole("admin")) 
-                    {
+                        @if (User.Identity.IsAuthenticated && (User.IsInRole("admin") || User.Identity.Name == item.Email))
+                        {
                         <div class="editPost row flex-row-reverse position-absolute top-0 end-0">
                             <div class="col-7">
                                 <form asp-controller="Deposit" asp-action="DeleteDeposit" method="post">
