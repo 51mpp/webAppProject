@@ -16,7 +16,7 @@ namespace WebApplication1.Models
         public string? FirstName { get; set; }
         public string? LastName { get; set; }
         public int? Section { get; set; }
-        public int? Phone { get; set; }
+        public string? Phone { get; set; }
 
         public string? ProfileImageUrl { get; set; }
         public string? City { get; set; }

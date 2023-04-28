@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using WebApplication1.Data;
 
@@ -11,9 +12,11 @@ using WebApplication1.Data;
 namespace WebApplication1.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230428162939_changePhoneToString")]
+    partial class changePhoneToString
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -293,7 +296,7 @@ namespace WebApplication1.Migrations
 
                     b.HasIndex("MainPoseId");
 
-                    b.ToTable("Comments", (string)null);
+                    b.ToTable("Comments");
                 });
 
             modelBuilder.Entity("WebApplication1.Models.CommentDeposit", b =>
@@ -336,7 +339,7 @@ namespace WebApplication1.Migrations
 
                     b.HasIndex("DepositId");
 
-                    b.ToTable("CommentDeposits", (string)null);
+                    b.ToTable("CommentDeposits");
                 });
 
             modelBuilder.Entity("WebApplication1.Models.Deposit", b =>
@@ -387,7 +390,7 @@ namespace WebApplication1.Migrations
 
                     b.HasIndex("AppUserId");
 
-                    b.ToTable("Deposits", (string)null);
+                    b.ToTable("Deposits");
                 });
 
             modelBuilder.Entity("WebApplication1.Models.MainPose", b =>
@@ -444,7 +447,7 @@ namespace WebApplication1.Migrations
 
                     b.HasIndex("AppUserId");
 
-                    b.ToTable("MainPoses", (string)null);
+                    b.ToTable("MainPoses");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
