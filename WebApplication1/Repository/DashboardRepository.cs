@@ -1,3 +1,4 @@
+using Microsoft.EntityFrameworkCore;
 using WebApplication1.Data;
 using WebApplication1.Interface;
 using WebApplication1.Models;
@@ -29,10 +30,27 @@ namespace WebApplication1.Repository
             return userDeposits.ToList();
         }
 
-        // public async Task<AppUser> GetUserById(string id)
-        // {
-        //     return await _context.User.FindAsync(id);
-        // }
+        public async Task<AppUser> GetUserById(string id)
+        {
+            return await _context.Users.FindAsync(id);
+        }
+
+        public async Task<AppUser> GetByIdNoTracking(string id)
+        {
+            return await _context.Users.Where(u => u.Id == id).AsNoTracking().FirstOrDefaultAsync();
+        }
+
+        public bool Update(AppUser user)
+        {
+            _context.Users.Update(user);
+            return Save();
+        }
+
+        public bool Save()
+        {
+            var saved = _context.SaveChanges();
+            return saved> 0 ? true : false;
+        }
 
     }
 }
