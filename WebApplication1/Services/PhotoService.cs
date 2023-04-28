@@ -69,7 +69,7 @@ namespace WebApplication1.Services
                 var uploadParams = new ImageUploadParams
                 {
                     File = new FileDescription(file.FileName, stream),
-                    Transformation = new Transformation().Height(150).Width(150).Crop("fill").Gravity("face")
+                    Transformation = new Transformation().Height(980).Width(550).Crop("fill").Gravity("face")
                 };
                 uploadResult = await _clondinary.UploadAsync(uploadParams);
             }

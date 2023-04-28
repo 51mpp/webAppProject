@@ -93,9 +93,12 @@ namespace WebApplication1.Controllers
             {
                 FirstName = registerVM.FirstName,
                 LastName = registerVM.LastName,
+                Section = registerVM.Section,
                 Phone = registerVM.Phone,
                 Email = registerVM.EmailAddress,
-                UserName = registerVM.EmailAddress
+                UserName = registerVM.EmailAddress,
+                // NickName = registerVM.NickName,
+                Icon = registerVM.Icon
             };
 
             var newUserResponse = await _userManager.CreateAsync(newUser, registerVM.Password);
