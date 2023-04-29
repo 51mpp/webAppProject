@@ -10,11 +10,15 @@ namespace WebApplication1.Repository
     {
         private readonly ApplicationDbContext _context;
         private readonly IHttpContextAccessor _httpContextAccessor;
+        private readonly IMainPoseRepository _mainPoseRepository;
+        private readonly IDepositRepository _depositRepository;
 
-        public DashboardRepository(ApplicationDbContext context, IHttpContextAccessor httpContextAccessor)
+        public DashboardRepository(ApplicationDbContext context, IHttpContextAccessor httpContextAccessor, IMainPoseRepository mainPoseRepository,IDepositRepository depositRepository)
         {
             _context = context;
             _httpContextAccessor = httpContextAccessor;
+            _mainPoseRepository = mainPoseRepository;
+            _depositRepository = depositRepository;
         }
         public async Task<List<MainPose>> GetAllUserMainPose()
         {
@@ -42,7 +46,27 @@ namespace WebApplication1.Repository
 
         public bool Update(AppUser user)
         {
+
             _context.Users.Update(user);
+            var mainPoses = _context.MainPoses.Where(p => p.AppUserId == user.Id);
+            var deposits = _context.Deposits.Where(_ => _.AppUserId == user.Id);
+            foreach (var mainPose in mainPoses)
+            {
+                mainPose.Icon = user.Icon;
+                mainPose.FirstName = user.FirstName; 
+                mainPose.LastName = user.LastName;
+                mainPose.Phone = user?.Phone;
+                _context.MainPoses.Update(mainPose);
+            }
+            foreach(var deposit in deposits)
+            {
+                deposit.Icon = user?.Icon;
+                deposit.FirstName = user?.FirstName;
+                deposit.LastName = user?.LastName;
+                deposit.Phone = user?.Phone;
+                _context?.Deposits.Update(deposit);
+
+            }            
             return Save();
         }
 
