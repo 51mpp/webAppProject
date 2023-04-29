@@ -58,20 +58,57 @@
                             <div id="postBox" class="col-sm-12 col-md-12 col-xl-5 ">
                                 @* Poster'simage *@
                                 <div id="box" class="card mb-4 box-shadow position-relative">
-                                        <div class="editPost row flex-row-reverse position-absolute top-0 end-0">
-                                            <div class="col-7">
-                                                <form asp-controller="MainPose" asp-action="DeleteMainPose" method="post">
-                                                    <input type="hidden" name="mainPoseId" value="@item.Id" />
-                                                    <button type="submit" class="remove"><img
-                                                            src="https://cdn-icons-png.flaticon.com/512/189/189690.png" alt=""></button>
-                                                </form>
+                                        @if (User.Identity.IsAuthenticated && (User.IsInRole("admin") || User.Identity.Name == item.Email))
+                                        {
+
+                                            <div class="editPost row flex-row-reverse position-absolute top-0 end-0">
+                                                <div class="col-7">
+                                                    <form asp-controller="MainPose" asp-action="DeleteMainPose" method="post">
+                                                        <input type="hidden" name="mainPoseId" value="@item.Id" />
+                                                        <button type="submit" class="remove"><img
+                                                                src="https://cdn-icons-png.flaticon.com/512/189/189690.png" alt=""></button>
+                                                    </form>
+                                                </div>
+                                                <div class="col-4">
+                                                    <a asp-controller="MainPose" asp-action="EditMainPose" asp-route-id="@item.Id" class="edit"><img
+                                                            src="https://cdn-icons-png.flaticon.com/512/3597/3597075.png" alt="">
+                                                    </a>
+                                                </div>
                                             </div>
-                                            <div class="col-4">
-                                                <a asp-controller="MainPose" asp-action="EditMainPose" asp-route-id="@item.Id" class="edit"><img
-                                                        src="https://cdn-icons-png.flaticon.com/512/3597/3597075.png" alt="">
-                                                </a>
+                                            <div class="status-radio d-flex justify-content-around position-absolute top-0 p-1">
+                                                    @* wait *@
+                                                        <div class="waitB">
+                                                            <input id="wait-btn-@item.Id" class="wait-btn" type="radio" name="radio-status-@item.Id"  onclick="status('@item.Id','รอ')">
+                                                        </div>
+
+                                                    @* process *@
+                                                        <div class="processB">
+                                                        <input id="process-btn-@item.Id" class="process-btn" type="radio" name="radio-status-@item.Id"  onclick="status('@item.Id','กำลังไปส่ง')">
+                                                        </div>
+
+                                                    @* finish *@
+                                                        <div class="finishB">
+                                                        <input  id="finish-btn-@item.Id" class="finish-btn" type="radio" name="radio-status-@item.Id"  onclick="status('@item.Id','ส่งแล้ว')">
+                                                        </div>
                                             </div>
-                                        </div>
+                                        }else{
+                                            <div class="status-radio d-flex justify-content-around position-absolute top-0 p-1">
+                                                    @* wait *@
+                                                        <div class="waitB">
+                                                            <input id="wait-btn-@item.Id" class="wait-btn" type="radio" name="radio-status-@item.Id" value="other">
+                                                        </div>
+
+                                                    @* process *@
+                                                        <div class="processB">
+                                                        <input id="process-btn-@item.Id" class="process-btn" type="radio" name="radio-status-@item.Id" value="other">
+                                                        </div>
+
+                                                    @* finish *@
+                                                        <div class="finishB">
+                                                        <input  id="finish-btn-@item.Id" class="finish-btn" type="radio" name="radio-status-@item.Id" value="other">
+                                                        </div>
+                                            </div>
+                                        }
                                 <div class="card-body">
                                     <small class="position-absolute top-0 start-1" style="margin-top: 5px;color: grey">
                                         @{
@@ -106,6 +143,18 @@
                                             @y&#128337;
                                     </small>
                                     <div style="margin-top: 10px;">
+                                        <div id="status-@item.Id-Post" class="position-absolute" style="color:white;">
+                                            @if(item.StatePost == "รอ")
+                                            {
+                                                <small>รอ</small>
+                                            }else if(item.StatePost == "กำลังไปส่ง")
+                                            {
+                                                <small>กำลังไปส่ง</small>
+                                            }else if(item.StatePost == "ส่งแล้ว")
+                                            {
+                                                <small>ส่งแล้ว</small>
+                                            }
+                                        </div>
                                         <div class="row align-items-center">
                                             <div class="col-sm-12 col-md-4">
                                                 <img class="profile" src="@item.Icon" style="margin-bottom: 10px;">
@@ -147,6 +196,49 @@
                                             </div>
                                         </div>
                                     </div>
+                                    <script>
+                                        function status(mainPoseId, status) {
+                                            $.ajax({
+                                                url: '@Url.Action("StateMainPose", "MainPose")',
+                                                data: { id: mainPoseId, status: status },
+                                                type: 'POST',
+                                                success: function (result) {
+                                                    console.log(result);
+                                                    // Do something with the result, if needed
+                                                },
+                                                error: function () {
+                                                    console.log('Error occurred while confirming comment.');
+                                                }
+                                            });
+                                            
+                                        } 
+
+                                    </script>
+                                    <script>
+                                        if(document.getElementById("status-@item.Id-Post").innerText == "รอ"){
+                                            document.getElementById("wait-btn-@item.Id").checked = true;
+                                            if(document.getElementById("wait-btn-@item.Id").value === "other"){
+                                                document.getElementById("wait-btn-@item.Id").disabled = false;
+                                                document.getElementById("process-btn-@item.Id").disabled = true;
+                                                document.getElementById("finish-btn-@item.Id").disabled = true;
+                                            }
+                                            
+                                        }else if(document.getElementById("status-@item.Id-Post").innerText == "กำลังไปส่ง"){
+                                            document.getElementById("process-btn-@item.Id").checked = true;
+                                            if(document.getElementById("process-btn-@item.Id").value === "other"){
+                                                document.getElementById("wait-btn-@item.Id").disabled = true;
+                                                document.getElementById("process-btn-@item.Id").disabled = false;
+                                                document.getElementById("finish-btn-@item.Id").disabled = true;
+                                            }
+                                        }else{
+                                            document.getElementById("finish-btn-@item.Id").checked = true;
+                                            if(document.getElementById("finish-btn-@item.Id").value === "other"){
+                                                document.getElementById("wait-btn-@item.Id").disabled = true;
+                                                document.getElementById("process-btn-@item.Id").disabled = true;
+                                                document.getElementById("finish-btn-@item.Id").disabled = false;
+                                            }
+                                        }       
+                                    </script>
                                     <div class="row align-items-center">
                                         <div class="scan col-12">
                                             <span onclick="showQR(@item.Id@item.Id,2)">แสกนจ่าย</span>
@@ -257,6 +349,39 @@
                                         </a>
                                     </div>
                                 </div>
+                                        <div class="status-radio d-flex justify-content-around position-absolute top-0 p-1">
+                                        @* wait *@
+                                            <div class="waitB">
+                                                <input id="wait-btn-@item.Id" class="wait-btn" type="radio" name="radio-status-@item.Id"  onclick="status('@item.Id','รอ')">
+                                            </div>
+
+                                        @* process *@
+                                            <div class="processB">
+                                            <input id="process-btn-@item.Id" class="process-btn" type="radio" name="radio-status-@item.Id"  onclick="status('@item.Id','กำลังไปส่ง')">
+                                            </div>
+
+                                        @* finish *@
+                                            <div class="finishB">
+                                            <input  id="finish-btn-@item.Id" class="finish-btn" type="radio" name="radio-status-@item.Id"  onclick="status('@item.Id','ส่งแล้ว')">
+                                            </div>
+                                </div>
+                            }else{
+                                <div class="status-radio d-flex justify-content-around position-absolute top-0 p-1">
+                                        @* wait *@
+                                            <div class="waitB">
+                                                <input id="wait-btn-@item.Id" class="wait-btn" type="radio" name="radio-status-@item.Id" value="other">
+                                            </div>
+
+                                        @* process *@
+                                            <div class="processB">
+                                            <input id="process-btn-@item.Id" class="process-btn" type="radio" name="radio-status-@item.Id" value="other">
+                                            </div>
+
+                                        @* finish *@
+                                            <div class="finishB">
+                                            <input  id="finish-btn-@item.Id" class="finish-btn" type="radio" name="radio-status-@item.Id" value="other">
+                                            </div>
+                                </div>
                             }
                         <div class="card-body">
                             <small class="position-absolute top-0 start-1 p-2" style="margin-top: 0px;color: grey">
@@ -291,11 +416,24 @@
                                 }
                                 @y&#128337;
                             </small>
+                        <div style="margin-top: 10px;"></div>
                         <div class="row align-items-center">
+                            <div id="status-@item.Id-Post" class="position-absolute" style="color:white;">
+                                    @if(item.StatePost == "รอ")
+                                    {
+                                        <small>รอ</small>
+                                    }else if(item.StatePost == "กำลังไปส่ง")
+                                    {
+                                        <small>กำลังไปส่ง</small>
+                                    }else if(item.StatePost == "ส่งแล้ว")
+                                    {
+                                        <small>ส่งแล้ว</small>
+                                    }
+                                </div>
                             <div class="col-sm-12 col-md-4">
                                 <img class="profile" src="@item.Icon" style="margin-bottom: 10px;">
                             </div>
-                            <div class="col-sm-12 col-md-8">
+                            <div class="col-sm-12 col-md-4">
                                 <div class="row align-items-center">
                                     <div class="col-12">
                                         <span>@item.FirstName @item.LastName</span> @* ชื่อ - สกุล*@
@@ -326,6 +464,49 @@
                                     </span>
                                 </div>
                             </div>
+                            <script>
+                            function status(mainPoseId, status) {
+                                console.log("yoo");
+                                $.ajax({
+                                    url: '@Url.Action("StateMainPose", "MainPose")',
+                                    data: { id: mainPoseId, status: status },
+                                    type: 'POST',
+                                    success: function (result) {
+                                        console.log(result);
+                                        // Do something with the result, if needed
+                                    },
+                                    error: function () {
+                                        console.log('Error occurred while confirming comment.');
+                                    }
+                                });
+                                
+                            } 
+                            </script>
+                            <script>
+                                if(document.getElementById("status-@item.Id-Post").innerText == "รอ"){
+                                    document.getElementById("wait-btn-@item.Id").checked = true;
+                                    if(document.getElementById("wait-btn-@item.Id").value === "other"){
+                                        document.getElementById("wait-btn-@item.Id").disabled = false;
+                                        document.getElementById("process-btn-@item.Id").disabled = true;
+                                        document.getElementById("finish-btn-@item.Id").disabled = true;
+                                    }
+                                    
+                                }else if(document.getElementById("status-@item.Id-Post").innerText == "กำลังไปส่ง"){
+                                    document.getElementById("process-btn-@item.Id").checked = true;
+                                    if(document.getElementById("process-btn-@item.Id").value === "other"){
+                                        document.getElementById("wait-btn-@item.Id").disabled = true;
+                                        document.getElementById("process-btn-@item.Id").disabled = false;
+                                        document.getElementById("finish-btn-@item.Id").disabled = true;
+                                    }
+                                }else{
+                                    document.getElementById("finish-btn-@item.Id").checked = true;
+                                    if(document.getElementById("finish-btn-@item.Id").value === "other"){
+                                        document.getElementById("wait-btn-@item.Id").disabled = true;
+                                        document.getElementById("process-btn-@item.Id").disabled = true;
+                                        document.getElementById("finish-btn-@item.Id").disabled = false;
+                                    }
+                                }       
+                            </script>
                             <div id="post-@item.Id-commentDeposit"></div>
                             <hr>
                             <script>
