@@ -1,12 +1,16 @@
 .profile {
     border-radius: 100px;
-    filter: drop-shadow(3px 4px 2px gray);
+    /* filter: drop-shadow(3px 4px 2px gray); */
     width: 100px;
     height: 100px;
 }
 
 .user-img {}
 
+body {
+    background-image: url('https://i.pinimg.com/564x/d6/aa/f2/d6aaf2c1b0402124aea5423898a7ef4c.jpg');
+    background-size: cover;
+}
 
 .user-info {
     font-family: 'IBM Plex Sans Thai', sans-serif;

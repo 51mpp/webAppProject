@@ -272,7 +272,7 @@ section {
 }
 
 .team-member h3 {
-  color: #333;
+  color: rgba(243, 156, 18, 1);
   font-size: 20px;
   font-family: var(--font);
 }
@@ -559,28 +559,5 @@ section {
     font-size: 16px;
     font-family: var(--font);
   }
-
-  /* .fa {
-    padding: 20px;
-    font-size: 30px;
-    width: 50px;
-    text-align: center;
-    text-decoration: none;
-    margin: 5px 2px;
-  }
-  
-  .fa:hover {
-      opacity: 0.;
-  }
-  
-  .fa-facebook {
-    background: #3B5998;
-    color: white;
-  }
-
-  .fa-instagram {
-    background: #125688;
-    color: white;
-  } */
 
 }
