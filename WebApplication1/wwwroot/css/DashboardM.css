@@ -5,6 +5,17 @@
     height: 100px;
 }
 
+.user-img {}
+
+
+.user-info {
+    font-family: 'IBM Plex Sans Thai', sans-serif;
+}
+
+.user-info p {
+    padding-left: 5%;
+}
+
 #postBox {
     padding: 20px;
 }
@@ -135,4 +146,11 @@ small {
     background-color: rgb(253, 201, 89);
     border-radius: 0px 0px 50px 50px;
 
+}
+
+.user-opt a {
+    width: 100%;
+    font-size: 14px;
+    padding: 10px;
+    font-family: 'IBM Plex Sans Thai', sans-serif;
 }
