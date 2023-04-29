@@ -125,7 +125,9 @@ namespace WebApplication1.Controllers
                 MaxTimePose = post.MaxTimePose,
                 CreatedTime = post.CreatedTime,
                 Email = post.Email,
-                AppUserId = post.AppUserId
+                Icon = post.Icon,
+                AppUserId = post.AppUserId,
+                StatePost = post.StatePost
 
             };
             return View(mainPoseVM);
@@ -171,7 +173,9 @@ namespace WebApplication1.Controllers
                 MaxTimePose = mainPoseVM.MaxTimePose,
                 LastModified = DateTime.Now,
                 Email = mainPoseVM.Email,
-                AppUserId = mainPoseVM.AppUserId
+                Icon = mainPoseVM.Icon,
+                AppUserId = mainPoseVM.AppUserId,
+                StatePost = mainPoseVM.StatePost
 
             };
             _mainPoseRepository.Update(mainPose);
@@ -198,6 +202,8 @@ namespace WebApplication1.Controllers
                 MaxTimePose = post.MaxTimePose,
                 LastModified = DateTime.Now,
                 Email = post.Email,
+                Icon = post.Icon,
+                AppUserId = post.AppUserId,
                 StatePost = status
             };
             _mainPoseRepository.Update(mainPose);

@@ -73,7 +73,8 @@ namespace WebApplication1.Controllers
                     MaxTimePose = depositVM.MaxTimePose,
                     AppUserId = depositVM.AppUserId,
                     CreatedTime = DateTime.Now,
-                    Email = depositVM.Email
+                    Email = depositVM.Email,
+                    StatePost = depositVM.StatePost
 
                 };
 
@@ -94,16 +95,19 @@ namespace WebApplication1.Controllers
             if (post == null) { return View("Error"); }
             var depositVM = new EditDepositViewModel
             {
+                Id = id,
                 FirstName = post.FirstName,
                 LastName = post.LastName,
                 Phone = post.Phone,
                 Place = post.Place,
-                Food = post.Food,
-                PlaceDeliver = post.PlaceDeliver,
                 MaxTimePose = post.MaxTimePose,
                 CreatedTime = post.CreatedTime,
+                Food = post.Food,
+                PlaceDeliver = post.PlaceDeliver,
+                Icon = post.Icon,
                 Email = post.Email,
-                AppUserId = post.AppUserId
+                AppUserId = post.AppUserId,
+                StatePost = post.StatePost
 
             };
             return View(depositVM);
@@ -128,17 +132,46 @@ namespace WebApplication1.Controllers
                 LastName = depositVM.LastName,
                 Phone = depositVM.Phone,
                 Place = depositVM.Place,
+                MaxTimePose = depositVM.MaxTimePose,
+                CreatedTime = depositVM.CreatedTime,
                 Food = depositVM.Food,
                 PlaceDeliver = depositVM.PlaceDeliver,
-                CreatedTime = depositVM.CreatedTime,
-                MaxTimePose = depositVM.MaxTimePose,
-                LastModified = DateTime.Now,
+                Icon = depositVM.Icon,
                 Email = depositVM.Email,
-                AppUserId = depositVM.AppUserId
+                AppUserId = depositVM.AppUserId,
+                StatePost = depositVM.StatePost,
+                LastModified = DateTime.Now,
 
             };
             _depositRepository.Update(deposit);
             return RedirectToAction("Index");
+        }
+        [HttpPost]
+        public async Task<IActionResult> StateMainPose(int id, string status)
+        {
+            if (!ModelState.IsValid) { return BadRequest("Invalid model state"); }
+            var post = await _depositRepository.GetByIdAsyncNoTracking(id);
+            if (post == null) { return BadRequest("Can get MainPose"); }
+
+            var deposit = new Deposit
+            {
+                Id = id,
+                FirstName = post.FirstName,
+                LastName = post.LastName,
+                Phone = post.Phone,
+                Place = post.Place,
+                Food = post.Food,
+                PlaceDeliver = post.PlaceDeliver,
+                MaxTimePose = post.MaxTimePose,
+                CreatedTime = post.CreatedTime,
+                Email = post.Email,
+                AppUserId = post.AppUserId,
+                StatePost = status,
+                LastModified = DateTime.Now,
+                Icon = post.Icon
+            };
+            _depositRepository.Update(deposit);
+            return Ok("Status submitted successfully");
         }
         [HttpPost]
         public async Task<IActionResult> DeleteDeposit(int depositId)

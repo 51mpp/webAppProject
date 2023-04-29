@@ -29,5 +29,6 @@ namespace WebApplication1.ViewModels
         public string AppUserId { get; set; }
 
         public string Email { get; set; }
+        public string? StatePost { get; set; }
     }
 }
