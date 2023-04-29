@@ -34,6 +34,9 @@
                                     <img src="https://cdn-icons-png.flaticon.com/512/3597/3597075.png" alt="">
                                 </a>
                             </div>
+                            <button onclick="status('@item.Id','รอ')">รอ</button>
+                            <button onclick="status('@item.Id','กำลังไปส่ง')">กำลังไปส่ง</button>
+                            <button onclick="status('@item.Id','ส่งแล้ว')">ส่งแล้ว</button>
                         </div>
                     }
                     <div class="card-body">
@@ -107,6 +110,37 @@
                                     </span>
                                 </div>
                             </div>
+                                <div id="status-@item.Id-Post">
+                                    @if (item.StatePost == "รอ")
+                                    {
+                                        <small>รอ</small>
+                                    }
+                                    else if (item.StatePost == "กำลังไปส่ง")
+                                    {
+                                        <small>กำลังไปส่ง</small>
+                                    }
+                                    else if (item.StatePost == "ส่งแล้ว")
+                                    {
+                                        <small>ส่งแล้ว</small>
+                                    }
+                                </div>
+                                <script>
+                                    function status(id, status) {
+                                        $.ajax({
+                                            url: '@Url.Action("StateMainPose", "Deposit")',
+                                            data: { id: id, status: status },
+                                            type: 'POST',
+                                            success: function (result) {
+                                                console.log(result);
+                                                // Do something with the result, if needed
+                                            },
+                                            error: function () {
+                                                console.log('Error occurred while confirming comment.');
+                                            }
+                                        });
+                                    }
+
+                                </script>
                             <div id="post-@item.Id-comments" class="p-2">
                             @if (item.CommentDeposits != null && item.CommentDeposits.Any())
                             {
