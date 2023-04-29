@@ -74,7 +74,7 @@ namespace WebApplication1.Controllers
                     AppUserId = depositVM.AppUserId,
                     CreatedTime = DateTime.Now,
                     Email = depositVM.Email,
-                    StatePost = depositVM.StatePost
+                    StatePost = "รอ"
 
                 };
 

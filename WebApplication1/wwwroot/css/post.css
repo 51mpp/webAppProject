@@ -156,3 +156,35 @@ small {
     border-radius: 0px 0px 50px 50px;
     margin-bottom: 60px;
 }
+
+.time {
+    font-size: 12px;
+}
+
+.status-radio {
+    margin-left: 50%;
+
+}
+
+.waitB {
+    padding-right: 20%;
+}
+
+.wait-btn {
+    accent-color: green;
+    ;
+}
+
+.processB {
+    padding-right: 20%;
+}
+
+.process-btn {
+
+    accent-color: yellow;
+}
+
+.finish-btn {
+
+    accent-color: red;
+}

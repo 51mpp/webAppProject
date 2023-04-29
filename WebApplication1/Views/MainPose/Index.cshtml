@@ -51,15 +51,43 @@ src="https://cdnjs.cloudflare.com/ajax/libs/jquery-ajax-unobtrusive/3.2.6/jquery
                                         src="https://cdn-icons-png.flaticon.com/512/3597/3597075.png" alt="">
                                 </a>
                             </div>
-                            <button onclick="status('@item.Id','รอ')">รอ</button>
-                            <button onclick="status('@item.Id','กำลังไปส่ง')">กำลังไปส่ง</button>
-                            <button onclick="status('@item.Id','ส่งแล้ว')">ส่งแล้ว</button>
-                            
+                        </div>
+                        <div class="status-radio d-flex justify-content-around position-absolute top-0 p-1">
+                                @* wait *@
+                                    <div class="waitB">
+                                        <input id="wait-btn-@item.Id" class="wait-btn" type="radio" name="radio-status-@item.Id"  onclick="status('@item.Id','รอ')">
+                                    </div>
+
+                                @* process *@
+                                    <div class="processB">
+                                    <input id="process-btn-@item.Id" class="process-btn" type="radio" name="radio-status-@item.Id"  onclick="status('@item.Id','กำลังไปส่ง')">
+                                    </div>
+
+                                @* finish *@
+                                    <div class="finishB">
+                                    <input  id="finish-btn-@item.Id" class="finish-btn" type="radio" name="radio-status-@item.Id"  onclick="status('@item.Id','ส่งแล้ว')">
+                                    </div>
+                        </div>
+                    }else{
+                        <div class="status-radio d-flex justify-content-around position-absolute top-0 p-1">
+                                @* wait *@
+                                    <div class="waitB">
+                                        <input id="wait-btn-@item.Id" class="wait-btn" type="radio" name="radio-status-@item.Id" value="other">
+                                    </div>
+
+                                @* process *@
+                                    <div class="processB">
+                                    <input id="process-btn-@item.Id" class="process-btn" type="radio" name="radio-status-@item.Id" value="other">
+                                    </div>
+
+                                @* finish *@
+                                    <div class="finishB">
+                                    <input  id="finish-btn-@item.Id" class="finish-btn" type="radio" name="radio-status-@item.Id" value="other">
+                                    </div>
                         </div>
                     }
-                    
                     <div class="card-body">
-                        <small class="position-absolute top-0 start-1" style="margin-top: 5px;color: grey">
+                        <small class="time position-absolute top-0 start-1" style="margin-top: 5px;color: grey">
                             @{
                                 var x = DateTime.Now - item.CreatedTime;
                                 string y = "";
@@ -95,6 +123,18 @@ src="https://cdnjs.cloudflare.com/ajax/libs/jquery-ajax-unobtrusive/3.2.6/jquery
 
                         <div style="margin-top: 10px;">
                             <div class="row align-items-center">
+                                <div id="status-@item.Id-Post" class="position-absolute" style="color:white;">
+                                    @if(item.StatePost == "รอ")
+                                    {
+                                        <small>รอ</small>
+                                    }else if(item.StatePost == "กำลังไปส่ง")
+                                    {
+                                        <small>กำลังไปส่ง</small>
+                                    }else if(item.StatePost == "ส่งแล้ว")
+                                    {
+                                        <small>ส่งแล้ว</small>
+                                    }
+                                </div>
                                 <div class="col-sm-12 col-md-4">
                                     @*  *@
                                     <img class="profile" src="@item.Icon" style="margin-bottom: 10px;">
@@ -136,18 +176,6 @@ src="https://cdnjs.cloudflare.com/ajax/libs/jquery-ajax-unobtrusive/3.2.6/jquery
 
                             </div>
                         </div>
-                        <div id="status-@item.Id-Post">
-                            @if(item.StatePost == "รอ")
-                            {
-                                <small>รอ</small>
-                            }else if(item.StatePost == "กำลังไปส่ง")
-                            {
-                                <small>กำลังไปส่ง</small>
-                            }else if(item.StatePost == "ส่งแล้ว")
-                            {
-                                <small>ส่งแล้ว</small>
-                            }
-                        </div>
                         <script>
                             function status(mainPoseId, status) {
                                 $.ajax({
@@ -162,8 +190,34 @@ src="https://cdnjs.cloudflare.com/ajax/libs/jquery-ajax-unobtrusive/3.2.6/jquery
                                         console.log('Error occurred while confirming comment.');
                                     }
                                 });
+                                
                             } 
 
+                        </script>
+                        <script>
+                            if(document.getElementById("status-@item.Id-Post").innerText == "รอ"){
+                                document.getElementById("wait-btn-@item.Id").checked = true;
+                                if(document.getElementById("wait-btn-@item.Id").value === "other"){
+                                    document.getElementById("wait-btn-@item.Id").disabled = false;
+                                    document.getElementById("process-btn-@item.Id").disabled = true;
+                                    document.getElementById("finish-btn-@item.Id").disabled = true;
+                                }
+                                
+                            }else if(document.getElementById("status-@item.Id-Post").innerText == "กำลังไปส่ง"){
+                                document.getElementById("process-btn-@item.Id").checked = true;
+                                if(document.getElementById("process-btn-@item.Id").value === "other"){
+                                    document.getElementById("wait-btn-@item.Id").disabled = true;
+                                    document.getElementById("process-btn-@item.Id").disabled = false;
+                                    document.getElementById("finish-btn-@item.Id").disabled = true;
+                                }
+                            }else{
+                                 document.getElementById("finish-btn-@item.Id").checked = true;
+                                 if(document.getElementById("finish-btn-@item.Id").value === "other"){
+                                    document.getElementById("wait-btn-@item.Id").disabled = true;
+                                    document.getElementById("process-btn-@item.Id").disabled = true;
+                                    document.getElementById("finish-btn-@item.Id").disabled = false;
+                                }
+                            }       
                         </script>
                         <div class="row align-items-center">
                             <div class="scan col-12">

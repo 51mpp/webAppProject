@@ -111,3 +111,35 @@ span {
     cursor: pointer;
     text-decoration: underline;
 }
+
+.time {
+    font-size: 12px;
+}
+
+.status-radio {
+    margin-left: 50%;
+
+}
+
+.waitB {
+    padding-right: 20%;
+}
+
+.wait-btn {
+    accent-color: green;
+    ;
+}
+
+.processB {
+    padding-right: 20%;
+}
+
+.process-btn {
+
+    accent-color: yellow;
+}
+
+.finish-btn {
+
+    accent-color: red;
+}

@@ -56,7 +56,7 @@ namespace WebApplication1.Controllers
             };
             return View(createMainPoseViewModel);
         }
-        
+
         [HttpPost]
         public async Task<IActionResult> CreateMainPose(CreateMainPoseViewModel mainPoseVM)
         {
@@ -71,7 +71,7 @@ namespace WebApplication1.Controllers
 
                 var curUserId = _httpContextAccessor.HttpContext.User.GetUserId();
                 AppUser user = await _userRepository.GetUserById(curUserId);
-                if(user == null) return View("Error");
+                if (user == null) return View("Error");
                 var mainPose = new MainPose
                 {
                     FirstName = mainPoseVM.FirstName,
@@ -85,7 +85,8 @@ namespace WebApplication1.Controllers
                     MaxComment = mainPoseVM.MaxComment,
                     MaxTimePose = mainPoseVM.MaxTimePose,
                     CreatedTime = DateTime.Now,
-                    Email = mainPoseVM.Email
+                    Email = mainPoseVM.Email,
+                    StatePost = "รอ"
                 };
 
                 _mainPoseRepository.Add(mainPose);
@@ -112,7 +113,7 @@ namespace WebApplication1.Controllers
         public async Task<IActionResult> EditMainPose(int id)
         {
             var post = await _mainPoseRepository.GetByIdAsync(id);
-            if (post == null) { return View("Error");}
+            if (post == null) { return View("Error"); }
             var mainPoseVM = new EditMainPoseViewModel
             {
                 FirstName = post.FirstName,
@@ -182,11 +183,11 @@ namespace WebApplication1.Controllers
             return RedirectToAction("Index");
         }
         [HttpPost]
-        public async Task<IActionResult> StateMainPose(int id,string status)
+        public async Task<IActionResult> StateMainPose(int id, string status)
         {
-            if (!ModelState.IsValid){return BadRequest("Invalid model state");}
+            if (!ModelState.IsValid) { return BadRequest("Invalid model state"); }
             var post = await _mainPoseRepository.GetByIdAsyncNoTracking(id);
-            if (post == null){return BadRequest("Can get MainPose");}
+            if (post == null) { return BadRequest("Can get MainPose"); }
 
             var mainPose = new MainPose
             {
@@ -221,7 +222,7 @@ namespace WebApplication1.Controllers
             {
                 x = "white";
             }
-            return PartialView("_StatusPosePartialView",x);
+            return PartialView("_StatusPosePartialView", x);
         }
         [HttpPost]
         public async Task<IActionResult> DeleteMainPose(int mainPoseId)
@@ -235,19 +236,31 @@ namespace WebApplication1.Controllers
             _mainPoseRepository.Delete(post);
             return RedirectToAction("");
         }
+        [HttpPost]
+        public async Task<IActionResult> DeleteMainPose2(int mainPoseId)
+        {
+            var post = await _mainPoseRepository.GetByIdAsync(mainPoseId);
+            if (post == null) { return View("Error"); }
+            if (!string.IsNullOrEmpty(post.Image))
+            {
+                _ = _photoService.DeletePhotoAsync(post.Image); // ไม่สนใจรีเทิน
+            }
+            _mainPoseRepository.Delete(post);
+            return RedirectToAction("Index","Dashboard");
+        }
         [HttpGet]
         public async Task<IActionResult> GetComments(int mainPoseId)
         {
             MainPose mainPose = await _mainPoseRepository.GetByIdAsync(mainPoseId);
             int maxComment = (int)mainPose.MaxComment;
             IEnumerable<Comment> comments = await _mainPoseRepository.GetCommentsByMainPoseId(mainPoseId);
-            return PartialView("_CommentPartialView", (comments,maxComment,mainPoseId,mainPose));
+            return PartialView("_CommentPartialView", (comments, maxComment, mainPoseId, mainPose));
         }
         [HttpPost]
-        public async Task<IActionResult> CreateComment(int mainPoseId, string CommentText, string FirstName, string LastName,IFormFile? image2,string email,bool confirm)
+        public async Task<IActionResult> CreateComment(int mainPoseId, string CommentText, string FirstName, string LastName, IFormFile? image2, string email, bool confirm)
         {
             MainPose mainPose = await _mainPoseRepository.GetByIdAsync(mainPoseId);
-            
+
             if (ModelState.IsValid)
             {
                 string imageUrl = "";
@@ -313,7 +326,7 @@ namespace WebApplication1.Controllers
             MainPose mainPoses = await _mainPoseRepository.GetByIdAsync(mainPoseId);
             IEnumerable<Comment> comments = await _mainPoseRepository.GetCommentsByMainPoseId(mainPoseId);
             int count = comments.Count();
-            return Json(new {countComment = count });
+            return Json(new { countComment = count });
         }
         [HttpGet]
         public IActionResult GetDate(DateTime CreatedTime)
@@ -381,7 +394,7 @@ namespace WebApplication1.Controllers
             return Json(new { success = false, errors = ModelState });
         }
         [HttpPost]
-        public async Task<IActionResult> ConfirmComment(int commentId, string CommentText, string FirstName, string LastName, string? Image, string email,bool confirm,int mainPoseId)
+        public async Task<IActionResult> ConfirmComment(int commentId, string CommentText, string FirstName, string LastName, string? Image, string email, bool confirm, int mainPoseId)
         {
             if (!ModelState.IsValid)
             {
