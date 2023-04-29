@@ -50,6 +50,8 @@ src="https://cdnjs.cloudflare.com/ajax/libs/jquery-ajax-unobtrusive/3.2.6/jquery
                                         src="https://cdn-icons-png.flaticon.com/512/3597/3597075.png" alt="">
                                 </a>
                             </div>
+
+
                         </div>
                     }
                     <div class="card-body">
@@ -288,6 +290,21 @@ src="https://cdnjs.cloudflare.com/ajax/libs/jquery-ajax-unobtrusive/3.2.6/jquery
                         }
                     });
                 }
+                function confirmComment(commentId, CommentText, FirstName, LastName, image, email, confirm, mainPoseId) {
+                    $.ajax({
+                        url: '@Url.Action("ConfirmComment", "MainPose")',
+                        data: { commentId: commentId, CommentText: CommentText, FirstName: FirstName, LastName: LastName, image: image, email: email, confirm: confirm, mainPoseId: mainPoseId },
+                        type: 'POST',
+                        success: function (result) {
+                            console.log(result);
+                            // Do something with the result, if needed
+                        },
+                        error: function () {
+                            console.log('Error occurred while confirming comment.');
+                        }
+                    });
+                }
+
                 // Call loadComments every 1 seconds
                 setInterval(function () {
                     loadComments(@item.Id);

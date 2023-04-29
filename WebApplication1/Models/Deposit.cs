@@ -24,5 +24,6 @@ namespace WebApplication1.Models
         public ICollection<CommentDeposit> CommentDeposits { get; set; }
 
         public string? Email { get; set; }
+        public string? StatePost { get; set; }
     }
 }
