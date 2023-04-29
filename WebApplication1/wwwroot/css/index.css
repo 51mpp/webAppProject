@@ -339,10 +339,10 @@ section {
     font-family: var(--font);
   }
 
-  .btn:hover {
+  /* .btn:hover {
     transform: scale(1.2) translateX(10px);
     transition: .4s;
-  }
+  } */
 
   /* home section */
 
@@ -412,7 +412,7 @@ section {
   }
 
   .team-member h3 {
-    color: #333;
+    color: rgba(243, 156, 18, 1);
     font-size: 20px;
     font-family: var(--font);
   }
@@ -469,7 +469,6 @@ section {
     color: #fff;
     border-radius: 0.5rem;
     font-family: var(--font);
-
   }
 
   /* home section */
@@ -540,7 +539,7 @@ section {
   }
 
   .team-member h3 {
-    color: #333;
+    color: rgba(243, 156, 18, 1);
     font-size: 20px;
     font-family: var(--font);
   }
@@ -549,6 +548,10 @@ section {
     color: #666;
     font-size: 16px;
     font-family: var(--font);
+  }
+
+  #footer p {
+    font-size: 10px;
   }
 
 }
