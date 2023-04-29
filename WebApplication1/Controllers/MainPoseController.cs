@@ -48,6 +48,7 @@ namespace WebApplication1.Controllers
             var createMainPoseViewModel = new CreateMainPoseViewModel { AppUserId = curUserId };
             return View(createMainPoseViewModel);
         }
+        
         [HttpPost]
         public async Task<IActionResult> CreateMainPose(CreateMainPoseViewModel mainPoseVM)
         {
@@ -59,7 +60,7 @@ namespace WebApplication1.Controllers
                     var result = await _photoService.AddPhotoAsync(mainPoseVM.Image);
                     imageUrl = result.Url.ToString();
                 }
-                
+
                 var curUserId = _httpContextAccessor.HttpContext.User.GetUserId();
                 AppUser user = await _userRepository.GetUserById(curUserId);
                 if(user == null) return View("Error");

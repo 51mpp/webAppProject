@@ -12,54 +12,253 @@
 <script src="~/js/post.js"></script>
 
 
-<div id="fCon" class="container">
-    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
-        <img src="@Model.Item2.Icon">
-        <div>
-            <h3>First Name & Last Name: <br> @Model.Item2.FirstName  @Model.Item2.LastName</h3>
-            <p>Nick Name: @Model.Item2.NickName</p>
-            <p>Phone: @Model.Item2.Phone</p>
-            <p>Section: @Model.Item2.Section</p>
+<div class="container">
+    @* user info *@
+    <div id="fCon">
+        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+            <img class="user-img" src="@Model.Item2.Icon">
+            <div class="user-info">
+                <h3 class="p-3">ข้อมูลผู้ใช้ </h3>
+                <p>ชื่อ-นามสุล: @Model.Item2.FirstName  @Model.Item2.LastName</p>
+                <p>ชื่อเล่น: @Model.Item2.NickName</p>
+                <p>เบอร์โทรศัพท์: @Model.Item2.Phone</p>
+                <p>เซค: @Model.Item2.Section</p>
+            </div>
         </div>
     </div>
-</div>
-<div class="album py-2 justify-content-center">  @*bg-light *@
-    <div class="container bg-light">
-        <h1 class="display-5 fw-normal">User Dashboard</h1>
-        <a type="button" class="btn btn-primary" asp-area="" asp-controller="MainPose" asp-action="CreateMainPose">สร้างการรับฝาก</a>
-        <a type="button" class="btn btn-primary" asp-area="" asp-controller="Deposit" asp-action="CreateDeposit">สร้างการฝากซื้อ</a>
-        <a type="button" class="btn btn-primary" asp-area="" asp-controller="Dashboard" asp-action="EditUserProfile">แก้ไขบัญชีผู้ใช้</a>
-        <hr>
-        <h2 class="display-6 fw-normal">การรับฝากของคุณ</h2>
-        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+    @* dashborad button *@
+    <div class="row">
+        <div class="col-12 p-3">
+            <div class="d-flex">
+                <div class="user-opt p-1">
+                    <a type="button" class="btn btn-primary" asp-area="" asp-controller="MainPose" asp-action="CreateMainPose">สร้างการรับฝาก</a>
+                </div>
+                <div class="user-opt p-1">
+                    <a type="button" class="btn btn-primary" asp-area="" asp-controller="Deposit" asp-action="CreateDeposit">สร้างการฝากซื้อ</a>
+                </div>
+                <div class="user-opt p-1">
+                    <a type="button" class="btn btn-primary" asp-area="" asp-controller="Dashboard" asp-action="EditUserProfile">แก้ไขบัญชีผู้ใช้</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="dashboardPost col-12">
+            <h1>กระดานการ รับ/ฝาก ของผู้ใช้</h1>
+            <hr>
+    @* mainpost *@
+            <div class="container">
+            <h2 class="display-6 fw-normal">การรับฝาก</h2>
+                <div class="album py-2 justify-content-center">  @*bg-light *@
+                    <div class="container bg-light">
+                        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+                        @foreach (var item in Model.Item1.MainPoses) @*.Reverse()*@
+                        {
+                            @* info section *@
+                            <div id="postBox" class="col-sm-12 col-md-12 col-xl-5 ">
+                                @* Poster'simage *@
+                                <div id="box" class="card mb-4 box-shadow position-relative">
+                                        <div class="editPost row flex-row-reverse position-absolute top-0 end-0">
+                                            <div class="col-7">
+                                                <form asp-controller="MainPose" asp-action="DeleteMainPose" method="post">
+                                                    <input type="hidden" name="mainPoseId" value="@item.Id" />
+                                                    <button type="submit" class="remove"><img
+                                                            src="https://cdn-icons-png.flaticon.com/512/189/189690.png" alt=""></button>
+                                                </form>
+                                            </div>
+                                            <div class="col-4">
+                                                <a asp-controller="MainPose" asp-action="EditMainPose" asp-route-id="@item.Id" class="edit"><img
+                                                        src="https://cdn-icons-png.flaticon.com/512/3597/3597075.png" alt="">
+                                                </a>
+                                            </div>
+                                        </div>
+                                <div class="card-body">
+                                    <small class="position-absolute top-0 start-1" style="margin-top: 5px;color: grey">
+                                        @{
+                                                var x = DateTime.Now - item.CreatedTime;
+                                                string y = "";
+                                                if (x.Minutes <= 0 && x.Hours <= 0 && x.Days <= 0)
+                                                {
+                                                    y = "โพสต์เมื่อซักครู่";
+                                                }
+                                                else if (x.Hours <= 0 && x.Days <= 0)
+                                                {
+                                                    y = string.Format("โพสต์เมื่อ {0} นาทีที่แล้ว", x.Minutes);
+                                                }
+                                                else if (x.Hours > 0 && x.Days <= 0)
+                                                {
+                                                    y = string.Format("โพสต์เมื่อ {0} ชั่วโมงที่แล้ว", x.Hours);
+                                                }
+                                                else if (x.Days > 0 && x.Days <= 7)
+                                                {
+                                                    y = string.Format("โพสต์เมื่อ {0} วันที่แล้ว ", x.Days);
+                                                }
+                                                else if (x.Days <= 365)
+                                                {
+                                                    y = item.CreatedTime.ToString("โพสต์เมื่อ dd MMMM เวลา HH:mm น.", new CultureInfo("th-TH"));
+                                                }
+                                                else
+                                                {
+                                                    y = item.CreatedTime.ToString("โพสต์เมื่อ dd MMMM yyyy เวลา HH:mm น.", new
+                                                    CultureInfo("th-TH"));
+                                                }
+                                            }
+                                            @y&#128337;
+                                    </small>
+                                    <div style="margin-top: 10px;">
+                                        <div class="row align-items-center">
+                                            <div class="col-sm-12 col-md-4">
+                                                <img class="profile" src="@item.Image" style="margin-bottom: 10px;">
+                                            </div>
+                                            <div class="col-sm-12 col-md-8">
+                                                <div class="row align-items-center">
+                                                    <div class="col-12">
+                                                        <span>@item.FirstName @item.LastName</span> @* ชื่อ - สกุล*@
+                                                    </div>
+                                                </div>
+                                                <div class="row align-items-center">
+                                                    <div class="col-12">
+                                                        <span>โทร : @item.Phone</span> @* เบอร์โทร *@
+                                                    </div>
+                                                </div>
+                                                <div class="row align-items-center">
+                                                    <div class="col-12">
+                                                        <span>บัญชีธนาคาร : @item.Account</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row align-items-end">
+                                            <div class="col-12" style="margin-top:5px;">
+                                                <span>ไปซื้อที่ : @item.Place</span>
+                                            </div>
+                                            <div class="col-12">
+                                                <span>
+                                                    @{
+                                                        var a = DateTime.Now - item.CreatedTime;
+                                                        string b = "จะไปซื้อในอีก : ";
+                                                        b += item.MaxTimePose + " นาที ";
+                                                        b += item.CreatedTime.ToString("(HH:mm - ", new CultureInfo("th-TH"));
+                                                        b += item.CreatedTime.AddMinutes(item.MaxTimePose.Value).ToString("HH:mm)", new
+                                                        CultureInfo("th-TH"));
+                                                    }@b
+                                                </span>
+                                                @* ไปซื้อที่ไหน *@
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row align-items-center">
+                                        <div class="scan col-12">
+                                            <span onclick="showQR(@item.Id@item.Id,2)">แสกนจ่าย</span>
+                                        </div>
+                                    </div>
+                                    <div class="QRcode d-flex justify-content-center">
+                                        <img id="@item.Id@item.Id" src="@item.Image" alt="" style="display: none;">
+                                    </div>
+                                    <div id="test1">
+                                        <span id="count-@item.Id-comments" onclick="showCom('post-@item.Id-comments')"></span>
+                                    </div>
+                                    <div id="post-@item.Id-comments" style="display: none;">
+                                    </div>
+                                    <script>
+                                        function showCom(id){
+                                            console.log(id);
+                                            var com = document.getElementById(id);
+                                            console.log(com.style.display);
+                                            if (com.style.display === "none") {
+                                                com.style.display = "block";
+                                            } else {
+                                                com.style.display = "none";
+                                            }
+                                        }
+                                    </script>
+                                    <script>
+                                        function loadComments(mainPoseId) {
+                                            $.ajax({
+                                                url: '@Url.Action("GetComments", "MainPose")',
+                                                data: { mainPoseId: mainPoseId },
+                                                type: 'GET',
+                                                success: function (result) {
+                                                    console.log('success.');
+                                                    $('#post-' + mainPoseId + '-comments').html(result);
+                                                },
+                                                error: function () {
+                                                    console.log('Error occurred while retrieving new comments.');
+                                                }
+                                            });
+                                            $.ajax({
+                                                url: '@Url.Action("CountComments", "MainPose")',
+                                                data: { mainPoseId: mainPoseId },
+                                                type: 'GET',
+                                                success: function (result) {
+                                                    console.log('success.');
+                                                    $('#count-' + mainPoseId + '-comments').html(result);
+                                                },
+                                                error: function () {
+                                                    console.log('Error occurred while retrieving new comments.');
+                                                }
+                                            });
+                                        }
+                                            @*function showComment(id, current, max, state) {
+                                                console.log("click");
+                                                var main = document.getElementById(id);
+                                                console.log(main);
+                                                console.log(main.style.display);
+                                                if (state === 1) {
+                                                    if (main.style.display === "block") {
+                                                        main.style.display = "none";
+                                                    } else {
+                                                        main.style.display = "block";
+                                                    }
+                                                    if (current >= max) {
+                                                        main.style.textAlign = "center";
+                                                        main.innerHTML = "เต็มแล้วจ้า";
+                                                    }
+                                                }
+                                            }*@
+                                        setInterval(function () {loadComments(@item.Id);}, 1000);
 
-            @foreach (var item in Model.Item1.MainPoses) @*.Reverse()*@
-            {
-                @* info section *@
+                                    </script>
+                                    <hr>
 
-                <div id="postBox" class="col-sm-12 col-lg-5 col-xl-4 ">
-
-                    @* Poster'simage *@
-
-                    <div id="box" class="card mb-4 box-shadow position-relative">
-
-                            <div class="editPost row flex-row-reverse position-absolute top-0 end-0">
-                                <div class="col-7">
-                                    <form asp-controller="MainPose" asp-action="DeleteMainPose" method="post">
-                                        <input type="hidden" name="mainPoseId" value="@item.Id" />
-                                        <button type="submit" class="remove"><img
-                                                src="https://cdn-icons-png.flaticon.com/512/189/189690.png" alt=""></button>
-                                    </form>
-                                </div>
-                                <div class="col-4">
-                                    <a asp-controller="MainPose" asp-action="EditMainPose" asp-route-id="@item.Id" class="edit"><img
-                                            src="https://cdn-icons-png.flaticon.com/512/3597/3597075.png" alt="">
-                                    </a>
+                                    </div>
                                 </div>
                             </div>
-                        
+                        }
+
+                    </div>
+                </div>
+                <hr>
+            </div>
+
+            @* Deposit *@
+            <h2 class="display-6 fw-normal">การฝากซื้อ</h2>
+            <div class="album py-2 justify-content-center">  @*bg-light *@
+            <div class="container bg-light">
+                <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+                @foreach (var item in Model.Item1.Deposites)
+                {
+                <div id="postBox" class="col-sm-12 col-md-12 col-xl-5 ">
+                    <div id="box" class="card mb-4 box-shadow position-relative">
+                            @if (User.Identity.IsAuthenticated && (User.IsInRole("admin") || User.Identity.Name == item.Email))
+                            {
+                                <div class="editPost row flex-row-reverse position-absolute top-0 end-0">
+                                    <div class="col-7">
+                                        <form asp-controller="Deposit" asp-action="DeleteDeposit" method="post">
+                                            <input type="hidden" name="depositId" value="@item.Id" />
+                                            <button type="submit" class="remove">
+                                                <img src="https://cdn-icons-png.flaticon.com/512/189/189690.png" alt="">
+                                            </button>
+                                        </form>
+                                    </div>
+                                    <div class="col-4">
+                                        <a a asp-controller="Deposit" asp-action="EditDeposit" asp-route-id="@item.Id" class="edit">
+                                            <img src="https://cdn-icons-png.flaticon.com/512/3597/3597075.png" alt="">
+                                        </a>
+                                    </div>
+                                </div>
+                            }
                         <div class="card-body">
-                            <small class="position-absolute top-0 start-1" style="margin-top: 5px;color: grey">
+                            <small class="position-absolute top-0 start-1 p-2" style="margin-top: 0px;color: grey">
                                 @{
                                     var x = DateTime.Now - item.CreatedTime;
                                     string y = "";
@@ -89,201 +288,12 @@
                                         CultureInfo("th-TH"));
                                     }
                                 }
-                                @y
-                                &#128337;
+                                @y&#128337;
                             </small>
-
-                            <div style="margin-top: 10px;">
-                                <div class="row align-items-center">
-                                    <div class="col-sm-12 col-md-4">
-                                        <img class="profile" src="@item.Icon" style="margin-bottom: 10px;">
-                                    </div>
-
-                                    <div class="col-sm-12 col-md-8">
-                                        <div class="row align-items-center">
-                                            <div class="col-12">
-                                                <span>@item.FirstName @item.LastName</span> @* ชื่อ - สกุล*@
-                                            </div>
-                                        </div>
-                                        <div class="row align-items-center">
-                                            <div class="col-12">
-                                                <span>โทร : @item.Phone</span> @* เบอร์โทร *@
-                                            </div>
-                                        </div>
-                                        <div class="row align-items-center">
-                                            <div class="col-12">
-                                                <span>บัญชีธนาคาร : @item.Account</span>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                </div>
-                                <div class="row align-items-end">
-                                    <div class="col-12" style="margin-top:5px;">
-                                        <span>ไปซื้อที่ : @item.Place</span>
-                                    </div>
-                                    <div class="col-12">
-                                        <span>
-                                            @{
-                                                var a = DateTime.Now - item.CreatedTime;
-                                                string b = "จะไปซื้อในอีก : ";
-                                                b += item.MaxTimePose + " นาที ";
-                                                b += item.CreatedTime.ToString("(HH:mm - ", new CultureInfo("th-TH"));
-                                                b += item.CreatedTime.AddMinutes(item.MaxTimePose.Value).ToString("HH:mm)", new
-                                                CultureInfo("th-TH"));
-                                            }@b
-                                        </span>
-                                        @* ไปซื้อที่ไหน *@
-                                    </div>
-
-                                </div>
-                            </div>
-                            <div class="row align-items-center">
-                                <div class="scan col-12">
-                                    <span onclick="showQR(@item.Id@item.Id,2)">แสกนจ่าย</span>
-                                </div>
-                            </div>
-                            <div class="QRcode w-60 h-100">
-                                <img id="@item.Id@item.Id" src="@item.Image" alt="" style="display: none;">
-                            </div>
-
-                            <div id="test1">
-                                <span id="count-@item.Id-comments" ฝากแล้ว คน></span>
-
-                            </div>
-                            <div id="post-@item.Id-comments">
-
-
-                            </div>
-
-                            <script>
-                                function loadComments(mainPoseId) {
-                                    $.ajax({
-                                        url: '@Url.Action("GetComments", "MainPose")',
-                                        data: { mainPoseId: mainPoseId },
-                                        type: 'GET',
-                                        success: function (result) {
-                                            console.log('success.');
-                                            $('#post-' + mainPoseId + '-comments').html(result);
-                                        },
-                                        error: function () {
-                                            console.log('Error occurred while retrieving new comments.');
-                                        }
-                                    });
-                                    $.ajax({
-                                        url: '@Url.Action("CountComments", "MainPose")',
-                                        data: { mainPoseId: mainPoseId },
-                                        type: 'GET',
-                                        success: function (result) {
-                                            console.log('success.');
-                                            $('#count-' + mainPoseId + '-comments').html(result);
-                                        },
-                                        error: function () {
-                                            console.log('Error occurred while retrieving new comments.');
-                                        }
-                                    });
-
-                                }
-                                @*function showComment(id, current, max, state) {
-                                    console.log("click");
-                                    var main = document.getElementById(id);
-                                    console.log(main);
-                                    console.log(main.style.display);
-                                    if (state === 1) {
-                                        if (main.style.display === "block") {
-                                            main.style.display = "none";
-                                        } else {
-                                            main.style.display = "block";
-                                        }
-                                        if (current >= max) {
-                                            main.style.textAlign = "center";
-                                            main.innerHTML = "เต็มแล้วจ้า";
-                                        }
-                                    }
-                                }*@
-                                setInterval(function () {loadComments(@item.Id);}, 1000);
-
-                            </script>
-                            <hr>
-
-                        </div>
-                    </div>
-                </div>
-            }
-
-        </div>
-    </div>
-    <hr>
-
-</div>
-
-<div class="album py-2 justify-content-center">  @*bg-light *@
-        <div class="container bg-light">
-            <h2 class="display-6 fw-normal">การฝากซื้อของคุณ</h2>
-            <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
-
-            @foreach (var item in Model.Item1.Deposites)
-            {
-            <div id="postBox" class="col-sm-12 col-lg-5 col-xl-4 ">
-                <div id="box" class="card mb-4 box-shadow position-relative">
-                        @if (User.Identity.IsAuthenticated && (User.IsInRole("admin") || User.Identity.Name == item.Email))
-                        {
-                        <div class="editPost row flex-row-reverse position-absolute top-0 end-0">
-                            <div class="col-7">
-                                <form asp-controller="Deposit" asp-action="DeleteDeposit" method="post">
-                                    <input type="hidden" name="depositId" value="@item.Id" />
-                                    <button type="submit" class="remove">
-                                        <img src="https://cdn-icons-png.flaticon.com/512/189/189690.png" alt="">
-                                    </button>
-                                </form>
-                            </div>
-                            <div class="col-4">
-                                <a a asp-controller="Deposit" asp-action="EditDeposit" asp-route-id="@item.Id" class="edit">
-                                    <img src="https://cdn-icons-png.flaticon.com/512/3597/3597075.png" alt="">
-                                </a>
-                            </div>
-                        </div>
-                    }
-                    <div class="card-body">
-                        <small class="position-absolute top-0 start-1" style="margin-top: 0px;color: grey">
-                            @{
-                                var x = DateTime.Now - item.CreatedTime;
-                                string y = "";
-                                if (x.Minutes <= 0 && x.Hours <= 0 && x.Days <= 0)
-                                {
-                                    y = "โพสต์เมื่อซักครู่";
-                                }
-                                else if (x.Hours <= 0 && x.Days <= 0)
-                                {
-                                    y = string.Format("โพสต์เมื่อ {0} นาทีที่แล้ว", x.Minutes);
-                                }
-                                else if (x.Hours > 0 && x.Days <= 0)
-                                {
-                                    y = string.Format("โพสต์เมื่อ {0} ชั่วโมงที่แล้ว", x.Hours);
-                                }
-                                else if (x.Days > 0 && x.Days <= 7)
-                                {
-                                    y = string.Format("โพสต์เมื่อ {0} วันที่แล้ว ", x.Days);
-                                }
-                                else if (x.Days <= 365)
-                                {
-                                    y = item.CreatedTime.ToString("โพสต์เมื่อ dd MMMM เวลา HH:mm น.", new CultureInfo("th-TH"));
-                                }
-                                else
-                                {
-                                    y = item.CreatedTime.ToString("โพสต์เมื่อ dd MMMM yyyy เวลา HH:mm น.", new
-                                    CultureInfo("th-TH"));
-                                }
-                            }
-                            @y
-                            &#128337;
-                        </small>
-
                         <div class="row align-items-center">
                             <div class="col-sm-12 col-md-4">
                                 <img class="profile" src="@item.Icon" style="margin-bottom: 10px;">
                             </div>
-
                             <div class="col-sm-12 col-md-8">
                                 <div class="row align-items-center">
                                     <div class="col-12">
@@ -311,12 +321,11 @@
                                             string b = item.CreatedTime.ToString("HH:mm น.", new CultureInfo("th-TH"));
                                             b += " - " + item.CreatedTime.AddMinutes(item.MaxTimePose.Value).ToString("HH:mm น.", new
                                             CultureInfo("th-TH"));
-                                        }@b
+                                            }@b
                                     </span>
                                 </div>
                             </div>
-                            <div id="post-@item.Id-commentDeposit">                 
-                        </div>
+                            <div id="post-@item.Id-commentDeposit"></div>
                             <hr>
                             <script>
                                 function loadCommentDeposits(depositId) {
@@ -350,10 +359,9 @@
                                         }
                                     }
                                 }
-                                    
+                                        
                                 setInterval(function () {
                                         loadCommentDeposits(@item.Id);
-
                                 }, 1000);
                                 function showComment(id){
                                     console.log("click");
@@ -367,9 +375,13 @@
                         </div>
 
                     </div>
-                </div>
-            </div>
-        }
+                    </div>
+                    </div>
+                }
             </div>
         </div>
+    </div>
+    </div>
+    </div>
+    
 </div>
