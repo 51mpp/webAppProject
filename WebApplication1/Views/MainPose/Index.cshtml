@@ -168,17 +168,17 @@ src="https://cdnjs.cloudflare.com/ajax/libs/jquery-ajax-unobtrusive/3.2.6/jquery
                                                     document.getElementById("frame").style.border = "3px solid green";
                                                 </script>
                                             }
-                                                <div class="row">
-                                                    <div class="col-3">
-                                                        <small style="color: rgb(76, 158, 80);">@comment.FirstName :</small>
-                                                    </div>
-                                                    <div class="col-9">
-                                                        <small class="font-weight-bold">@comment.CommentText</small>
-                                                    </div>
-                                                    <div class="col-12 p-2">
-                                                        <img class="slip" id="Image-@comment.Id-comment" src="@comment.Image" alt="">
-                                                    </div>
+                                            <div class="row">
+                                                <div class="col-3">
+                                                    <small style="color: rgb(76, 158, 80);">@comment.FirstName :</small>
                                                 </div>
+                                                <div class="col-9">
+                                                    <small class="font-weight-bold">@comment.CommentText</small>
+                                                </div>
+                                                <div class="col-12 p-2">
+                                                    <img class="slip" id="Image-@comment.Id-comment" src="@comment.Image" alt="">
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                     @if (User.Identity.IsAuthenticated && (User.IsInRole("admin") || User.Identity.Name == item.Email))
@@ -220,10 +220,11 @@ src="https://cdnjs.cloudflare.com/ajax/libs/jquery-ajax-unobtrusive/3.2.6/jquery
                             }
                         </script>
                         <hr>
-                        <div class="comment"
-                            onclick="showComment(@item.Id@item.Id@item.Id,@item.Comments.Count,@item.MaxComment,1  )">
-                            ฝากซื้อหน่อย
+                        <div class="comment" 
+                            onclick="showComment(@item.Id@item.Id@item.Id,@item.Comments.Count,@item.MaxComment,1)">
+                            ฝากซื้อหน่อย 
                         </div>
+                        
                         <div id="postComment">
                             <div class="form-group row" id="@item.Id@item.Id@item.Id" style="display: none;">
                                 <form asp-controller="MainPose" asp-action="CreateComment" method="post"

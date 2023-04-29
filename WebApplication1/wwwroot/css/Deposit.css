@@ -89,3 +89,25 @@ span {
 .remove img:hover {
     filter: brightness(200%);
 }
+
+.likeFrame {
+    width: 100px;
+}
+
+.like {
+    width: 45px;
+
+}
+
+.qr {
+    width: 70%;
+}
+
+.confirmBox {
+    text-align: center;
+}
+
+.confirmBox span {
+    cursor: pointer;
+    text-decoration: underline;
+}
