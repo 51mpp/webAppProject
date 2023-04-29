@@ -184,7 +184,8 @@ src="https://cdnjs.cloudflare.com/ajax/libs/jquery-ajax-unobtrusive/3.2.6/jquery
                                     type: 'POST',
                                     success: function (result) {
                                         console.log(result);
-                                        // Do something with the result, if needed
+                                        window.location.href = "MainPose"
+                                        
                                     },
                                     error: function () {
                                         console.log('Error occurred while confirming comment.');

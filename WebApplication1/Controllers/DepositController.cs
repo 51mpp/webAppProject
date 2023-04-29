@@ -171,7 +171,7 @@ namespace WebApplication1.Controllers
                 Icon = post.Icon
             };
             _depositRepository.Update(deposit);
-            return Ok("Status submitted successfully");
+            return RedirectToAction("");
         }
         [HttpPost]
         public async Task<IActionResult> DeleteDeposit(int depositId)
@@ -229,7 +229,15 @@ namespace WebApplication1.Controllers
                     Email = email,
                     Like = confirm
                 };
-                await _depositRepository.AddComment(comment);
+                try
+                {
+                    await _depositRepository.AddComment(comment);
+                }
+                catch (Exception ex)
+                {
+                    return RedirectToAction("");
+                }
+                
                 return RedirectToAction("");
             }
             else
