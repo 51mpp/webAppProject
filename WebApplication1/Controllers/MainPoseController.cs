@@ -21,11 +21,12 @@ namespace WebApplication1.Controllers
         private readonly IUserRepository _userRepository;
 
 
-        public MainPoseController(IMainPoseRepository mainPoseRepository, IPhotoService photoService, IHttpContextAccessor httpContextAccessor)
+        public MainPoseController(IMainPoseRepository mainPoseRepository, IPhotoService photoService, IHttpContextAccessor httpContextAccessor, IUserRepository userRepository)
         {
             _mainPoseRepository = mainPoseRepository;
             _photoService = photoService;
             _httpContextAccessor = httpContextAccessor;
+            _userRepository = userRepository;
         }
         [HttpGet]
         public async Task<IActionResult> Index() // อันนี้ใช้ return view() ในหน้า club -----> controller 
@@ -58,12 +59,17 @@ namespace WebApplication1.Controllers
                     var result = await _photoService.AddPhotoAsync(mainPoseVM.Image);
                     imageUrl = result.Url.ToString();
                 }
+                
+                var curUserId = _httpContextAccessor.HttpContext.User.GetUserId();
+                AppUser user = await _userRepository.GetUserById(curUserId);
+                if(user == null) return View("Error");
                 var mainPose = new MainPose
                 {
                     FirstName = mainPoseVM.FirstName,
                     LastName = mainPoseVM.LastName,
                     Phone = mainPoseVM.Phone,
                     AppUserId = mainPoseVM.AppUserId,
+                    Icon = user.Icon,
                     Image = imageUrl,
                     Place = mainPoseVM.Place,
                     Account = mainPoseVM.Account,

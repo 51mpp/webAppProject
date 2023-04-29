@@ -17,13 +17,15 @@ namespace WebApplication1.Controllers
         private readonly IDepositRepository _depositRepository;
         private readonly IPhotoService _photoService;
         private readonly IHttpContextAccessor _httpContextAccessor;
+        private readonly IUserRepository _userRepository;
 
 
-        public DepositController(IDepositRepository depositRepository, IPhotoService photoService, IHttpContextAccessor httpContextAccessor)
+        public DepositController(IDepositRepository depositRepository, IPhotoService photoService, IHttpContextAccessor httpContextAccessor, IUserRepository userRepository)
         {
             _depositRepository = depositRepository;
             _photoService = photoService;
             _httpContextAccessor = httpContextAccessor;
+            _userRepository = userRepository;
         }
         [HttpGet]
         public async Task<IActionResult> Index() // อันนี้ใช้ return view() ในหน้า club -----> controller 
@@ -49,10 +51,13 @@ namespace WebApplication1.Controllers
         {
             if (ModelState.IsValid)
             {
+                var curUserId = _httpContextAccessor.HttpContext.User.GetUserId();
+                AppUser user = await _userRepository.GetUserById(curUserId);
                 var deposit = new Deposit
                 {
                     FirstName = depositVM.FirstName,
                     LastName = depositVM.LastName,
+                    Icon = user.Icon,
                     Phone = depositVM.Phone,
                     Place = depositVM.Place,
                     Food = depositVM.Food,

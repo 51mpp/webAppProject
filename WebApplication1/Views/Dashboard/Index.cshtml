@@ -29,7 +29,8 @@
         <a type="button" class="btn btn-primary" asp-area="" asp-controller="MainPose" asp-action="CreateMainPose">สร้างการรับฝาก</a>
         <a type="button" class="btn btn-primary" asp-area="" asp-controller="Deposit" asp-action="CreateDeposit">สร้างการฝากซื้อ</a>
         <a type="button" class="btn btn-primary" asp-area="" asp-controller="Dashboard" asp-action="EditUserProfile">แก้ไขบัญชีผู้ใช้</a>
-        <h2 class="display-6 fw-normal">Your Post</h2>
+        <hr>
+        <h2 class="display-6 fw-normal">การรับฝากของคุณ</h2>
         <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
 
             @foreach (var item in Model.Item1.MainPoses) @*.Reverse()*@
@@ -95,7 +96,7 @@
                             <div style="margin-top: 10px;">
                                 <div class="row align-items-center">
                                     <div class="col-sm-12 col-md-4">
-                                        <img class="profile" src="@item.Image" style="margin-bottom: 10px;">
+                                        <img class="profile" src="@item.Icon" style="margin-bottom: 10px;">
                                     </div>
 
                                     <div class="col-sm-12 col-md-8">
@@ -218,7 +219,7 @@
 
 <div class="album py-2 justify-content-center">  @*bg-light *@
         <div class="container bg-light">
-            <h2 class="display-6 fw-normal">Your Post</h2>
+            <h2 class="display-6 fw-normal">การฝากซื้อของคุณ</h2>
             <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
 
             @foreach (var item in Model.Item1.Deposites)
