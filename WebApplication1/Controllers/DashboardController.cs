@@ -15,6 +15,7 @@ namespace WebApplication1.Controllers
         private readonly IHttpContextAccessor _httpContextAccessor;
         private readonly IPhotoService _photoService;
         private readonly IUserRepository _userRepository;
+        
 
         public DashboardController(IDashboardRepository dashboardRepository, IHttpContextAccessor httpContextAccessor, IPhotoService photoService, IUserRepository userRepository)
         {
@@ -22,6 +23,7 @@ namespace WebApplication1.Controllers
             _httpContextAccessor = httpContextAccessor;
             _photoService = photoService;
             _userRepository = userRepository;
+
         }
         private void MapUserEdit(AppUser user, EditUserDashboardVM editVM, ImageUploadResult photoResult)
         {
@@ -102,7 +104,9 @@ namespace WebApplication1.Controllers
 
                 MapUserEdit(user, editVM, photoResult);
 
+
                 _dashboardRepository.Update(user);
+                
                 return RedirectToAction("Index");
             }
         }

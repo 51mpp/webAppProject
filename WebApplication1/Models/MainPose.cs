@@ -23,6 +23,8 @@ namespace WebApplication1.Models
         public DateTime? LastModified { get; set; }
         [ForeignKey("AppUser")]
         public string? AppUserId { get; set; }
+        [ForeignKey("AppUserIcon")]
+        public string? AppUserIcon { get; set; }
         public AppUser? AppUser { get; set; }
         public ICollection<Comment> Comments { get; set; }
         public string? Email { get; set; }
