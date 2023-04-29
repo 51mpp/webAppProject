@@ -1,10 +1,11 @@
-using CloudinaryDotNet.Actions;
+﻿using CloudinaryDotNet.Actions;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using WebApplication1.Data;
 using WebApplication1.Interface;
 using WebApplication1.Models;
+using WebApplication1.Repository;
 using WebApplication1.ViewModels;
 
 namespace WebApplication1.Controllers
@@ -15,14 +16,16 @@ namespace WebApplication1.Controllers
         private readonly IHttpContextAccessor _httpContextAccessor;
         private readonly IPhotoService _photoService;
         private readonly IUserRepository _userRepository;
-        
+        private readonly IMainPoseRepository _mainPoseRepository;
 
-        public DashboardController(IDashboardRepository dashboardRepository, IHttpContextAccessor httpContextAccessor, IPhotoService photoService, IUserRepository userRepository)
+
+        public DashboardController(IDashboardRepository dashboardRepository, IHttpContextAccessor httpContextAccessor, IPhotoService photoService, IUserRepository userRepository, IMainPoseRepository mainPoseRepository)
         {
             _dashboardRepository = dashboardRepository;
             _httpContextAccessor = httpContextAccessor;
             _photoService = photoService;
             _userRepository = userRepository;
+            _mainPoseRepository = mainPoseRepository;
 
         }
         private void MapUserEdit(AppUser user, EditUserDashboardVM editVM, ImageUploadResult photoResult)
@@ -110,6 +113,18 @@ namespace WebApplication1.Controllers
                 
                 return RedirectToAction("Index");
             }
+        }
+        [HttpPost]
+        public async Task<IActionResult> DeleteMainPose(int mainPoseId)
+        {
+            var post = await _mainPoseRepository.GetByIdAsync(mainPoseId);
+            if (post == null) { return View("Error"); }
+            if (!string.IsNullOrEmpty(post.Image))
+            {
+                _ = _photoService.DeletePhotoAsync(post.Image); // ไม่สนใจรีเทิน
+            }
+            _mainPoseRepository.Delete(post);
+            return Ok("delete success");
         }
 
     }
