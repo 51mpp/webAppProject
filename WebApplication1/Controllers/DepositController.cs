@@ -180,6 +180,15 @@ namespace WebApplication1.Controllers
             if (post == null) { return View("Error"); }
 
             _depositRepository.Delete(post);
+            return RedirectToAction("Index", "Dashboard");
+        }
+        [HttpPost]
+        public async Task<IActionResult> DeleteDeposit2(int depositId)
+        {
+            var post = await _depositRepository.GetByIdAsync(depositId);
+            if (post == null) { return View("Error"); }
+
+            _depositRepository.Delete(post);
             return RedirectToAction("");
         }
         [HttpGet]
@@ -241,6 +250,7 @@ namespace WebApplication1.Controllers
             _depositRepository.DeleteCommentEach(post);
             return RedirectToAction("");
         }
+        
         [HttpPost]
         public async Task<IActionResult> CreateCommentByAjax(int? depositId, string CommentText, string FirstName, string LastName)
         {

@@ -63,7 +63,7 @@
 
                                             <div class="editPost row flex-row-reverse position-absolute top-0 end-0">
                                                 <div class="col-7">
-                                                    <form asp-controller="MainPose" asp-action="DeleteMainPose" method="post">
+                                                    <form asp-controller="MainPose" asp-action="DeleteMainPose2" method="post">
                                                         <input type="hidden" name="mainPoseId" value="@item.Id" />
                                                         <button type="submit" class="remove"><img
                                                                 src="https://cdn-icons-png.flaticon.com/512/189/189690.png" alt=""></button>
@@ -349,38 +349,38 @@
                                         </a>
                                     </div>
                                 </div>
-                                        <div class="status-radio d-flex justify-content-around position-absolute top-0 p-1">
-                                        @* wait *@
-                                            <div class="waitB">
-                                                <input id="wait-btn-@item.Id" class="wait-btn" type="radio" name="radio-status-@item.Id"  onclick="status('@item.Id','รอ')">
-                                            </div>
+                                <div class="status-radio d-flex justify-content-around position-absolute top-0 p-1">
+                                @* wait *@
+                                    <div class="waitB">
+                                        <input id="wait-btn-@item.Id" class="wait-btn" type="radio" name="radio-status-@item.Id" onclick="statusDeposit('@item.Id','รอ')">
+                                    </div>
 
-                                        @* process *@
-                                            <div class="processB">
-                                            <input id="process-btn-@item.Id" class="process-btn" type="radio" name="radio-status-@item.Id"  onclick="status('@item.Id','กำลังไปส่ง')">
-                                            </div>
+                                @* process *@
+                                    <div class="processB">
+                                        <input id="process-btn-@item.Id" class="process-btn" type="radio" name="radio-status-@item.Id" onclick="statusDeposit('@item.Id','กำลังไปส่ง')">
+                                    </div>
 
-                                        @* finish *@
-                                            <div class="finishB">
-                                            <input  id="finish-btn-@item.Id" class="finish-btn" type="radio" name="radio-status-@item.Id"  onclick="status('@item.Id','ส่งแล้ว')">
-                                            </div>
+                                @* finish *@
+                                    <div class="finishB">
+                                        <input id="finish-btn-@item.Id" class="finish-btn" type="radio" name="radio-status-@item.Id" onclick="statusDeposit('@item.Id','ส่งแล้ว')">
+                                    </div>
                                 </div>
                             }else{
                                 <div class="status-radio d-flex justify-content-around position-absolute top-0 p-1">
-                                        @* wait *@
-                                            <div class="waitB">
-                                                <input id="wait-btn-@item.Id" class="wait-btn" type="radio" name="radio-status-@item.Id" value="other">
-                                            </div>
+                                @* wait *@
+                                    <div class="waitB">
+                                        <input id="wait-btn-@item.Id" class="wait-btn" type="radio" name="radio-status-@item.Id" value="other">
+                                    </div>
 
-                                        @* process *@
-                                            <div class="processB">
-                                            <input id="process-btn-@item.Id" class="process-btn" type="radio" name="radio-status-@item.Id" value="other">
-                                            </div>
+                                @* process *@
+                                    <div class="processB">
+                                    <input id="process-btn-@item.Id" class="process-btn" type="radio" name="radio-status-@item.Id" value="other">
+                                    </div>
 
-                                        @* finish *@
-                                            <div class="finishB">
-                                            <input  id="finish-btn-@item.Id" class="finish-btn" type="radio" name="radio-status-@item.Id" value="other">
-                                            </div>
+                                @* finish *@
+                                    <div class="finishB">
+                                    <input  id="finish-btn-@item.Id" class="finish-btn" type="radio" name="radio-status-@item.Id" value="other">
+                                    </div>
                                 </div>
                             }
                         <div class="card-body">
@@ -465,10 +465,10 @@
                                 </div>
                             </div>
                             <script>
-                            function status(mainPoseId, status) {
+                            function statusDeposit(mainPoseId, status) {
                                 console.log("yoo");
                                 $.ajax({
-                                    url: '@Url.Action("StateMainPose", "MainPose")',
+                                    url: '@Url.Action("StateMainPose", "Deposit")',
                                     data: { id: mainPoseId, status: status },
                                     type: 'POST',
                                     success: function (result) {
@@ -480,7 +480,8 @@
                                     }
                                 });
                                 
-                            } 
+                            }
+                           
                             </script>
                             <script>
                                 if(document.getElementById("status-@item.Id-Post").innerText == "รอ"){
