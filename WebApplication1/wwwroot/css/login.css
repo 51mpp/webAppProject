@@ -48,7 +48,7 @@ div button {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    /* box-shadow: 0 0 10px rgba(0, 0, 0, 0.15); */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.15);
     background-color: rgba(red, green, blue, 0) !important;
 }
 
