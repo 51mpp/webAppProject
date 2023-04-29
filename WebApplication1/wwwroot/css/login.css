@@ -2,6 +2,7 @@
 
 body{
     height: 100vh;
+    overflow-x: hidden;
 }
 .empty{
     background-color: rgba(red, green, blue, 0);

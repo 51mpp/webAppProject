@@ -79,7 +79,7 @@ button.accept-policy {
   color: white;
 }
 
-.mainnav.active {
+#mainnav.active {
   background-color: rgba(9, 68, 9, 1)
 }
 

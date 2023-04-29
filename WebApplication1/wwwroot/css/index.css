@@ -210,11 +210,6 @@ section {
   font-family: var(--font);
 }
 
-.btn:hover {
-  transform: scale(1.2) translateX(10px);
-  transition: .4s;
-}
-
 /* home section */
 
 /* about section */
@@ -475,11 +470,6 @@ section {
     border-radius: 0.5rem;
     font-family: var(--font);
 
-  }
-
-  .btn:hover {
-    transform: scale(1.2) translateX(10px);
-    transition: .4s;
   }
 
   /* home section */
