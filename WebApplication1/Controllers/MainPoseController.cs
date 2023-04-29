@@ -208,7 +208,7 @@ namespace WebApplication1.Controllers
                 StatePost = status
             };
             _mainPoseRepository.Update(mainPose);
-            return Ok("Status submitted successfully");
+            return RedirectToAction("");
         }
         [HttpGet]
         public async Task<IActionResult> StatusMainPose(int id, string status)
@@ -251,6 +251,7 @@ namespace WebApplication1.Controllers
         [HttpGet]
         public async Task<IActionResult> GetComments(int mainPoseId)
         {
+            
             MainPose mainPose = await _mainPoseRepository.GetByIdAsync(mainPoseId);
             int maxComment = (int)mainPose.MaxComment;
             IEnumerable<Comment> comments = await _mainPoseRepository.GetCommentsByMainPoseId(mainPoseId);
@@ -260,7 +261,13 @@ namespace WebApplication1.Controllers
         public async Task<IActionResult> CreateComment(int mainPoseId, string CommentText, string FirstName, string LastName, IFormFile? image2, string email, bool confirm)
         {
             MainPose mainPose = await _mainPoseRepository.GetByIdAsync(mainPoseId);
+            try
+            {
 
+            }catch (Exception ex)
+            {
+                return RedirectToAction("");
+            }
             if (ModelState.IsValid)
             {
                 string imageUrl = "";
@@ -288,7 +295,13 @@ namespace WebApplication1.Controllers
                     Email = email,
                     Like = confirm
                 };
-                await _mainPoseRepository.AddComment(comment);
+                try {
+                    await _mainPoseRepository.AddComment(comment);
+                } catch (Exception ex) 
+                {
+                    return RedirectToAction("");
+                }
+                
                 return RedirectToAction("");
             }
             else
