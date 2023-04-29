@@ -12,9 +12,7 @@ window.onscroll = function () {
         if (window.location.pathname == "/") {
             document.getElementById("l01").style.color = "white"
             document.getElementById("li01").style.backgroundColor = "#f59317"
-            if (window.scrollY > 300) {
-                document.getElementById("bg-img").style.filter = "brightness(0.3)"
-            }
+            
         }
         else if (window.location.pathname == "/MainPose") {
             document.getElementById("l02").style.color = "white"

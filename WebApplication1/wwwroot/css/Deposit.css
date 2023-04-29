@@ -1,8 +1,9 @@
 #CT {
     /* background-color: #F2B350; */
-    background-color: rgb(253, 201, 89);
+    /* background-color: rgb(253, 201, 89); */
     border-radius: 0px 0px 50px 50px;
-
+    background-color: rgba(253, 201, 89, 0.15);
+    margin-bottom: 60px;
 }
 
 #depositing {
@@ -49,7 +50,7 @@ span {
 
 .accept:hover {
     transform: scale(1.05, 1.1);
-    background-color: #86373E;
+    background-color: #eea25b;
 
 }
 
@@ -142,4 +143,9 @@ span {
 .finish-btn {
 
     accent-color: red;
+}
+
+body {
+    background-image: url('https://i.pinimg.com/564x/d6/aa/f2/d6aaf2c1b0402124aea5423898a7ef4c.jpg');
+    background-size: cover;
 }

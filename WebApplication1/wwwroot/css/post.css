@@ -55,7 +55,7 @@ small {
 .comment {
     text-align: center;
     cursor: pointer;
-    background-color: #F09711;
+    background-color: #167019;
     color: rgb(255, 255, 255);
     border-radius: 10px;
 }
@@ -152,9 +152,10 @@ small {
 }
 
 #CT {
-    background-color: rgb(253, 201, 89);
+    background-color: rgba(253, 201, 89, 0.15);
     border-radius: 0px 0px 50px 50px;
     margin-bottom: 60px;
+    /* backdrop-filter: blur(60px); */
 }
 
 .time {
@@ -187,4 +188,9 @@ small {
 .finish-btn {
 
     accent-color: red;
+}
+
+body {
+    background-image: url('https://i.pinimg.com/564x/d6/aa/f2/d6aaf2c1b0402124aea5423898a7ef4c.jpg');
+    background-size: cover;
 }
