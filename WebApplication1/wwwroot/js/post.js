@@ -1,13 +1,22 @@
 function showComment(id, current, max, state, bt) {
     console.log("click");
     var main = document.getElementById(id);
+    var st = document.getElementById(bt);
     console.log(main);
-    console.log(main.style.display);
+    console.log(st.innerText);
     if (state === 1) {
         if (main.style.display === "block") {
             main.style.display = "none";
         } else {
             main.style.display = "block";
+        }
+        if (st.innerText == "กำลังไปส่ง") {
+            main.style.textAlign = "center";
+            main.innerHTML = "ไม่รับแล้วจ้า";
+        }
+        if (st.innerText == "ส่งแล้ว") {
+            main.style.textAlign = "center";
+            main.innerHTML = "ไม่รับแล้วจ้า";
         }
         if (current >= max) {
             main.style.textAlign = "center";
