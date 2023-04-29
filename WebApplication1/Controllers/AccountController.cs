@@ -105,6 +105,7 @@ namespace WebApplication1.Controllers
                 LastName = registerVM.LastName,
                 Section = registerVM.Section,
                 Phone = registerVM.Phone,
+                Account = registerVM.Account,
                 Email = registerVM.EmailAddress,
                 UserName = registerVM.EmailAddress,
                 NickName = registerVM.NickName,

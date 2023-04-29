@@ -40,10 +40,18 @@ namespace WebApplication1.Controllers
             return View("Index", (deposits, createMainPoseVM, commentVM));
         }
         [HttpGet]
-        public IActionResult CreateDeposit()
+        public async Task<IActionResult> CreateDeposit()
         {
             var curUserId = _httpContextAccessor.HttpContext.User.GetUserId();
-            var createDepositViewModel = new CreateDepositViewModel { AppUserId = curUserId };
+            AppUser user = await _userRepository.GetUserById(curUserId);
+            var createDepositViewModel = new CreateDepositViewModel 
+            { 
+                AppUserId = curUserId,
+                FirstName = user.FirstName,
+                LastName = user.LastName,
+                Phone = user.Phone,
+                Account = user.Account
+            };
             return View(createDepositViewModel);
         }
         [HttpPost]

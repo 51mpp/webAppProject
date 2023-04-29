@@ -7,6 +7,7 @@ namespace WebApplication1
         public string? LastName { get; set; }
         public int? Section { get; set; }
         public string? Phone { get; set; }
+        public string? Account { get; set; }
         public string? Icon { get; set; }
         public string? NickName { get; set; }
         public string? State { get; set; }

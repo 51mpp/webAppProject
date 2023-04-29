@@ -24,6 +24,7 @@ namespace WebApplication1.ViewModels
         [Required(ErrorMessage = "MaxTimePose is requied")]
         public int? MaxTimePose { get; set; }
         public DateTime CreatedTime { get; set; }
+        public string? Account { get; set; }
         public DateTime? LastModified { get; set; }
         public string AppUserId { get; set; }
 
