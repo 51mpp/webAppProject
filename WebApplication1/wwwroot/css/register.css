@@ -1,15 +1,19 @@
 
 body{
     height: 100vh;
+    /* width: 100%;
+    min-height: 100vh;
+    background-image: url("https://media.discordapp.net/attachments/879723819621814342/1101604585623261184/RegisterBackground-01.jpg?width=1211&height=670");
+    background-size: cover;
+    align-items: center; */
 }
 
-.container {
+.contain {
     width: 100%;
     min-height: 100vh;
-    background-image: url('');
+    background-image: url("https://media.discordapp.net/attachments/879723819621814342/1101604585623261184/RegisterBackground-01.jpg?width=1211&height=670");
     background-size: cover;
     align-items: center;
-
 }
 
 .signup-container {

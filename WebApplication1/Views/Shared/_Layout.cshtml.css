@@ -54,8 +54,9 @@ button.accept-policy {
   line-height: 60px;
 }
 
-.mainnav {
+#mainnav {
   background-color: rgba(0, 0, 0, 0.3);
+  height: 80px;
 }
 
 .banner-image {
@@ -105,7 +106,7 @@ footer p {
 }
 
 .container {
-  margin-top: 100px;
+  margin-top: 80px;
 }
 
 #LogoutBTN {

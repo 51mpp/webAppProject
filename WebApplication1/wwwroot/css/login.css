@@ -8,7 +8,9 @@ body{
     height: 100%;
 }
 div button {
-    background-color: #007bff;
+
+    background-color: #F09711;
+    
     color: white;
     font-size: 16px;
     padding: 10px;
@@ -48,8 +50,9 @@ div button {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.15);
-    background-color: rgba(red, green, blue, 0) !important;
+    box-shadow: 0 0 10px rgba(255, 255, 255, 1);
+    /* background-color: rgba(0, 0, 0, 0.5) !important; */
+    backdrop-filter: blur(40px);
 }
 
 
@@ -88,10 +91,8 @@ input::placeholder {
     color: #aaa;
 }
 
-
-
 button:hover {
-    background-color: #0056b3;
+    background-color: #fead32;
 }
 
 .signup-link {
