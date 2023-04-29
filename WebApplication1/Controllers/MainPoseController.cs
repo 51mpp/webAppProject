@@ -236,6 +236,18 @@ namespace WebApplication1.Controllers
             _mainPoseRepository.Delete(post);
             return RedirectToAction("");
         }
+        [HttpPost]
+        public async Task<IActionResult> DeleteMainPose2(int mainPoseId)
+        {
+            var post = await _mainPoseRepository.GetByIdAsync(mainPoseId);
+            if (post == null) { return View("Error"); }
+            if (!string.IsNullOrEmpty(post.Image))
+            {
+                _ = _photoService.DeletePhotoAsync(post.Image); // ไม่สนใจรีเทิน
+            }
+            _mainPoseRepository.Delete(post);
+            return RedirectToAction("Index","Dashboard");
+        }
         [HttpGet]
         public async Task<IActionResult> GetComments(int mainPoseId)
         {
