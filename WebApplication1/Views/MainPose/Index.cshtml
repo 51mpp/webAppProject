@@ -37,6 +37,7 @@ src="https://cdnjs.cloudflare.com/ajax/libs/jquery-ajax-unobtrusive/3.2.6/jquery
 
                     @if (User.Identity.IsAuthenticated && (User.IsInRole("admin") || User.Identity.Name == item.Email))
                     {
+
                         <div class="editPost row flex-row-reverse position-absolute top-0 end-0">
                             <div class="col-7">
                                 <form asp-controller="MainPose" asp-action="DeleteMainPose" method="post">
@@ -50,10 +51,13 @@ src="https://cdnjs.cloudflare.com/ajax/libs/jquery-ajax-unobtrusive/3.2.6/jquery
                                         src="https://cdn-icons-png.flaticon.com/512/3597/3597075.png" alt="">
                                 </a>
                             </div>
-
-
+                            <button onclick="status('@item.Id','รอ')">รอ</button>
+                            <button onclick="status('@item.Id','กำลังไปส่ง')">กำลังไปส่ง</button>
+                            <button onclick="status('@item.Id','ส่งแล้ว')">ส่งแล้ว</button>
+                            
                         </div>
                     }
+                    
                     <div class="card-body">
                         <small class="position-absolute top-0 start-1" style="margin-top: 5px;color: grey">
                             @{
@@ -132,6 +136,35 @@ src="https://cdnjs.cloudflare.com/ajax/libs/jquery-ajax-unobtrusive/3.2.6/jquery
 
                             </div>
                         </div>
+                        <div id="status-@item.Id-Post">
+                            @if(item.StatePost == "รอ")
+                            {
+                                <small>รอ</small>
+                            }else if(item.StatePost == "กำลังไปส่ง")
+                            {
+                                <small>กำลังไปส่ง</small>
+                            }else if(item.StatePost == "ส่งแล้ว")
+                            {
+                                <small>ส่งแล้ว</small>
+                            }
+                        </div>
+                        <script>
+                            function status(mainPoseId, status) {
+                                $.ajax({
+                                    url: '@Url.Action("StateMainPose", "MainPose")',
+                                    data: { id: mainPoseId, status: status },
+                                    type: 'POST',
+                                    success: function (result) {
+                                        console.log(result);
+                                        // Do something with the result, if needed
+                                    },
+                                    error: function () {
+                                        console.log('Error occurred while confirming comment.');
+                                    }
+                                });
+                            } 
+
+                        </script>
                         <div class="row align-items-center">
                             <div class="scan col-12">
                                 <span onclick="showQR(@item.Id@item.Id,2)">แสกนจ่าย</span>
@@ -291,24 +324,14 @@ src="https://cdnjs.cloudflare.com/ajax/libs/jquery-ajax-unobtrusive/3.2.6/jquery
                         }
                     });
                 }
-                function confirmComment(commentId, CommentText, FirstName, LastName, image, email, confirm, mainPoseId) {
-                    $.ajax({
-                        url: '@Url.Action("ConfirmComment", "MainPose")',
-                        data: { commentId: commentId, CommentText: CommentText, FirstName: FirstName, LastName: LastName, image: image, email: email, confirm: confirm, mainPoseId: mainPoseId },
-                        type: 'POST',
-                        success: function (result) {
-                            console.log(result);
-                            // Do something with the result, if needed
-                        },
-                        error: function () {
-                            console.log('Error occurred while confirming comment.');
-                        }
-                    });
-                }
+
+
 
                 // Call loadComments every 1 seconds
                 setInterval(function () {
+                    
                     loadComments(@item.Id);
+                    
                 }, 1000);
                 
             </script>

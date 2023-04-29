@@ -194,6 +194,20 @@ namespace WebApplication1.Controllers
             _mainPoseRepository.Update(mainPose);
             return Ok("Status submitted successfully");
         }
+        [HttpGet]
+        public async Task<IActionResult> StatusMainPose(int id, string status)
+        {
+            string x = "";
+            if (status == "รอ")
+            {
+                x = "blue";
+            }
+            else
+            {
+                x = "white";
+            }
+            return PartialView("_StatusPosePartialView",x);
+        }
         [HttpPost]
         public async Task<IActionResult> DeleteMainPose(int mainPoseId)
         {
