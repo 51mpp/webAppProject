@@ -1,17 +1,15 @@
 
 body{
     height: 100vh;
-    /* width: 100%;
-    min-height: 100vh;
-    background-image: url("https://media.discordapp.net/attachments/879723819621814342/1101604585623261184/RegisterBackground-01.jpg?width=1211&height=670");
-    background-size: cover;
-    align-items: center; */
+
 }
 
 .contain {
     width: 100%;
+    padding-top: 110px;
+    padding-bottom: 70px;
     min-height: 100vh;
-    background-image: url("https://media.discordapp.net/attachments/879723819621814342/1101604585623261184/RegisterBackground-01.jpg?width=1211&height=670");
+    background-image: url("https://media.discordapp.net/attachments/879723819621814342/1101828154252853348/RegisterBackground-02-01.jpg?width=1920&height=1080");
     background-size: cover;
     align-items: center;
 }
@@ -21,16 +19,18 @@ body{
     display: flex;
     flex-direction: column;
     justify-content: center;
-    max-width:40%;
+    max-width:45%;
     margin-left: auto;
     margin-right: auto;
-    margin-top: 100px;
+    box-shadow: 0 0 20px rgb(0, 0, 0);
+    backdrop-filter: blur(40px);
 }
 
 h1 {
     text-align: center;
     margin-bottom: 30px;
-    color: #333;
+    text-shadow: 2px 2px #573300;
+    color: #ff9900;
 }
 
 .input-group {
@@ -63,7 +63,7 @@ input::placeholder {
 
 div button {
     margin-top: 10px;
-    background-color: #007bff;
+    background-color: #F09711;
     color: white;
     font-size: 16px;
     padding: 10px;
@@ -74,6 +74,6 @@ div button {
 }
 
 button:hover {
-    background-color: #0056b3;
+    background-color: #fead32;
 }
 

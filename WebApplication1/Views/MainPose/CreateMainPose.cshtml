@@ -1,4 +1,9 @@
 ﻿@using WebApplication1.Data.Enum
+
+@using Microsoft.AspNetCore.Identity
+@inject SignInManager<AppUser> SignInManager
+@using System.Globalization;
+
 @using WebApplication1.ViewModels
 @model CreateMainPoseViewModel
 
@@ -11,7 +16,7 @@
             <div class="col-md-6 col-sm-12 form-group">
                 <label asp-for="FirstName">ชื่อ</label>
                 <div class="col-12">
-                    <input asp-for="FirstName" class="form-control" placeholder="*กรอกชื่อ">
+                    <input asp-for="FirstName" value="" class="form-control" placeholder="*กรอกชื่อ">
                     <span asp-validation-for="FirstName" class="text-danger"></span>
                 </div>
 
