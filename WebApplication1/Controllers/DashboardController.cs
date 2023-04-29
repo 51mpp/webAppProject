@@ -61,6 +61,7 @@ namespace WebApplication1.Controllers
                 LastName = user.LastName,
                 Section = user.Section,
                 Phone = user.Phone,
+                Account = user.Account,
                 Icon = user.Icon,
                 NickName = user.NickName,
                 State = user.State

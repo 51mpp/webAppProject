@@ -42,10 +42,18 @@ namespace WebApplication1.Controllers
             return View("Index", (mainPoses, createMainPoseVM, commentVM));
         }
         [HttpGet]
-        public IActionResult CreateMainPose()
-        {
+        public async Task<IActionResult> CreateMainPose()
+        {   
             var curUserId = _httpContextAccessor.HttpContext.User.GetUserId();
-            var createMainPoseViewModel = new CreateMainPoseViewModel { AppUserId = curUserId };
+            AppUser user = await _userRepository.GetUserById(curUserId);
+            var createMainPoseViewModel = new CreateMainPoseViewModel 
+            { 
+                AppUserId = curUserId,
+                FirstName = user.FirstName,
+                LastName = user.LastName,
+                Phone = user.Phone,
+                Account = user.Account
+            };
             return View(createMainPoseViewModel);
         }
         

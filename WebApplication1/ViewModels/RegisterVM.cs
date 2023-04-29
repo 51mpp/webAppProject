@@ -24,6 +24,7 @@ namespace WebApplication1.ViewModels
         public string? NickName { get; set; }
         public int? Section { get; set; }
         public string? Icon { get; set; }
+        public string? Account { get; set; }
         public IFormFile Image { get; set; }
     }
 }

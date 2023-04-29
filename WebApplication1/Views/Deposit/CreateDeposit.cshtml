@@ -2,8 +2,6 @@
     For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 *@
 @{
-}
-@{
     ViewData["Title"] = "โพสต์ฝาก";
 }
 @using WebApplication1.ViewModels
@@ -17,7 +15,7 @@
             <div class="col-md-6 col-sm-12 form-group">
                 <label asp-for="FirstName">ชื่อ</label>
                 <div class="col-12">
-                    <input asp-for="FirstName" class="form-control" placeholder="*กรอกชื่อ">
+                    <input asp-for="FirstName" value="@Model.FirstName" class="form-control" placeholder="*กรอกชื่อ">
                     <span asp-validation-for="FirstName" class="text-danger"></span>
                 </div>
 
@@ -25,7 +23,7 @@
             <div class="col-md-6 col-sm-12 form-group">
                 <label asp-for="LastName">นามสกุล</label>
                 <div class="col-12">
-                    <input asp-for="LastName" class="form-control" placeholder="*กรอกนามสกุล">
+                    <input asp-for="LastName" value="@Model.LastName" class="form-control" placeholder="*กรอกนามสกุล">
                     <span asp-validation-for="LastName" class="text-danger"></span>
                 </div>
 
@@ -34,7 +32,7 @@
         <div class="row">
             <div class="col-xl-6 col-md-4 form-group">
                 <label asp-for="Phone">เบอร์โทรศัพท์</label>
-                <input asp-for="Phone" type="text" class="form-control" placeholder="*กรอกเบอร์โทรศัพท์" maxlength="10">
+                <input asp-for="Phone" type="text" value="@Model.Phone" class="form-control" placeholder="*กรอกเบอร์โทรศัพท์" maxlength="10">
                 <span asp-validation-for="Phone" class="text-danger"></span>
             </div>
         </div>
