@@ -28,6 +28,7 @@ namespace WebApplication1.Models
         public AppUser? AppUser { get; set; }
         public ICollection<Comment> Comments { get; set; }
         public string? Email { get; set; }
+        public string? StatePost { get; set; }
 
     }
 }

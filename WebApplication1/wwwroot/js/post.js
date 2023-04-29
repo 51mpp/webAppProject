@@ -1,4 +1,4 @@
-function showComment(id, current, max, state) {
+function showComment(id, current, max, state, bt) {
     console.log("click");
     var main = document.getElementById(id);
     console.log(main);
@@ -12,7 +12,11 @@ function showComment(id, current, max, state) {
         if (current >= max) {
             main.style.textAlign = "center";
             main.innerHTML = "เต็มแล้วจ้า";
+            bt.style.display = "none";
+        } else {
+            bt.style.display = "block";
         }
+
     }
 }
 

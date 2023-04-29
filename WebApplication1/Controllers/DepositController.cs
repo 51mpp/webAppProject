@@ -43,7 +43,7 @@ namespace WebApplication1.Controllers
         public IActionResult CreateDeposit()
         {
             var curUserId = _httpContextAccessor.HttpContext.User.GetUserId();
-            var createDepositViewModel = new CreateDepositViewModel { AppUserId = curUserId  };
+            var createDepositViewModel = new CreateDepositViewModel { AppUserId = curUserId };
             return View(createDepositViewModel);
         }
         [HttpPost]
@@ -66,7 +66,7 @@ namespace WebApplication1.Controllers
                     AppUserId = depositVM.AppUserId,
                     CreatedTime = DateTime.Now,
                     Email = depositVM.Email
-                    
+
                 };
 
                 _depositRepository.Add(deposit);
@@ -94,7 +94,8 @@ namespace WebApplication1.Controllers
                 PlaceDeliver = post.PlaceDeliver,
                 MaxTimePose = post.MaxTimePose,
                 CreatedTime = post.CreatedTime,
-                Email = post.Email
+                Email = post.Email,
+                AppUserId = post.AppUserId
 
             };
             return View(depositVM);
@@ -124,7 +125,8 @@ namespace WebApplication1.Controllers
                 CreatedTime = depositVM.CreatedTime,
                 MaxTimePose = depositVM.MaxTimePose,
                 LastModified = DateTime.Now,
-                Email = depositVM.Email
+                Email = depositVM.Email,
+                AppUserId = depositVM.AppUserId
 
             };
             _depositRepository.Update(deposit);
@@ -143,11 +145,11 @@ namespace WebApplication1.Controllers
         public async Task<IActionResult> GetComments(int depositId)
         {
             Deposit deposit = await _depositRepository.GetByIdAsync(depositId);
-            IEnumerable <CommentDeposit> commentDeposits = await _depositRepository.GetCommentsByDepositId(depositId);
-            return PartialView("_CommentDepositPartialView", (commentDeposits,deposit));
+            IEnumerable<CommentDeposit> commentDeposits = await _depositRepository.GetCommentsByDepositId(depositId);
+            return PartialView("_CommentDepositPartialView", (commentDeposits, deposit));
         }
         [HttpPost]
-        public async Task<IActionResult> CreateComment(int depositId, string CommentText, string FirstName, string LastName, IFormFile? image,string email, bool confirm)
+        public async Task<IActionResult> CreateComment(int depositId, string CommentText, string FirstName, string LastName, IFormFile? image, string email, bool confirm)
         {
             Deposit deposits = await _depositRepository.GetByIdAsync(depositId);
             if (ModelState.IsValid)
@@ -158,7 +160,7 @@ namespace WebApplication1.Controllers
                 string imageUrl = null;
                 if (image != null)
                 {
-                    var result = await _photoService.AddPhotoCommentAsync(image);
+                    var result = await _photoService.AddPhotoCommentDepositAsync(image);
                     imageUrl = result.Url.ToString();
                 }
                 if (CommentText != null)
@@ -228,11 +230,11 @@ namespace WebApplication1.Controllers
         {
             Deposit deposit = await _depositRepository.GetByIdAsync(depositId);
             IEnumerable<CommentDeposit> comments = await _depositRepository.GetCommentsByDepositId(depositId);
-            return PartialView("_CommentDepositPartialView", (comments,deposit));
+            return PartialView("_CommentDepositPartialView", (comments, deposit));
         }
 
         [HttpPost]
-        public async Task<IActionResult> ConfirmComment(int commentDepositId,int depositId, string CommentText, string FirstName, string LastName, string? image, string email, bool confirm)
+        public async Task<IActionResult> ConfirmComment(int commentDepositId, int depositId, string CommentText, string FirstName, string LastName, string? image, string email, bool confirm)
         {
             if (!ModelState.IsValid)
             {

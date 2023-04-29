@@ -107,41 +107,10 @@
                                     </span>
                                 </div>
                             </div>
-                            <div id="post-@item.Id-comments">
-                            @*@foreach (var comment in @item.CommentDeposits)
-                            {
-                                <div class="row">
-                                    <div class="order_box">
-                                        <div class="card p-3 shadow-sm">
-                                            <div class="d-flex justify-content-between align-items-center">
-                                                <div class="user d-flex flex-row align-items-center">
-                                                    <div class="row">
-                                                        <div class="col-3">
-                                                            <small style="color: rgb(76, 158, 80);">@comment.FirstName</small>
-                                                        </div>
-                                                        <div class="col-9">
-                                                            <small class="font-weight-bold">@comment.CommentText</small>
-                                                        </div>
-                                                        <div></div>
-                                                        <div class="slip">
-                                                            <img id="Image-@comment.Id-comment" src="@comment.Image" alt="">
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <form asp-controller="Deposit" asp-action="DeleteComment" method="post">
-                                            <input type="hidden" name="depositId" value="@comment.Id" />
-                                        <button type="submit" class="remove">
-                                            <img src="https://cdn-icons-png.flaticon.com/512/189/189690.png" alt="">
-                                        </button>
-                                    </form>
-                                </div>
-                            }*@
+                            <div id="post-@item.Id-comments" class="p-2">
                             @if (item.CommentDeposits != null && item.CommentDeposits.Any())
                             {
-                                <div class="row">
+                                @* <div class="row">
                                     <div class="order_box">
                                         <div class="card p-3 shadow-sm">
                                             <div class="d-flex justify-content-between align-items-center">
@@ -154,7 +123,7 @@
                                                             <small class="font-weight-bold">@item.CommentDeposits.FirstOrDefault().CommentText</small>
                                                         </div>
                                                         <div></div>
-                                                        <div class="slip">
+                                                        <div class="qr">
                                                             <img id="Image-@item.CommentDeposits.FirstOrDefault().Id-comment" src="@item.CommentDeposits.FirstOrDefault().Image" alt="">
                                                         </div>
                                                     </div>
@@ -180,6 +149,60 @@
                                         </form>
                                     }
                                         
+                                </div> *@
+
+                                <div class="row">
+                                    <div class="order_box">
+                                        <div class="card p-3 shadow-sm" id="frame-@item.CommentDeposits.FirstOrDefault().Id">
+                                            @if (User.Identity.IsAuthenticated && (User.IsInRole("admin") || User.Identity.Name ==
+                                        item.CommentDeposits.FirstOrDefault().Email))
+                                            {
+                                                <form asp-controller="Deposit" asp-action="DeleteComment" method="post"
+                                                    class="position-absolute top-0 end-0 p-1">
+                                                    <input type="hidden" name="depositId" value="@item.CommentDeposits.FirstOrDefault().Id" />
+                                                    <button type="submit" class="remove">
+                                                        <img src="https://cdn-icons-png.flaticon.com/512/189/189690.png" alt="">
+                                                    </button>
+                                                </form>
+                                            }
+                                            @if (item.CommentDeposits.FirstOrDefault().Like == true)
+                                            {
+                                                <div class="likeFrame position-absolute top-0 end-0">
+                                                    <img class="like"
+                                                        src="https://cdn.discordapp.com/attachments/880751147449733150/1101569968333656125/pngwing.com.png"
+                                                        alt="">
+                                                </div>
+                                                <script>
+                                                    document.getElementById("frame-@item.CommentDeposits.FirstOrDefault().Id").style.border = "3px solid green";
+
+                                                </script>
+                                            }
+
+
+                                            <div class="row">
+                                                <div class="col-3">
+                                                    <small style="color: rgb(76, 158, 80);">@item.CommentDeposits.FirstOrDefault().FirstName :</small>
+                                                </div>
+                                                <div class="col-5">
+                                                    <small class="font-weight-bold">@item.CommentDeposits.FirstOrDefault().CommentText</small>
+                                                </div>
+                                                <div></div>
+                                                <div class="col-12 p-1 d-flex justify-content-center">
+                                                    <img class="qr" id="Image-@item.CommentDeposits.FirstOrDefault().Id-comment" src="@item.CommentDeposits.FirstOrDefault().Image"
+                                                        alt="">
+                                                </div>
+                                                @if (User.Identity.IsAuthenticated && (User.IsInRole("admin") || User.Identity.Name ==
+                                            Model.Item2.Email))
+                                                {
+                                                    <div class="confirmBox">
+                                                    <span id="confirm-@item.CommentDeposits.FirstOrDefault().Id-comments" class="confirmText"
+                                                        onclick="confirmComment('@item.CommentDeposits.FirstOrDefault().Id','@item.CommentDeposits.FirstOrDefault().CommentText','@item.CommentDeposits.FirstOrDefault().FirstName','@item.CommentDeposits.FirstOrDefault().LastName','@item.CommentDeposits.FirstOrDefault().Image','@item.CommentDeposits.FirstOrDefault().Email','@item.CommentDeposits.FirstOrDefault().Like','@item.Id')">รับทราบ</span>
+                                                    </div>
+                                                }
+                                            </div>
+
+                                        </div>
+                                    </div>
                                 </div>
                                 <script>
                                     function confirmComment(commentDepositId, CommentText, FirstName, LastName, image, email, confirm, depositId) {
@@ -202,7 +225,7 @@
                         </div>
                         </div>
                             <hr>
-                            <div class="accept" onclick="showComment(@item.Id@item.Id)">
+                            <div  class="accept" onclick="showComment(@item.Id@item.Id)">
                                 เดี๋ยวไปซื้อให้
                             </div>
                             <div id="postComment">

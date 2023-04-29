@@ -50,6 +50,8 @@ src="https://cdnjs.cloudflare.com/ajax/libs/jquery-ajax-unobtrusive/3.2.6/jquery
                                         src="https://cdn-icons-png.flaticon.com/512/3597/3597075.png" alt="">
                                 </a>
                             </div>
+
+
                         </div>
                     }
                     <div class="card-body">
@@ -139,11 +141,11 @@ src="https://cdnjs.cloudflare.com/ajax/libs/jquery-ajax-unobtrusive/3.2.6/jquery
                             <img id="@item.Id@item.Id" src="@item.Image" alt="" style="display: none;">
                         </div>
                         <div id="test1">
-                            <span id="count-@item.Id-comments" ฝากแล้ว คน>
+                            <span id="count-@item.Id-comments" onclick="showCom('post-@item.Id-comments')">
                                 ฝากแล้ว @item.Comments.Count / @item.MaxComment คน
                             </span>
                         </div>
-                        <div id="post-@item.Id-comments">
+                        <div id="post-@item.Id-comments" style="display: none;">
                             @foreach (var comment in @item.Comments.Take((int)@item.MaxComment))
                             {
                                 <div class="row">
@@ -158,26 +160,35 @@ src="https://cdnjs.cloudflare.com/ajax/libs/jquery-ajax-unobtrusive/3.2.6/jquery
                                                     </button>
                                                 </form>
                                             }
-                                                <div class="row">
-                                                    <div class="col-3">
-                                                        <small style="color: rgb(76, 158, 80);">@comment.FirstName :</small>
-                                                    </div>
-                                                    <div class="col-9">
-                                                        <small class="font-weight-bold">@comment.CommentText</small>
-                                                    </div>
-                                                    <div class="col-12 p-2">
-                                                        <img class="slip" id="Image-@comment.Id-comment" src="@comment.Image" alt="">
-                                                    </div>
+                                            @if (comment.Like == true)
+                                            {
+                                                <div class="likeFrame position-absolute top-0 end-0">
+                                                    <img class="like"
+                                                        src="https://cdn.discordapp.com/attachments/880751147449733150/1101569968333656125/pngwing.com.png"
+                                                        alt="">
                                                 </div>
+                                                <script>
+                                                    document.getElementById("frame").style.border = "3px solid green";
+                                                </script>
+                                            }
+                                            <div class="row">
+                                                <div class="col-3">
+                                                    <small style="color: rgb(76, 158, 80);">@comment.FirstName :</small>
+                                                </div>
+                                                <div class="col-9">
+                                                    <small class="font-weight-bold">@comment.CommentText</small>
+                                                </div>
+                                                <div class="col-12 p-2">
+                                                    <img class="slip" id="Image-@comment.Id-comment" src="@comment.Image" alt="">
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
-                                    @if (comment.Like == true)
-                                    {
-                                        <img class="w-25 h-25" src="https://cdn.discordapp.com/attachments/880751147449733150/1101569968333656125/pngwing.com.png" alt="">
-                                    }
                                     @if (User.Identity.IsAuthenticated && (User.IsInRole("admin") || User.Identity.Name == item.Email))
                                     {
-                                        <button id="confirm-@comment.Id-comments" onclick="confirmComment('@comment.Id','@comment.CommentText','@comment.FirstName','@comment.LastName','@comment.Image','@comment.Email','@comment.Like',@Model.Item3)">Confirm Comment</button>
+                                        <span style="text-decoration: underline;cursor: pointer;text-align:center;" class="p-1"
+                                        id="confirm-@comment.Id-comments"
+                                        onclick="confirmComment('@comment.Id','@comment.CommentText','@comment.FirstName','@comment.LastName','@comment.Email','@comment.Like',@Model.Item3,'@comment.Image')">ยืนยันการรับฝาก</span>
                                     }
                                     
                                 </div>
@@ -199,11 +210,24 @@ src="https://cdnjs.cloudflare.com/ajax/libs/jquery-ajax-unobtrusive/3.2.6/jquery
                                 </script>
                             }
                         </div>
+                        <script>
+                            function showCom(id){
+                                console.log(id);
+                                var com = document.getElementById(id);
+                                console.log(com.style.display);
+                                if (com.style.display === "none") {
+                                    com.style.display = "block";
+                                } else {
+                                    com.style.display = "none";
+                                }
+                            }
+                        </script>
                         <hr>
-                        <div class="comment"
-                            onclick="showComment(@item.Id@item.Id@item.Id,@item.Comments.Count,@item.MaxComment,1  )">
-                            ฝากซื้อหน่อย
+                        <div class="comment" 
+                            onclick="showComment(@item.Id@item.Id@item.Id,@item.Comments.Count,@item.MaxComment,1)">
+                            ฝากซื้อหน่อย 
                         </div>
+                        
                         <div id="postComment">
                             <div class="form-group row" id="@item.Id@item.Id@item.Id" style="display: none;">
                                 <form asp-controller="MainPose" asp-action="CreateComment" method="post"
@@ -267,6 +291,21 @@ src="https://cdnjs.cloudflare.com/ajax/libs/jquery-ajax-unobtrusive/3.2.6/jquery
                         }
                     });
                 }
+                function confirmComment(commentId, CommentText, FirstName, LastName, image, email, confirm, mainPoseId) {
+                    $.ajax({
+                        url: '@Url.Action("ConfirmComment", "MainPose")',
+                        data: { commentId: commentId, CommentText: CommentText, FirstName: FirstName, LastName: LastName, image: image, email: email, confirm: confirm, mainPoseId: mainPoseId },
+                        type: 'POST',
+                        success: function (result) {
+                            console.log(result);
+                            // Do something with the result, if needed
+                        },
+                        error: function () {
+                            console.log('Error occurred while confirming comment.');
+                        }
+                    });
+                }
+
                 // Call loadComments every 1 seconds
                 setInterval(function () {
                     loadComments(@item.Id);
