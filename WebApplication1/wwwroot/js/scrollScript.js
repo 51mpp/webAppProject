@@ -26,6 +26,10 @@ window.onscroll = function () {
             document.getElementById("l04").style.color = "white"
             document.getElementById("li04").style.backgroundColor = "#f59317"
         }
+        else if (window.location.pathname == '/Dashboard') {
+            document.getElementById("l05").style.color = "white"
+            document.getElementById("li05").style.backgroundColor = "#f59317"
+        }
     }
     else {
         mainnav.classList.remove('active');
@@ -43,13 +47,18 @@ window.onscroll = function () {
         }
         else if (window.location.pathname == "/Deposit") {
             document.getElementById("l03").style.color = "white"
-            document.getElementById("li03").style.backgroundColor = "#f59317"
+            document.getElementById("li03").style.backgroundColor = "red"
         }
         else if (window.location.pathname == "/Account/Login" || window.location.pathname == '/Account/Register') {
             document.getElementById("l04").style.color = "white"
             document.getElementById("li04").style.backgroundColor = "red"
         }
+        else if (window.location.pathname == '/Dashboard') {
+            document.getElementById("l05").style.color = "white"
+            document.getElementById("li05").style.backgroundColor = "red"
+        }
 
     }
 
 }
+    
