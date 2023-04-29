@@ -180,7 +180,7 @@ namespace WebApplication1.Controllers
             if (post == null) { return View("Error"); }
 
             _depositRepository.Delete(post);
-            return RedirectToAction("Index", "Dashboard");
+            return RedirectToAction("");
         }
         [HttpPost]
         public async Task<IActionResult> DeleteDeposit2(int depositId)
@@ -189,7 +189,7 @@ namespace WebApplication1.Controllers
             if (post == null) { return View("Error"); }
 
             _depositRepository.Delete(post);
-            return RedirectToAction("");
+            return RedirectToAction("Index", "Dashboard");
         }
         [HttpGet]
         public async Task<IActionResult> GetComments(int depositId)
