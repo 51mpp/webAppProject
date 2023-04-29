@@ -89,7 +89,8 @@ namespace WebApplication1.Controllers
                 PlaceDeliver = post.PlaceDeliver,
                 MaxTimePose = post.MaxTimePose,
                 CreatedTime = post.CreatedTime,
-                Email = post.Email
+                Email = post.Email,
+                AppUserId = post.AppUserId
 
             };
             return View(depositVM);
@@ -119,7 +120,8 @@ namespace WebApplication1.Controllers
                 CreatedTime = depositVM.CreatedTime,
                 MaxTimePose = depositVM.MaxTimePose,
                 LastModified = DateTime.Now,
-                Email = depositVM.Email
+                Email = depositVM.Email,
+                AppUserId = depositVM.AppUserId
 
             };
             _depositRepository.Update(deposit);

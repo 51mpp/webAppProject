@@ -109,7 +109,8 @@ namespace WebApplication1.Controllers
                 MaxComment = post.MaxComment,
                 MaxTimePose = post.MaxTimePose,
                 CreatedTime = post.CreatedTime,
-                Email = post.Email
+                Email = post.Email,
+                AppUserId = post.AppUserId
 
             };
             return View(mainPoseVM);
@@ -154,7 +155,9 @@ namespace WebApplication1.Controllers
                 CreatedTime = mainPoseVM.CreatedTime,
                 MaxTimePose = mainPoseVM.MaxTimePose,
                 LastModified = DateTime.Now,
-                Email = mainPoseVM.Email
+                Email = mainPoseVM.Email,
+                AppUserId = mainPoseVM.AppUserId
+
             };
             _mainPoseRepository.Update(mainPose);
             return RedirectToAction("Index");
