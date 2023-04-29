@@ -23,5 +23,6 @@ namespace WebApplication1.ViewModels
         public DateTime? LastModified { get; set; }
         public DateTime CreatedTime { get; set; }
         public string Email { get; set; }
+        public string? StatePost { get; set; }
     }
 }

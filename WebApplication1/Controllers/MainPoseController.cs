@@ -97,7 +97,7 @@ namespace WebApplication1.Controllers
         public async Task<IActionResult> EditMainPose(int id)
         {
             var post = await _mainPoseRepository.GetByIdAsync(id);
-            if (post == null) { return View("Error"); }
+            if (post == null) { return View("Error");}
             var mainPoseVM = new EditMainPoseViewModel
             {
                 FirstName = post.FirstName,
@@ -158,6 +158,32 @@ namespace WebApplication1.Controllers
             };
             _mainPoseRepository.Update(mainPose);
             return RedirectToAction("Index");
+        }
+        [HttpPost]
+        public async Task<IActionResult> StateMainPose(int id,string status)
+        {
+            if (!ModelState.IsValid){return BadRequest("Invalid model state");}
+            var post = await _mainPoseRepository.GetByIdAsyncNoTracking(id);
+            if (post == null){return BadRequest("Can get MainPose");}
+
+            var mainPose = new MainPose
+            {
+                Id = id,
+                FirstName = post.FirstName,
+                LastName = post.LastName,
+                Phone = post.Phone,
+                Image = post.Image,
+                Place = post.Place,
+                Account = post.Account,
+                MaxComment = post.MaxComment,
+                CreatedTime = post.CreatedTime,
+                MaxTimePose = post.MaxTimePose,
+                LastModified = DateTime.Now,
+                Email = post.Email,
+                StatePost = status
+            };
+            _mainPoseRepository.Update(mainPose);
+            return Ok("Status submitted successfully");
         }
         [HttpPost]
         public async Task<IActionResult> DeleteMainPose(int mainPoseId)
