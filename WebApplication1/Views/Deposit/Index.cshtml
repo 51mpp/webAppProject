@@ -162,17 +162,41 @@
                                             </div>
                                         </div>
                                     </div>
-                                        @if (User.Identity.IsAuthenticated && (User.IsInRole("admin") || User.Identity.Name == item.CommentDeposits.FirstOrDefault().Email))
-                                        {
-                                            <form asp-controller="Deposit" asp-action="DeleteComment" method="post">
-                                                <input type="hidden" name="depositId" value="@item.CommentDeposits.FirstOrDefault().Id" />
-                                                <button type="submit" class="remove">
-                                                    <img src="https://cdn-icons-png.flaticon.com/512/189/189690.png" alt="">
-                                                </button>
-                                            </form>
-                                        }
+                                    @if (item.CommentDeposits.FirstOrDefault().Like == true)
+                                    {
+                                        <img class="w-25 h-25" src="https://cdn.discordapp.com/attachments/880751147449733150/1101569968333656125/pngwing.com.png" alt="">
+                                    }
+                                    @if (User.Identity.IsAuthenticated && (User.IsInRole("admin") || User.Identity.Name == item.Email))
+                                    {
+                                        <button id="confirm-@item.CommentDeposits.FirstOrDefault().Id-comments" onclick="confirmComment('@item.CommentDeposits.FirstOrDefault().Id','@item.CommentDeposits.FirstOrDefault().CommentText','@item.CommentDeposits.FirstOrDefault().FirstName','@item.CommentDeposits.FirstOrDefault().LastName','@item.CommentDeposits.FirstOrDefault().Image','@item.CommentDeposits.FirstOrDefault().Email','@item.CommentDeposits.FirstOrDefault().Like','@item.Id')">Confirm Comment</button>
+                                    }
+                                    @if (User.Identity.IsAuthenticated && (User.IsInRole("admin") || User.Identity.Name == item.CommentDeposits.FirstOrDefault().Email))
+                                    {
+                                        <form asp-controller="Deposit" asp-action="DeleteComment" method="post">
+                                            <input type="hidden" name="depositId" value="@item.CommentDeposits.FirstOrDefault().Id" />
+                                            <button type="submit" class="remove">
+                                                <img src="https://cdn-icons-png.flaticon.com/512/189/189690.png" alt="">
+                                            </button>
+                                        </form>
+                                    }
                                         
                                 </div>
+                                <script>
+                                    function confirmComment(commentDepositId, CommentText, FirstName, LastName, image, email, confirm, depositId) {
+                                        $.ajax({
+                                            url: '@Url.Action("ConfirmComment", "Deposit")',
+                                            data: { commentDepositId: commentDepositId, CommentText: CommentText, FirstName: FirstName, LastName: LastName, image: image, email: email, confirm: confirm, depositId: depositId },
+                                            type: 'POST',
+                                            success: function (result) {
+                                                console.log(result);
+                                                // Do something with the result, if needed
+                                            },
+                                            error: function () {
+                                                console.log('Error occurred while confirming comment.');
+                                            }
+                                        });
+                                    }
+                                </script>
                             }
                             
                         </div>
@@ -186,6 +210,7 @@
                                     <form asp-controller="Deposit" asp-action="CreateComment" method="post" enctype="multipart/form-data">
                                         <input type="hidden" name="depositId" value="@item.Id" />
                                         <input type="hidden" name="email" value="@User.Identity.Name" />
+                                        <input type="hidden" name="confirm" value="false" />
                                         <div class="form-group">
                                             <label for="first-name">ชื่อ</label>
                                             <input type="text" id="first-name" name="FirstName" class="form-control" required />
@@ -234,7 +259,7 @@
                                 setInterval(function () {
                                     loadCommentDeposits(@item.Id);
 
-                                }, 5000);
+                                }, 1000);
                             </script>
                         </div>
 
