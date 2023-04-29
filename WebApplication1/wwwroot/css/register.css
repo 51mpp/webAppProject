@@ -1,5 +1,4 @@
-
-body{
+body {
     height: 100vh;
 
 }
@@ -19,7 +18,7 @@ body{
     display: flex;
     flex-direction: column;
     justify-content: center;
-    max-width:45%;
+    max-width: 45%;
     margin-left: auto;
     margin-right: auto;
     box-shadow: 0 0 20px rgb(78, 78, 78);
@@ -77,3 +76,21 @@ button:hover {
     background-color: #fead32;
 }
 
+label {
+    font-weight: 700;
+
+}
+
+@media (max-width: 840px) {
+    .signup-container {
+        padding: 60px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        max-width: 80%;
+        margin-left: auto;
+        margin-right: auto;
+        box-shadow: 0 0 20px rgb(78, 78, 78);
+        backdrop-filter: blur(35px);
+    }
+}
