@@ -24,7 +24,10 @@
             <div class="home-text col-xl-6 col-md-12 col-sm-12">
                 <h1>บริการ รับ/ฝาก ซื้ออาหาร</h1>
                 <h2>หิวเมื่อไหร่ก็แวะมา <br> มีคนรอ รับ/ฝาก อยู่ตลอด</h2>
-                <a href="./Account/Login" class="btn">ลงชื่อเข้าใช้</a>
+                @if (!User.Identity.IsAuthenticated)
+                {
+                    <a href="./Account/Login" class="btn">ลงชื่อเข้าใช้</a>
+                }
             </div>
             <img class="home-img col-xl-6 col-md-12 col-sm-12"
                 src="https://scontent.fbkk3-6.fna.fbcdn.net/v/t1.6435-9/163261349_1883601285126635_930153694810579536_n.jpg?_nc_cat=106&ccb=1-7&_nc_sid=730e14&_nc_eui2=AeEj-4S9rQ4yOrUXDv5FArRsjBY1ULBhSdaMFjVQsGFJ1tmXLQmtzWDZwJ9tzceSKbhSCAeuPopfLnQ0673E1T1c&_nc_ohc=wJsJwuTCB8kAX_fQFl4&_nc_ht=scontent.fbkk3-6.fna&oh=00_AfCu82WmjL9CsL72u_VMQGe_LLYiz1fKy3t7zfqLxqkCFg&oe=6471FE1E"
@@ -49,7 +52,10 @@
                     เว็บไซต์ของพวกเราออกแบบมาเพื่อสร้างประสบการณ์ที่ดีให้กับทุกคนที่เข้ามาใช้งาน
                     หากพบสิ่งที่ผิดปกติหรือมีข้อเสนอแนะให้กับพวกเรา โปรดอย่าลังเลที่จะบอกพวกเรา
                     เรายินดีที่จะรับฟังคำแนะนำจากคุณ</p>
-                <a href="./Account/Register" class="btn">สมัครเข้าใช้งาน</a>
+                @if (!User.Identity.IsAuthenticated)
+                {
+                    <a href="./Account/Register" class="btn">สมัครเข้าใช้งาน</a>
+                }
             </div>
         </div>
     </section>
