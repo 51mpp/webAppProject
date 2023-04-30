@@ -35,6 +35,7 @@ namespace WebApplication1.Controllers
             user.LastName = editVM.LastName;
             user.Section = editVM.Section;
             user.Phone = editVM.Phone;
+            user.Account = editVM.Account;
             user.Icon = photoResult.Url.ToString();
             user.NickName = editVM.NickName;
             user.State = editVM.State;
