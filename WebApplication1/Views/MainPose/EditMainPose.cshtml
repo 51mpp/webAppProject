@@ -2,13 +2,18 @@
 For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 *@
 @{
+    ViewData["Title"] = "แก้ไขโพสต์รับฝาก";
 }
 @using WebApplication1.Data.Enum
 @using WebApplication1.ViewModels
 @model EditMainPoseViewModel
 
-<link rel="stylesheet" href="~/css/createMainPost.css">
-<div class="box container h-200 d-flex align-items-center justify-content-center">
+<link rel="stylesheet" href="~/css/fillInfo.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai:wght@500&display=swap" rel="stylesheet">
+<div class="container" id="box">
+    <h2>แก้ไขข้อมูลการรับฝาก</h2>
     <form asp-action="EditMainPose" method="post" enctype="multipart/form-data">
         <div class="row">
             <div class="col-md-6 col-sm-12 form-group">
@@ -27,12 +32,12 @@ For more information on enabling MVC for empty projects, visit https://go.micros
             </div>
         </div>
         <div class="row">
-            <div class="col-xl-6 col-md-4 form-group">
+            <div class="col-xl-6 col-md-6 form-group">
                 <label asp-for="Phone">เบอร์โทรศัพท์</label>
                 <input asp-for="Phone" type="text" class="form-control" placeholder="*กรอกเบอร์โทรศัพท์" maxlength="10">
                 <span asp-validation-for="Phone" class="text-danger"></span>
             </div>
-            <div class="col-xl-6  col-md-4 form-group">
+            <div class="col-xl-6  col-md-6 form-group">
                 <label asp-for="Account">หมายเลขบัญชี</label>
                 <input asp-for="Account" type="text" class="form-control" placeholder="กรอกหมายเลขบัญชี">
             </div>
@@ -47,23 +52,26 @@ For more information on enabling MVC for empty projects, visit https://go.micros
             </div>
             <div class=" col-xl-4 col-md-4 col-sm-12 form-group">
                 <label asp-for="MaxTimePose">จะไปซื้อในอีก (นาที)</label>
-                <input asp-for="MaxTimePose" class="form-control" min="0"/>
+                <input asp-for="MaxTimePose" class="form-control" min="0" />
             </div>
-            <div class=" col-xl-4 col-md-4 col-sm-12 form-group">
+            <div class=" col-xl-4 col-md-5 col-sm-12 form-group">
                 <label asp-for="MaxComment">จำนวนรับฝาก (เริ่มต้นที่ 1 คน)</label>
                 <input asp-for="MaxComment" class="form-control " min="1">
             </div>
-            <div class=" col-xl-4 col-md-4 col-sm-12 form-group">
+        </div>
+        <div class="row">
+            <div class=" col-xl-4 col-md-6 col-sm-12 form-group">
                 <label asp-for="Image">QR code</label>
                 <input asp-for="Image" type="file" class="form-control" placeholder="เลือกไฟล์">
                 <span asp-validation-for="Image" class="text-danger"></span>
             </div>
         </div>
-        <input asp-for="CreatedTime" class="form-control" type="hidden"/>
+        <input asp-for="CreatedTime" class="form-control" type="hidden" />
         <input asp-for="URLImage" class="form-control" type="hidden" />
         <input type="hidden" id="Email" name="Email" asp-for="Email" value="@User.Identity.Name" />
-        <input type="hidden" id="AppUserId" name="AppUserId" asp-for="AppUserId"/>
-        <input type ="hidden" id="Icon" name="Icon" asp-for="Icon"/>
+        <input type="hidden" id="AppUserId" name="AppUserId" asp-for="AppUserId" />
+        <input type="hidden" id="Icon" name="Icon" asp-for="Icon" />
+        <br>
         <a class="btn btn-secondary" href="/MainPose">ยกเลิก</a>
         <button type="submit" class="btn btn-primary">ยืนยัน</button>
     </form>

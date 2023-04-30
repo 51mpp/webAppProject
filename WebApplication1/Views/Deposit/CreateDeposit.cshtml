@@ -6,8 +6,12 @@ For more information on enabling MVC for empty projects, visit https://go.micros
 }
 @using WebApplication1.ViewModels
 @model CreateDepositViewModel
-
-<div class="box container h-200 d-flex align-items-center justify-content-center">
+<link rel="stylesheet" href="~/css/fillInfo.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai:wght@500&display=swap" rel="stylesheet">
+<div class="container" id="depoBox">
+    <h2>กรอกข้อมูลการฝากซื้อ</h2>
     <form method="post" asp-action="CreateDeposit">
         <input type="hidden" id="AppUserId" name="AppUserId" asp-for="AppUserId" />
         <input type="hidden" id="Email" name="Email" asp-for="Email" value="@User.Identity.Name" />
@@ -30,7 +34,7 @@ For more information on enabling MVC for empty projects, visit https://go.micros
             </div>
         </div>
         <div class="row">
-            <div class="col-xl-6 col-md-4 form-group">
+            <div class="col-xl-6 col-md-6 form-group">
                 <label asp-for="Phone">เบอร์โทรศัพท์</label>
                 <input asp-for="Phone" type="text" value="@Model.Phone" class="form-control"
                     placeholder="*กรอกเบอร์โทรศัพท์" maxlength="10">
@@ -42,29 +46,26 @@ For more information on enabling MVC for empty projects, visit https://go.micros
             <div class="col-xl-6 col-md-12 form-group">
                 <label asp-for="Place">ไปซื้อที่ไหน</label>
                 <input asp-for="Place" class="form-control"
-                    placeholder="*จะไปซื้อที่ไหน Ex: โรงพระเทพ ร้านอาหารตามสั่ง">
+                    placeholder="*จะต้องไปซื้อที่ไหน Ex: โรงพระเทพ ร้านอาหารตามสั่ง">
                 <span asp-validation-for="Place" class="text-danger"></span>
             </div>
             <div class="col-xl-6 col-md-12 form-group">
                 <label asp-for="Food">ไปซื้ออะไร</label>
-                <input asp-for="Food" class="form-control" placeholder="*จะไปซื้อที่ไหน Ex: โรงพระเทพ ร้านอาหารตามสั่ง">
+                <input asp-for="Food" class="form-control" placeholder="*จะให้ไปซื้ออะไร Ex: ข้าวไข่เจียว">
                 <span asp-validation-for="Food" class="text-danger"></span>
             </div>
             <div class="col-xl-6 col-md-12 form-group">
                 <label asp-for="PlaceDeliver">เอามาส่งที่ไหน</label>
-                <input asp-for="PlaceDeliver" class="form-control"
-                    placeholder="*จะไปซื้อที่ไหน Ex: โรงพระเทพ ร้านอาหารตามสั่ง">
+                <input asp-for="PlaceDeliver" class="form-control" placeholder="*จะต้องไปส่งที่ไหน Ex: ตึก ECC">
                 <span asp-validation-for="PlaceDeliver" class="text-danger"></span>
             </div>
-            <div class=" col-xl-5 col-md-4 col-sm-12 form-group">
-                <div class="row">
-                    <div class="col-6">
-                        <label asp-for="MaxTimePose">หาคนรับฝากภายใน(นาที)</label>
-                        <input asp-for="MaxTimePose" class="form-control" value="1" min="1">
-                    </div>
-                    <div class="col-6">
-                    </div>
-                </div>
+            <div class=" col-xl-6 col-md-6 col-sm-12 form-group">
+
+
+                <label asp-for="MaxTimePose">หาคนรับฝากภายใน(นาที)</label>
+                <input asp-for="MaxTimePose" class="form-control" value="1" min="1">
+
+
             </div>
         </div>
         <br>

@@ -16,6 +16,12 @@ window.addEventListener("load", (event) => {
         renderContainer.className = "container";
 
     }
+    else if (window.location.pathname == '/MainPose/CreateMainPose') {
+        console.log("mainPost")
+        document.getElementById("l02").style.color = "white"
+        document.getElementById("li02").style.backgroundColor = "red"
+        document.getElementById("footer").style.display = "none"
+    }
     else if (window.location.pathname == '/Account/Login' || window.location.pathname == '/Account/Register') {
         console.log("Login")
         document.getElementById("li04").style.color = "white"
@@ -33,6 +39,13 @@ window.addEventListener("load", (event) => {
     }
     else if (window.location.pathname == '/Dashboard') {
         console.log("Login")
+        document.getElementById("li05").style.color = "white"
+        document.getElementById("li05").style.backgroundColor = "red"
+        document.getElementById("footer").style.display = "none"
+        renderContainer.className = "";
+    }
+    else if (window.location.pathname == '/Dashboard/EditUserProfile') {
+        console.log("waht");
         document.getElementById("li05").style.color = "white"
         document.getElementById("li05").style.backgroundColor = "red"
         document.getElementById("footer").style.display = "none"
