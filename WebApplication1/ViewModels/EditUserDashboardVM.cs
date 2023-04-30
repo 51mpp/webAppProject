@@ -11,6 +11,7 @@ namespace WebApplication1
         public string? Icon { get; set; }
         public string? NickName { get; set; }
         public string? State { get; set; }
-        public IFormFile Image { get; set; }
+        public IFormFile? Image { get; set; }
+        public string? UrlImage { get; set; }
     }
 }

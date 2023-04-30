@@ -38,6 +38,19 @@ namespace WebApplication1.Controllers
             user.Icon = photoResult.Url.ToString();
             user.NickName = editVM.NickName;
             user.State = editVM.State;
+            user.Account = editVM.Account;
+        }
+        private void MapUserEdit2(AppUser user, EditUserDashboardVM editVM)
+        {
+            user.Id = editVM.Id;
+            user.FirstName = editVM.FirstName;
+            user.LastName = editVM.LastName;
+            user.Section = editVM.Section;
+            user.Phone = editVM.Phone;
+            user.Icon = editVM.UrlImage;
+            user.NickName = editVM.NickName;
+            user.State = editVM.State;
+            user.Account = editVM.Account;
         }
         public async Task<IActionResult> Index()
         {
@@ -67,7 +80,8 @@ namespace WebApplication1.Controllers
                 Account = user.Account,
                 Icon = user.Icon,
                 NickName = user.NickName,
-                State = user.State
+                State = user.State,
+                UrlImage = user.Icon
             };
             return View(editUserVM);
         }
@@ -95,18 +109,26 @@ namespace WebApplication1.Controllers
             }
             else
             {
-                try
+                if (editVM.Image != null)
                 {
-                    await _photoService.DeletePhotoAsync(user.Icon);
-                }
-                catch(Exception ex)
-                {
-                    ModelState.AddModelError("","Could not delete photo");
-                    return View(editVM);
-                }
-                var photoResult = await _photoService.AddPhotoAsync(editVM.Image);
+                    try
+                    {
+                        await _photoService.DeletePhotoAsync(user.Icon);
+                    }
+                    catch (Exception ex)
+                    {
+                        ModelState.AddModelError("", "Could not delete photo");
+                        return View(editVM);
+                    }
+                    var photoResult = await _photoService.AddPhotoAsync(editVM.Image);
 
-                MapUserEdit(user, editVM, photoResult);
+                    MapUserEdit(user, editVM, photoResult);
+                }
+                else
+                {
+                    MapUserEdit2(user, editVM);
+                }
+                
 
 
                 _dashboardRepository.Update(user);
