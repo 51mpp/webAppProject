@@ -36,6 +36,51 @@
                             </div>
                         </div>
                     }
+                    @if (item.CommentDeposits != null && item.CommentDeposits.Any())
+                    {
+
+                        @if (User.Identity.IsAuthenticated && (User.IsInRole("admin") || User.Identity.Name ==
+                       item.CommentDeposits.FirstOrDefault().Email))
+                        {
+                            <div class="status-radio d-flex justify-content-around position-absolute top-0 p-1">
+                                @* wait *@
+                                <div class="waitB">
+                                    <input id="wait-btn-@item.Id" class="wait-btn" type="radio" name="radio-status-@item.Id" onclick="status('@item.Id','รอ')">
+                                </div>
+
+                                @* process *@
+                                <div class="processB">
+                                    <input id="process-btn-@item.Id" class="process-btn" type="radio" name="radio-status-@item.Id" onclick="status('@item.Id','กำลังไปส่ง')">
+                                </div>
+
+                                @* finish *@
+                                <div class="finishB">
+                                    <input id="finish-btn-@item.Id" class="finish-btn" type="radio" name="radio-status-@item.Id" onclick="status('@item.Id','ส่งแล้ว')">
+                                </div>
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="status-radio d-flex justify-content-around position-absolute top-0 p-1">
+                                @* wait *@
+                                <div class="waitB">
+                                    <input id="wait-btn-@item.Id" class="wait-btn" type="radio" name="radio-status-@item.Id" value="other">
+                                </div>
+
+                                @* process *@
+                                <div class="processB">
+                                    <input id="process-btn-@item.Id" class="process-btn" type="radio" name="radio-status-@item.Id" value="other">
+                                </div>
+
+                                @* finish *@
+                                <div class="finishB">
+                                    <input id="finish-btn-@item.Id" class="finish-btn" type="radio" name="radio-status-@item.Id" value="other">
+                                </div>
+                            </div>
+                        }
+                    }
+
+                    
                     <div class="card-body">
                         <small class="time position-absolute top-0 start-1" style="margin-top: 5px;color: grey">
                             @{
@@ -168,7 +213,7 @@
                                 </script>
                             <div id="post-@item.Id-comments" class="p-2">
                             @if (item.CommentDeposits != null && item.CommentDeposits.Any())
-                            {
+                            {   
                                 @* <div class="row">
                                     <div class="order_box">
                                         <div class="card p-3 shadow-sm">

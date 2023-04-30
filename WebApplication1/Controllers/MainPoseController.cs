@@ -257,6 +257,15 @@ namespace WebApplication1.Controllers
             IEnumerable<Comment> comments = await _mainPoseRepository.GetCommentsByMainPoseId(mainPoseId);
             return PartialView("_CommentPartialView", (comments, maxComment, mainPoseId, mainPose));
         }
+        [HttpGet]
+        public async Task<IActionResult> GetComments2(int mainPoseId)
+        {
+
+            MainPose mainPose = await _mainPoseRepository.GetByIdAsync(mainPoseId);
+            int maxComment = (int)mainPose.MaxComment;
+            IEnumerable<Comment> comments = await _mainPoseRepository.GetCommentsByMainPoseId(mainPoseId);
+            return PartialView("_CommentPartialView2", (comments, maxComment, mainPoseId, mainPose));
+        }
         [HttpPost]
         public async Task<IActionResult> CreateComment(int mainPoseId, string CommentText, string FirstName, string LastName, IFormFile? image2, string email, bool confirm)
         {
@@ -321,6 +330,18 @@ namespace WebApplication1.Controllers
             }
             _mainPoseRepository.DeleteCommentEach(post);
             return RedirectToAction("");
+        }
+        [HttpPost]
+        public async Task<IActionResult> DeleteComment2(int commentId)
+        {
+            var post = await _mainPoseRepository.GetCommentEachByIdAsync(commentId);
+            if (post == null) { return View("Error"); }
+            if (!string.IsNullOrEmpty(post.Image))
+            {
+                _ = _photoService.DeletePhotoAsync(post.Image); // ไม่สนใจรีเทิน
+            }
+            _mainPoseRepository.DeleteCommentEach(post);
+            return RedirectToAction("Index","Dashboard");
         }
         [HttpGet]
         public async Task<IActionResult> CountComments(int mainPoseId)

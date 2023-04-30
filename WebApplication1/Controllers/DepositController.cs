@@ -258,7 +258,18 @@ namespace WebApplication1.Controllers
             _depositRepository.DeleteCommentEach(post);
             return RedirectToAction("");
         }
-        
+        [HttpPost]
+        public async Task<IActionResult> DeleteComment2(int depositId)
+        {
+            var post = await _depositRepository.GetCommentEachByIdAsync(depositId);
+            if (post == null) { return View("Error"); }
+            if (!string.IsNullOrEmpty(post.Image))
+            {
+                _ = _photoService.DeletePhotoAsync(post.Image); // ไม่สนใจรีเทิน
+            }
+            _depositRepository.DeleteCommentEach(post);
+            return RedirectToAction("Index","Dashboard");
+        }
         [HttpPost]
         public async Task<IActionResult> CreateCommentByAjax(int? depositId, string CommentText, string FirstName, string LastName)
         {
@@ -291,7 +302,13 @@ namespace WebApplication1.Controllers
             IEnumerable<CommentDeposit> comments = await _depositRepository.GetCommentsByDepositId(depositId);
             return PartialView("_CommentDepositPartialView", (comments, deposit));
         }
-
+        [HttpGet]
+        public async Task<IActionResult> GetCommentDeposit2(int depositId)
+        {
+            Deposit deposit = await _depositRepository.GetByIdAsync(depositId);
+            IEnumerable<CommentDeposit> comments = await _depositRepository.GetCommentsByDepositId(depositId);
+            return PartialView("_CommentDepositPartialView2", (comments, deposit));
+        }
         [HttpPost]
         public async Task<IActionResult> ConfirmComment(int commentDepositId, int depositId, string CommentText, string FirstName, string LastName, string? image, string email, bool confirm)
         {
