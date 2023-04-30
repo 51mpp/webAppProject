@@ -13,6 +13,7 @@
     <h2>แก้ไขข้อมูลผู้ใช้</h2>
     <form method="post" asp-action="EditUserProfile" enctype="multipart/form-data">
         <input type="hidden" id="Id" name="Id" asp-for="Id">
+        <input type="hidden" id="UrlImage" name="UrlImage" asp-for="UrlImage">
         <div class="row">
             <div class="form-group col-xl-6 col-sm-12">
                 <label asp-for="FirstName" class="control-label">ชื่อ</label>

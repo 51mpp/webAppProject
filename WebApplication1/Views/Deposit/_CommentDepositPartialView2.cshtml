@@ -1,0 +1,86 @@
+﻿@*
+For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+@model (IEnumerable<CommentDeposit>,Deposit)
+
+<link rel="stylesheet" href="~/css/Deposit.css">
+@if (Model.Item1 != null && Model.Item1.Any())
+{
+    <div class="row">
+        <div class="order_box">
+            <div class="card p-3 shadow-sm" id="frame-@Model.Item1.FirstOrDefault().Id">
+                @if (User.Identity.IsAuthenticated && (User.IsInRole("admin") || User.Identity.Name ==
+               Model.Item1.FirstOrDefault().Email))
+                {
+                    <form asp-controller="Deposit" asp-action="DeleteComment2" method="post"
+                        class="position-absolute top-0 end-0 p-1">
+                        <input type="hidden" name="depositId" value="@Model.Item1.FirstOrDefault().Id" />
+                        <button type="submit" class="remove">
+                            <img src="https://cdn-icons-png.flaticon.com/512/189/189690.png" alt="">
+                        </button>
+                    </form>
+                }
+                @if (Model.Item1.FirstOrDefault().Like == true)
+                {
+                    <div class="likeFrame position-absolute top-0 end-0">
+                        <img class="like"
+                            src="https://cdn.discordapp.com/attachments/880751147449733150/1101569968333656125/pngwing.com.png"
+                            alt="">
+                    </div>
+                    <script>
+                        document.getElementById("frame-@Model.Item1.FirstOrDefault().Id").style.border = "3px solid green";
+                        document.getElementById("confirm-@Model.Item1.FirstOrDefault().Id-comments").innerText = "ยกเลิกการยืนยัน";
+
+                    </script>
+                }
+
+
+                <div class="row">
+                    <div class="col-3">
+                        <small style="color: rgb(76, 158, 80);">@Model.Item1.FirstOrDefault().FirstName :</small>
+                    </div>
+                    <div class="col-5">
+                        <small class="font-weight-bold">@Model.Item1.FirstOrDefault().CommentText</small>
+                    </div>
+                    <div></div>
+                    <div class="col-12 p-1 d-flex justify-content-center">
+                        <img class="qr" id="Image-@Model.Item1.FirstOrDefault().Id-comment"
+                            src="@Model.Item1.FirstOrDefault().Image" alt="">
+                    </div>
+                    @if (User.Identity.IsAuthenticated && (User.IsInRole("admin") || User.Identity.Name ==
+                   Model.Item2.Email))
+                    {
+                        <div class="confirmBox">
+                            <span id="confirm-@Model.Item1.FirstOrDefault().Id-comments" class="confirmText"
+                                onclick="confirmComment('@Model.Item1.FirstOrDefault().Id','@Model.Item1.FirstOrDefault().CommentText','@Model.Item1.FirstOrDefault().FirstName','@Model.Item1.FirstOrDefault().LastName','@Model.Item1.FirstOrDefault().Image','@Model.Item1.FirstOrDefault().Email','@Model.Item1.FirstOrDefault().Like','@Model.Item2.Id')">รับทราบ
+                            </span>
+                        </div>
+                    }
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+
+    <script>
+        function confirmComment(commentDepositId, CommentText, FirstName, LastName, image, email, confirm, depositId) {
+            $.ajax({
+                url: '@Url.Action("ConfirmComment", "Deposit")',
+                data: { commentDepositId: commentDepositId, CommentText: CommentText, FirstName: FirstName, LastName: LastName, image: image, email: email, confirm: confirm, depositId: depositId },
+                type: 'POST',
+                success: function (result) {
+                    console.log(result);
+                    // Do something with the result, if needed
+                },
+                error: function () {
+                    console.log('Error occurred while confirming comment.');
+                }
+            });
+        }
+    </script>
+}
+

@@ -1,0 +1,74 @@
+﻿@*
+For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+@model (IEnumerable<Comment>,int,int,MainPose)
+<link rel="stylesheet" href="~/css/post.css">
+@foreach (var comment in Model.Item1.Take(Model.Item2))
+{
+    <div class="row">
+        <div class="order_box">
+            <div class="card p-3 shadow-sm" id="frame-@comment.Id-comments">
+
+                @if (User.Identity.IsAuthenticated && (User.IsInRole("admin") || User.Identity.Name == comment.Email))
+                {
+                    <form asp-controller="MainPose" asp-action="DeleteComment2" method="post"
+                        class="position-absolute top-0 p-1 end-0">
+                        <input type="hidden" name="commentId" value="@comment.Id" />
+                        <button type="submit" class="remove">
+                            <img src="https://cdn-icons-png.flaticon.com/512/189/189690.png" alt="">
+                        </button>
+                    </form>
+                }
+                @if (comment.Like == true)
+                {
+                    <div class="likeFrame position-absolute top-0 end-0">
+                        <img class="like"
+                            src="https://cdn.discordapp.com/attachments/880751147449733150/1101569968333656125/pngwing.com.png"
+                            alt="">
+                    </div>
+                    <script>
+                        document.getElementById("frame-@comment.Id-comments").style.border = "3px solid green";
+                        document.getElementById("confirm-@comment.Id-comments").innerText = "ยกเลิกการยืนยัน";
+                    </script>
+                }
+                <div class="row">
+                    <div class="col-3">
+                        <small style="color: rgb(76, 158, 80);">@comment.FirstName :</small>
+                    </div>
+                    <div class="col-5">
+                        <small class="font-weight-bold">@comment.CommentText</small>
+                    </div>
+                    <div></div>
+                    <div class="col-12 p-2">
+                        <img class="slip" id="Image-@comment.Id-comment" src="@comment.Image" alt="">
+                    </div>
+                    @if (User.Identity.IsAuthenticated && (User.IsInRole("admin") || User.Identity.Name ==
+                   Model.Item4.Email))
+                    {
+                        <span style="text-decoration: underline;cursor: pointer;text-align:center;" class="p-1"
+                            id="confirm-@comment.Id-comments"
+                            onclick="confirmComment('@comment.Id','@comment.CommentText','@comment.FirstName','@comment.LastName','@comment.Email','@comment.Like',@Model.Item3,'@comment.Image')">ยืนยันการรับฝาก</span>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        function confirmComment(commentId, CommentText, FirstName, LastName, email, confirm, mainPoseId, Image) {
+            $.ajax({
+                url: '@Url.Action("ConfirmComment", "MainPose")',
+                data: { commentId: commentId, CommentText: CommentText, FirstName: FirstName, LastName: LastName, email: email, confirm: confirm, mainPoseId: mainPoseId, Image: Image },
+                type: 'POST',
+                success: function (result) {
+                    console.log(result);
+                    // Do something with the result, if needed
+                },
+                error: function () {
+                    console.log('Error occurred while confirming comment.');
+                }
+            });
+        }
+    </script>
+}

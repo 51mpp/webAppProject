@@ -271,7 +271,7 @@
                                     <script>
                                         function loadComments(mainPoseId) {
                                             $.ajax({
-                                                url: '@Url.Action("GetComments", "MainPose")',
+                                                url: '@Url.Action("GetComments2", "MainPose")',
                                                 data: { mainPoseId: mainPoseId },
                                                 type: 'GET',
                                                 success: function (result) {
@@ -353,40 +353,50 @@
                                         </a>
                                     </div>
                                 </div>
-                                <div class="status-radio d-flex justify-content-around position-absolute top-0 p-1">
-                                @* wait *@
-                                    <div class="waitB">
-                                        <input id="wait-btn-@item.Id" class="wait-btn" type="radio" name="radio-status-@item.Id" onclick="statusDeposit('@item.Id','รอ')">
-                                    </div>
+                               
+                                
+                            }
 
-                                @* process *@
-                                    <div class="processB">
-                                        <input id="process-btn-@item.Id" class="process-btn" type="radio" name="radio-status-@item.Id" onclick="statusDeposit('@item.Id','กำลังไปส่ง')">
-                                    </div>
-
-                                @* finish *@
-                                    <div class="finishB">
-                                        <input id="finish-btn-@item.Id" class="finish-btn" type="radio" name="radio-status-@item.Id" onclick="statusDeposit('@item.Id','ส่งแล้ว')">
-                                    </div>
-                                </div>
-                            }else{
+                            @if (User.Identity.IsAuthenticated && (User.IsInRole("admin") || User.Identity.Name == item.Email))
+                            {
+                                   
                                 <div class="status-radio d-flex justify-content-around position-absolute top-0 p-1">
-                                @* wait *@
+                                    @* wait *@
                                     <div class="waitB">
                                         <input id="wait-btn-@item.Id" class="wait-btn" type="radio" name="radio-status-@item.Id" value="other">
                                     </div>
 
-                                @* process *@
+                                    @* process *@
                                     <div class="processB">
-                                    <input id="process-btn-@item.Id" class="process-btn" type="radio" name="radio-status-@item.Id" value="other">
+                                        <input id="process-btn-@item.Id" class="process-btn" type="radio" name="radio-status-@item.Id" value="other">
                                     </div>
 
-                                @* finish *@
+                                    @* finish *@
                                     <div class="finishB">
-                                    <input  id="finish-btn-@item.Id" class="finish-btn" type="radio" name="radio-status-@item.Id" value="other">
+                                        <input id="finish-btn-@item.Id" class="finish-btn" type="radio" name="radio-status-@item.Id" value="other">
                                     </div>
                                 </div>
                             }
+                            else
+                            {
+                            <div class="status-radio d-flex justify-content-around position-absolute top-0 p-1">
+                                @* wait *@
+                                <div class="waitB">
+                                    <input id="wait-btn-@item.Id" class="wait-btn" type="radio" name="radio-status-@item.Id" onclick="statusDeposit('@item.Id','รอ')">
+                                </div>
+
+                                @* process *@
+                                <div class="processB">
+                                    <input id="process-btn-@item.Id" class="process-btn" type="radio" name="radio-status-@item.Id" onclick="statusDeposit('@item.Id','กำลังไปส่ง')">
+                                </div>
+
+                                @* finish *@
+                                <div class="finishB">
+                                    <input id="finish-btn-@item.Id" class="finish-btn" type="radio" name="radio-status-@item.Id" onclick="statusDeposit('@item.Id','ส่งแล้ว')">
+                                </div>
+                            </div> 
+                            }
+                        
                         <div class="card-body">
                             <small class="position-absolute top-0 start-1 p-2" style="margin-top: 0px;color: grey">
                                 @{
@@ -517,7 +527,7 @@
                             <script>
                                 function loadCommentDeposits(depositId) {
                                     $.ajax({
-                                        url: '@Url.Action("GetCommentDeposit", "Deposit")',
+                                        url: '@Url.Action("GetCommentDeposit2", "Deposit")',
                                         data: { depositId: depositId },
                                         type: 'GET',
                                         success: function (result) {
