@@ -35,7 +35,11 @@
                                 </a>
                             </div>
                         </div>
-                        <div class="status-radio d-flex justify-content-around position-absolute top-0 p-1">
+                    }
+                    @if (User.Identity.IsAuthenticated && (User.IsInRole("admin") || User.Identity.Name ==
+                                        item.CommentDeposits.FirstOrDefault().Email))
+                        {
+                                <div class="status-radio d-flex justify-content-around position-absolute top-0 p-1">
                                 @* wait *@
                                     <div class="waitB">
                                         <input id="wait-btn-@item.Id" class="wait-btn" type="radio" name="radio-status-@item.Id"  onclick="status('@item.Id','รอ')">
@@ -50,8 +54,8 @@
                                     <div class="finishB">
                                     <input  id="finish-btn-@item.Id" class="finish-btn" type="radio" name="radio-status-@item.Id"  onclick="status('@item.Id','ส่งแล้ว')">
                                     </div>
-                        </div>
-                    }else{
+                        </div>                
+                        }else{
                         <div class="status-radio d-flex justify-content-around position-absolute top-0 p-1">
                                 @* wait *@
                                     <div class="waitB">
@@ -68,7 +72,7 @@
                                     <input  id="finish-btn-@item.Id" class="finish-btn" type="radio" name="radio-status-@item.Id" value="other">
                                     </div>
                         </div>
-                    }
+                        }
                     <div class="card-body">
                         <small class="time position-absolute top-0 start-1" style="margin-top: 5px;color: grey">
                             @{
