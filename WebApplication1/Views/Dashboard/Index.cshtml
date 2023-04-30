@@ -1,3 +1,7 @@
+@{
+    ViewData["Title"] = "ข้อมูลผู้ใช้";
+}
+
 @using Microsoft.AspNetCore.Identity
 @inject SignInManager<AppUser> SignInManager
 @using System.Globalization;
@@ -336,7 +340,7 @@
                             {
                                 <div class="editPost row flex-row-reverse position-absolute top-0 end-0">
                                     <div class="col-7">
-                                        <form asp-controller="Deposit" asp-action="DeleteDeposit" method="post">
+                                        <form asp-controller="Deposit" asp-action="DeleteDeposit2" method="post">
                                             <input type="hidden" name="depositId" value="@item.Id" />
                                             <button type="submit" class="remove">
                                                 <img src="https://cdn-icons-png.flaticon.com/512/189/189690.png" alt="">
@@ -418,7 +422,7 @@
                             </small>
                         <div style="margin-top: 10px;"></div>
                         <div class="row align-items-center">
-                            <div id="status-@item.Id-Post" class="position-absolute" style="color:white;">
+                            <div id="status-@item.Id-Post" class="position-absolute top-0" style="color:white;margin-top: 20px">
                                     @if(item.StatePost == "รอ")
                                     {
                                         <small>รอ</small>

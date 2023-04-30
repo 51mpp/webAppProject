@@ -1,0 +1,38 @@
+label {
+    font-family: 'IBM Plex Sans Thai', sans-serif;
+
+}
+
+h2 {
+    font-family: 'IBM Plex Sans Thai', sans-serif;
+}
+
+a {
+    font-family: 'IBM Plex Sans Thai', sans-serif;
+}
+
+button {
+    font-family: 'IBM Plex Sans Thai', sans-serif;
+}
+
+#edituser {
+    margin-top: 100px;
+    padding-left: 10%;
+    padding-right: 10%;
+}
+
+#editbox {
+    padding-left: 10%;
+    padding-right: 10%;
+    padding-bottom: 100px;
+}
+
+#box {
+    padding-left: 10%;
+    padding-right: 10%;
+}
+
+#depoBox {
+    padding-left: 10%;
+    padding-right: 10%;
+}

@@ -1,82 +1,84 @@
 @using WebApplication1.ViewModels
 @model RegisterVM
 @{
-    ViewData["Title"] = "Sign up";
+    ViewData["Title"] = "สร้างบัญชีผู้ใช้";
 
 }
- <link rel="stylesheet" href="~/css/register.css">
+<link rel="stylesheet" href="~/css/register.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-<link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600&display=swap" rel="stylesheet"> 
+<link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600&display=swap" rel="stylesheet">
 
 
 <div class="contain">
     <div class="container">
         <div class="signup-container rounded">
-            @if(TempData["Error"] != null)
+            @if (TempData["Error"] != null)
             {
                 <div class="col-md-12 alert alert-danger">
                     <span><b>Sorry!</b> - @TempData["Error"]</span>
                 </div>
             }
             <h1>Create Account</h1>
+
             <form asp-action="Register" enctype="multipart/form-data">
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                    <div class="form-group">
-                        <label asp-for="FirstName" class="control-label"></label>
-                        <input asp-for="FirstName" class="form-control" />
-                        <span asp-validation-for="FirstName" class="text-danger"></span>
-                    </div>
-                    <div class="form-group">
-                        <label asp-for="LastName" class="control-label"></label>
-                        <input asp-for="LastName" class="form-control" />
-                        <span asp-validation-for="LastName" class="text-danger"></span>
-                    </div>
-                    <div class="form-group">
-                        <label asp-for="NickName" class="control-label"></label>
-                        <input asp-for="NickName" class="form-control" />
-                        <span asp-validation-for="NickName" class="text-danger"></span>
-                    </div>
-                    <div class="form-group">
-                        <label asp-for="Phone" class="control-label"></label>
-                        <input asp-for="Phone" class="form-control" />
-                        <span asp-validation-for="Phone" class="text-danger"></span>
-                    </div>
-                    <div class="form-group">
-                        <label asp-for="Section" class="control-label"></label>
-                        <input asp-for="Section" class="form-control" />
-                        <span asp-validation-for="Section" class="text-danger"></span>
-                    </div>
-                    <div class="form-group">
-                        <label asp-for="Account" class="control-label"></label>
-                        <input asp-for="Account" class="form-control" />
-                        <span asp-validation-for="Account" class="text-danger"></span>
-                    </div>
-                    <div class="form-group">
-                        <label asp-for="EmailAddress" class="control-label"></label>
-                        <input asp-for="EmailAddress" class="form-control" />
-                        <span asp-validation-for="EmailAddress" class="text-danger"></span>
-                    </div>
-                    <div class="form-group">
-                        <label asp-for="Password" class="control-label"></label>
-                        <input asp-for="Password" class="form-control" />
-                        <span asp-validation-for="Password" class="text-danger"></span>
-                    </div>
-                    <div class="form-group">
-                        <label asp-for="ConfirmPassword" class="control-label"></label>
-                        <input asp-for="ConfirmPassword" class="form-control" />
-                        <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
-                    </div>
-                    <hr>
-                    <div class="form-group">
-                        <label asp-for="Image" class="control-label">Image Profile</label>
-                        <input asp-for="Image" type="file" class="form-control" placeholder="เลือกไฟล์">
-                        <span asp-validation-for="Image" class="text-danger"></span>
-                    </div>
-                    <hr>
+                <div class="form-group">
+                    <label asp-for="FirstName" class="control-label"></label>
+                    <input asp-for="FirstName" class="form-control" />
+                    <span asp-validation-for="FirstName" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="LastName" class="control-label"></label>
+                    <input asp-for="LastName" class="form-control" />
+                    <span asp-validation-for="LastName" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="NickName" class="control-label"></label>
+                    <input asp-for="NickName" class="form-control" />
+                    <span asp-validation-for="NickName" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Phone" class="control-label"></label>
+                    <input asp-for="Phone" class="form-control" />
+                    <span asp-validation-for="Phone" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Section" class="control-label"></label>
+                    <input asp-for="Section" class="form-control" />
+                    <span asp-validation-for="Section" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Account" class="control-label"></label>
+                    <input asp-for="Account" class="form-control" />
+                    <span asp-validation-for="Account" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="EmailAddress" class="control-label"></label>
+                    <input asp-for="EmailAddress" class="form-control" />
+                    <span asp-validation-for="EmailAddress" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Password" class="control-label"></label>
+                    <input asp-for="Password" class="form-control" />
+                    <span asp-validation-for="Password" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="ConfirmPassword" class="control-label"></label>
+                    <input asp-for="ConfirmPassword" class="form-control" />
+                    <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+                </div>
+                <hr>
+                <div class="form-group">
+                    <label asp-for="Image" class="control-label">Image Profile</label>
+                    <input asp-for="Image" type="file" class="form-control" placeholder="เลือกไฟล์">
+                    <span asp-validation-for="Image" class="text-danger"></span>
+                </div>
+                <hr>
                 <button type="submit">Sign Up</button>
             </form>
+
             <div class="signin-link">
-                <p>มีบัญชีผู้ใช้งานอยู่แล้ว? <a asp-controller="Account"asp-action="Login">Login ได้ที่นี่</a> </p>
+                <p>มีบัญชีผู้ใช้งานอยู่แล้ว? <a asp-controller="Account" asp-action="Login">Login ได้ที่นี่</a> </p>
             </div>
         </div>
     </div>
