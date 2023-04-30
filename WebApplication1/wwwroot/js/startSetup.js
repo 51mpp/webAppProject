@@ -37,6 +37,20 @@ window.addEventListener("load", (event) => {
         document.getElementById("footer").style.display = "none"
 
     }
+    else if (window.location.pathname == '/Deposit/CreateDeposit') {
+        console.log("Login")
+        document.getElementById("li03").style.color = "white"
+        document.getElementById("li03").style.backgroundColor = "red"
+        document.getElementById("footer").style.display = "none"
+
+    }
+    else if (window.location.pathname == '/Deposit/EditMainPose/*/') {
+        console.log("Login")
+        document.getElementById("li03").style.color = "white"
+        document.getElementById("li03").style.backgroundColor = "red"
+        document.getElementById("footer").style.display = "none"
+
+    }
     else if (window.location.pathname == '/Dashboard') {
         console.log("Login")
         document.getElementById("li05").style.color = "white"
